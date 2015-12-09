@@ -1,0 +1,66 @@
+extends base
+block append script
+  script(src='/js/projects.js')
+block content
+  link(rel='stylesheet', href='/css/side_nav.css')
+  link(rel='stylesheet', href='/css/recruitments.css')
+  link(rel='stylesheet', href='/css/error.css')
+  include search.jade
+  .container-fluid.list-show#projects
+    .row
+      .col-lg-2.col-md-2.col-sm-12.col-xs-12.padding-19
+        if filters
+          .siderNav
+            include mixin/filter.jade
+            each filter in filters
+              +filter(filter)
+      .col-lg-10.col-md-10.col-sm-12.col-xs-12
+        .well.transparent
+          .panel
+            .panel-body
+              if projects.length==0
+                .empty_result 没有搜索到相关项目
+                  br
+                  | 请试试其他搜索吧......
+              each project in projects
+                li.col-xs-12.portfolio-item.span4.fix-height
+                  .media
+                   .media-left.media-middle.col-md-5.picow
+                      img.media-object(src=project.logo_img, width='100%')
+                      if project.recruitments && project.recruitments.length > 0
+                        a(href='/recruitments?project=' + project._id)
+                          .state='合伙人招募中'
+                    .media-body.col-md-7(onclick="location.href='/projects/#{project._id}'")
+                      h4.media-heading.mb10
+                        a(href= '/projects/' + project._id)
+                          strong= project.name
+                      .small
+                        i.fa.fa-map-marker.r5
+                        em.c7.f14=project.location
+                      .small
+                        i.fa.fa-list.r5
+                        em.c7.f14=project.stage
+                      .small
+                        em.c7= '创建者角色：'
+                        a(href='/users/'+project.creator.user)
+                          =project.creator.role
+                      .small
+                        em.c7= '融资规模：'
+                        =project.funding.next.need
+                      .small
+                        em.c7= '融资回报：'
+                        =project.funding.next.return
+
+                  .col-md-12.insvestemt
+                    p.c7.f16=project.keyword
+                  .col-md-12
+                      i.fa.fa-map-marker
+                      em.c7.f16.r26=project.location
+                      i.fa.fa-tags
+                      em.c7=project.tag
+                  .col-md-12
+                      i.fa.fa-clock-o
+                      em.c7
+                        include mixin/date
+                        +date(project.creation_time)
+                        |  发布

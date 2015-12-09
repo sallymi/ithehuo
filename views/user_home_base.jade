@@ -1,0 +1,54 @@
+extends base
+block append link
+  link(rel='stylesheet', href='/css/user_home.css')
+block append script
+  script(src='/js/user_home_base.js')
+block content
+  .templatemo-container.container-fluid
+    .row
+      .col-lg-2.col-md-2.col-sm-12.col-xs-12
+        //- .zm-profile-side-following.zg-clear
+        //-   a.item(href='###')
+        //-     span.zg-gray-normal 关注了
+        //-     br
+        //-     strong 0
+        //-     label 人
+        //-   a.item(href='###')
+        //-     span.zg-gray-normal 关注了
+        //-     br
+        //-     strong 0
+        //-     label 人
+        nav
+          ul.nav
+            lh.c-navstack-heading 我的IT合伙人
+            li
+              a.c-navstack-item(href='/home') 我的信息
+            li
+              a.c-navstack-item(href='/home/followings') 我关注的
+                span.badge#favorite
+            li
+              a.c-navstack-item(href='/home/friends') 我的好友
+                span.badge#friends
+            li
+              a.c-navstack-item(href='/home/projects') 我的项目
+                span.badge#projects
+            li
+              a.c-navstack-item(href='/home/recruitments') 我的招募
+                span.badge#recruitments
+              //- a.c-navstack-item.subitem(href='/home/recruitments?publish=true') 有效招募
+              //-   span.badge#recruitments_valid
+              //- a.c-navstack-item.subitem(href='/home/recruitments?publish=false') 已下线招募
+              //-   span.badge#recruitments_offline
+            .s-vgBottom1
+            lh.c-navstack-heading 我的设置
+            li
+              a.c-navstack-item(href='/home/settings/password') 密码
+            li
+              a.c-navstack-item(href='/home/settings/email') 邮箱
+
+            //- .s-vgBottom1
+            //- lh.c-navstack-heading 我的收藏
+            //- li
+            //-   a.c-navstack-item(href='/home/settings/password') 我的收藏
+      .col-lg-10.col-md-10.col-sm-12.col-xs-12
+        block user_home_content

@@ -1,0 +1,18 @@
+.modal.fade#questionEditModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button" data-dismiss="modal" aria-label="Close")
+          span(aria-hidden="true") &times
+        h4.modal-title 修改问题
+      .modal-body
+        form.form-horizontal
+          input#qid(type="hidden")
+          .form-group
+            label(for="title") 标题
+            input.form-control#title(type="text")
+          .form-group
+            label(for="content") 内容
+            textarea.form-control#content
+      .modal-footer
+        button#submit(type="button" class="btn btn-primary") 修改

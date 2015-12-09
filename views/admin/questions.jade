@@ -1,0 +1,26 @@
+extends ./layout
+block append script
+  script(src='/js/admin/questions.js')
+block content
+  include question_edit_modal.jade
+  table.table.table-condensed.table-bordered
+    thead
+      tr
+        th 标题
+        th 内容
+        th 作者
+        th 发表时间
+        th 操作
+    tbody
+      each question in questions
+        tr.question(qid= question.id)
+          td.title
+            a(href="/admin/questions/" +  question.id)= question.title
+          td.content= question.content
+          td= question.created_by.name ? question.created_by.name : question.created_by.email
+          td= moment(question.created_at).format('YYYY年MM月DD日 HH:mm')
+          td.small
+            a(href='#')
+              i.action.fa.fa-trash.delete
+            a(href='#')
+              i.action.fa.fa-pencil.edit

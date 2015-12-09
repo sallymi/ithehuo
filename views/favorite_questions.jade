@@ -1,0 +1,9 @@
+.panel
+  .panel-heading 我关注的问题
+  .panel-body
+    if fav_questions && fav_questions.length > 0
+      ul
+        each favq in fav_questions
+          li
+            a(href="/questions/"+favq.question._id) #{favq.question.title}
+              span  收藏于 #{moment(favq.fav_time).format('YYYY年MM月DD日 HH:mm:SS')}

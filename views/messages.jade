@@ -1,0 +1,104 @@
+extends base
+block content
+	script(src='/js/message.js')
+	link(rel='stylesheet', href='/css/message.css',type='text/css')
+	input#user(type='hidden' value=user && user.id)
+	.container-fluid#message
+		.row
+			.col-md-3
+				.well.transparent
+					.panel
+						.panel-body.user-tile
+							.col-md-3
+								a(href='/users/#{user.id}')
+									img.img-circle(src=user.logo_img)
+							.col-md-8
+								small
+									a.text_blank(href='/users/#{user.id}')=user.name
+									a.text_blank(href='/messages')
+										i.small.fa.fa-envelope.muted
+											small 私信
+										span.small.badge=messages.length
+								br
+								p
+								small
+									a.muted(href='/home')
+										span.small 我的主页
+										span |
+									a.muted(href='/home/projects')
+										small 我的项目
+							div(style='clear:both')
+							p
+							p
+								small
+									small
+										a.muted(href='/home/followings')
+											small 关注
+											small=user.followings&&user.followings.length
+											small 人
+											span |
+										a.muted(href='/home/friends')
+											small 联系
+											small=friendsNumber
+											small 人
+								hr
+								small
+									span.muted
+										small=requestsNumber + followersNumber
+										small 人想认识我
+
+				.well.transparent
+					.panel
+						.panel-body
+							h3='广告位'
+				.well.transparent
+					.panel
+						.panel-body
+							h3='广告位'
+			.col-md-9
+				.well.transparent
+					.panel
+						.panel-body
+							.table
+								.tab-pane.in.active
+									.message-container
+										.message-navbar.align-center.clearfix
+											.message-bar
+												span.sender.blue 发送者
+												span.summary.blue
+													a#content_link(href='javascript:showAllMessage()') 内容
+													span#content 内容
+													span |
+													a#unread_link(href='javascript:showUnreadMessage()') 未读消息
+													span#unread 未读消息
+										.message-list-container
+											.message-list
+												each message in messages
+													.question.message-item
+														span.sender
+															img.img-circle(src=message.from.logo_img)
+															br
+															span=message.from.name
+														span.summary
+															a(href='/chat/#{message.from.id}')=message.msg
+															br
+															span=moment(message.timestamp).format('YYYY年MM月DD日 hh:mm:ss')
+
+														span.time
+															i.fa.fa-trash.message-star.delete
+
+											.message-list.unread
+												each message in messages
+													if (!message.read)
+														.question.message-item
+															span.sender
+																img.img-circle(src=message.from.logo_img)
+																br
+																span=message.from.name
+															span.summary
+																a(href='/message/#{message.from.id}')=message.msg
+																br
+																span=moment(message.timestamp).format('YYYY年MM月DD日 hh:mm:ss')
+
+															span.time
+																i.fa.fa-trash.message-star.delete

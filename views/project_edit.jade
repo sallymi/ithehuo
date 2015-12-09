@@ -1,0 +1,202 @@
+script(type='text/javascript',src='/javascripts/typeahead.bundle.js')
+script(type='text/javascript',src='/javascripts/handlebars-v3.0.3.js')
+script(src='/js/project_edit.js')
+script(src='/javascripts/jquery-ui.min.js')
+script(src='/javascripts/jquery.tag-editor.min.js')
+
+link(rel='stylesheet', href='/stylesheets/jquery.tag-editor.css')
+link(rel='stylesheet', href='/css/project_edit.css')
+.row
+  .col-lg-12
+    form#detailForm
+      input#projectId(type='hidden' value= project && project._id)
+      br
+      .panel
+        .panel-heading='项目详情'
+        .panel-body
+          .col-lg-9
+            .row.form-group
+              .col-xs-12.col-sm-4
+                font(color="red")='* '
+                label.control-label(for='projectName')=' 项目名称'
+              .col-xs-12.col-sm-8
+                input.form-control#projectName(style='width:100%',type='text', name='projectName', value=project && project.name, placeholder='项目名称', required)
+            .row.form-group
+              .col-xs-12.col-sm-4
+                font(color="red")='* '
+                label.control-label(for='projectKeyword')='Slogan'
+              .col-xs-12.col-sm-8
+                input.form-control#projectKeyword(style='width:100%',type='text', name='projectKeyword', value=project && project.keyword, placeholder='一句话描述', required)
+            .row.form-group
+              .col-xs-12.col-sm-4
+                label.control-label='项目标签 (领域方向等)'
+              .col-xs-12.col-sm-8
+                input.form-control#projectTags(style='width:100%',type='text',name='projectTags', placeholder='如 互联网团队，天使轮，A轮, 以回车分隔')=project && project.tag
+            .row.form-group
+              .col-xs-12.col-sm-4
+                label.control-label(for='projectStage') 项目阶段
+              .col-xs-12.col-sm-8
+                select.form-control#projectStage(style="width:100%", name='projectStage', 'required')
+                  include ./mixin/form.jade
+                  +option('想法构思', project && project.stage)
+                  +option('正在实现', project && project.stage)
+                  +option('测试版已发布', project && project.stage)
+                  +option('正式版已发布', project && project.stage)
+            .row.form-group
+              .col-xs-12.col-sm-4
+                font(color="red")='* '
+                label.control-label='项目描述'
+              .col-xs-12.col-sm-8
+                input.form-control#projectDescription(style='width:100%',type='text', name='projectDescription', value=project && project.description, placeholder='项目描述', required)
+            .row.form-group
+              .col-xs-12.col-sm-4
+                label.control-label='项目城市'
+              .col-xs-12.col-sm-8
+                input.form-control#projectLocation(style='width:100%',type='text', name='projectLocation', value=project && project.location, placeholder='项目城市')
+          .col-lg-2.col-lg-offset-1
+            h4='项目LOGO'
+            img#project_logo.img-responsive(src=project && project.logo_img ? project.logo_img:"/images/portfolio/dog-160.png")
+            button.btn.btn-primary(type='button' data-toggle='modal', data-target='.bs-example-modal-sm') 更换logo
+      .panel
+        .panel-heading='相关内容'
+        .panel-body
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label.control-label='公司'
+            .col-xs-12.col-sm-8
+              input.form-control#projectCompany(type='text',name='projectCompany', value=project && project.company, placeholder='公司全名')
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label.control-label='技术需求'
+            .col-xs-12.col-sm-8
+              textarea.form-control#projectRequiredSkills(type='text',name='projectRequiredSkills', value=project && project.required_skills, placeholder='如 PHP，PS，JAVA')
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label.control-label='展示链接'
+            .col-xs-12.col-sm-8
+              input.form-control#projectLink(type='text',name='projectLink', value=project && project.link, placeholder='项目展示链接')
+      .panel
+        .panel-heading 融资状况
+        .panel-body
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label.control-label(for='projectFundingCurrent') 融资情况
+            .col-xs-12.col-sm-8
+              select.form-control#projectFundingCurrent(name='projectFundingCurrent', 'required')
+                include ./mixin/form.jade
+                +option('50万以下', project && project.funding && project.funding.current)
+                +option('51-100万', project && project.funding && project.funding.current)
+                +option('101-500万', project && project.funding && project.funding.current)
+                +option('501-2000万', project && project.funding && project.funding.current)
+                +option('2000万以上', project && project.funding && project.funding.current)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label.control-label(for='projectFundingNext') 下一阶段融资需求
+            .col-xs-12.col-sm-8
+              select.form-control#projectFundingNext(name='projectFundingNext', 'required')
+                include ./mixin/form.jade
+                +option('50万以下', project && project.funding && project.funding.current)
+                +option('51-100万', project && project.funding && project.funding.current)
+                +option('101-500万', project && project.funding && project.funding.current)
+                +option('501-2000万', project && project.funding && project.funding.current)
+                +option('2000万以上', project && project.funding && project.funding.current)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label.control-label(for='projectFundingReturn') 项目计划融资可以出让的股份比例
+            .col-xs-12.col-sm-8
+              select.form-control#projectFundingReturn(name='projectFundingReturn', 'required')
+                include ./mixin/form.jade
+                +option('1％－5%', project && project.funding && project.funding.next.return)
+                +option('6%－10%', project && project.funding && project.funding.next.return)
+                +option('11%－20%', project && project.funding && project.funding.next.return)
+                +option('21%－30%', project && project.funding && project.funding.next.return)
+                +option('31%－40%', project && project.funding && project.funding.next.return)
+                +option('41％－50%', project && project.funding && project.funding.next.return)
+                +option('50%以上', project && project.funding && project.funding.next.return)
+      //- .panel
+        .panel-heading 合作伙伴
+        .panel-body#projectPartner
+          .row
+            .col-md-2.col-md-offset-10
+              i.add.fa.fa-plus.pull-right(data-toggle="modal" data-target="#projectAddParterModal")
+              .modal.fade#projectAddParterModal
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;
+                      h4.modal-title 查找合作伙伴
+                    .modal-body
+                      p One fine body&hellip;
+                    .modal-footer
+                      button(type="button" class="btn btn-primary") 确定
+          .row
+            .col-md-2 合伙人
+            .col-md-2 张三
+            .col-md-2.col-md-offset-6
+              i.delete.fa.fa-trash.pull-right
+      .panel
+        .panel-heading='我的贡献'
+        .panel-body
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
+              label.control-label='你什么时候开始进入这个项目工作的'
+            .col-xs-12.col-sm-8
+              input.form-control#projectCreatorStartTime(type='date',name='projectCreatorStartTime', value=project && project.creator && project.creator.start_time, placeholder='如 2014-1-1', required)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
+              label.control-label 在这个项目中的角色
+            .col-xs-12.col-sm-8
+              .radio.form-control#projectCreatorRole
+                include ./mixin/form.jade
+                +radio('projectCreatorRole', '创始人', project && project.creator && project.creator.role, 'required')
+                +radio('projectCreatorRole', '合伙人', project && project.creator && project.creator.role, 'required')
+                +radio('projectCreatorRole', '投资人', project && project.creator && project.creator.role, 'required')
+      .form-group.col-xs-12.text-center
+        button(type='submit').btn.btn-info 保存并发布
+      br
+.modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
+  .modal-dialog.model-sm
+    .modal-content
+      a.closeBtn(href='#', data-dismiss='modal') X
+      h1.margin-bottom-15
+      .modal-body
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/cabin-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/cake-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/eCommerce-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/plane-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/safe-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/social-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/social2-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/submarine-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/vision-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/finice-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/cloud-160.png')
+        .col-xs-6.col-md-3
+          a.thumbnail(href='#')
+            img(src='/images/portfolio/bigdata-160.png')
+      .modal-footer

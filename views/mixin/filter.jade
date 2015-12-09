@@ -1,0 +1,46 @@
+mixin filterLink(item, query, name)
+  a(href='/'+item+'?'+query)=name
+
+mixin sideFilter(filter)
+  if filter
+    .menu_main
+      h2=filter.name
+        if filter.categories
+          span
+      if filter.values
+        each value in filter.values
+          if value.name
+            +filterLink(filter.item, value.query, value.name)
+          else
+            +filterLink(filter.item, filter.key + '=' + value, value)
+
+mixin popUpFilter(filter)
+  if filter && filter.categories
+    .menu_sub.dn(id=filter.key.replace('.', '_'))
+      dl.reset
+        each catetory in filter.categories
+          dt
+            cls= catetory.name
+            dd
+              each value in catetory.values
+                if value.operator && value.value && value.name
+                  +filterLink(filter.item, filter.key, value.operator+'=', value.value, value.name)
+                else
+                  +filterLink(filter.item, filter.key + '=' + value, value)
+
+//- sample filter data
+  {
+    item: 'projects',
+    name: '地区',
+    key: 'location',
+    values: [北京,上海,深圳,广州]
+    categories: {
+      name: '华北'
+      values: [北京,天津,河北]
+    }
+  }
+mixin filter(filter)
+  if filter
+    .menu_box(rel='drevil', name=filter.key.replace('.', '_'))
+      +sideFilter(filter)
+      +popUpFilter(filter)

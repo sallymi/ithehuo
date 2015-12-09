@@ -1,0 +1,25 @@
+.portfolio-modal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true', id='updateQuestion')
+	.modal-content
+		.close-modal(data-dismiss='modal')
+			.lr
+				.rl
+		.container
+			.row
+				.col-lg-8.col-lg-offset-2
+					.modal-body
+						.form_group
+							label(for='u_question') 问题：
+							input.form-control(name="u_question",id="u_question",type="text",placeholder="问题...",value="#{title}")
+						.form_group
+							label(for='u_content') 详情：
+							textarea.form-control(name="u_content",id="u_content",placeholder="详情...") #{content}
+						.form_group
+							label(for='u_tags') 标签：
+							input.form-control(name="u_tags",id="u_tags",type="text",placeholder="标签1, 标签2", value="#{tags}")
+						
+						botton.btn.btn-primary(type='button', style='margin-right: 5px;')
+							a.btn.btn-info(href='javascript:updateQuestion("#{_id}")')
+								i.fa.fa-ellipsis-h='更新'								
+						botton.btn.btn-primary(type='button', data-dismiss='modal')
+							a.btn.btn-info(href='#')
+								i.fa.fa-times='关闭'

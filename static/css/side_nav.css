@@ -1,0 +1,99 @@
+.padding-19{
+	padding: 19px;
+}
+.siderNav {
+	font: 14px/22px Arial,"Hiragino Sans GB","微软雅黑","宋体";
+  	color: #333;
+  	word-wrap: break-word;
+  	background: white;
+  	//width: 230px;
+}
+.siderNav .menu_main {
+  //width: 206px;
+  padding: 6px 12px;
+  border: 2px solid #fafafa;
+  border-right: none;
+  overflow: hidden;
+  position: relative;
+}
+.siderNav .menu_main h2 {
+  font-size: 18px;
+  padding-left: 8px;
+  font-weight: 500;
+  margin: 10px;
+  //background: url(../images/arr.png) right 5px no-repeat; 
+
+ }
+ .siderNav .menu_main h2 span {
+  width: 13px;
+  height: 14px;
+  background: url(../images/arr.png) 0 0 no-repeat;
+  float: right;
+  margin-top: 3px;
+}
+
+.siderNav .menu_main a {
+  float: left;
+  white-space: nowrap;
+  margin: 0 5px 5px 0;
+  padding: 0 8px;
+}
+.siderNav .menu_sub {
+  //width: 540px;
+  padding: 15px 30px 5px 30px;
+  position: absolute;
+  top: 0;
+  left: 297px;
+  z-index: 101;
+  border: 2px solid #c9cbce;
+  background: #fff;
+}
+#projects .siderNav .menu_sub {
+  //width: 540px;
+  padding: 15px 30px 5px 30px;
+  position: absolute;
+  top: 0;
+  left: 180px;
+  z-index: 101;
+  border: 2px solid #c9cbce;
+  background: #fff;
+}
+.dn {
+  display: none;
+}
+.menu_sub dt {
+  width: 70px;
+  font-size: 14px;
+  margin: 0;
+  text-align: right;
+  position: absolute;
+}
+.siderNav .menu_sub dt a {
+  padding: 0;
+  line-height: 28px;
+  text-decoration: underline;
+}
+.siderNav .menu_sub dl {
+  margin: 0 0 20px;
+}
+.siderNav .menu_sub dd {
+  margin-left: 100px;
+  overflow: hidden;
+}
+.siderNav .menu_sub dd a {
+  white-space: nowrap;
+  padding: 0 10px;
+  background: url(../images/arr.png) -29px center no-repeat;
+  color: #777;
+  line-height: 28px;
+  margin-left: -1px;
+  text-decoration: underline;
+}
+
+.siderNav .menu_sub dt cls {
+  padding: 0;
+  line-height: 28px;
+  text-decoration: none;
+  outline: 0;
+  color: #18bc9c;
+}

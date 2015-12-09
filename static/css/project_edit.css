@@ -1,0 +1,31 @@
+.closeBtn {
+  position: absolute;
+  right: 20px;
+  font-size: 40px;
+  color: black;
+}
+
+.closeBtn:hover,
+.closeBtn:focus,
+.closeBtn:active {
+  text-decoration: none;
+}
+#detailForm .tag-editor {
+  	margin-left: 10px;
+  	border: 2px solid #dce4ec;
+  	padding: 10px 15px;
+  	font-size: 15px;
+}
+#projectStage {
+  width: 100%;
+}
+@media(min-width:768px) {
+	#projectRequiredSkills+.tag-editor{
+  	width: 50%;
+	}
+}
+@media(max-width:767px) {
+	#projectRequiredSkills+.tag-editor{
+  	width: 100%;
+	}
+}

@@ -1,0 +1,77 @@
+extends base
+block append link
+  link(rel='stylesheet', href='/stylesheets/jquery.fullPage.css')
+  link(rel='stylesheet', href='/css/fullpage.css')
+block append script
+  script(src='/javascripts/jquery-1.8.3.min.js')
+  script(src='/javascripts/jquery.fullPage.min.js')
+  script(src='/js/fullpage.js')
+block content
+  <!--header-->
+  #dowebok
+    .section#page1
+      header.slide
+        .container
+          .row
+            .col-lg-12
+              img.img-responsive(src='images/profile.png', alt='')
+          .row
+            .intro-text
+              span.name='IT copartner'
+              hr.star-light
+              span.skills='IT合伙人'
+            a.godown
+              span
+      .slide.section1
+      .slide.section2
+    .section#page2
+      .container
+        .row
+          .col-sm-3.portfolio-item
+            img.img-responsive(src='images/portfolio/black-circuit-320.png', alt='')
+          .col-sm-9
+            h3='个性化面膜O2O'
+            h4='项目亮点'
+            h4='创始人亮点'
+            h4='项目阶段'
+            h4='合伙人需求：1位产品合伙人，1位市场合伙人'
+        br
+        div(style='BORDER-TOP: #00686b 1px dashed; OVERFLOW: hidden; HEIGHT: 1px')
+        br
+        .row
+          .col-sm-9
+            h3='个性化面膜O2O'
+            h4='项目亮点'
+            h4='创始人亮点'
+            h4='项目阶段'
+            h4='合伙人需求：1位产品合伙人，1位市场合伙人'          
+          .col-sm-3.portfolio-item
+            img.img-responsive(src='images/portfolio/social2.png', alt='')
+        a.godown
+          span
+    .section#portfolio
+      .container
+        .row
+          .col-lg-12.text-center
+            h2(style='font-size: 32px')='这些项目正在找技术合伙人'
+            hr.star-primary
+        .row
+          each item in hots
+            .col-sm-4.portfolio-item
+              a.portfolio-link(href='#portfolioProject_#{item.pid}', data-toggle='modal')
+                .caption
+                  .caption-content
+                    i.fa.fa-search-plus.fa-3x
+                img.img-responsive(src='#{item.img}', alt='')     
+    .section#page4
+      .container
+        .row
+          .col-lg-12.text-center
+            h2(style='font-size: 32px')='合作创业导师'
+            hr.star-primary-mentor
+        .row
+          .col-lg-12.text-center
+            h2(style='font-size: 32px')='合作伙伴'
+            hr.star-primary-mentor
+  each item in hots
+      include project_detail

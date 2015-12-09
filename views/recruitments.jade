@@ -1,0 +1,72 @@
+extends base
+block append script
+  script(src='/js/recruitments.js')
+block content
+  link(rel='stylesheet', href='/css/side_nav.css')
+  link(rel='stylesheet', href='/css/recruitments.css')
+  include search.jade
+  .container-fluid.list-show
+    .row
+      .col-lg-3.col-md-3.col-sm-12.col-xs-12.padding-19
+        if filters
+          .siderNav
+            include mixin/filter.jade
+            each filter in filters
+              +filter(filter)
+      .col-lg-9.col-md-9s.col-sm-12.col-xs-12
+        .well.transparent
+          .panel
+            .panel-body
+              if recruitments.length==0
+                .empty_result 没有搜索到相关招募
+                  br
+                  | 请试试其他搜索吧......
+              each recruitment in recruitments
+                li.col-md-12.portfolio-item
+                  .media
+                    .media-left.media-middle.col-xs-2
+                      a(href='/recruitments/' + recruitment._id)
+                        img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
+                    .media-body.col-xs-5(onclick="location.href='/recruitments/#{recruitment._id}'")
+                      h5.media-heading.mb10
+                        a(href= '/recruitments/' + recruitment._id)
+                          strong= recruitment.classify
+                        small=recruitment.location+' | '+recruitment.work_nature
+                      .small
+                        em.c7='月薪：'
+                        =recruitment.payment_min+'k-'+recruitment.payment_max+'k'
+                      if (recruitment.share_option_min && recruitment.share_option_max)
+                        .small
+                          em.c7= '期权：'
+                          if !recruitment.share_option_min && !recruitment.share_option_max
+                            ='<发布者暂不出让期权>'
+                          else
+                            =recruitment.share_option_min+'% - '+recruitment.share_option_max+'%'
+                      else
+                        .small
+                          em.c7= '期权： 暂无'
+                      .small
+                        em.c7= '职位诱惑：'
+                        =recruitment.keyword
+                      .small.c7
+                        include mixin/date
+                        +date(recruitment.creation_time)
+                        |  发布
+                    .media-body.col-xs-5(onclick="location.href='/projects/#{recruitment.project&&recruitment.project._id}'")
+                      h5.media-heading.mb10
+                        if (recruitment.project)
+                          large='所在项目：'+recruitment.project.name
+                        else
+                          large='所在项目：'
+                      .small
+                        em.c7= 'Slogan：'
+                        =recruitment.project&&recruitment.project.keyword
+                      .small
+                        em.c7= '阶段：'
+                        =recruitment.project&&recruitment.project.stage
+                      .small
+                        em.c7= '项目标签：'
+                        =recruitment.project&&recruitment.project.tag
+                      .small
+                        em.c7= '融资规模：'
+                        =recruitment.project&&recruitment.project.funding&&recruitment.project.funding.current?recruitment.project.funding.current:'<创建者还没有填写>'

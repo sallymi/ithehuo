@@ -1,0 +1,32 @@
+mixin startup(startup)
+  .experience.startup.col-md-8.col-md-offset-4
+    table
+      tr
+        td
+          .form-group
+            .col-xs-2
+              label 开始
+            .col-md-10
+              input.start_time.form-control(type='date' value=startup && startup.start_time)
+          .form-group
+            .col-xs-2
+              label 结束
+            .col-md-10
+              input.end_time.form-control(type='date' value=startup && startup.end_time)
+          .form-group
+            .col-xs-2
+              label 角色
+            .col-md-10
+              input.role.form-control(type='text' value=startup && startup.role)
+          .form-group
+            .col-xs-2
+              label 项目名称
+            .col-md-10
+              input.name.form-control(type='text' value=startup && startup.name)
+          .form-group
+            .col-xs-2
+              label 项目描述
+            .col-md-10
+              input.description.form-control(type='text' value=startup && startup.description)
+        td
+          i.fa.fa-trash-o.pull-right

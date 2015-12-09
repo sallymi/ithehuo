@@ -1,0 +1,9 @@
+.searchCtn {
+  padding: 10px;
+}
+.searchCtn.row .form-control-ctn{
+  padding: 0 !important;
+}
+.searchCtn.row .form-control-ctn:last-child{
+  padding-left: 2px !important;
+}

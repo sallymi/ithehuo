@@ -1,0 +1,9 @@
+.panel
+  .panel-heading 我收藏的答案
+  .panel-body
+    if fav_answers && fav_answers.length > 0
+      ul
+        each fava in fav_answers
+          li
+            a(href="/questions/"+fava.answer.question+'/?answerId='+fava.answer.id) #{fava.answer.content}
+              span  收藏于 #{moment(fava.fav_time).format('YYYY年MM月DD日 HH:mm:SS')}

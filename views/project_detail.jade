@@ -1,0 +1,32 @@
+.portfolio-modal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true', id='portfolioProject_#{item._id}')
+	.modal-content
+		.close-modal(data-dismiss='modal')
+			.lr
+				.rl
+		.container
+			.row
+				.col-lg-8.col-lg-offset-2
+					.modal-body
+						h2=item.name
+						hr.star-primary
+						img.img-responsive.img-centered(src='#{item.logo_img}', alt='')
+						p=item.description
+						ul.list-inline.item-details
+							li='Client:'
+								strong
+									a(href='http://www.baidu.com')='it hehuoren'
+							li='Date:'
+								strong
+									a(href='http://www.baidu.com')='2015'
+							li='Service:'
+								strong
+									a(href='http://www.baidu.com')='Web'
+						botton.btn.btn-primary#details(type='button', style='margin-right: 5px;')
+							if signinUser
+								a(href='/projects/'+'#{item._id}')
+									i.fa.fa-ellipsis-h='更多详情'
+							else
+								a(href='/signin')
+									i.fa.fa-ellipsis-h='登陆查看更多'
+						botton.btn.btn-default(type='button', data-dismiss='modal')
+							i.fa.fa-times='关闭'

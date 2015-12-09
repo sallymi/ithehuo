@@ -1,0 +1,180 @@
+mixin check_helpful(uid, answer)
+  -var helpful = false
+  each agree in answer.agrees
+    if agree.user.id == uid
+      -helpful = true
+  if helpful
+    if signinUser
+      i.fa.fa-minus(style='margin-left:7px;')
+      a(href='javascript:cancelAgreeAnswer("#{answer._id}")') 取消赞同
+    else
+      i.fa.fa-minus(style='margin-left:7px;')
+      a(href='/signin') 取消赞同
+  else
+    if signinUser
+      i.fa.fa-plus(style='margin-left:7px;')
+      a(href='javascript:agreeAnswer("#{answer._id}")') 赞同
+    else
+      i.fa.fa-plus(style='margin-left:7px;')
+      a(href='/signin') 赞同
+
+extends base
+block content
+  link(rel='stylesheet', href='/css/question.css',type='text/css')
+  script(type='text/javascript',src='/javascripts/jquery.json.min.js')
+  script(type='text/javascript',src='/javascripts/typeahead.bundle.js')
+  script(type='text/javascript',src='/javascripts/questions/ask.js')
+  include search.jade
+  .qa.container-fluid
+    .row
+      .col-md-9
+        .well.transparent
+          .panel
+            .panel-body
+              .answer-content
+                if question.tag
+                  .tag
+                    .label.label-info #{question.tag.title}
+                if question.title
+                  h2.zm-item-title= question.title
+                br
+
+                if question.anonymous
+                  div 提问人：匿名用户
+                else if question.created_by
+                  span.subtitle #{question.created_by.name?question.created_by.name:question.created_by.email}
+
+                if question.created_at
+                  span.subtitle 发布于 #{moment(question.created_at).format('YYYY年MM月DD日')}
+                br
+                if question.content
+                  textarea.transperant(readonly="readonly") !{question.content}
+                .feed-meta
+                  .zm-item-meta.clearfix
+                    .zm-meta-panel
+                      if question.comment
+                        a.meta-item.toggle-comment(href='####' onclick='showComment("#{question.comment.length}",event)' name='addcomment')
+                          i.fa.fa-comment
+                          span=question.comment.length+'条评论'
+                      .panel-container(name='comments')
+                        .zm-comment-box
+                          i.fa.fa-sort-up.zm-comment-bubble
+                          .zm-comment-list
+                            each item in question.comment
+                              .zm-item-comment
+                                a.zm-item-link-avatar
+                                  img.zm-item-img-avatar(src=question.created_by.logo_img)
+                                .zm-comment-content-wrap
+                                  .zm-comment-hd
+                                    a.zg-link=question.created_by.name?question.created_by.name:question.created_by.email
+                                  .zm-comment-content=item.content
+                                  .zm-comment-ft
+                                    span=moment(item.create_at).format('YYYY年MM月DD日')
+                            .zm-comment-form.zm-comment-box-ft.expanded
+                              include questions_update
+                              input#ta_q.form-control(placeholder="写下你的评论")
+                              .zm-command.zg-clear
+                                if signinUser
+                                  a.btn.btn-sm.btn-info(href='javascript:commentQuestion("#{question._id}")') 评论
+                                else
+                                  a.btn.btn-sm.btn-info.disabled(href='/signin') 评论
+                if answers && answers.length > 0
+                  .zh-answers-title.clearfix
+                    h3=answers.length+'个回答'
+                  #zh-question-answer-wrap
+                    .zm-item-answer
+                      each answer,index in answers
+                        if question.best_answer && question.best_answer.id === answer.id
+                          .alert.alert-success 被提问者标记为最佳答案
+                        .answer-head
+                          .zm-item-answer-author-info
+                            h3.zm-item-answer-author-wrap
+                              a.zm-item-link-avatar
+                                img.zm-list-avatar(src=answer.created_by.logo_img)
+                              a=answer.created_by.name?answer.created_by.name:answer.created_by.email
+                          .zm-item-vote-info
+                            .voters
+                              each agree in answer.agrees
+                                span.user-block
+                                  a.zig-link(href='/users/#{agree.user.id}')=agree.user.name?agree.user.name:agree.user.email
+                                  span=', '
+                            if answer.agrees.length>0
+                              span.meta-item 等人赞同
+                        .zm-item-rich-text
+                          textarea.transperant.zm-editable-content.clearfix=answer.content
+                        .zm-item-meta.zm-item-comment-el.answer-actions.clearfix
+                          .zm-meta-panel
+                            .answer-date-link-wrap
+                              span.subtitle.answer-date-link.last_updated.meta-item='编辑于'+moment(answer.created_at).format('YYYY年MM月DD日')
+                            if answer.comment
+                              a.meta-item.toggle-comment(href='####' onclick='showComment("#{answer.comment.length}",event)' name='addcomment')
+                                i.fa.fa-comment
+                                span=answer.comment.length+'条评论'
+                            if signinUser
+                              +check_helpful(signinUser.id, answer)
+                              if !answer.isFavorited
+                                a.meta-item(href='javascript:favoriteAnswer("#{answer._id}")')
+                                  i.fa.fa-bookmark(style='margin-left:7px;')
+                                  span 收藏答案
+                              else
+                                a.meta-item(href='javascript:cancelFavoriteAnswer("#{answer._id}")')
+                                  i.fa.fa-bookmark(style='margin-left:7px;')
+                                  span 取消收藏
+                            .panel-container(name='comments')
+                              .zm-comment-box
+                                i.fa.fa-sort-up.zm-comment-bubble
+                                .zm-comment-list
+                                  each item in answer.comment
+                                    .zm-item-comment
+                                      a.zm-item-link-avatar
+                                        img.zm-item-img-avatar(src="/images/profile.png")
+                                      .zm-comment-content-wrap
+                                        .zm-comment-hd
+                                          a.zg-link=item.created_by.name ? item.created_by.name : item.created_by.email
+                                        .zm-comment-content=item.content
+                                        .zm-comment-ft
+                                          span=moment(item.create_at).format('YYYY年MM月DD日')
+                                  .zm-comment-form.zm-comment-box-ft.expanded
+                                    include questions_update
+                                    input.form-control(id="ta_a_#{index}",placeholder="写下你的评论")
+                                    .zm-command.zg-clear
+                                      if signinUser
+                                        a.btn.btn-sm.btn-info(href='javascript:commentAnswer("#{answer._id}", #{index})') 评论
+                                      else
+                                        a.btn.btn-sm.btn-info.disabled(href='/signin') 评论
+                          if signinUser && signinUser.id === question.created_by.id
+                            if question.best_answer && question.best_answer.id === answer.id
+                              a.btn.btn-success(style='margin-right:5px;',href='javascript:cancelBestAnswer("#{question.id}","#{answer._id}")') 取消标记最佳
+                            else
+                              a.btn.btn-success(style='margin-right:5px;',href='javascript:bestAnswer("#{question.id}","#{answer._id}")') 标记为最佳
+                else
+                  .asnwer-list
+                    .no-answer 暂时没有回答
+                .answer-submit
+                  form.form-inline()
+                  .form_group
+                    label(for='content') 我来回答：
+                    if signinUser
+                      textarea.form-control(name="content",id="content",rows=5,cols=50,type="text",placeholder="写下答案内容...")
+                    else
+                      a(href='/signin?redirect=/questions/' + question._id)
+                        textarea.form-control(name="content",id="content",rows=5,cols=50,type="text",placeholder="写下答案内容...")
+                  if signinUser
+                    a.btn.btn-info(type="button",style='margin-left:10px;padding:5px 10px;',href='javascript:answerQuestion("#{question._id}")') 提交答案
+                  else
+                    a.btn.btn-info.disabled(type="button",style='margin-left:10px;padding:5px 10px;',href='/signin') 提交答案
+
+      .col-md-3
+        .well.transparent
+          a.btn.btn-success.btn-block(href='/questions/ask') 我要提问
+          if signinUser
+            if !isFavorited
+              a.btn.btn-info.btn-block(href='javascript:favoriteQuestion("#{question._id}")') 关注该问题
+            else
+              a.btn.btn-primary.btn-block(href='javascript:cancelFavoriteQuestion("#{question._id}")') 取消关注该问题
+          else
+            a.btn.btn-info.btn-block.disabled(href='/signin') 关注该问题
+
+        if signinUser
+          include favorite_questions.jade
+          include favorite_answers.jade

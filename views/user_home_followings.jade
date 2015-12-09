@@ -1,0 +1,13 @@
+extends user_home_base
+block user_home_content
+  link(rel='stylesheet', href='/css/user_home_recruitments.css')
+  .panel
+    .panel-heading.c-insetC-header
+      span 我关注的IT合伙人
+    .panel-body
+      if followings
+        ul.my_jobs
+          each following in followings
+            li
+              h3
+                a(href= '/users/' + following.id)= following.name

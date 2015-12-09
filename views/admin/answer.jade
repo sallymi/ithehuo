@@ -1,0 +1,30 @@
+extends ./layout
+block append script
+  script(src='/js/admin/answer.js')
+block content
+  //- 提示
+  p
+    a(href='/admin/questions/' + answer.question.id)= '问题：' + answer.question.title
+  p= '答案：' + answer.content
+
+  //- 评论管理
+  include comment_edit_modal.jade
+  p 答案评论管理
+  table.table.table-condensed.table-bordered.answer(aid=answer.id)
+    thead
+      tr
+        th 评论
+        th 作者
+        th 发表时间
+        th 操作
+    tbody
+      each comment in answer.comment
+        tr.comment(cid=comment.id)
+          td.content= comment.content
+          td= comment.created_by.name ? comment.created_by.name : comment.created_by.email
+          td= moment(comment.created_at).format('YYYY年MM月DD日 HH:mm')
+          td.small
+            a(href='#')
+              i.action.fa.fa-trash.delete
+            a(href='#')
+              i.action.fa.fa-pencil.edit

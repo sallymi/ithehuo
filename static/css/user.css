@@ -1,0 +1,25 @@
+.closeBtn {
+  position: absolute;
+  right: 20px;
+  font-size: 40px;
+  color: black;
+}
+
+.closeBtn:hover,
+.closeBtn:focus,
+.closeBtn:active {
+  text-decoration: none;
+}
+.description .row{
+	padding: 3px 0;
+}
+.tag {
+  margin: 0 5px 15px;
+  line-height: 25px;
+}
+mark {
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  color: red;
+}
+

@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    -var t = title ? title : 'IT合伙人管理'
+    title= t
+    block link
+      link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+      link(rel='stylesheet', href='/stylesheets/ace.min.css')
+      link(rel='stylesheet', href='/font-awesome/css/font-awesome.css',type='text/css')
+      link(rel='stylesheet', href='/css/admin/layout.css',type='text/css')
+    block script
+      script(src='/javascripts/jquery.js')
+      script(src='/javascripts/bootstrap.min.js')
+  body
+    .main-container
+      .main-container-inner
+        .sidebar
+          .nav.nav-list
+            - var activeClass = (header === '控制台') ? 'active' : ''
+            li(class= activeClass)
+              a(href='/admin')
+                i.fa.fa-dashboard
+                span.menu-text 控制台
+            - var activeClass = (header === '问答管理') ? 'active' : ''
+            li(class= activeClass)
+              a(href="/admin/questions")
+                i.fa.fa-text-width
+                span.menu-text 问答管理
+            - var activeClass = (header === '项目管理') ? 'active' : ''
+            li(class= activeClass)
+              a(href="/admin/projects")
+                i.fa.fa-list
+                span.menu-text 项目管理
+      .main-content
+        //- .breadcrumbs
+          ul.breadcrumb
+            li
+              i.fa.fa-home.home-icon
+              a(href='/admin') 首页
+            li.active 项目管理
+        .page-content
+          .page-header
+            h1= header
+              //- small
+                i.fa.fa-angle-double-right 查看
+          .page-content
+            block content

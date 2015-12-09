@@ -1,0 +1,45 @@
+.section { text-align: center; font: 18px "Microsoft Yahei";}
+hr.star-primary-mentor {
+    margin: 25px auto 30px;
+    padding: 0;
+    max-width: 250px;
+    border: 0;
+    border-top: solid 5px;
+    text-align: center;
+}
+hr.star-primary-mentor:after {
+    content: "\f005";
+    display: inline-block;
+    position: relative;
+    top: -.8em;
+    padding: 0 .25em;
+    font-family: FontAwesome;
+    font-size: 2em;
+}
+hr.star-primary-mentor {
+    border-color: #2c3e50;
+}
+
+hr.star-primary-mentor:after {
+    color: #2c3e50;
+    background-color: #F9F3DC;
+}
+.section1 { background: url(../../images/portfolio/rent.png) ;}
+.section2 { background: url(../../images/portfolio/slogon.png);}
+.section3 { background: url(images/3.jpg) 50%;}
+.section4 { background: url(images/4.jpg) 50%;}
+.godown {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  z-index: 100;
+  width: 50px;
+  height: 53px;
+  margin-left: -25px;
+}
+.godown span {
+  display: block;
+  width: 50px;
+  height: 53px;
+  background-image: url(../../images/portfolio/godown.png);
+ }

@@ -1,0 +1,172 @@
+extends base
+block content
+  script(src='/js/message.js')
+  link(rel='stylesheet', href='/css/message.css',type='text/css')
+  input#targetUser(type='hidden' value=user && user.id name=(user && user.name)?user.name:user.email)
+  .container-fluid
+    .row
+      .col-md-3
+        .well.transparent
+          .panel
+            .panel-body
+              h3
+                a(href='/users/#{user.id}')= user.name
+                small= user.status
+              span.small= '当前常在城市：'+(user.location?user.location:'暂未填写')
+              br
+              span.small= '年龄：'+(user.age?user.age:'暂未填写') + ' | 籍贯：' + (user.hometown?user.hometown:'暂未填写')
+              br
+              span.small= '感兴趣的方向：'+(user.field?user.field:'暂未填写')
+              br
+              br
+              span.small= '目前的创业项目：'
+              each value in projects
+                a(href='/projects/#{value.id}')
+                  strong.small=value.name + ' '
+              br
+              span.small= '创业心态：'+user.prefer
+              br
+              br
+              //- span.small= '联系方式（成为好友可见，想了解 '
+              //-   a(href='/users/#{user.id}')='更多'
+              //-   span='）：'
+              //-   br
+              //-   if (isFriend)
+              //-       div='电话：'+(user.mobile_phone ? user.mobile_phone:'暂未填写')
+              //-       div='邮箱：'+ (user.email ? user.email: '暂未填写')
+              //-   else
+              //-       span= '只对好友公开'
+              //- br
+              //- br
+              if (!startup_experiences_public && !isFriend)
+                span.small= '创业经历（成为好友可见）：'
+                  br
+                  span= '只对好友公开'
+              else if (user.startup_experiences && user.startup_experiences.length >0)
+                  span.small= '创业经历（想了解 '
+                    a(href='/users/#{user.id}')='更多'
+                    span='）：'
+                    br
+                    each startup in user.startup_experiences
+                        span.tag.label.label-info=startup.name
+                        span= ' '
+              else
+                span.small= '创业经历： '
+                  br
+                  span= '暂未填写'
+              //- span.small= '创业经历（成为好友可见，想了解 '
+              //-   a(href='/users/#{user.id}')='更多'
+              //-   span='）：'
+              //-   br
+              //-   if (!startup_experiences_public && !isFriend)
+              //-       span= '只对好友公开'
+              //-   else if (isFriend && user.startup_experiences && user.startup_experiences.length >0)
+              //-       each startup in user.startup_experiences
+              //-           span.tag.label.label-info=startup.name
+              //-   else
+              //-       span= '暂未填写'
+                
+              br
+              br
+              if (!work_experiences_public && !isFriend)
+                span.small= '工作经历（成为好友可见'
+                  span='）：'
+                  br
+                  span= '只对好友公开'
+              else if (user.work_experiences && user.work_experiences.length >0 || user.work_experiences_tags && user.work_experiences_tags.length>0)
+                  span.small= '工作经历（想了解 '
+                    a(href='/users/#{user.id}')='更多'
+                    span='）：'
+                    br
+                    each work in user.work_experiences
+                        span.tag.label.label-info=work.corporation
+                        span= ' '
+                    if user.work_experiences_tags && user.work_experiences_tags.length>0
+                      each tag in user.work_experiences_tags
+                          span.tag.label.label-info=tag
+                          span= ' '
+              else
+                span.small= '工作经历： '
+                  br
+                  span= '暂未填写'
+              //- span.small= '工作经历（成为好友可见，想了解 '
+              //-   a(href='/users/#{user.id}')='更多'
+              //-   span='）：'
+              //-   br
+              //-   if (!work_experiences_public && !isFriend)
+              //-       span= '只对好友公开'    
+              //-   else if (isFriend && user.work_experiences && user.work_experiences.length >0) 
+              //-       each work in user.work_experiences
+              //-           span.tag.label.label-info= work.corporation
+              //-   else if user.work_experiences_tags && user.work_experiences_tags.length>0
+              //-       each tag in user.work_experiences_tags
+              //-           span.tag.label.label-info=tag
+              //-   else
+              //-       span= '暂未填写'
+                
+
+              br
+              br
+              span.small= 'ta的技能标签：'
+                br
+                if (user.skill)
+                    each skill in user.skill.split(',')
+                      span.tag.label.label-info= skill
+                else
+                    span= '暂未填写'
+              br
+              br
+              span.small= '教育经历：'
+                br
+                if (user.education && user.education.length>0)
+                    each education in user.educations
+                      span.tag.label.label-info= education.school
+                else
+                    span='暂未填写'
+              br
+              br
+              //- span= '推荐给ta创业项目：'
+              //- br
+              //- span= '推荐给其ta创业者：'
+        .well.transparent
+          .panel
+            .panel-body
+              h3='广告位'
+        .well.transparent
+          .panel
+            .panel-body
+              h3='广告位'
+      .col-md-9
+        .well.transparent
+          .panel
+            .panel-body
+              .row
+                .col-md-3
+                  a(href='/users/#{user.id}')
+                    img.img-responsive(src=user.logo_img)
+                    h4= user.name
+                .col-md-9
+                  img.img-responsive.pull-right(src=signinUser.logo_img)
+
+          .panel
+            .panel-body
+              .msg_chat
+                ul.chat_ul
+                  each message in messages
+                    if (message.from.id === user.id)
+                      li
+                        .chat_left
+                          p.chat_time=moment(message.timestamp).format('YYYY年MM月DD日 HH:mm:SS')
+                          p.chat_content.line_break=message.msg
+                    else
+                      li
+                        .chat_right
+                          p.chat_time=moment(message.timestamp).format('YYYY年MM月DD日 HH:mm:SS')
+                          p.chat_content.line_break=message.msg
+              .send_msg
+                textarea.col-md-12#message(rows=3, placeholder="点击此处输入回复内容 可按Enter回车发送", onkeydown="javascript:onkey(event)")
+              br
+              div
+                .col-md-9 双方均在线时，可实时聊天，如果想随时收到站内消息推送，请关注微信公众号
+                .col-md-3
+                  a.btn.btn-info.pull-right#submit 发送

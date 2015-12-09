@@ -1,0 +1,17 @@
+extends user_home_base
+block user_home_content
+  link(rel='stylesheet', href='/css/user_home_recruitments.css')
+  .panel
+    .panel-heading.c-insetC-header 我的项目
+    .panel-body
+      if projects
+        ul.my_jobs
+          each project in projects
+            li
+              h3
+                a(href= '/home/projects/' + project._id)= project.name
+                span=project.location
+              div=project.creator.role+' / '+project.tag +' / '+project.stage+'阶段'
+              div.c9='发布时间：'
+                include mixin/date
+                +date(project.creation_time)

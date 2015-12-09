@@ -1,0 +1,32 @@
+mixin work(work)
+  .experience.work.col-md-8.col-md-offset-4
+    table
+      tr
+        td
+          .form-group
+            .col-xs-2
+              label 开始
+            .col-xs-10
+              input.start_time.form-control(type='date' value=work && work.start_time)
+          .form-group
+            .col-xs-2
+              label 结束
+            .col-xs-10
+              input.end_time.form-control(type='date' value=work && work.end_time)
+          .form-group
+            .col-xs-2
+              label 公司
+            .col-xs-10
+              input.corporation.form-control(type='text' value=work && work.corporation)
+          .form-group
+            .col-xs-2
+              label 职位
+            .col-xs-10
+              input.title.form-control(type='text' value=work && work.title)
+          .form-group
+            .col-xs-2
+              label 描述
+            .col-xs-10
+              input.description.form-control(type='text' value=work && work.description)
+          td
+            i.fa.fa-trash-o.pull-right

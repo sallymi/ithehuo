@@ -1,0 +1,41 @@
+extends user_home_base
+block append script
+  script(src='/js/user_home_setting_email.js')
+  link(rel='stylesheet', href='/css/user_home_profile.css')
+block user_home_content
+  .panel
+    .panel-heading.c-insetC-header
+      span 设置 /
+      span 修改邮箱
+    .panel-body
+      form#settingEmailForm.form-horizontal
+       .form-group
+          .col-md-2
+            label.control-label(for='curent_email') 当前邮箱
+          .col-md-5
+            span=current_email
+        .form-group
+          .col-md-2
+            font(color="red")='* '
+            label.control-label(for='email') 新邮箱
+          .col-md-5
+            input#email.form-control(type='email' name='email' required)
+        .form-group
+          .col-md-2
+            font(color="red")='* '
+            label.control-label(for='email_verify') 确认新邮箱
+          .col-md-5
+            input#email_verify.form-control(type='email' name='email_verify' required)
+        .form-group
+          .col-md-5.col-sm-offset-2
+            span 修改邮箱操作需要输入用户密码
+        .form-group
+          .col-md-2
+            font(color="red")='* '
+            label.control-label(for='password') 密码
+          .col-md-5
+            input(type="password" style="display:none")
+            input#password.form-control(type='password' name='password' required placeholder="用户密码")
+        .form-group
+          .col-sm-offset-2.col-sm-10
+            input.btn.btn-info(type='submit' value='保存更改' data-loading-text='正在保存...')

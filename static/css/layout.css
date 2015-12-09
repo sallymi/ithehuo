@@ -1,0 +1,401 @@
+@media(min-width:768px) {
+  .navigationCtn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    z-index: 1000;
+  }
+  .contentCtn {
+    position: fixed;
+    top: 112px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    overflow: auto;
+  }
+  .navbar .container .btn {
+    margin: 0 5px;
+  }
+  .navbar .container {
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0px;
+  }
+  .navbar .fa-envelope-o{
+    color:white; 
+    display:block;
+  }
+  .navbar .badge {
+      background: red;
+      color: white;
+  }
+  #recruitmentForm .col-sm-4, #detailForm .col-sm-4, #userProfileForm .col-sm-4, #questionForm .col-sm-4{
+	  text-align: right;
+	}
+	#recruitmentForm .form-control, #detailForm  .form-control{
+		width: 50%;
+	}
+	#recruitmentForm #description {
+    min-height: 256px;
+    width: 65%;
+	}
+	#settingPasswordForm .col-md-2, #settingEmailForm .col-md-2{
+	text-align: right;
+	}
+	.span4 {
+	  width: 30.623931623931625%;
+	  margin-left: 2.564102564102564%;
+	}
+}
+@media(max-width:767px) {
+  .navbar .container .btn {
+    margin: 5px 10px;
+  }
+	 #recruitmentForm .col-sm-4, #detailForm .col-sm-4, #userProfileForm .col-sm-4, #questionForm .col-sm-4{
+	  text-align: left;
+	}
+	#recruitmentForm .form-control, #detailForm  .form-control{
+		width: 100%;
+	}
+	#recruitmentForm #description {
+    min-height: 256px;
+    width: 100%;
+	}
+	#settingPasswordForm .col-md-2, #settingEmailForm .col-md-2{
+		text-align: left;
+	}
+	.span4 {
+	  width: 100%;
+	}
+}
+body{
+  background: #e2e2e2 url('../images/background.png') repeat;
+}
+.navbar-header {
+  margin-top: 14px;
+}
+.head-logo {
+  margin-left: 10px;
+  width:100px;
+}
+.head_shu {
+  margin-left: 13px;
+  margin-top: 14px;
+}
+.head-descript {
+  margin-left: 11px;
+  margin-top: 26px;
+}
+/* tool classes*/
+table tr td.small-col {
+  width: 1px;
+}
+
+.panel-heading {
+  background-color:#888;
+  color:#fff;
+}
+.slogon {
+  text-align: center;
+  margin: 0 0 1em 0;
+}
+.transparent{
+  background: transparent;
+}
+.btn-account {
+  border: 0px;
+  margin-top: 0px;
+  height: 40px;
+  line-height: 10px;
+  font-family: ProximaNovaRegular;
+  font-size: 14px !important;
+  padding: 0 !important;
+  position: relative;
+  color: #000;
+  border-radius: 4px !important;
+  max-width: 150px;
+  background: white;
+  //background: url(../images/AccountBtn.png);
+  background-position: center center !important;
+  background-repeat: repeat-x;
+}
+.btn-account:after {
+  content: '\25bc';
+  position: absolute;
+  right: 9px;
+  font-size: 7px;
+  line-height: 8px;
+  top: 18px;
+  color: #4a4a4a;
+}
+.btn-account img {
+  position: absolute;
+  left: -1px;
+  top: 0px;
+  bottom: 0px;
+  width: 40px;
+  border-radius: 4px;
+}
+
+#login-button>span.ellipsis {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 10px;
+  padding: 15px 25px 7px 45px;
+  text-align: left;
+}
+.btn-account:hover {
+  color: blue;
+}
+.large-title{
+  font: normal normal 300 38px/52px "Open Sans","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
+  color: #686868;
+  line-height: 137%;
+  text-align: left;
+  margin: 45px 0 20px;
+  padding: 0;
+}
+.medium-title{
+  margin-bottom: 16px;
+}
+.header-text .medium-title {
+  text-align: left;
+  margin-top: -5px;
+  margin-bottom: 30px;
+  font-weight: 100;
+  font-size: 24px;
+  line-height: 36px;
+}
+.login-button {
+  width: 100%;
+}
+.form-group.login-form{
+  margin-bottom: 4px;
+}
+.jumbotron {
+  background: #fbfbfb;
+}
+.jumbotron .right {
+  text-align: right;
+}
+.form-container {
+  max-width: 320px;
+  margin: -12px auto 20px;
+}
+#recruitmentForm .form-control, #detailForm  .form-control{
+  margin-left: 10px;
+/*  width: 50%;*/
+  display:inline;
+}
+/*#recruitmentForm #description {
+    min-height: 256px;
+    width: 65%;
+}*/
+#questionForm .form-control{
+  margin-left: 10px;
+  width: 80%;
+  display:inline;
+}
+#recruitmentForm .radio, #detailForm .radio{
+  border:none;
+  padding: 0;
+  margin: 0;
+}
+
+#recruitmentForm .col-xs-4, #detailForm .col-xs-4, #userProfileForm .col-xs-4, #questionForm .col-xs-4{
+  text-align: right;
+}
+
+
+textarea {
+  min-height: 100px;
+}
+em {
+  font-style: normal;
+}
+.mb10{
+  margin-bottom: 10px;
+}
+.c7 {
+  color: #777;
+}
+.c9 {
+  color: #999;
+}
+.c9c {
+  color: #18bc9c;
+}
+.f4 {
+  font-size: 14px;
+}
+.f2 {
+  font-size: 12px;
+}
+.f16 {
+  font-size: 16px;
+}
+.f20 {
+  font-size: 20px;
+}
+.r26{
+  padding-right: 26px;
+}
+.r5{
+  padding-right: 5px;
+}
+.tt-menu,
+.gist {
+  text-align: left;
+}
+.twitter-typeahead {
+  display: block;
+}
+.typeahead,
+.tt-query,
+.tt-hint {
+  width: 396px;
+  height: 30px;
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+}
+
+.typeahead {
+  background-color: #fff;
+}
+
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-menu {
+  width: 320px;
+  margin: 8px 0;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.gist {
+  font-size: 14px;
+}
+
+/* example specific styles */
+/* ----------------------- */
+
+.empty-message {
+  padding: 5px 10px;
+ text-align: center;
+ color: red;
+}
+.empty_result {
+  height:130px;
+  font-size: 18px;
+  line-height: 32px;
+  padding: 20px 0 0 150px;
+  background: url(../images/addnew.png) 0 0 no-repeat;
+}
+
+small.error {
+  display: block;
+  margin: 5px 0 10px 0;
+  font-size: 14px;
+  color: #ff6a6a;
+  text-align: left;
+  background: url(../images/error.png) 0 3px no-repeat;
+  padding-left: 20px;
+  line-height: 22px;
+}
+
+/**/
+#notification-container {
+  top: 70px;
+  border: 0;
+  box-shadow: 0 8pt 8pt 0 rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 350px;
+  background-color: #26343f;
+  z-index: 100;
+  right: 20px;
+  border-radius: 0 0 3px 3px;
+  outline: none;
+  font-weight: normal;
+}
+.navbar-default .badge {
+	background-color: #f37b1d;
+}
+.am-badge {
+  font-size: 10px;
+  padding: 2px;
+  position: absolute;
+  right: 0;
+  top: 4px;
+}
+.am-badge-warning {
+  background-color: #f37b1d;
+}
+.am-badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: .25em .625em;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-align: center;
+}
+.modal-content {
+	margin-top: 150px;
+}

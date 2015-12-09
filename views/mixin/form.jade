@@ -1,0 +1,15 @@
+mixin radio(name, value, checkedValue, required, displayName)
+  label.radio-inline
+    - var checked = (value === String(checkedValue)) ? true : false
+    input(type='radio', name=name, value=value, checked=checked, required=required)
+    = displayName? displayName : value
+
+mixin option(value, selectedValue, name)
+  - var selected = (value === selectedValue) ? true : false
+  option(value=value, selected=selected)= name ? name : value
+
+mixin checkbox(id, name, value, checkedValue, required, displayName)
+  label.checkbox-inline
+    - var checked = (checkedValue&&checkedValue.indexOf(value)!==-1) ? true : false
+    input.radiocheck(id=id,type='checkbox', name=name, value=value, checked=checked, required=required)
+    label.full.default.right(for=id)= displayName? displayName : value

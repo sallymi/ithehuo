@@ -1,0 +1,25 @@
+extends base
+block content
+	link(rel='stylesheet', href='/css/error.css')
+	.container-fluid#portfolio
+		.row
+			.col-md-12
+				.text-center
+					- var title = error ? error.title : '出错啦！'
+					- var msg = error ? error.msg : '等会儿再试试吧'
+					h1= title
+					h5= msg
+				.page-404
+					|          .----.
+					|      _.'__    `.
+					|   .--($)($$)---/#\
+					| .' @          /###\
+					| :         ,   #####
+					|  `-..__.-' _.-\###/
+					|        `;_:    `"'
+					|      .'"""""`.
+					|     /,  ya ,\\
+					|    //  出错啦! \\
+					|    `-._______.-'
+					|    ___`. | .'___
+					|   (______|______)

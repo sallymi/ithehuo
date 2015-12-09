@@ -1,0 +1,114 @@
+extends base
+block content
+  include search.jade
+  .container-fluid#portfolio
+    .row
+      .col-md-8
+        .well.transparent
+          .panel
+            .panel-body
+              .row
+                .col-md-3
+                  img.img-responsive(src=project.logo_img)
+                .col-md-9
+                  h3= project.name
+                  p= project.keyword
+                  p= project.stage
+                  p= project.tag
+          .panel
+            .panel-heading='项目描述'
+            .panel-body
+              p= project.description
+          .panel
+            .panel-heading='项目创建人信息'
+            .panel-body
+              if project.creator
+                .col-sm-3.portfolio-item
+                    a.portfolio-link(href='/users/#{project.creator.user.id}', data-toggle='modal')
+                        .caption
+                          .caption-content
+                            i.fa.fa-search-plus.fa-3x
+                            p= project.creator.user.name
+                            p= project.creator.role
+                        img.img-responsive(src='#{project.creator.user.logo_img}', alt='',width='80%')
+                    a(href='/users/#{project.creator.user.id}')= project.creator.role+' : '+project.creator.user.name
+          if project.partners
+            .panel
+              .panel-heading='团队成员'
+              .panel-body
+                each partner in project.partners
+                  //- .col-sm-6.portfolio-item
+                  //-   .media
+                  //-     a.pull-left
+                  //-       img.media-object(src='http://placehold.it/80/F0F0F0')
+                  //-     .media-body
+                  //-       h5.media-heading
+                  //-         a
+                  //-           strong #{founders[member]}
+                  //-       small='简要摘要'
+                  //-       br
+                  //-       span.badge='关注'
+                  //-         i.fa.fa-star-o
+                  //-       small='87人关注他'
+          if project.required_skills
+            .panel
+              .panel-heading='需要的技能'
+              .panel-body
+                p= project.required_skills
+          if project.company
+            .panel
+              .panel-heading='公司信息'
+              .panel-body
+                p= project.company
+          if project.link
+            .panel
+              .panel-heading='项目链接'
+              .panel-body
+                a(href='http://' + project.link)= project.link
+      .col-md-4.well.transparent
+        .panel
+          .panel-heading
+          .panel-body
+            .text-center
+              h5 合伙工作机会
+              if recruitments&&recruitments.length>0
+                each recruitement in recruitments
+                  .col-sm-6
+                    a(href='/recruitments/'+recruitement._id)=recruitement.classify
+                  .col-sm-3
+                    span=recruitement.fulltime
+                  .col-sm-3
+                    span=recruitement.location
+                  br
+              else
+                span 静候项目开放合作机会！
+        if project.company
+          .panel
+            .panel-heading
+            .panel-body
+              .text-center
+                h5 公司名称
+                p= company
+        if project.stage
+          .panel
+            .panel-heading
+            .panel-body
+              .text-center
+                h5 项目阶段
+                p= project.stage
+        if project.funding && project.funding.current
+          .panel
+            .panel-heading
+            .panel-body
+              .text-center
+                h5 目前融资状况
+                p= project.funding.current
+        if project.funding && project.funding.next
+          .panel
+            .panel-heading
+            .panel-body
+              .text-center
+                h5 融资计划
+                p= project.funding.next.need
+                h5 出让股权
+                p= project.funding.next.return

@@ -1,0 +1,71 @@
+#wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 890px;
+    height: 550px;
+    margin-top: -275px;
+    margin-left: -445px;
+    background: url(../images/mainBG.png) top center;
+}
+#logo {
+    margin: 21px 21px 0px 21px;
+    height: 90px;
+    position: relative;
+    background: #FFF url(../images/headerBG.gif) repeat-x;
+}
+/*#logo h1 {
+    font-size: 22px;
+    font-weight: normal;
+    padding: 0px;
+    text-align: center;
+}*/
+#container {
+    margin: 0px 21px 0px 21px;
+}
+#containerBG {
+    height: 255px;
+}
+#containerBG h1 {
+    /*font-weight: 700;
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 38px;
+    padding: 25px 0px 10px 0px;*/
+    text-align: center;
+    /*margin: 5px auto;*/
+}
+#containerBG h3 {
+    text-transform: uppercase;
+    padding: 25px 0px 10px 0px;
+    text-align: center;
+    margin: 5px auto;
+}
+#progressBarBG {
+    padding: 15px 0px 0px 14px;
+    margin: 0 auto;
+    width: 579px;
+    height: 44px;
+    background: url(../images/progressBarBG.png) no-repeat;
+
+}
+.progressbar {
+    border: 1px solid #101010;
+    width: 547px;
+    height: 23px;
+    text-align: center;
+    font-size: 18px;
+    width: 0%;
+  -moz-transition: all 2s ease;
+  -moz-transition-delay: 0.5s;
+  -webkit-transition: all 2s ease;
+  -webkit-transition-delay: 0.5s;
+  transition: all 2s ease;
+  transition-delay: 0.5s;
+
+}
+span.text {
+    font-size: 18px;
+    text-shadow: 1px 1px 1px #333333;
+    /* visibility: hidden; */
+}

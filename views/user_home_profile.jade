@@ -1,0 +1,168 @@
+extends user_home_base
+block append link
+  link(rel='stylesheet', href='/stylesheets/jquery.tag-editor.css')
+  link(rel='stylesheet', href='/css/user_home_profile.css')
+block append script
+
+  script(src='/javascripts/jquery-ui.min.js')
+  script(src='/javascripts/jquery.tag-editor.min.js')
+  script(type='text/javascript',src='/javascripts/typeahead.bundle.js')
+  script(type='text/javascript',src='/javascripts/handlebars-v3.0.3.js')
+  script(src='js/user_home_profile.js')
+
+block user_home_content
+  .panel
+    .panel-heading.c-insetC-header 我的信息
+    .panel-body
+      form#userProfileForm.form-horizontal
+        .col-lg-9
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
+              label(for='name') 姓名
+            .col-xs-12.col-sm-8
+              input#name.form-control(type='text', name='name', placeholder='姓名', value=signinUser.name, required)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label.control-label(for='age') 年龄
+            .col-xs-12.col-sm-8
+              input#age.form-control(type='text', name='age', placeholder='年龄', value=signinUser.age)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label.control-label(for='hometown') 家乡
+            .col-xs-12.col-sm-8
+              input#hometown.form-control(type='text', name='hometown', placeholder='填写后，老乡就能找到你啦', value=signinUser.hometown)
+          //- .row.form-group
+          //-   .col-xs-4
+          //-     label(for='location') 所在地
+          //-       font(color="red") *
+          //-   .col-md-8
+          //-     select.form-control#location(name='location' required)
+          //-       include ./mixin/form.jade
+          //-       - var cities = ["北京", "上海", "杭州", "深圳", "广州", "成都", "武汉", "重庆", "天津", "南京" ,"苏州", "海外", "广东", "浙江", "江苏", "四川", "福建", "河南", "山东", "湖北", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江", "安徽", "江西", "湖南", "广西", "海南", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆", "台湾", "香港", "澳门"]
+          //-       each item in cities
+          //-         +option(item, signinUser.location)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
+              label.control-label(for='location') 所在地
+            .col-xs-12.col-sm-8
+              input#location.form-control(type='text', name='location', value=signinUser.location, placeholder='请输入工作城市名称，如北京 / beijing / bj', required)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
+              label.control-label(for='field') 领域方向
+            .col-xs-12.col-sm-8
+              input#field.form-control(type='text', name='field', value=signinUser.field, placeholder='移动互联网 | O2O | 电子商务', required)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
+              label(for='skill') 技能
+            .col-xs-12.col-sm-8
+              input#skill.form-control(type='text', name='skill', value=signinUser.skill,placeholder='Java | PHP | C++ | UI | 后端 | 数据库 | 用户体验', required)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
+              label 状态
+            .col-xs-12.col-sm-8
+              include ./mixin/form.jade
+              +radio('status', '全职创业中', signinUser.status, 'required')
+              +radio('status', '兼职创业中', signinUser.status, 'required')
+              +radio('status', '没有任何创业', signinUser.status, 'required')
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
+              label 角色定位
+            .col-xs-12.col-sm-8
+              include ./mixin/form.jade
+              +radio('role', '创始人', signinUser.role, 'required')
+              +radio('role', '技术合伙人', signinUser.role, 'required')
+              +radio('role', '产品设计合伙人', signinUser.role, 'required')
+              +radio('role', '运营合伙人', signinUser.role, 'required')
+              +radio('role', '市场营销合伙人', signinUser.role, 'required')
+              +radio('role', '资源合伙人', signinUser.role, 'required')
+              +radio('role', '资金合伙人', signinUser.role, 'required')
+              +radio('role', '顾问/导师合伙人', signinUser.role, 'required')
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
+              label 创业倾向
+            .col-xs-12.col-sm-8
+              include ./mixin/form.jade
+              +radio('prefer', '全职主导创业', signinUser.prefer, 'required')
+              +radio('prefer', '全职参与创业', signinUser.prefer, 'required')
+              +radio('prefer', '兼职创业', signinUser.prefer, 'required')
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label(for='mobile_phone') 手机
+            .col-xs-12.col-sm-8
+              input#mobile_phone.form-control(type='text', name='mobile_phone', placeholder='手机', value= signinUser.mobile_phone)
+          .row.form-group
+            .col-xs-12.col-sm-4
+              label(for='description') 个人描述
+            .col-xs-12.col-sm-8
+              textarea#description.form-control(type='text', name='description', placeholder='个人描述')= signinUser.description
+          .dashline
+          include ./mixin/form_educations.jade
+          +educations(signinUser.educations)
+          .dashline
+          include ./mixin/form_works.jade
+          +works(signinUser.work_experiences)
+          .dashline
+          include ./mixin/form_startups.jade
+          +startups(signinUser.startup_experiences)
+          .dashline
+          .row.form-group
+            .col-sm-offset-2.col-sm-10
+              input#submitBtn.btn.btn-info.center-block(type='submit' value='保存' data-loading-text='正在保存...')
+        .col-lg-2.col-lg-offset-1
+            h4='头像'
+            img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
+            button.btn.btn-primary(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+        .dashline
+      //- .row
+      //-   .form-group.col-xs-12.text-center
+      //-     input#submitBtn.btn.btn-info.center-block(type='submit' value='保存' data-loading-text='正在保存...')
+  .modal.fade.user-logo-image(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
+    .modal-dialog.model-sm
+      .modal-content
+        a.closeBtn(href='#', data-dismiss='modal') X
+        h1.margin-bottom-15
+        .modal-body
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a6-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a7-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a8-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a9-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a10-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a11-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a12-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a13-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a14-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/a15-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/portfolio/wugui-160.png')
+          .col-xs-6.col-md-3
+            a.thumbnail(href='#')
+              img(src='/images/avatars/profile.png')
+        .modal-footer

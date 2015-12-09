@@ -1,0 +1,19 @@
+mixin startups(startups)
+  .experiences.startups.form-group
+    .col-xs-4
+      font(color="red")='* '
+      label 创业经历
+    .col-xs-8
+      div （如选择不公开只有成为好友才可见）
+      include ./form.jade
+      +radio('startup_experiences_public', 'false', signinUser.startup_experiences_public, 'required', '不公开')
+      +radio('startup_experiences_public', 'true', signinUser.startup_experiences_public, 'required', '公开')
+    .col-xs-4
+    .col-md-8
+      i.fa.fa-plus.pull-right
+    include ./form_startup.jade
+    if startups && startups.length > 0
+      each startup in startups
+        +startup(startup)
+    #new_startup_template.hide
+      +startup()

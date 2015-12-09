@@ -1,0 +1,31 @@
+extends ./layout
+block append script
+  script(src='/js/admin/projects.js')
+block content
+  table.table.table-condensed.table-bordered#project-table
+    thead
+      tr
+        th 图表
+        th 名称
+        th slogan
+        th 操作
+    tbody
+      if projects
+        each project in projects
+          tr.project(pid= project.id)
+            td.small
+              img(src=project.logo_img height='40px')
+            td= project.name
+            td= project.keyword
+            td.small
+              //- add hot button
+              if project.recruitments && project.recruitments.length > 0
+                if project.hot
+                  button.action.btn.btn-danger.btn-xs.remove(title='该项目已经添为hot项目' type='hot') 取消Hot
+                else
+                  button.action.btn.btn-primary.btn-xs.add(title='添加为Hot' type='hot') 添加Hot
+              //- add recommended button
+              if project.recommended
+                button.action.btn.btn-danger.btn-xs.remove(title='该项目已经添为hot项目' type='recommended') 取消推荐到首页
+              else
+                button.action.btn.btn-primary.btn-xs.add(title='添加为Hot' type='recommended') 推荐到首页

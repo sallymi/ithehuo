@@ -1,0 +1,38 @@
+extends user_home_base
+block user_home_content
+  link(rel='stylesheet', href='/css/user_home_recruitments.css')
+  script(src='/js/user_home_recruitments.js')
+  .panel
+    .panel-heading.c-insetC-header 我的招募
+    .panel-body
+      if recruitments
+        ul.my_jobs
+          each recruitment in recruitments
+            if(recruitment.status === 'open')
+              li.recruitment
+                h3
+                  a(href= '/home/recruitments/' + recruitment.id)= recruitment.classify
+                  span=recruitment.location
+                  span=' | '
+                  span='所属项目：'
+                  a(href='/home/projects/#{recruitment.project.id}')
+                    span=recruitment.project.name
+                div= recruitment.work_nature + '/ '+ recruitment.payment_min + 'k-' + recruitment.payment_max + 'k /'+ recruitment.years_of_working+'(工作经验) / ' +recruitment.education_background+'(学历)'
+                div.c9 发布时间：
+                  include mixin/date
+                  +date(recruitment.creation_time)
+                div.links
+                  //a(href='#') 下线
+                  btn.btn.btn-link.delete(rid= recruitment.id) 删除
+            //- else
+              li
+                h3
+                  a(href= '/home/recruitments/' + recruitment._id)= recruitment.classify
+                  span=recruitment.location
+                div= recruitment.work_nature + '/ '+ recruitment.payment_min + 'k-' + recruitment.payment_max + 'k /'+ recruitment.years_of_working+'(工作经验) / ' +recruitment.education_background+'(学历)'
+                div.c9 下线时间：
+                  include mixin/date
+                  +date(recruitment.creation_time)
+                div.links
+                  //a(href='#') 再次上线
+                  a(href='#') 删除

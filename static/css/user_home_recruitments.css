@@ -1,0 +1,57 @@
+.my_jobs {
+  margin: 0 40px;
+}
+.my_jobs li {
+  margin-bottom: 30px;
+  border-left: 3px solid #91cebe;
+  padding: 2px 10px 2px 15px;
+  background: #fff;
+  overflow: hidden;
+}
+.my_jobs h3 {
+  padding: 5px 0;
+  margin: 0!important;
+  font-weight: normal;
+}
+.my_jobs h3 a {
+  font-size: 18px;
+  color: #019875;
+}
+.my_jobs h3 span {
+  color: #999;
+  font-size: 14px;
+  float: none;
+  margin-left: 0;
+  margin-right: 10px;
+}
+.my_jobs span {
+  color: #999;
+  font-size: 14px;
+  /*float: right;*/
+  /*margin-top: -26px;*/
+}
+.my_jobs li div {
+  margin: 5px 0;
+}
+.my_jobs li div.links {
+  position: absolute;
+  float: right;
+  margin-top: -30px;
+  right: 50px;
+  height: 22px;
+}
+.links a {
+  color: #00b38a;
+  margin-left: 8px;
+}
+.c9 {
+  color: #999;
+}
+mark.small {
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  color: red;
+}
+.badge {
+	background-color: #f37b1d;
+}

@@ -1,0 +1,199 @@
+extends base
+block append link
+  link(rel='stylesheet', href='/css/index.css')
+block append script
+  script(src='/javascripts/jquery-1.8.3.min.js')
+block content
+  include search.jade
+  <!--header-->
+  .section.banner
+    .jumbotron.wrapper
+      .container
+        .row
+          .col-sm-4
+            img.img-responsive.center-block(src='images/profile.png', alt='', width='65%')
+          .col-sm-4
+            h1 IT合伙人
+            h4 在这里找到创业小伙伴
+          .col-sm-4
+            img.img-responsive.center-block(src='images/team.png', alt='')
+        .row
+          if signinUser
+            button.btn.btn-warning.center-block(onclick='window.location.href="/users"')  立刻寻找创业伙伴
+          else
+            button.btn.btn-warning.center-block(onclick='window.location.href="/signin"')  立刻开启你的创业梦想
+  <!--IT人-->
+  .section.private_promise
+    .wrapper
+      .container
+        .row
+          h3.text-center IT人为什么选择我们
+        .row
+          .col-sm-4
+            .row
+              .col-sm-12 
+                i.fa.fa-search-plus
+                .text
+                  .fz20 低调创业
+                  .details 只有你申请的创业团队和好友才能看见你的创业梦想，现任老板看不见
+          .col-sm-4
+            .row
+              .col-sm-12    
+                i.fa.fa-search-plus
+                .text
+                  .fz20 薪资和股权
+                  .details 申请之前你就能看到薪资和股权
+          .col-sm-4
+            .row
+              .col-sm-12
+                i.fa.fa-search-plus
+                .text
+                  .fz20 无中间方
+                  .details 和创始人直接对话
+        .row(style="text-align: center;")
+          if signinUser
+            .btn-group(role="group")
+              button.btn.btn-warning(onclick='window.location.href="/projects"')  立刻寻找创业项目
+          else
+            button.btn.btn-warning.center-block(onclick='window.location.href="/signin"')  立刻开启你的创业梦想
+  <!--introduction-section-->
+  if recommends && recommends.length >0
+    .section.browse_by_prod
+      .jumbotron
+        each recommend, index in recommends
+          .container
+            .row
+              .col-lg-12.text-center
+                h2='大家正在关注这些项目'
+                hr.star-primary
+            if((index+1) % 2 ==1)
+              .row
+                .col-sm-3.col-sm-offset-1.portfolio-item
+                  a(href='/projects/'+recommend._id)
+                    img.img-responsive(src=recommend.logo_img, alt='')
+                .col-sm-8
+                  a(href='/projects/'+recommend._id)
+                    h3=recommend.name
+                  h4=recommend.keyword             
+                  h4='项目阶段：'+recommend.stage
+                  if (recommend.funding&&recommend.funding.next)
+                    h4='融资需求：'+recommend.funding.next.need
+                  h4='快来看看TA有什么合伙工作机会吧！！！'
+              br
+              if index!=recommends.length-1
+                div(style='BORDER-TOP: #00686b 1px dashed; OVERFLOW: hidden; HEIGHT: 1px')
+              br
+            else
+              .row              
+                .col-sm-8.right
+                  a(href='/projects/'+recommend._id)
+                    h3=recommend.name
+                  h4=recommend.keyword             
+                  h4='项目阶段：'+recommend.stage
+                  if (recommend.funding&&recommend.funding.next)
+                    h4='融资需求：'+recommend.funding.next.need
+                  h4='快来看看TA有什么合伙工作机会吧！！！'
+                .col-sm-3.portfolio-item
+                  a(href='/projects/'+recommend._id)
+                    img.img-responsive(src=recommend.logo_img, alt='')
+              br
+              if index!=recommends.length-1
+                div(style='BORDER-TOP: #00686b 1px dashed; OVERFLOW: hidden; HEIGHT: 1px')
+              br
+  <!--创业者-->
+  .section.activi_for_startup
+    .wrapper
+      .container
+        .row
+          h3.text-center 创始人为什么选择我们
+        .row
+          .col-sm-4
+            .row
+              .col-sm-12 
+                i.fa.fa-search-plus
+                .text
+                  .fz20 高品质候选IT人才
+                  .details 来自顶尖公司的IT开发人员、设计和运营人员
+          .col-sm-4
+            .row
+              .col-sm-12    
+                i.fa.fa-search-plus
+                .text
+                  .fz20 100%完全免费
+                  .details 不需要任何费用和成本
+          .col-sm-4
+            .row
+              .col-sm-12
+                i.fa.fa-search-plus
+                .text
+                  .fz20 节约时间
+                  .details 轻松点击，即可直接联系潜在IT合伙人                
+        .row(style="text-align: center;")
+          if signinUser
+            .btn-group(role="group")
+              button.btn.btn-warning(onclick='window.location.href="/new/project"')  立刻发布创业项目
+          else
+            button.btn.btn-warning.center-block(onclick='window.location.href="/signin"')  立刻开启你的创业梦想
+     
+  
+  <!--projects-section-->
+  if hots && hots.length >0
+    .section.browse_by_prod#portfolio
+      .jumbotron
+        .container
+          .row
+            .col-lg-12.text-center
+              h2='这些项目正在寻找IT合伙人'
+              hr.star-primary
+          .row
+            each item in hots
+              - console.log("item:")
+              - console.log(item)
+              .col-sm-2.portfolio-item
+                a.portfolio-link(href='projects/#{item._id}', data-toggle='modal')
+                  .caption
+                    .caption-content
+                      i.fa.fa-search-plus.fa-3x
+                      p= item.name
+                      p= item.keyword
+                  img.img-responsive(src='#{item.logo_img}', alt='')
+  <!--指南-->
+  .section.how_it_works
+    .wrapper
+      .container
+        .row
+          h3.text-center 如何快速使用
+        .row
+          .col-sm-4.col-sm-offset-2
+            .row
+              .col-sm-12
+                  i.fa.fa-search-plus
+                  .text
+                    .fz20 如果你是创始人
+                    .col-sm-12.details
+                      .badge 1
+                      span 发布你的创业项目
+                    .col-sm-12.details   
+                      .badge 2
+                      span 发布IT合伙人招募信息
+            .row
+              .col-sm-5.col-sm-offset-1
+                button.btn.btn-warning.center-block(onclick='window.location.href="/new/project"')  立刻发布创业项目
+          .col-sm-6
+            .row
+              .col-sm-12   
+                i.fa.fa-search-plus
+                .text
+                  .fz20 如果你是想参与创业的IT人
+                  .col-sm-12.details
+                    .badge 1
+                    span 完善你的信息
+                  .col-sm-12.details
+                    .badge 2
+                    span 查找招募信息，找到合适的创始人和创业项目
+            .row
+              .col-sm-5.col-sm-offset-1
+                button.btn.btn-warning.center-block(onclick='window.location.href="/projects"')  立刻寻找创业项目
+              
+  each item in hots
+    include project_detail

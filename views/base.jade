@@ -1,0 +1,129 @@
+extends layout
+
+block navbar
+  script(src='/js/base.js')
+  if signinUser
+    input#uid(type='hidden' value=signinUser.id)
+  nav.navbar.navbar-default.navbar-static-top
+    .container
+      .navbar-header.page-scroll
+        button.navbar-toggle(data-toggle='collapse',data-target='#bs-example-navbar-collapse')
+          span.sr-only="Toggle navigation"
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        span.head-logo
+          a(href='/')
+            img(src='/images/itgreen.png',style="width:100px;")
+        span.head_shu
+          img(src='/images/head-shu.png')
+        span.head-descript
+          img(src='/images/logo-desc.png', style="width:140px;")
+      #bs-example-navbar-collapse.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-left
+          li.page-scroll
+            a.btn.btn-lg.btn-info(href='/new/project') 发布项目
+          li.page-scroll
+            a.btn.btn-lg.btn-info(href='/new/recruitment') 发布招募
+          li.page-scroll
+            a(href='/users') 找合伙人
+          li.page-scroll
+            a(href='/recruitments') 合伙工作机会
+          li.page-scroll
+            a(href='/projects') 创业项目
+          //- li.page-scroll
+          //-   a(href='/questions')="创业问答"
+          if (signinUser)
+            li.page-scroll
+              a(href='/messages')
+                i.fa.fa-envelope-o 私信
+                  span.badge#unreadMessagesCount
+        ul.nav.navbar-nav.navbar-right
+          if (signinUser)
+            span.badge.am-badge.am-badge-warning#reminder
+            .dropdown#login-button.btn.btn-account
+              if(signinUser.logo_img)
+                img(src=signinUser.logo_img)
+              else
+                img(src='/images/smile.png')
+              span.ellipsis
+                - var displayName = signinUser.name ? signinUser.name : signinUser.email
+                a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=displayName
+                ul.dropdown-menu(role="menu")
+                  li
+                    a(href='/home/recruitments') 我的小伙伴招募
+                  li
+                    a(href='/home/projects') 我的创业项目
+                  li
+                    a(href='/home/friends') 我的好友申请
+                      span.badge#RequestCount
+                  li
+                    a(href='/home') 我的个人信息
+                  li
+                    a(href='/home/settings/password') 我的账号设置
+                  li
+                    a(href='/signout') 退出
+          else
+            li
+              a.btn.btn-info(href='/signin') 登录
+            li
+              a.btn.btn-info(href='/signup') 注册
+          #notification-container
+        //- ul.nav.navbar-nav.navbar-right
+        //-   if (signinUser)
+        //-     .dropdown
+        //-       a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+        //-         = signinUser.email
+        //-         .caret
+        //-       ul.dropdown-menu(role="menu")
+        //-         li
+        //-           a(href='/home') 个人中心
+        //-         li
+        //-           a(href='/signout') 退出
+        //-   else
+        //-     li
+        //-       a.btn.btn-info(href='/signin') 登录
+        //-     li
+        //-       a.btn.btn-info(href='/signup') 注册
+      //- br
+      //- .input-group
+      //-   .input-group-btn
+      //-     button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')='创业项目'
+      //-       span.caret
+      //-     ul.dropdown-menu(role='menu')
+      //-       li
+      //-         a(href='#about')='创业项目'
+      //-       li
+      //-         a(href='#about')='创业话题'
+      //-   input.form-control(type='text', value='搜索创业项目/合伙工作机会/话题')
+      //-   span.input-group-btn
+      //-     button.btn.btn-default(type='button')='搜索!'
+block footer
+  footer.text-center
+    .footer-above
+      .container
+        .row(style='text-align: left;')
+          .col-sm-2
+            span="友情链接："
+          .col-sm-10
+            a(href='http://www.helloworld-cafe.com', target='_blank')='Hello World'
+            span=" | "
+            a(href='http://www.51lietou.com/', target='_blank')='51猎头'
+            span=" | "
+            a(href='http://www.zpark.com.cn/', target='_blank')='中关村软件园'
+            span=" | "
+            a(href='http://www.zgcspi.com/', target='_blank')='中关村软件园孵化器'
+            span=" | "
+            a(href='http://www.cloud-valley.com/', target='_blank')='中关村云基地'
+        .row(style='text-align: left;')
+          .footer-col.col-md-2
+            span='联系我们：'
+          .footer-col.col-md-10
+            a(style="padding-right: 10px;", href="/construct")='IT公司导航'
+            a(style="padding-right: 10px;", href="/construct")='it合伙人导航'
+            a(style="padding-right: 10px;", href="/construct")='it合伙人微信'
+
+    .footer-below
+      .container
+        .row
+          .col-lg-12='京ICP备00001号 Copyright &copy; ithehuo.com 2015'

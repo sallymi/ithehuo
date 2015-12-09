@@ -1,0 +1,46 @@
+extends base
+block content
+	link(rel='stylesheet', href='/css/question.css',type='text/css')
+	script(type='text/javascript',src='/javascripts/jquery.json.min.js')
+	script(type='text/javascript',src='/javascripts/questions/ask.js')
+	script(type='text/javascript',src='/javascripts/typeahead.bundle.js')
+	script(type='text/javascript',src='/javascripts/handlebars-v3.0.3.js')
+
+	.container(style='padding:10px')
+		div.row
+			div.col-md-12
+				.panel
+					.panel-heading  发布问题
+					.panel-body
+						.alert.alert-success(role="alert")
+							p 问题指南：
+							ol
+								li 用一句话简单明了的写下你的问题；
+								li 在对问题的补充中写下你提问的问题背景、条件等详细信息；
+								li 选择话题是尽量精准，越精准越容易让相关领域专业人士看到你的问题，越容易得到更专业的回答。
+						form#questionForm.form-inline()
+							.row.form_group
+								.col-xs-4
+									font(color="red")='* '
+									label.control-label(for='question') 写下你的问题			
+								.col-xs-8
+									input.form-control(name="question",id="question",type="text",placeholder="问题的内容...",'required')
+							.row.form_group
+								.col-xs-4
+									label.control-label(for='content') 对问题的补充说明(可选)
+								.col-xs-8
+									textarea.form-control(name="content",id="content",rows=5,cols=50,placeholder="问题的补充说明...")
+							.row.form_group
+								.col-xs-4
+									font(color="red")='* '
+									label.control-label(for='tags') 选择或者输入一个话题
+								.col-xs-8
+									input.form-control(name="tags",id="tags",type="text",placeholder="选择或者输入一个话题",required, style="width:150%")
+							.row.form_group
+								.col-xs-4
+									label.control-label(for='anonymous') 匿名发表
+								.col-xs-8
+									input.form-control(name="anonymous",id="anonymous",type="checkbox")
+							.row
+								.form-group.col-xs-12.text-center
+									input.btn.btn-info(type="submit",value='提交')

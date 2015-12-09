@@ -1,0 +1,105 @@
+extends base
+block append link
+  link(rel='stylesheet', href='/css/index.css')
+  //- link(rel='stylesheet', href='/slider/sliderengine/amazingslider-1.css')
+block append script
+  script(src='/javascripts/jquery-1.8.3.min.js')
+  //- script(src='/jquery.bxslider/jquery.bxslider.min.js')
+  //- script(src='/slider/sliderengine/jquery.js')
+  //- script(src='/slider/sliderengine/amazingslider.js')
+  //- script(src='/slider/sliderengine/initslider-1.js')
+block content
+  include search.jade
+  <!--header-->
+  section
+    #carousel-example-generic.carousel.slide(data-ride='carousel', data-pause='hover')
+      // Indicators
+      ol.carousel-indicators
+        li.active(data-target='#carousel-example-generic', data-slide-to='0')
+        li(data-target='#carousel-example-generic', data-slide-to='1')
+        li(data-target='#carousel-example-generic', data-slide-to='2')
+      // Wrapper for slides
+      .carousel-inner(role='listbox')
+        .item.active
+          img.img-responsive(src='images/profile2.png', width="100%",alt='')
+          .carousel-caption
+            .intro-text
+              h1.name='IT 合伙人'
+              hr.star-light
+              span.skills='创业第一步'
+        .item
+          img.img-responsive(src='images/rent1.png', width="100%",alt='...')
+          .carousel-caption
+            .intro-text
+              span.skills='创业空间，无尽想象'
+        .item
+          img.img-responsive(src='images/slogon1.png', width="100%",alt='...')
+          .carousel-caption
+            .intro-text
+              span.skills='线上找到IT合伙人'
+      // Controls
+      a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
+        span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+        span.sr-only Previous
+      a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
+        span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+        span.sr-only Next
+  <!--introduction-section-->
+  section
+    .jumbotron
+      each recommend, index in recommends
+        .container
+          if((index+1) % 2 ==1)
+            .row
+              .col-sm-3.col-sm-offset-1.portfolio-item
+                a(href='/projects/'+recommend._id)
+                  img.img-responsive(src=recommend.logo_img, alt='')
+              .col-sm-8
+                a(href='/projects/'+recommend._id)
+                  h3=recommend.name
+                h4=recommend.keyword             
+                h4='项目阶段：'+recommend.stage
+                if (recommend.funding&&recommend.funding.next)
+                  h4='融资需求：'+recommend.funding.next.need
+                h4='快来看看TA有什么合伙工作机会吧！！！'
+            br
+            div(style='BORDER-TOP: #00686b 1px dashed; OVERFLOW: hidden; HEIGHT: 1px')
+            br
+          else
+            .row              
+              .col-sm-8.right
+                a(href='/projects/'+recommend._id)
+                  h3=recommend.name
+                h4=recommend.keyword             
+                h4='项目阶段：'+recommend.stage
+                if (recommend.funding&&recommend.funding.next)
+                  h4='融资需求：'+recommend.funding.next.need
+                h4='快来看看TA有什么合伙工作机会吧！！！'
+              .col-sm-3.portfolio-item
+                a(href='/projects/'+recommend._id)
+                  img.img-responsive(src=recommend.logo_img, alt='')
+            br
+            div(style='BORDER-TOP: #00686b 1px dashed; OVERFLOW: hidden; HEIGHT: 1px')
+            br
+  <!--projects-section-->
+  section#portfolio
+    .jumbotron
+      .container
+        .row
+          .col-lg-12.text-center
+            h2='这些项目正在寻找IT合伙人'
+            hr.star-primary
+        .row
+          each item in hots
+            - console.log("item:")
+            - console.log(item)
+            .col-sm-4.portfolio-item
+              a.portfolio-link(href='projects/#{item._id}', data-toggle='modal')
+                .caption
+                  .caption-content
+                    i.fa.fa-search-plus.fa-3x
+                    p= item.name
+                    p= item.keyword
+                img.img-responsive(src='#{item.logo_img}', alt='')
+  each item in hots
+    include project_detail

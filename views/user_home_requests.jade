@@ -1,0 +1,17 @@
+extends user_home_base
+block user_home_content
+  link(rel='stylesheet', href='/css/user_home_recruitments.css')
+  .panel
+    .panel-heading.c-insetC-header 
+      a(href='/home/friends') 我的好友 
+      span | 想与我建立联系的IT合伙人
+    .panel-body
+      if requests
+        ul.my_jobs
+          each request in requests
+            li
+              h3
+                a(href= '/users/' + request.user_id)= request.user_name
+              
+              a.btn.btn-info.navbar-header(href='/agreeRequest/#{signinUser.id}/#{request.user_id}/#{request.user_name}') 通过好友请求
+              a.btn.btn-info.head_shu(href='/denyRequest/#{signinUser.id}/#{request.user_id}/#{request.user_name}') 拒绝好友申请

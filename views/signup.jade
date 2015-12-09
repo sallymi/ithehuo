@@ -1,0 +1,49 @@
+extends layout
+block content
+  link(rel='stylesheet', href='/css/sign.css')
+  a.closeBtn(href='/') X
+  h1.margin-bottom-15 注册IT合伙人
+  h3 加入IT合伙人，找到创业伙伴
+  form.form-horizontal.templatemo-container.templatemo-login-form-1(role='form',action='/signup',method='post')
+    .form-inner
+      if (success)
+        .alert.alert-success
+          strong= success
+      else
+        if(error)
+          .alert.alert-danger
+            a.close(data-dismiss='alert' href='#') &times;
+            strong= error
+        .form-group
+          .col-md-12
+            label.control-label.pull-left(for='email') 请输入常用邮箱地址
+            input#email.form-control(type='email', name='email', placeholder='', value= email)
+        .form-group
+          .col-md-6
+            label.control-label.pull-left(for='password') 密码
+            input#password.form-control(type='password', name='password', placeholder='')
+          .col-md-6
+            label.control-label.pull-left(for='re_password') 确认密码
+            input#re_password.form-control(type='password', name='re_password', placeholder='')
+        .form-group
+          .col-md-12
+            label.pull-left
+              span 您将同意并接受
+              a(data-toggle='modal', data-target='#terms-modal')  IT合伙人用户协议
+        .form-group
+          .col-md-12
+            input.btn.btn-info.pull-left(type='submit', value='注册')
+            a.pull-right(href='/signin') 已有账号直接登录
+
+  .modal.fade#terms-modal(tabindex='-1', role='dialog', aria-labelledby='terms-modal-label', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal')
+            span(aria-hidden='true') ×
+            span.sr-only 关闭
+          h4#terms-modal-label.modal-title 协议
+        .modal-body
+          include privacy.jade
+        .modal-footer
+          button.btn.btn-default(data-dismiss='modal') 关闭

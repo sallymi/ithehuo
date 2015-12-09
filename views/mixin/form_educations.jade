@@ -1,0 +1,12 @@
+mixin educations(educations)
+  .experiences.educations.form-group
+    .col-xs-4
+      label 教育背景
+    .col-md-8
+      i.fa.fa-plus.pull-right
+    include ./form_education.jade
+    if educations && educations.length > 0
+      each education in educations
+        +education(education)
+    #new_education_template.hide
+      +education()

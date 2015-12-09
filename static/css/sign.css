@@ -1,0 +1,24 @@
+h3 {
+  text-align: center;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 20px;
+  font-size: 40px;
+  color: black;
+}
+
+.closeBtn:hover,
+.closeBtn:focus,
+.closeBtn:active {
+  text-decoration: none;
+}
+
+.privacy {
+    padding: 80px 25px;
+    line-height: 28px;
+}
+.privacy div {
+    text-indent: 2em;
+}

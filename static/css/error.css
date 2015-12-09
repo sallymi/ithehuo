@@ -1,0 +1,16 @@
+.page-404{
+  width: 200px;
+  margin: 0 auto;
+  font-size: 1.3rem;
+  display: block;
+  padding: 1rem;
+  /* margin: 1rem 0; */
+  font-size: 1.3rem;
+  line-height: 1.6;
+  /* word-break: break-all; */
+  /* word-wrap: break-word; */
+  color: #555;
+  border-radius: 0;
+  white-space: pre-wrap;
+  font-family: Monaco,Menlo,Consolas,"Courier New",FontAwesome,monospace;
+}

@@ -1,0 +1,15 @@
+.modal.fade#answerEditModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button" data-dismiss="modal" aria-label="Close")
+          span(aria-hidden="true") &times
+        h4.modal-title 修改答案
+      .modal-body
+        form.form-horizontal
+          input#aid(type="hidden")
+          .form-group
+            label(for="content") 答案
+            textarea.form-control#content
+      .modal-footer
+        button#submit(type="button" class="btn btn-primary") 修改

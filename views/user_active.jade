@@ -1,0 +1,14 @@
+extends layout
+block content
+  link(rel='stylesheet', href='/css/sign.css')
+  a.closeBtn(href='/') X
+  h3 加入IT合伙人，找到创业伙伴
+  form.form-horizontal.templatemo-container.templatemo-login-form-1(role='form',action='/signup',method='post')
+    .form-inner
+      if (error)
+        .alert.alert-danger
+          strong= error
+      else
+        .alert.alert-success
+          strong 激活成功，
+            a(href='/signin') 点击登录

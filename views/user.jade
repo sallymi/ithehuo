@@ -1,0 +1,157 @@
+extends base
+block content
+  script(src='/js/user.js')
+  link(rel='stylesheet', href='/css/user.css',type='text/css')
+  input#user(type='hidden' value=user && user.id)
+  .container-fluid.list-show#portfolio
+    .row
+      .col-md-8
+        .well.transparent
+          .panel
+            .panel-body
+              .row
+                .col-md-3
+                  img.img-responsive(src=user.logo_img?user.logo_img:'/images/portfolio/dog-160.png')
+                .col-md-9.description
+                  h3= user.name
+                    small= user.status
+                  .row
+                    .col-md-4
+                      span= '目前居住地：'+(user.location?user.location:'暂未填写')
+                    .col-md-3
+                      span='年龄：'+(user.age?user.age:'暂未填写')
+                    .col-md-5
+                      span='籍贯：'+(user.hometown?user.hometown:'暂未填写')
+                  .row
+                    .col-md-12
+                      span='感兴趣的方向：   '+(user.field?user.field:'暂未填写')
+                  .row
+                    .col-md-12
+                      span='创业心态：   '+(user.prefer?user.prefer:'暂未填写')
+                  if user.work_experiences_tags && user.work_experiences_tags.length>0
+                      .row
+                          .col-md-12
+                              each tag in user.work_experiences_tags
+                                  span.tag.label.label-info=tag
+                                  span= ' '
+                  .row
+                    .col-md-12
+                      h4= user.description
+                  .row
+                    if (signinUser.id!=user.id)
+                      //- following
+                      if (!isFollowed)
+                        button.btn.btn-info.navbar-header#addFollowing 关注
+                        button.btn.btn-default.navbar-header#removeFollowing(style='display:none') 取消关注
+                      else
+                        button.btn.btn-info.navbar-header#addFollowing(style='display:none') 关注
+                        button.btn.btn-default.navbar-header#removeFollowing 取消关注
+                      //- friend
+                      if (relation)
+                        button.btn.btn-success.head_shu 已经是朋友
+                      else
+                        if (request)
+                          input#status(hidden, value=request.status)
+                          button.btn.btn-success.head_shu#addFriend(data-toggle='modal', data-target='.user-request')
+                              if (request.status === 'pending')
+                                  = '再次发送好友申请'
+                              else
+                                  = '加为好友'
+                        else
+                          input#status(hidden, value="")
+                          button.btn.btn-info.head_shu#addFriend(data-toggle='modal', data-target='.user-request') 加为好友
+                          //button.btn.btn-success.head_shu(style='display:none')#friendStatus 朋友状态
+                      //- message
+                      a.btn.btn-info.head_shu(href='/chat/'+user.id) 发消息
+          .panel
+            .panel-heading='目前的创业项目'
+            .panel-body
+                if (projects && projects.length >0)
+                  each value in projects
+                    .col-sm-3.portfolio-item
+                      .media
+                        a.pull-left(href='/projects/#{value.id}')
+                          img.img-responsive.media-object(src=value.logo_img, width='50%')
+                        .media-body
+                          h5.media-heading
+                            a(href='/projects/#{value.id}')
+                              strong=value.name
+                          small=value.keyword
+                else
+                    span= '暂未创建创业项目'
+          .panel
+            .panel-heading='创业经历'
+            .panel-body
+                if (!user.startup_experiences_public && !relation)
+                    span= '只对好友公开'
+                else if (relation && user.startup_experiences && user.startup_experiences.length >0)
+                    each startup in user.startup_experiences
+                        .row
+                          .col-md-4
+                            if startup && startup.start_time
+                              span= moment(startup.start_time).format('YYYY年MM月') + ' ~ ' + moment(startup.end_time).format('YYYY年MM月')
+                          .col-md-3
+                            span= startup.name
+                          .col-md-5
+                            span= startup.description
+                else
+                    span= '暂未填写'
+          .panel
+            .panel-heading='工作经历'
+            .panel-body
+                if (!user.work_experiences_public && !relation)
+                    span= '只对好友公开'
+                else if (relation && user.work_experiences && user.work_experiences.length >0)
+                  each work in user.work_experiences
+                    .row
+                      .col-md-4
+                        if work && work.start_time
+                          span= moment(work.start_time).format('YYYY年MM月') + ' ~ ' + moment(work.end_time).format('YYYY年MM月')
+                      .col-md-3
+                        span= work.title
+                      .col-md-5
+                        span= work.corporation
+                      .col-md-9.col-md-offset-4
+                        span= work.description
+                  
+                else
+                  span= '暂未填写'
+          .panel
+            .panel-heading='教育经历'
+            .panel-body
+                if (user.educations && user.educations.length >0)
+                  each education in user.educations
+                    .row
+                      .col-md-4
+                        if education && education.start_time
+                          span= moment(education.start_time).format('YYYY年MM月') + ' ~ ' + moment(education.end_time).format('YYYY年MM月')
+                      .col-md-3
+                        span= education.school
+                      .col-md-5
+                        span= education.description
+                else
+                    span= '暂未填写'
+      .col-md-4
+        .well.transparent
+          .panel
+            .panel-body
+              h5='我的技能'
+              p= user.skill
+  .modal.fade.user-request(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
+    .modal-dialog.model-sm
+      .modal-content
+        a.closeBtn(href='#', data-dismiss='modal') X
+        h1="请求与"+(user.name?user.name:user.email)+'成为好友'
+        .modal-body
+          blockquote
+            mark 温馨提示：详细填写个人资料，我们能更快地帮助您找到合适的项目及优秀的合伙人！
+          form#requestFriend.form-inline()
+            .row.form_group
+              .col-xs-2
+                font(color="red")='* '
+                label.control-label.pull-right(for='requestMsg') 发请求：
+              .col-xs-9
+                textarea.form-control.requestMsg(name='requestMsg',rows=5,cols=50,placeholder="建议用个性化的打招呼方式，比如我注意到**** ，你提到**** ")
+            .row.form_group
+              .col-xs-12
+                button.btn.btn-info.center-block(type="submit")#requestAddFriend 加为好友

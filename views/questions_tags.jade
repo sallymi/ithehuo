@@ -1,0 +1,22 @@
+extends base
+block content
+	.container(style='padding:10px')
+		div.row
+			div.col-md-9
+				if tag
+					div.pannel.pannel-default
+						div.pannel-heading
+							span 所有关于
+							span.label.label-info #{tag.title}
+							span 的话题
+						div.pannel-body
+							ul
+							each question in questions
+								li
+									a(href="/questions/"+question._id) #{question.title} - #{moment(question.created_at).format('YYYY年MM月DD日 HH:mm:SS')}
+				else
+					div
+
+			div.col-md-3
+				a.btn.btn-success.btn-block(href='/questions/ask') 我要提问
+			

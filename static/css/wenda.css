@@ -1,0 +1,34 @@
+.question-item{
+	border-bottom: 1px dashed #e1e1e1;
+}
+ul, ol, li {
+	list-style: none;
+}
+.question-item .title-line{
+	cursor: pointer;
+	position: relative;
+	padding: 7px 0 5px 20px;
+}
+.question-item .title-line .title-container{
+	width: 525px;
+}
+.f-12{
+	font-size: 12px;
+}
+.f-light{
+	color: #999;
+}
+.question-answer-num {
+	position:absolute;
+	top:7px;
+	right: 94px;
+	width: 63px;
+	text-align: center;
+}
+.question-time {
+  position: absolute;
+  top: 7px;
+  right: 20px;
+  width: 74px;
+  text-align: right;
+}

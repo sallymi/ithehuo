@@ -1,0 +1,17 @@
+.modal.fade#commentEditModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button" data-dismiss="modal" aria-label="Close")
+          span(aria-hidden="true") &times
+        h4.modal-title 修改评论
+      .modal-body
+        form.form-horizontal
+          input#qid(type="hidden")
+          input#aid(type="hidden")
+          input#cid(type="hidden")
+          .form-group
+            label(for="content") 评论
+            textarea.form-control#content
+      .modal-footer
+        button#submit(type="button" class="btn btn-primary") 修改

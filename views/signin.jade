@@ -1,0 +1,49 @@
+extends layout
+block content
+  link(rel='stylesheet', href='/css/sign.css')
+  a.closeBtn(href='/') X
+  h1.margin-bottom-15 登录IT合伙人
+  form.form-horizontal.templatemo-container.templatemo-login-form-1.margin-bottom-30(role='form',action='/signin',method='post')
+    .form-group
+      if (error)
+        .alert.alert-danger
+          a.close(data-dismiss='alert' href='#') &times;
+          strong= error
+      .form-group
+        .col-xs-12
+          .control-wrapper
+            label.control-label.fa-label(for='username')
+              i.fa.fa-user.fa-medium
+            input#username.form-control(type='email', name='username', placeholder='请输入登录邮箱地址')
+      .form-group
+        .col-md-12
+          .control-wrapper
+            label.control-label.fa-label(for='password')
+              i.fa.fa-lock.fa-medium
+            input#password.form-control(type='password', name='password', placeholder='请输入密码')
+      .form-group
+        .col-md-12
+          .checkbox.control-wrapper
+            label.pull-left
+              input(type='checkbox', name='remeberme')
+              span 记住我
+      .form-group
+        .col-md-12
+          .control-wrapper
+            input.btn.btn-info.pull-left(type='submit', value='登录')
+            a.text-right.pull-right(href='/forgot-password') 忘记密码
+      //- hr
+      //- .form-group
+      //-   .col-md-12
+      //-     label 或者使用以下账户直接登录：
+      //-     .inline-block
+      //-       a(href='#')='微信'
+      //-         i.fa.fa-weixin.login-with
+      //-       a(href='#')='QQ'
+      //-         i.fa.fa-qq.login-with
+      //-       a(href='#')='新浪微博'
+      //-         i.fa.fa-weibo.login-with
+    .text-center
+      span 还没有IT合伙人账号?
+      a.templatemo-create-new(href= '/signup')  立即注册一个账号
+        i.fa.fa-arrow-circle-o-right

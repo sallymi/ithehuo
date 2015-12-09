@@ -1,0 +1,30 @@
+.users dt {
+  width: 70px;
+  font-size: 14px;
+  margin: 0;
+  text-align: right;
+  position: absolute;
+}
+.users  dt a {
+  padding: 0;
+  line-height: 28px;
+  text-decoration: underline;
+}
+.users  dl {
+  margin: 0 0 20px;
+}
+.users  dd {
+  margin-left: 100px;
+  overflow: hidden;
+}
+.users  dd a {
+  white-space: nowrap;
+  padding: 0 10px;
+  background: url(../images/arr.png) -29px center no-repeat;
+  color: #777;
+  line-height: 28px;
+  margin-left: -1px;
+}
+.tag {
+  margin: 0 5px 15px;
+}

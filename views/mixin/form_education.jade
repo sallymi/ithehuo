@@ -1,0 +1,27 @@
+mixin education(education)
+  .experience.education.col-md-8.col-md-offset-4
+    table
+      tr
+        td
+          .form-group
+            .col-xs-2
+              label.control-label 开始
+            .col-xs-10
+              input.start_time.form-control(type='date' value=education && education.start_time)
+          .form-group
+            .col-xs-2
+              label.control-label 结束
+            .col-xs-10
+              input.end_time.form-control(type='date' value=education && education.end_time)
+          .form-group
+            .col-xs-2
+              label.control-label 学校
+            .col-xs-10
+              input.school.form-control(type='text' value=education && education.school)
+          .form-group
+            .col-xs-2
+              label.control-label 描述
+            .col-xs-10
+              input.description.form-control(type='text' value=education && education.description)
+        td
+          i.fa.fa-trash-o.pull-right

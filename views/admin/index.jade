@@ -1,0 +1,42 @@
+extends ./layout
+
+block content
+  .row
+    .col-xs-12
+      .row
+        .space-6
+        .col-sm-7.infobox-container
+          .infobox.infobox-green
+            .infobox-icon
+              i.fa.fa-comments
+            .infobox-data
+              span.infobox-data-number 32
+              .infobox-content 2个评论
+            .stat.stat-success 8%
+              i.fa.fa-arrow-up
+          .infobox.infobox-blue
+            .infobox-icon
+              i.fa.fa-twitter
+            .infobox-data
+              span.infobox-data-number 11
+              .infobox-content 新用户
+            .badge.badge-success 8%
+              i.fa.fa-arrow-up
+          .infobox.infobox-pink
+            .infobox-icon
+              i.fa.fa-shopping-cart
+            .infobox-data
+              span.infobox-data-number
+                a(href='/admin/projects') 15
+              .infobox-content 新项目
+            .badge.badge-success 8%
+              i.fa.fa-arrow-up
+          .infobox.infobox-orange2
+            .infobox-chart
+              span.sparkline(data-values="196,128,202,177,154,94,100,170,224")
+            .infobox-data
+              span.infobox-data-number 6,251
+              .infobox-content 页面查看次数
+            .badge.badge-success 8%
+              i.fa.fa-arrow-up
+
