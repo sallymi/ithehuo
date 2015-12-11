@@ -31,7 +31,7 @@ block content
                         a(href='/recruitments?project=' + project._id)
                           .state='合伙人招募中'
                     .media-body.col-md-7(onclick="location.href='/projects/#{project._id}'")
-                      h4.media-heading.mb10
+                      h5.media-heading.mb10
                         a(href= '/projects/' + project._id)
                           strong= project.name
                       .small
@@ -52,15 +52,15 @@ block content
                         =project.funding.next.return
 
                   .col-md-12.insvestemt
-                    p.c7.f16=project.keyword
+                    p.c7.f13=project.keyword
                   .col-md-12
                       i.fa.fa-map-marker
-                      em.c7.f16.r26=project.location
+                      em.c7.f13.r26=project.location
                       i.fa.fa-tags
-                      em.c7=project.tag
+                      em.c7.f13=project.tag
                   .col-md-12
                       i.fa.fa-clock-o
-                      em.c7
+                      em.c7.f13
                         include mixin/date
                         +date(project.creation_time)
                         |  发布

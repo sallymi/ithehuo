@@ -27,7 +27,7 @@ block content
     .wrapper
       .container
         .row
-          h3.text-center IT人为什么选择我们
+          h4.text-center IT人为什么选择我们
         .row
           .col-sm-4
             .row
@@ -60,12 +60,12 @@ block content
   if recommends && recommends.length >0
     .section.browse_by_prod
       .jumbotron
-        each recommend, index in recommends
-          .container
-            .row
-              .col-lg-12.text-center
-                h2='大家正在关注这些项目'
-                hr.star-primary
+        .container
+          .row
+            .col-lg-12.text-center
+              h4='大家正在关注这些项目'
+              hr.star-primary
+          each recommend, index in recommends
             if((index+1) % 2 ==1)
               .row
                 .col-sm-3.col-sm-offset-1.portfolio-item
@@ -73,12 +73,12 @@ block content
                     img.img-responsive(src=recommend.logo_img, alt='')
                 .col-sm-8
                   a(href='/projects/'+recommend._id)
-                    h3=recommend.name
-                  h4=recommend.keyword             
-                  h4='项目阶段：'+recommend.stage
+                    h4=recommend.name
+                  div=recommend.keyword             
+                  div='项目阶段：'+recommend.stage
                   if (recommend.funding&&recommend.funding.next)
-                    h4='融资需求：'+recommend.funding.next.need
-                  h4='快来看看TA有什么合伙工作机会吧！！！'
+                    div='融资需求：'+recommend.funding.next.need
+                  div='快来看看TA有什么合伙工作机会吧！！！'
               br
               if index!=recommends.length-1
                 div(style='BORDER-TOP: #00686b 1px dashed; OVERFLOW: hidden; HEIGHT: 1px')
@@ -87,12 +87,12 @@ block content
               .row              
                 .col-sm-8.right
                   a(href='/projects/'+recommend._id)
-                    h3=recommend.name
-                  h4=recommend.keyword             
-                  h4='项目阶段：'+recommend.stage
+                    h4=recommend.name
+                  div=recommend.keyword             
+                  div='项目阶段：'+recommend.stage
                   if (recommend.funding&&recommend.funding.next)
-                    h4='融资需求：'+recommend.funding.next.need
-                  h4='快来看看TA有什么合伙工作机会吧！！！'
+                    div='融资需求：'+recommend.funding.next.need
+                  div='快来看看TA有什么合伙工作机会吧！！！'
                 .col-sm-3.portfolio-item
                   a(href='/projects/'+recommend._id)
                     img.img-responsive(src=recommend.logo_img, alt='')
@@ -105,7 +105,7 @@ block content
     .wrapper
       .container
         .row
-          h3.text-center 创始人为什么选择我们
+          h4.text-center 创始人为什么选择我们
         .row
           .col-sm-4
             .row
@@ -143,7 +143,7 @@ block content
         .container
           .row
             .col-lg-12.text-center
-              h2='这些项目正在寻找IT合伙人'
+              h4='这些项目正在寻找IT合伙人'
               hr.star-primary
           .row
             each item in hots
@@ -162,7 +162,7 @@ block content
     .wrapper
       .container
         .row
-          h3.text-center 如何快速使用
+          h4.text-center 如何快速使用
         .row
           .col-sm-4.col-sm-offset-2
             .row
