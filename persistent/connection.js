@@ -12,7 +12,8 @@ var logger = require('../utils/log').getLogger('persistent/connection');
 var port = (process.env.VCAP_APP_PORT || 3000);
 var host = (process.env.VCAP_APP_HOST || 'localhost');
 var dbUrl = (process.env.DB_PORT_27017_TCP_ADDR || 'localhost');
-var dbName = (process.env.DB_NAME || '/test');
+//var dbName = (process.env.DB_NAME || '/test');
+var dbName = '/ithhr/db';
 var url = 'mongodb://'+dbUrl+dbName;
 var options = {
   db: { native_parser: true },
