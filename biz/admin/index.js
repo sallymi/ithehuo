@@ -20,6 +20,9 @@ var logger = require('../../utils/log').getLogger('biz/admin/index.js');
 
 
 exports.indexPage = function (req, res) {
+  // res.render('admin_signin',{
+  //   'header': '登陆控制台'
+  // });
   res.render('admin/index', {
     'header': '控制台'
   });

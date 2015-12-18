@@ -1,6 +1,7 @@
 var config = {
   name: 'IT合伙人',
   host: 'ithehuo.com',
+  admin: ['sallymi_82@126.com','jiaji1104@126.com'],
   secret: 'SVTlkIjkvJnkuro=',
   mailer: {
     host: 'smtp.126.com',

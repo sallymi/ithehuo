@@ -1,0 +1,17 @@
+extends layout
+block content
+  link(rel='stylesheet', href='/css/sign.css')
+  a.closeBtn(href='/') X
+  h1.margin-bottom-15 登陆管理员主页
+  form.form-horizontal.templatemo-container.templatemo-login-form-1.margin-bottom-30(role='form',action='/signinAdmin',method='post')
+    .form-group
+      if (error)
+        .alert.alert-danger
+          a.close(data-dismiss='alert' href='#') &times;
+          strong= error
+      .form-group
+        .col-md-12
+          .control-wrapper
+            label.control-label.fa-label(for='password')
+              i.fa.fa-lock.fa-medium
+            input#password.form-control(type='password', name='password', placeholder='请输入管理员密码')
