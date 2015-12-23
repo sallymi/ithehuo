@@ -26,7 +26,6 @@ exports.showSigninPage = function (req, res) {
 
 exports.signin = function (req, res) {
   logger.info('request received to signin');
-
   var email = req.body.username;
   var password = req.body.password;
 

@@ -13,7 +13,7 @@ block content
                 .col-md-3
                   img.img-responsive(src=user.logo_img?user.logo_img:'/images/portfolio/dog-160.png')
                 .col-md-9.description
-                  h3= user.name
+                  h3= user.name?user.name:user.email.split('@')[0]
                     small= user.status
                   .row
                     .col-md-4
@@ -136,7 +136,7 @@ block content
           .panel
             .panel-body
               h5='我的技能'
-              p= user.skill
+              p= user.skill?user.skill:'暂未填写'
   .modal.fade.user-request(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
     .modal-dialog.model-sm
       .modal-content

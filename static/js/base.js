@@ -188,6 +188,8 @@ $(function () {
     if (window.location.pathname.split('/')[1] === 'home' && window.location.pathname.split('/')[2] === 'friends'){
     	window.location.reload();
     }
+    //session storage
+
   });
   $('.caption p').each(function(){
     var _text = $(this).text();
@@ -195,5 +197,54 @@ $(function () {
     $(this).text(_text.substring(0,35)+'...');
     }
   });
+  var storage = window.sessionStorage;
+  var uid = $('#uid').val();
+  var profile = $('#profile').val();
+  if(!uid){
+    storage.removeItem("reminder");
+  }else if(!profile){
+    if(!storage.getItem("reminder")){
+      storage.setItem("reminder", 0);
+    }
+
+    if(storage.reminder==="0"){
+      var notice = new PNotify({
+          title:'完善个人信息！',
+          text:'完善个人信息，让更多创业者找到你',
+          icon: 'fa fa-envelope-o',
+          type: 'success',
+          hide: false,
+          confirm: {
+            confirm: true,
+            buttons: [{
+              text: '完善信息',
+              addClass: 'btn-primary',
+              click: function(notice){
+                window.location.href = '/home';
+              }
+            },
+            {
+              text: '稍后再说',
+              click: function (notice){
+                notice.remove();
+              }
+            }]
+          },
+          buttons: {
+            closer_hover: false,
+            sticker: false
+          },
+          history: {
+            history: false
+          }
+        });
+      storage.reminder=1;
+    }else{
+      storage.reminder = parseInt(storage.getItem("reminder")) + 1;
+    }
+  }
+  
+  console.log(storage.reminder);
+  
 });
 
