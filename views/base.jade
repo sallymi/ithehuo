@@ -4,8 +4,8 @@ block navbar
   script(src='/js/base.js')
   if signinUser
     input#uid(type='hidden' value=signinUser.id)
-  if singinUser&&singinUser.name
-    input#profile(type='hidden' value=singinUser.name)
+  if signinUser&&signinUser.name
+    input#profile(type='hidden' value=signinUser.name)
   nav.navbar.navbar-default.navbar-static-top
     .container
       .navbar-header.page-scroll
