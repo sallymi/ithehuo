@@ -33,20 +33,20 @@ block content
                           strong= recruitment.classify
                         small=recruitment.location+' | '+recruitment.work_nature
                       .small
-                        em.c7='月薪：'
+                        strong='月薪：'
                         =recruitment.payment_min+'k-'+recruitment.payment_max+'k'
                       if (recruitment.share_option_min && recruitment.share_option_max)
                         .small
-                          em.c7= '期权：'
+                          strong= '期权：'
                           if !recruitment.share_option_min && !recruitment.share_option_max
                             ='<发布者暂不出让期权>'
                           else
                             =recruitment.share_option_min+'% - '+recruitment.share_option_max+'%'
                       else
                         .small
-                          em.c7= '期权： 暂无'
+                          strong= '期权： 暂无'
                       .small
-                        em.c7= '职位诱惑：'
+                        strong= '职位诱惑：'
                         =recruitment.keyword
                       .small.c7
                         include mixin/util
@@ -59,14 +59,14 @@ block content
                         else
                           large='所在项目：'
                       .small
-                        em.c7= 'Slogan：'
+                        strong= 'Slogan：'
                         =recruitment.project&&recruitment.project.keyword
                       .small
-                        em.c7= '阶段：'
-                        =recruitment.project&&recruitment.project.stage
+                        strong= '阶段：'
+                        =recruitment.project&&recruitment.project.stage?recruitment.project.stage:'暂未填写'
                       .small
-                        em.c7= '项目标签：'
-                        =recruitment.project&&recruitment.project.tag
+                        strong= '项目标签：'
+                        =(recruitment.project&&recruitment.project.tag&&recruitment.project.tag.length>0?recruitment.project.tag:'创业项目')
                       .small
-                        em.c7= '融资规模：'
+                        strong= '融资规模：'
                         =recruitment.project&&recruitment.project.funding&&recruitment.project.funding.current?recruitment.project.funding.current:'<创建者还没有填写>'

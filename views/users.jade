@@ -105,13 +105,13 @@ block content
                               strong= user.name?user.name:user.email.split('@')[0]
                             small= user.role
                           .small
-                            em.c7='地址：'
+                            strong='地址：'
                             =user.location?user.location:'创业者暂未公布'
                           .small
-                            em.c7='状态：'
+                            strong='状态：'
                             =user.status?user.status:'创业者暂未公布'
                           .small
-                            em.c7='个人一句话描述：'
+                            strong='个人一句话描述：'
                             =user.description?user.description:'创业者暂未公布'
                         .media-body.col-md-4
                             if user.work_experiences_tags && user.work_experiences_tags.length>0

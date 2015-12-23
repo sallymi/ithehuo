@@ -8,6 +8,7 @@
 	padding: 13px;
   	line-height: 25px;
   	position: relative;
+    overflow: auto;
 }
 .list-show li{
 	list-style: none;

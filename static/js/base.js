@@ -204,7 +204,7 @@ $(function () {
   if(!uid){
     storage.removeItem("reminder");
     storage.removeItem("intro");
-    //localstorage.removeItem("intro");
+    localstorage.removeItem("intro");
   }else{
     if(!localstorage.getItem("intro")){
       localstorage.setItem("intro", true);
