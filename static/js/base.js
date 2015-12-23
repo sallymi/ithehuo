@@ -198,53 +198,68 @@ $(function () {
     }
   });
   var storage = window.sessionStorage;
+  var localstorage = window.localStorage;
   var uid = $('#uid').val();
   var profile = $('#profile').val();
   if(!uid){
     storage.removeItem("reminder");
-  }else if(!profile){
-    if(!storage.getItem("reminder")){
-      storage.setItem("reminder", 0);
+    storage.removeItem("intro");
+    //localstorage.removeItem("intro");
+  }else{
+    if(!localstorage.getItem("intro")){
+      localstorage.setItem("intro", true);
+    }
+    if(localstorage.intro==="true"){
+      $('.guide').show();
+      localstorage.intro = false;
+    }
+    if(!profile){
+      if(!storage.getItem("reminder")){
+        storage.setItem("reminder", 0);
+      }
+      if(storage.reminder==="0"){
+        var notice = new PNotify({
+            title:'完善个人信息！',
+            text:'完善个人信息，让更多创业者找到你',
+            icon: 'fa fa-envelope-o',
+            type: 'success',
+            hide: false,
+            confirm: {
+              confirm: true,
+              buttons: [{
+                text: '完善信息',
+                addClass: 'btn-primary',
+                click: function(notice){
+                  window.location.href = '/home';
+                }
+              },
+              {
+                text: '稍后再说',
+                click: function (notice){
+                  notice.remove();
+                }
+              }]
+            },
+            buttons: {
+              closer_hover: false,
+              sticker: false
+            },
+            history: {
+              history: false
+            }
+          });
+        storage.reminder=1;
+      }else{
+        storage.reminder = parseInt(storage.getItem("reminder")) + 1;
+      }
     }
 
-    if(storage.reminder==="0"){
-      var notice = new PNotify({
-          title:'完善个人信息！',
-          text:'完善个人信息，让更多创业者找到你',
-          icon: 'fa fa-envelope-o',
-          type: 'success',
-          hide: false,
-          confirm: {
-            confirm: true,
-            buttons: [{
-              text: '完善信息',
-              addClass: 'btn-primary',
-              click: function(notice){
-                window.location.href = '/home';
-              }
-            },
-            {
-              text: '稍后再说',
-              click: function (notice){
-                notice.remove();
-              }
-            }]
-          },
-          buttons: {
-            closer_hover: false,
-            sticker: false
-          },
-          history: {
-            history: false
-          }
-        });
-      storage.reminder=1;
-    }else{
-      storage.reminder = parseInt(storage.getItem("reminder")) + 1;
-    }
-  }
+  } 
   
   console.log(storage.reminder);
+  $('.lend_about').on('click', function(){
+    $('.guide').hide();
+  });
   
 });
 
