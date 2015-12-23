@@ -12,32 +12,32 @@ block content
                   h3
                     span.f20= '开放职位 ' 
                     span.c9c=(recruitment && recruitment.classify)
-                  p= '所在项目: ' + (recruitment && recruitment.project && recruitment.project.name)
-                  p= '职位诱惑: ' + (recruitment && recruitment.keyword)
-                  p= 'Slogan: '+ (recruitment.project&&recruitment.project.keyword)
-                  include mixin/date
+                  p.f13= '所在项目: ' + (recruitment && recruitment.project && recruitment.project.name)
+                  p.f13= '职位诱惑: ' + (recruitment && recruitment.keyword)
+                  p.f13= 'Slogan: '+ (recruitment.project&&recruitment.project.keyword)
+                  include mixin/util
                   +date(recruitment.creation_time)
                   |  发布
           .panel
             .panel-heading='项目介绍'
             .panel-body
-               p= '项目标签: ' +(recruitment.project&&recruitment.project.tag)
-               p= '项目阶段: ' +(recruitment.project&&recruitment.project.stage)
-               p= '融资规模: ' +(recruitment.project&&recruitment.project.funding&&recruitment.project.funding.current?recruitment.project.funding.current:'<创建者还没有填写>')
+               p.f13= '项目标签: ' +(recruitment.project&&recruitment.project.tag&&recruitment.project.tag.length>0?recruitment.project.tag:'创建者还没有填写')
+               p.f13= '项目阶段: ' +(recruitment.project&&recruitment.project.stage)
+               p.f13= '融资规模: ' +(recruitment.project&&recruitment.project.funding&&recruitment.project.funding.current?recruitment.project.funding.current:'<创建者还没有填写>')
           .panel
             .panel-heading='职位要求'
             .panel-body
-              p= '工作年限: ' + (recruitment && recruitment.years_of_working)
-              p= '学历: ' + (recruitment && recruitment.education_background)
-              p= '年龄: ' + (recruitment && recruitment.age)
-              p= '籍贯: ' + (recruitment && recruitment.hometown)
-              p= '毕业院校: ' + (recruitment && recruitment.school)
-              p= '创业心态: ' + (recruitment && recruitment.attitude)
+              p.f13= '工作年限: ' + (recruitment && recruitment.years_of_working)
+              p.f13= '学历: ' + (recruitment && recruitment.education_background)
+              p.f13= '年龄: ' + (recruitment && recruitment.age)
+              p.f13= '籍贯: ' + (recruitment && recruitment.hometown)
+              p.f13= '毕业院校: ' + (recruitment && recruitment.school)
+              p.f13= '创业心态: ' + (recruitment && recruitment.attitude)
           if recruitment.description
             .panel
               .panel-heading='职位描述'
               .panel-body
-                p= recruitment && recruitment.description
+                p.f13= recruitment && recruitment.description
           
       .col-md-4.well.transparent
         if recruitment.work_nature
@@ -46,16 +46,16 @@ block content
             .panel-body
               .text-center
                 h5 招募性质
-                p= recruitment && recruitment.work_nature
+                p.f13= recruitment && recruitment.work_nature
         .panel
           .panel-heading
           .panel-body
             .text-center
               h5 薪资范围
-              p= '月薪：'+ (recruitment&&recruitment.payment_min) +'k-'+ (recruitment&&recruitment.payment_max)+'k'
+              p.f13= '月薪：'+ (recruitment&&recruitment.payment_min) +'k-'+ (recruitment&&recruitment.payment_max)+'k'
         .panel
           .panel-heading
           .panel-body
             .text-center
               h5 工作城市/地点
-              p= (recruitment && recruitment.location) + '-'+(recruitment && recruitment.address)
+              p.f13= (recruitment && recruitment.location) + '-'+(recruitment && recruitment.address)

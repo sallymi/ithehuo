@@ -1,0 +1,12 @@
+mixin date(timestamp)
+	span= timestamp.getFullYear() + '-' + (timestamp.getMonth() + 1) + '-' + timestamp.getDate()
+
+mixin creator(creator)
+	a.portfolio-link(href='/users/#{creator.user.id}', data-toggle='modal')
+		.caption
+			.caption-content
+				i.fa.fa-search-plus.fa-3x
+				p.f13= creator.user.name?creator.user.name:creator.user.email.split('@')[0]
+				p.f13= creator.role
+		img.img-responsive(src=creator.user.logo_img?creator.user.logo_img:'/images/portfolio/dog-160.png', alt='',width='50%')
+	a.f13(href='/users/#{creator.user.id}')= creator.role+' : '+(creator.user.name?creator.user.name:creator.user.email.split('@')[0])

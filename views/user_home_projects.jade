@@ -13,5 +13,5 @@ block user_home_content
                 span=project.location
               div=project.creator.role+' / '+project.tag +' / '+project.stage+'阶段'
               div.c9='发布时间：'
-                include mixin/date
+                include mixin/util
                 +date(project.creation_time)

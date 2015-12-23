@@ -18,21 +18,15 @@ block content
           .panel
             .panel-heading='项目描述'
             .panel-body
-              p= project.description
+              p.f13= project.description
           .panel
             .panel-heading='项目创建人信息'
             .panel-body
               if project.creator
                 .col-sm-3.portfolio-item
-                    a.portfolio-link(href='/users/#{project.creator.user.id}', data-toggle='modal')
-                        .caption
-                          .caption-content
-                            i.fa.fa-search-plus.fa-3x
-                            p= project.creator.user.name
-                            p= project.creator.role
-                        img.img-responsive(src='#{project.creator.user.logo_img}', alt='',width='80%')
-                    a(href='/users/#{project.creator.user.id}')= project.creator.role+' : '+project.creator.user.name
-          if project.partners
+                  include ./mixin/util.jade
+                  +creator(project.creator)
+          if project.partners&&project.partners.length>0
             .panel
               .panel-heading='团队成员'
               .panel-body
@@ -69,7 +63,7 @@ block content
         .panel
           .panel-heading
           .panel-body
-            .text-center
+            .text-center.f13
               h5 合伙工作机会
               if recruitments&&recruitments.length>0
                 each recruitement in recruitments
@@ -86,29 +80,29 @@ block content
           .panel
             .panel-heading
             .panel-body
-              .text-center
+              .text-center.f13
                 h5 公司名称
                 p= company
         if project.stage
           .panel
             .panel-heading
             .panel-body
-              .text-center
+              .text-center.f13
                 h5 项目阶段
-                p= project.stage
+                p.f13= project.stage
         if project.funding && project.funding.current
           .panel
             .panel-heading
             .panel-body
-              .text-center
+              .text-center.f13
                 h5 目前融资状况
-                p= project.funding.current
+                p.f13= project.funding.current
         if project.funding && project.funding.next
           .panel
             .panel-heading
             .panel-body
-              .text-center
+              .text-center.f13
                 h5 融资计划
-                p= project.funding.next.need
+                p.f13= project.funding.next.need
                 h5 出让股权
-                p= project.funding.next.return
+                p.f13= project.funding.next.return

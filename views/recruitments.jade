@@ -49,7 +49,7 @@ block content
                         em.c7= '职位诱惑：'
                         =recruitment.keyword
                       .small.c7
-                        include mixin/date
+                        include mixin/util
                         +date(recruitment.creation_time)
                         |  发布
                     .media-body.col-xs-5(onclick="location.href='/projects/#{recruitment.project&&recruitment.project._id}'")

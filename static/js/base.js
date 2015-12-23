@@ -123,7 +123,7 @@ $(function () {
     updateUnreadMessagesCount();
     updateRequestListCount();
   }
-  var socket = io.connect('http://119.81.189.152');
+  var socket = io.connect('http://119.81.189.157');
   socket.on('connect', function (data) {
       console.log(data);  
   });

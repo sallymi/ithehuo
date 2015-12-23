@@ -19,7 +19,7 @@ block user_home_content
                     span=recruitment.project.name
                 div= recruitment.work_nature + '/ '+ recruitment.payment_min + 'k-' + recruitment.payment_max + 'k /'+ recruitment.years_of_working+'(工作经验) / ' +recruitment.education_background+'(学历)'
                 div.c9 发布时间：
-                  include mixin/date
+                  include mixin/util
                   +date(recruitment.creation_time)
                 div.links
                   //a(href='#') 下线
@@ -31,7 +31,7 @@ block user_home_content
                   span=recruitment.location
                 div= recruitment.work_nature + '/ '+ recruitment.payment_min + 'k-' + recruitment.payment_max + 'k /'+ recruitment.years_of_working+'(工作经验) / ' +recruitment.education_background+'(学历)'
                 div.c9 下线时间：
-                  include mixin/date
+                  include mixin/util
                   +date(recruitment.creation_time)
                 div.links
                   //a(href='#') 再次上线
