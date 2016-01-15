@@ -260,6 +260,26 @@ $(function () {
   $('.lend_about').on('click', function(){
     $('.guide').hide();
   });
+  // $('[data-toggle="popover"]').popover();
+  $('#login-button1').popover({   
+      html : true,
+      content: function() {  
+        return $(".popover").html();  
+      }  
+  });
+  $('#login-button1').on('shown.bs.popover', function(){
+    var position = parseInt($('.popover').position().left);
+    // var pos2 = parseInt($('#login-button').position().top) - 5;
+    // var x = pos2 - position + 5;
+    //  if ($('.popover').height < x)
+    //  x = $('.popover').height;
+     // $('.popover.left .arrow').css('top', x + 'px');
+     // $('.popover .arrow').css('left', '90%');
+     // var position2 = parseInt($('.popover .arrow').position().left);
+     // $('.popover').css('left', position-position2/2);
+
+
+  })
   
 });
 

@@ -105,7 +105,7 @@ table tr td.small-col {
 .transparent{
   background: transparent;
 }
-.btn-account {
+.dropdown.btn-account {
   border: 0px;
   margin-top: 0px;
   height: 40px;
@@ -116,6 +116,25 @@ table tr td.small-col {
   position: relative;
   color: #000;
   border-radius: 4px !important;
+  max-width: 150px;
+  background: white;
+  //background: url(../images/AccountBtn.png);
+  background-position: center center !important;
+  background-repeat: repeat-x;
+}
+a.btn-account {
+  width: 100%;
+  border-radius: 50%;
+  border: 0px;
+  /*margin-top: 0px;*/
+  height: 40px;
+  line-height: 10px;
+  font-family: ProximaNovaRegular;
+  font-size: 14px !important;
+  /*padding: 0 !important;*/
+  position: relative;
+  color: #000;
+  /*border-radius: 4px !important;*/
   max-width: 150px;
   background: white;
   //background: url(../images/AccountBtn.png);
@@ -426,8 +445,8 @@ p {
 }
 .lend_main .lend_img1 {
     position: fixed;
-    right: 19px;
-    top: 40px;
+    right: 109px;
+    top: 20px;
     z-index: 10002;
 }
 img {
@@ -441,7 +460,7 @@ img {
 }
 .lend_main .lend_img3 {
     position: absolute;
-    left: 304px;
+    left: 234px;
     top: -92px;
     z-index: 12002;
 }

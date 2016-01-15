@@ -3,7 +3,7 @@ html
   head
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="baidu-site-verification" content="0Gda0gfKCd")
-    -var t = title ? title : 'IT合伙人'
+    -var t = title ? title+' 创业找合伙人,找IT合伙人,找互联网合伙人' : 'IT合伙人 创业找合伙人,找IT合伙人,找互联网合伙人'
     title= t
     block link
       link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
@@ -16,7 +16,7 @@ html
       link(href='/images/favicon.ico', type='image/png', rel='icon')
       //- link(rel='stylesheet', href='/stylesheets/fileinput.min.css', media='all', type='text/css')
     block script
-      script(src='/javascripts/jquery.js')
+      script(src='/javascripts/jquery-1.11.3.min.js')
       script(type='text/javascript',src='/javascripts/jquery.validate.min.js')
       script(src='/javascripts/bootstrap.min.js')
       script(src='/javascripts/pnotify.custom.min.js')
@@ -39,9 +39,9 @@ html
     .guide(style='display:none')
       .cover
       .lend_main
-        img.lend_img1(src="http://cdn.e.51shebao.com/2015120204/static/images/lend/inav.png")
-        img.lend_img2(src="http://cdn.e.51shebao.com/2015120204/static/images/lend/ioffer.png")
-        img.lend_img3(src="http://cdn.e.51shebao.com/2015120204/static/images/lend/iservice.png")
+        img.lend_img1(src="/images/iprofile.png")
+        img.lend_img2(src="/images/irecrute.png")
+        img.lend_img3(src="/images/iproduct.png")
         a.lend_about(href="javascript:;")
           img(src="http://cdn.e.51shebao.com/2015120204/static/images/lend/about.png", alt)
     .contentCtn

@@ -43,6 +43,7 @@ block navbar
         ul.nav.navbar-nav.navbar-right
           if (signinUser)
             span.badge.am-badge.am-badge-warning#reminder
+            //- a#login-button1.btn.btn-account(role="button" data-trigger="focus" data-toggle="popover" data-original-title title data-placement="bottom" tabindex="0")
             .dropdown#login-button.btn.btn-account
               if(signinUser.logo_img)
                 img(src=signinUser.logo_img)
@@ -100,6 +101,21 @@ block navbar
       //-   input.form-control(type='text', value='搜索创业项目/合伙工作机会/话题')
       //-   span.input-group-btn
       //-     button.btn.btn-default(type='button')='搜索!'
+  .popover(role="tooltip")
+    .nav.nav-stacked(style='width: 180px')
+      li
+        a(href='/home/recruitments') 我的小伙伴招募
+      li
+        a(href='/home/projects') 我的创业项目
+      li
+        a(href='/home/friends') 我的好友申请
+          span.badge#RequestCount
+      li
+        a(href='/home') 我的个人信息
+      li
+        a(href='/home/settings/password') 我的账号设置
+      li
+        a(href='/signout') 退出
 block footer
   footer.text-center
     .footer-above
