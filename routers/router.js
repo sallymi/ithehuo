@@ -32,6 +32,8 @@ router.get('/home', index.userHome);
 router.get('/signup', signup.showSignupPage);
 router.post('/signup', signup.signup);
 router.get('/active', signup.active);
+router.get('/sms/:phone', signup.sms);
+router.get('/getCaptcha', signup.captcha);
 // sign in
 router.get('/signin', signin.showSigninPage);
 router.post('/signin', signin.signin);

@@ -22,3 +22,68 @@ h3 {
 .privacy div {
     text-indent: 2em;
 }
+.form_head {
+    position: relative;
+    z-index: 1;
+    height: 33px;
+    margin-bottom: 29px;
+    border-bottom: 1px solid #ebebeb;
+}
+.form_head li {
+    font-size: 16px;
+    line-height: 24px;
+    position: relative;
+    float: left;
+    width: 190px;
+    height: 33px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    color: #333;
+}
+li {
+    list-style: none;
+}
+.form_head .tab_active {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    background-color: #00b38a;
+    width: 220px;
+    height: 1px;
+}
+.form_head .tab_active:before, .form_head .tab_active:after {
+    position: absolute;
+    z-index: 2;
+    top: -12px;
+    left: 50%;
+    margin-left: -3px;
+    content: '';
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border: 6px solid transparent;
+    border-bottom-color: #00b38a;
+}
+.form_head .tab_active:after {
+    z-index: 3;
+    top: -10px;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border: 6px solid transparent;
+    border-bottom-color: #fff;
+}
+li.active {
+    color: #00b38a;
+}
+.reflash {
+    background: url('/images/reflash.jpg') center center no-repeat;
+    background-size: 19px 21px;
+    display: inline-block;
+    height: 48px;
+    width: 19px;
+    vertical-align: middle;
+    margin-left: 10px;
+   
+}

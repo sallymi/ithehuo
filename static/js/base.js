@@ -279,7 +279,25 @@ $(function () {
      // $('.popover').css('left', position-position2/2);
 
 
-  })
+  });
+  $('ul.form_head > li').click(function (e) {
+    e.preventDefault();
+    $('ul.form_head > li').removeClass('active');
+    $(this).addClass('active');
+    if($(this).attr('name')=='by_email'){
+      $('span.tab_active').css('left','218px');
+      $('.by_phone').hide();
+      $('.by_email').show();
+    }else{
+      $('span.tab_active').css('left','0');
+      $('.by_email').hide();
+      $('.by_phone').show();
+    }
+    
+  });
+  $('.reflash').click(function(e){
+    $('img.captcha').attr("src", "/getCaptcha?rnd="+Math.random());
+  });
   
 });
 
