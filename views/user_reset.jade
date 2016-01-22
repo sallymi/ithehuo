@@ -1,0 +1,25 @@
+extends layout
+block content
+  script(src='/js/user_signin_reset_password.js')
+  link(rel='stylesheet', href='/css/sign.css')
+  a.closeBtn(href='/') X
+  h3 加入IT合伙人，找到创业伙伴
+  input#user(type='hidden' value=user)
+  form.form-horizontal.templatemo-container.templatemo-login-form-1#resetPasswordForm
+    .form-inner
+      .form-group
+        .col-md-3
+          font(color="red")='* '
+          label.control-label(for='new_pwd') 新密码
+        .col-md-9
+          input#new_pwd.form-control(type='password', name='new_pwd', placeholder='至少8个字符',required)
+      .form-group
+        .col-md-3
+          font(color="red")='* '
+          label.control-label(for='new_pwd_verify') 确认新密码
+        .col-md-9
+          input(type="password" style="display:none")
+          input#new_pwd_verify.form-control(type='password', name='new_pwd_verify', placeholder='与新密码一致',required)
+      .form-group
+        .col-sm-offset-4.col-sm-10
+          input#savePasswordBtn.btn.btn-info(type='submit' value='保存新密码' data-loading-text='正在保存...')

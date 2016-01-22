@@ -175,3 +175,103 @@ exports.active = function (req, res) {
     });
   }
 };
+
+exports.reset = function (req, res) {
+  logger.debug('request received to reset password');
+  var base64Email = req.query.email;
+  var ticket = req.query.ticket;
+
+  logger.debug('validate if the active url is valid');
+  if (!base64Email || !ticket) {
+    resUtil.render(req, res, 'user_active', {error: '错误的激活链接'});
+    return;
+  }
+
+  var email = crypto.base64Decode(base64Email);
+  var hash = crypto.md5(email + config.secret);
+  logger.debug('email: ' + email);
+
+  if (ticket === hash) {
+    userProxy.findUserByEmail(email).then(function (user) {
+      logger.debug('ready to reset password, user email: ' + user.email);
+      resUtil.render(req, res, 'user_reset',{user:email});
+    }).fail(function (err) {
+      logger.error(err);
+      resUtil.render(req, res, 'user_reset', {error: '重置失败'});
+    });
+  }
+};
+
+/**
+ * Request handler for change password request
+ *
+ * @function
+ * @param req - express http request
+ * @param res - express http response
+ *
+ */
+exports.changePassword = function (req, res) {
+  logger.info('request received to change password');
+  var pass = req.body;
+  var newPwd = pass && pass.new_pwd;
+  var newPwdVerify = pass && pass.new_pwd_verify;
+
+ 
+  logger.info('[check] if new password is set');
+  if (!newPwd) {
+    logger.info('[failed] will response with error message');
+    resUtil.errJson(res, '新密码不能为空', null, 406);
+    return;
+  }
+  logger.info('[pass]');
+
+  logger.info('[check] if new password verify is set');
+  if (!newPwdVerify) {
+    logger.info('[failed] will response with error message');
+    resUtil.errJson(res, '重复新密码不能为空', null, 406);
+    return;
+  }
+  logger.info('[pass]');
+
+  logger.info('[check] if new password equals to new password verify');
+  if (newPwd !== newPwdVerify) {
+    logger.info('[failed] will response with error message');
+    resUtil.errJson(res, '两次输入的新密码不一致', null, 406);
+    return;
+  }
+  logger.info('[pass]');
+
+  logger.info('[check] if new password length >= 8');
+  if (newPwd.length < 8) {
+    logger.info('[failed] will response with error message');
+    resUtil.errJson(res, '新密码长度必须大于8位', null, 406);
+    return;
+  }
+  logger.info('[pass]');
+
+  var user = pass.user;
+  userProxy.findUserByEmail(user).then(function (user) {
+
+    logger.info('[check] if user exist');
+    if (!user) {
+      logger.info('[failed] will response with error message');
+      resUtil.errJson(res, '出错啦，请重新登录后再试');
+      return;
+    }
+    logger.info('[pass]');
+
+    logger.info('[all check pass] begin update password');
+    user.password = crypto.md5(newPwd);
+    userProxy.saveUser(user).then(function () {
+      logger.info('password saved, will resoponse with success message');
+      req.session.user = user.toObject();
+      // res.redirect('/');
+      resUtil.okJson(res, '操作成功，密码已修改');
+    });
+
+  }).fail(function (error) {
+    logger.error('failed to modify user password due to bellow error');
+    logger.error(error);
+    resUtil.errJson(res, '操作失败啦，请稍后再试 :(', error);
+  });
+};

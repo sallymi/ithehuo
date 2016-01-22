@@ -10,6 +10,7 @@ var reqUtil = require('../utils/request');
 var resUtil = require('../utils/response');
 var crypto = require('../utils/crypto');
 var logger = require('../utils/log').getLogger('biz/signin.js');
+var mailer = require('../utils/mail');
 
 exports.showSigninPage = function (req, res) {
 
@@ -126,16 +127,28 @@ exports.resetPassword = function (req, res) {
 
       logger.debug('try to reset user password');
       //TODO
-      return userProxy.changePassword(email, password).then(function (email) {
+      var newPwd = "p0o9i8u7";
+      user.password = crypto.md5(newPwd);
+      return userProxy.saveUser(user).then(function () {
         logger.debug('try to send a mail to change password, mail: ' + email);
-        return email;
-        //return mailer.sendActiveMail(user.email);
-
+        return mailer.sendResetPwdMail(email, newPwd);
       }).then(function (email) {
         resUtil.render(req, res, 'signup', {
-          success: '您的密码已经重置！我们已给您的注册邮箱 ' + email + ' 发送了一封邮件，登陆后尽快修改密码。'
+          success: '密码重置邮件已发送至你的邮箱：' + email + ' 请尽快登录你的邮箱接收邮件,链接激活后可重置密码。'
         });
       });
+
+
+      // return userProxy.changePassword(email, password).then(function (email) {
+      //   logger.debug('try to send a mail to change password, mail: ' + email);
+      //   //return email;
+      //   return mailer.sendActiveMail(user.email);
+
+      // }).then(function (email) {
+      //   resUtil.render(req, res, 'signup', {
+      //     success: '您的密码已经重置！我们已给您的注册邮箱 ' + email + ' 发送了一封邮件，登陆后尽快修改密码。'
+      //   });
+      // });
     }
   }).fail(function (err) {
     logger.error(err);

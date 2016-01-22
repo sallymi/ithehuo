@@ -1,7 +1,7 @@
 var config = {
   name: 'IT合伙人',
   host: 'ithehuo.com',
-  admin: ['sallymi_82@126.com','jiaji1104@126.com'],
+  admin: ['sallymi_82@126.com','jiaji1104@126.com','liubaoshu@helloworld-cafe.com'],
   secret: 'SVTlkIjkvJnkuro=',
   mailer: {
     host: 'smtp.126.com',
@@ -632,7 +632,7 @@ config.filters.projects =
     item: 'projects',
     name: '需要的合伙人',
     key: 'recruitment',
-    values: ['技术合伙人', '产品设计合伙人', '运营合伙人', '市场营销合伙人', '资源合伙人', '投资合伙人','顾问/导师合伙人']
+    values: ['技术合伙人', '产品设计合伙人', '运营合伙人', '市场营销合伙人', '资源合伙人', '投资合伙人','顾问/导师轻合伙人']
   }, {
     item: 'projects',
     name: '当前融资情况',
@@ -701,7 +701,7 @@ config.filters.recruitments =
     item: 'recruitments',
     name: '合伙类别',
     key: 'classify',
-    values: ['技术合伙人', '产品设计合伙人', '运营合伙人', '市场营销合伙人', '资源合伙人', '投资合伙人','顾问/导师合伙人']
+    values: ['技术合伙人', '产品设计合伙人', '运营合伙人', '市场营销合伙人', '资源合伙人', '投资合伙人','顾问/导师轻合伙人']
   }, {
     item: 'recruitments',
     name: '合伙方式',
@@ -735,7 +735,7 @@ config.filters.users =
     item: 'users',
     name: '角色定位',
     key: 'role',
-    values: ['创始人', '技术合伙人', '产品设计合伙人', '运营合伙人', '市场营销合伙人', '资源合伙人', '投资合伙人','顾问/导师合伙人']
+    values: ['创始人', '技术合伙人', '产品设计合伙人', '运营合伙人', '市场营销合伙人', '资源合伙人', '投资合伙人','顾问/导师轻合伙人']
   }, {
     item: 'users',
     name: '所在地',

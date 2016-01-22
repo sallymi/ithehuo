@@ -77,4 +77,35 @@ exports.sendActiveMail = function (email) {
       reject(err);
     });
   });
-};
+}
+  /**
+ * Send reset pwd mail
+ *
+ * @function
+ * @param {String} email - target email address
+ *
+ */
+exports.sendResetPwdMail = function (email,newPW) {
+  return Q.Promise(function (resolve, reject) {
+    var siteName = config.name;
+    var siteContactMail = config.mailer.auth.user;
+    var encodedEmail = crypto.base64Encode(email);
+    var ticket = crypto.md5(email + config.secret);
+    var activeUrl = SITE_ROOT_URL + '/reset?email=' + encodedEmail + '&ticket=' + ticket;
+
+    var to = email;
+    var subject = '重置您的' + siteName + '密码';
+    var html =
+      '<p>您好：<p/>' +
+      '<p>' + siteName + '已经收到了你的找回密码请求，请点击下面的链接重置密码。<p/>' +
+      '<a href="' + activeUrl + '">' + activeUrl + '</a>' +
+      '<p style="padding-top: 20px">' + siteName + '开发团队</p>' +
+      '<p>' + siteContactMail + '</p>';
+
+    sendMail(to, subject, html).then(function () {
+      resolve(email);
+    }).fail(function (err) {
+      reject(err);
+    });
+  });
+}
