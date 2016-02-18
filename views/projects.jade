@@ -5,6 +5,8 @@ block content
   link(rel='stylesheet', href='/css/side_nav.css')
   link(rel='stylesheet', href='/css/recruitments.css')
   link(rel='stylesheet', href='/css/error.css')
+  //- link(href="http://v3.jiathis.com/code/css/jiathis_counter.css" rel="stylesheet" type="text/css")
+  //- link(href="http://v3.jiathis.com/code/css/jiathis_share.css" rel="stylesheet" type="text/css")
   include search.jade
   .container-fluid.list-show#projects
     .row
@@ -30,10 +32,23 @@ block content
                       if project.recruitments && project.recruitments.length > 0
                         a(href='/recruitments?project=' + project._id)
                           .state='合伙人招募中'
-                    .media-body.col-md-7(onclick="location.href='/projects/#{project._id}'")
-                      h5.media-heading.mb10
-                        a(href= '/projects/' + project._id)
-                          strong= project.name
+                    .media-body.col-md-7
+                      .row
+                        h5.media-heading.mb10.col-md-6
+                          a(href= '/projects/' + project._id)
+                            strong= project.name
+                        input#pid(type='hidden' value=project._id)
+                        .jiathis_style.col-md-6.hidden-xs
+                          a.jiathis.jiathis_txt(href="http://www.jiathis.com/share" target="_blank")
+                            img(src='http://v3.jiathis.com/code/images/btn/v1/jiathis1.gif' border="0")
+                        script(type='text/javascript').
+                          var jiathis_config={
+                            url:"http://www.ithehuo.com"+'/projects/' + $('#pid').val(),
+                            summary:"",
+                            title:"我在IT合伙人发现了好项目，快来看看！##",
+                            shortUrl:false,
+                            hideMore:true
+                          }
                       .small
                         i.fa.fa-map-marker.r5
                         em.c7.f14=project.location
@@ -64,3 +79,5 @@ block content
                         include mixin/util
                         +date(project.creation_time)
                         |  发布
+    
+    script(type='text/javascript' src='http://v3.jiathis.com/code_mini/jia.js' charset='utf-8')
