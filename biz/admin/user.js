@@ -24,6 +24,29 @@ exports.userPage = function (req, res) {
   });
 };
 
+exports.active = function (req, res) {
+  var uid = req.body.uid;;
+  console.log(uid);
+  userProxy.updateActive(uid, true).then(function () {
+    //res.redirect('/admin/users');
+    res.json('success');
+  }).fail(function (err) {
+    logger.error(err);
+    resUtil.render(req, res, 'error', err);
+  });
+}
+exports.deActive = function (req, res) {
+  var uid = req.body.uid;;
+  console.log(uid);
+  userProxy.updateActive(uid, false).then(function () {
+    //res.redirect('/admin/users');
+    res.json('success');
+  }).fail(function (err) {
+    logger.error(err);
+    resUtil.render(req, res, 'error', err);
+  });
+}
+
 exports.addHot = function (req, res) {
   var pid = req.body.pid;
   projectProxy.updateHot(pid, true).then(function () {

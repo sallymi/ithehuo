@@ -1,14 +1,15 @@
 extends ./layout
 block append script
-  script(src='/js/admin/projects.js')
+  script(src='/js/admin/users.js')
 block content
   h3 注册总人数: 
     span=users.length
-  table.table.table-condensed.table-bordered#project-table
+  table.table.table-condensed.table-bordered#user-table
     thead
       tr
         th 头像
         th 姓名
+        th 是否激活
         th 注册ID
         th 注册邮箱
         th 注册电话
@@ -17,16 +18,25 @@ block content
     tbody
       if users
         each user in users
-          tr.project(uid= user.id)
+          tr.user(uid= user.id)
             td.small
               img(src=user.logo_img height='40px')
             td= user.name
+            td= user.active?'已激活':'未激活'
             td
               a(href='/users/'+user.id)= user.id
             td= user.email
             td= user.mobile_phone
             td= moment(user.creation_time).format('YYYY/MM/DD')
             td.small
+              //- if user.active
+              //-   button.action.btn.btn-primary.btn-xs.disabled(title='该项目已经激活' type='active') 帮他激活
+              //- else
+              if user.active
+                button.action.btn.btn-primary.btn-xs.remove.hide(title='取消激活' type='active') 取消激活
+                button.action.btn.btn-primary.btn-xs.add.disabled(title='帮他激活' type='active') 帮他激活
+              else
+                button.action.btn.btn-primary.btn-xs.add(title='帮他激活' type='active') 帮他激活
               //- add hot button
               //- if project.recruitments && project.recruitments.length > 0
               //-   if project.hot

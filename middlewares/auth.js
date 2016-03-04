@@ -88,9 +88,11 @@ exports.signinAuthforAdmin = function (req, res, next) {
   if (user) {
     logger.debug('user exist in session, will pass control to next handler');
      if(-1 !== config.admin.indexOf(user.email)){
+      console.log("here")
         next();
         return;
       }else{
+        console.log("here1")
         res.redirect('/');
       }
   }

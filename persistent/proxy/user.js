@@ -118,6 +118,36 @@ exports.findUserById = function (uid) {
 };
 
 /**
+ * Active user by id
+ *
+ * @function
+ * @param {String} uid - user id
+ * @return {Promise} promise to perform a find action:
+ * <li>user found: resolve with user
+ * <li>user not found: resolve with undefine
+ * <li>error occur during find: reject with error
+ *
+ */
+exports.updateActive = function (uid, value) {
+  return Q.Promise(function (resolve, reject) {
+    User
+      .update(
+        { '_id': uid },
+        { "active": value}
+      )
+      .exec(function (err) {
+        if (err) {
+          logger.error(err);
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+  });
+};
+
+
+/**
  * Save user
  *
  * @function
