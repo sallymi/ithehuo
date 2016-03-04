@@ -2,6 +2,8 @@ extends ./layout
 block append script
   script(src='/js/admin/projects.js')
 block content
+  h3 项目总数: 
+    span=projects.length
   table.table.table-condensed.table-bordered#project-table
     thead
       tr
