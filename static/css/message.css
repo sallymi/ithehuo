@@ -122,6 +122,14 @@
   white-space: nowrap;
   cursor: pointer;
 }
+.message-item .summary a {
+    word-break: normal;
+    width: auto;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
 .message-item .time {
   float: right;
   width: 60px;
