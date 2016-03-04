@@ -10,6 +10,7 @@ var index = require('../biz/admin/index.js');
 var project = require('../biz/admin/project.js');
 var question = require('../biz/admin/question.js');
 var answer = require('../biz/admin/answer.js');
+var user = require('../biz/admin/user.js');
 
 var router = express.Router();
 
@@ -32,6 +33,7 @@ router.put('/answers/:aid', answer.updateAnswer);
 router.delete('/answers/:aid', answer.deleteAnswer);
 router.put('/answers/:aid/comments/:cid', answer.updateComment);
 router.delete('/answers/:aid/comments/:cid', answer.deleteComment);
+router.get('/users', user.userPage);
 
 // TODO: just for development, need remove before go to production
 router.get('/reset', index.reset);

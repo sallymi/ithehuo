@@ -32,6 +32,11 @@ html
               a(href="/admin/projects")
                 i.fa.fa-list
                 span.menu-text 项目管理
+            - var activeClass = (header === '项目管理') ? 'active' : ''
+            li(class= activeClass)
+              a(href="/admin/users")
+                i.fa.fa-list
+                span.menu-text 注册人员管理
       .main-content
         //- .breadcrumbs
           ul.breadcrumb
