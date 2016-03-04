@@ -58,7 +58,10 @@ block content
             .panel
               .panel-heading='项目链接'
               .panel-body
-                a(href='http://' + project.link)= project.link
+                if project.link.indexOf("http")!==-1
+                  a(href=project.link target='_blank')= project.link
+                else
+                  a(href='http://' + project.link target='_blank')= project.link
       .col-md-4.well.transparent
         .panel
           .panel-heading
