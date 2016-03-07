@@ -54,7 +54,7 @@ exports.signup = function (req, res) {
   logger.debug('request received to sign up');
   var email = req.body.email;
   var pass = req.body.password;
-  var re_pass = req.body.re_password;
+  // var re_pass = req.body.re_password;
   // var phone = req.body.phone;
   // var captcha = req.body.captcha;
   // var sms = req.body.sms;
@@ -94,8 +94,8 @@ exports.signup = function (req, res) {
   //   }
   // }
   
-  logger.debug('check if email, password and re_password are all set');
-  if (email === '' || pass === '' || re_pass === '') {
+  logger.debug('check if email, password are all set');
+  if (email === '' || pass === '') {
     resUtil.render(req, res, 'signup', {error: '信息不完整。', email: email});
     return;
   }
@@ -105,11 +105,11 @@ exports.signup = function (req, res) {
     resUtil.render(req, res, 'signup', {error: '不正确的电子邮箱。', email: email});
     return;
   }
-  logger.debug('check if password === re_password');
-  if (pass !== re_pass) {
-    resUtil.render(req, res, 'signup', {error: '两次密码输入不一致。', email: email});
-    return;
-  }
+  // logger.debug('check if password === re_password');
+  // if (pass !== re_pass) {
+  //   resUtil.render(req, res, 'signup', {error: '两次密码输入不一致。', email: email});
+  //   return;
+  // }
 
   logger.debug('check if password length >= 8');
   if (pass.length < 8) {
