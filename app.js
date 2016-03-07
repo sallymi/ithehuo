@@ -43,7 +43,6 @@ connection.connect().then(function () {
   });
   var io  = require('socket.io')(server);
   io.sockets.on('connection', function (socket) {
-    console.log('connected');
     socket.on('private message', function (from, to, msg, timestamp) {
       logger.info('I received a private message by ', from, ' say to ', to, msg);
       socket.broadcast.emit('to' + to, {from : from, to : to, msg : msg, timestamp : timestamp});

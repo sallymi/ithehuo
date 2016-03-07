@@ -18,10 +18,10 @@ block user_home_content
         each request in myRequests
           li.col-md-12.request(requestId= request.id)
               .media
-                .media-left.media-middle.col-md-3
+                .media-left.media-middle.col-md-3.col-sm-0
                   a(href='/users/' + request.target._id)
                     img.media-object(src=request.target && request.target.logo_img ? request.requestor.logo_img:"/images/portfolio/dog-160.png",width='50%')
-                .media-body.col-md-5(onclick="location.href='/users/#{request.target._id}'")
+                .media-body.col-md-5.col-sm-8(onclick="location.href='/users/#{request.target._id}'")
                   h5.media-heading.mb10
                     a(href= '/users/' + request.target._id)
                       strong= (request.target.name ? request.target.name : request.target.email)
@@ -41,7 +41,7 @@ block user_home_content
                   mark.small
                     em.c7='申请留言：'
                     =(request.request_msg ? request.request_msg : '')
-                .media-body.col-md-4
+                .media-body.col-md-4.col-sm-4
                   if (relation)
                     button.btn.btn-success.head_shu 已经是朋友
                   else
@@ -78,7 +78,7 @@ block user_home_content
                         em.c7='申请留言：'
                         =(request.request_msg ? request.request_msg : '')
                     .media-body.col-md-4
-                      if request.status === 'pending'	
+                      if request.status === 'pending' 
                         button.btn.btn-info.action.pass(action='accept') 通过
                         button.btn.btn-danger.action.deny(action='deny') 拒绝
                         //button.btn.btn-default.action.ignore(action='ignore') 忽略
