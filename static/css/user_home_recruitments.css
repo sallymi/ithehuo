@@ -1,6 +1,15 @@
 .my_jobs {
   margin: 0 40px;
 }
+@media screen and (max-width: 600px) {
+  .my_jobs {
+    margin: 0 0;
+  }
+
+  ul {
+    -webkit-padding-start:0px;
+  }
+}
 .my_jobs li {
   margin-bottom: 30px;
   border-left: 3px solid #91cebe;
