@@ -51,6 +51,7 @@
 	}
 }
 @media(max-width:767px) {
+
   .navbar .container .btn {
     margin: 5px 10px;
   }
@@ -360,13 +361,29 @@ em {
  text-align: center;
  color: red;
 }
-.empty_result {
+
+@media screen and (max-width: 600px) {
+    .empty_result {
+    height:130px;
+    font-size: 18px;
+    line-height: 32px;
+    background: url(../images/addnew.png) 0 0 no-repeat;
+  }
+}
+
+@media screen and (min-width: 600px) {
+   .empty_result {
   height:130px;
   font-size: 18px;
   line-height: 32px;
   padding: 20px 0 0 150px;
   background: url(../images/addnew.png) 0 0 no-repeat;
 }
+
+}
+
+
+
 
 small.error {
   display: block;
