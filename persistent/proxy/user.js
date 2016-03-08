@@ -57,6 +57,39 @@ exports.findUsers = function (filter) {
 };
 
 /**
+ * Find users with a filter & page & limit
+ *
+ * @function
+ * @return {Promise} promise to find all users:
+ * <li> succeed: resolve with users array
+ * <li> failed: reject with error
+ *
+ */
+exports.findUsersLimit = function (filter) {
+  return Q.Promise(function (resolve, reject) {
+    var page = filter.page?parseInt(filter.page):1;
+    var limit = filter.limit?parseInt(filter.limit):9;
+    delete filter.page;
+    delete filter.limit;
+    User
+      .find(filter)
+      .populate('fav_questions.question fav_answers.answer followings')
+      .skip((page-1)*limit)
+      .limit(limit)
+      .exec(function (err, users) {
+        if (err) {
+          logger.error(err);
+          reject(err);
+        } else {
+          resolve(users);
+        }
+      });
+  });
+};
+
+
+
+/**
  * Find user by email
  *
  * @function
