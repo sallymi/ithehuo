@@ -96,10 +96,10 @@ block content
                   if user.email
                     li.col-md-12.portfolio-item
                       .media
-                        .media-left.media-middle.col-md-3
+                        .media-left.media-middle.col-md-3.col-xs-12
                           a(href='/users/' + user._id)
                             img.media-object(src=src=user.logo_img?user.logo_img:'/images/portfolio/dog-160.png', width='50%')
-                        .media-body.col-md-5(onclick="location.href='/users/#{user._id}'")
+                        .media-body.col-md-5.col-xs-12(onclick="location.href='/users/#{user._id}'")
                           h5.media-heading.mb10
                             a(href= '/users/' + user._id)
                               strong= user.name?user.name:user.email.split('@')[0]
@@ -113,7 +113,7 @@ block content
                           .small
                             strong='个人一句话描述：'
                             =user.description?user.description:'创业者暂未公布'
-                        .media-body.col-md-4
+                        .media-body.col-md-4.col-xs-12
                             if user.work_experiences_tags && user.work_experiences_tags.length>0
                                 each tag in user.work_experiences_tags
                                   span.tag.label.label-info=tag
