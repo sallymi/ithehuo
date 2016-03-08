@@ -209,7 +209,7 @@ $(function () {
     if(!localstorage.getItem("intro")){
       localstorage.setItem("intro", true);
     }
-    if(localstorage.intro==="true"){
+    if(localstorage.intro==="true"&& IsPC()){
       $('.guide').show();
       localstorage.intro = false;
     }
@@ -298,6 +298,32 @@ $(function () {
   $('.reflash').click(function(e){
     $('img.captcha').attr("src", "/getCaptcha?rnd="+Math.random());
   });
+  //获取短信验证码
+  $('#getSmsCode').click(function(e){
+    $.ajax({
+      'url': '/users/' + uid + '/messagescount?read=false',
+      'method': 'GET'
+    }).done(function (res) {
+      dfd.resolve(res.count);
+    }).fail(function (resp) {
+      dfd.reject(resp);
+    });
+  });
+
+  function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+        flag = false;
+        break;
+      }
+    }
+    return flag;
+  }
   
 });
 
