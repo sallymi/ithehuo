@@ -69,6 +69,53 @@ exports.find = function (filter) {
   });
 };
 
+
+/**
+ * Find recruitments with a filter & page & limit
+ * will return all if no filter if provided
+ *
+ * @function
+ * @param {JSON} filter - query filter
+ * @return {Promise} promise to find all recruitments:
+ * <li>success: resolve with the found recruitment
+ * <li>failed: reject with the error
+ *
+ */
+exports.findLimit = function (filter) {
+  if (!filter) {
+    filter = { 'status': { $ne: 'deleted'} };
+  } else if (!filter.status || (filter.status === 'deleted')) {
+    filter.status = { $ne: 'deleted'};
+  }
+  return Q.Promise(function (resolve, reject) {
+    logger.debug('try to find recruitments, filter: ' + JSON.stringify(filter));
+    
+    var page = filter.page?parseInt(filter.page):1;
+    var limit = filter.limit?parseInt(filter.limit):9;
+    delete filter.page;
+    delete filter.limit;
+
+    Recruitment.
+      find(filter).
+      populate('project').
+      sort({creation_time: -1}).
+      skip((page-1)*limit).
+      limit(limit).
+      exec().
+      then(function (recruitments) {
+        logger.debug('recruitments found');
+        logger.trace(recruitments);
+        logger.debug('will resolve with the found recruitments');
+        resolve(recruitments);
+      }, function (err) {
+        logger.error('bellow error occur when try to find all recruitments');
+        logger.error(err);
+        logger.debug('will reject with the error');
+        reject(err);
+      });
+  });
+};
+
 /**
  * Find recruitment by id
  *

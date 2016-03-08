@@ -70,6 +70,49 @@ exports.findProjects = function (filter) {
   });
 };
 
+
+/**
+ * Find projects with a filter & page & limit
+ * will return all if no filter is provided
+ *
+ * @function
+ * @param {JSON} filter - query filter
+ * @return {Promise} promise to find all projects:
+ * <li>success: resolve with the found projects
+ * <li>failed: reject with the error
+ *
+ */
+exports.findProjectsLimit = function (filter) {
+  var method = '[findProjects]';
+  return Q.Promise(function (resolve, reject) {
+    logger.debug(method, 'try to find projects');
+    logger.debug(method, 'filter: ' + JSON.stringify(filter));
+
+    var page = filter.page?parseInt(filter.page):1;
+    var limit = filter.limit?parseInt(filter.limit):9;
+    delete filter.page;
+    delete filter.limit;
+
+    Project.
+      find(filter).
+      sort({creation_time: -1}).
+      skip((page-1)*limit).
+      limit(limit).
+      exec().
+      then(function (projects) {
+        logger.debug(method, projects.length + ' projects found');
+        logger.trace(method, projects);
+        logger.debug(method, 'will resolve with the found projects');
+        resolve(projects);
+      }, function (err) {
+        logger.error(method, 'bellow error occur when try to find all projects');
+        logger.error(err);
+        logger.debug(method, 'will reject with the error');
+        reject(err);
+      });
+  });
+};
+
 /**
  * Find project by id
  *
