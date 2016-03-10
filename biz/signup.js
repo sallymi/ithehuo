@@ -30,12 +30,12 @@ exports.showSignupPage = function (req, res) {
 exports.sms = function (req, res) {
   var phone = req.params.phone;
   logger.debug('get the phone number');
-  var app = new App('23298060', '64a0fe73e56868f9ef9cabd3461ed48f');
+  var app = new App('23324086', '701378360789f40887a0db9905d11252');
   app.smsSend({
       sms_free_sign_name: '注册验证', //短信签名，参考这里 http://www.alidayu.com/admin/service/sign
       sms_param: JSON.stringify({"code": "123456", "product": "［IT合伙人］"}),//短信变量，对应短信模板里面的变量
       rec_num: phone, //接收短信的手机号
-      sms_template_code: 'SMS_4425967' //短信模板，参考这里 http://www.alidayu.com/admin/service/tpl
+      sms_template_code: 'SMS_5495196' //短信模板，参考这里 http://www.alidayu.com/admin/service/tpl
   }, function(result){
     logger.debug(result);
     resUtil.okJson(res, '已发送');

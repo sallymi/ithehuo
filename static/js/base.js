@@ -299,16 +299,31 @@ $(function () {
     $('img.captcha').attr("src", "/getCaptcha?rnd="+Math.random());
   });
   //获取短信验证码
+  var seed = 60;
+  var t1 = null;
   $('#getSmsCode').click(function(e){
+    var phone = $("#phone").val();
     $.ajax({
-      'url': '/users/' + uid + '/messagescount?read=false',
+      'url': '/sms/' + phone,
       'method': 'GET'
     }).done(function (res) {
-      dfd.resolve(res.count);
+      $("#getSmsCode").attr("disabled","disabled");
+      t1 = setInterval(tip,1000);
     }).fail(function (resp) {
-      dfd.reject(resp);
+      $()
     });
   });
+
+  function tip() {
+    seed--;
+    if (seed < 1) {
+      $("#getSmsCode").removeAttr("disabled").text("获取验证码");
+      seed = 60;
+      var t2 = clearInterval(t1);
+    } else {
+      $("#getSmsCode").text(seed+" s后重新发送");
+    }
+  }
 
   function IsPC() {
     var userAgentInfo = navigator.userAgent;
