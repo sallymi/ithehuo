@@ -1,6 +1,7 @@
 extends layout
 block content
   link(rel='stylesheet', href='/css/sign.css')
+  script(src='/js/base.js')
   a.closeBtn(href='/') X
   h1.margin-bottom-15 注册IT合伙人
   h3 加入IT合伙人，找到创业伙伴
@@ -14,14 +15,49 @@ block content
           .alert.alert-danger
             a.close(data-dismiss='alert' href='#') &times;
             strong= error
-        .form-group
-          .col-md-12
-            label.control-label.pull-left(for='email') 请输入常用邮箱地址
-            input#email.form-control(type='email', name='email', placeholder='', value= email)
+        ul.form_head
+          li(name='by_phone').active
+            i.fa.fa-mobile 手机号码注册
+          li(name='by_email')
+            i.fa.fa-envelope-o 邮箱注册
+          span.tab_active
+        div.by_email(style="display: none")
+          .form-group
+            .col-md-12
+              label.control-label.pull-left(for='email') 请输入常用邮箱地址
+              input#email.form-control(type='email', name='email', placeholder='', value= email)
+        div.by_phone
+          .form-group
+            .col-md-12
+              label.control-label.pull-left(for='phone') 请输入常用手机号码
+              input#phone.form-control(type='phone', name='phone', placeholder='', value= phone)
+          .form-group
+            .col-md-12
+              label.pull-left
+                span 请输入图片验证码
+          .form-group
+            .col-md-7
+              input#captcha.form-control(type='captcha', name='captcha', placeholder='请输入图形中验证码', value= captcha)
+            .col-md-5
+              img.captcha(src='/getCaptcha', onclick="this.src='/getCaptcha'")
+              a.reflash(href='javascript:;')
+          .form-group
+            .col-md-12
+              label.pull-left
+                span 请输入短信验证码
+          .form-group
+            .col-md-8
+              input#sms.form-control(type='sms', name='sms', placeholder='', value= sms)
+            .col-md-4
+              a.btn.btn-info.pull-right#getSmsCode(style='color:white', href='javascript:;') 获取验证码
+        br
         .form-group
           .col-md-12
             label.control-label.pull-left(for='password') 密码
             input#password.form-control(type='password', name='password', placeholder='')
+          //- .col-md-6
+          //-   label.control-label.pull-left(for='re_password') 确认密码
+          //-   input#re_password.form-control(type='password', name='re_password', placeholder='')  
         .form-group
           .col-md-12
             label.pull-left
@@ -31,7 +67,6 @@ block content
           .col-md-12
             input.btn.btn-info.pull-left(type='submit', value='注册')
             a.pull-right(href='/signin') 已有账号直接登录
-
   .modal.fade#terms-modal(tabindex='-1', role='dialog', aria-labelledby='terms-modal-label', aria-hidden='true')
     .modal-dialog
       .modal-content

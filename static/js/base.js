@@ -209,7 +209,7 @@ $(function () {
     if(!localstorage.getItem("intro")){
       localstorage.setItem("intro", true);
     }
-    if(localstorage.intro==="true" && IsPC()){
+    if(localstorage.intro==="true"&& IsPC()){
       $('.guide').show();
       localstorage.intro = false;
     }
@@ -298,6 +298,39 @@ $(function () {
   $('.reflash').click(function(e){
     $('img.captcha').attr("src", "/getCaptcha?rnd="+Math.random());
   });
+  //获取短信验证码
+  var seed = 60;
+  var t1 = null;
+  $('#getSmsCode').click(function(e){
+    var phone = $("#phone").val();
+    var patt1 = new RegExp(/^(\+?0?86\-?)?1[345789]\d{9}$/);
+    if(!patt1.test(phone)){
+      alert("手机号不合规范，请输入11位中国大陆手机号！");
+      //setTimeout($("#phone"))
+      return
+    }
+    $.ajax({
+      'url': '/sms/' + phone,
+      'method': 'GET'
+    }).done(function (res) {
+      $("#getSmsCode").attr("disabled","disabled");
+      t1 = setInterval(tip,1000);
+    }).fail(function (resp) {
+      $()
+    });
+  });
+
+  function tip() {
+    seed--;
+    if (seed < 1) {
+      $("#getSmsCode").removeAttr("disabled").text("获取验证码");
+      seed = 60;
+      var t2 = clearInterval(t1);
+    } else {
+      $("#getSmsCode").text(seed+" s后重新发送");
+    }
+  }
+
   function IsPC() {
     var userAgentInfo = navigator.userAgent;
     var Agents = ["Android", "iPhone",

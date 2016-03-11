@@ -120,6 +120,37 @@ exports.findUserByEmail = function (email) {
 };
 
 /**
+ * Find user by phone
+ *
+ * @function
+ * @param {String} uid - user id
+ * @return {Promise} promise to perform a find action:
+ * <li>user found: resolve with user
+ * <li>user not found: resolve with undefine
+ * <li>error occur during find: reject with error
+ *
+ */
+exports.findUserByPhone = function (phone) {
+  return Q.Promise(function (resolve, reject) {
+    User
+      .findOne({'mobile_phone':phone})
+      .populate('fav_questions.question fav_answers.answer followings')
+      .exec(function (err, user) {
+        if (err) {
+          logger.error(err);
+          reject(err);
+        } else {
+          if (user) {
+            resolve(user);
+          } else {
+            resolve();
+          }
+        }
+      });
+  });
+};
+
+/**
  * Find user by id
  *
  * @function
