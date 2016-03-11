@@ -71,6 +71,9 @@
 	.span4 {
 	  width: 100%;
 	}
+  .cover {
+    display: none;
+  }
 }
 body{
   background: #e2e2e2 url('../images/background.png') repeat;
