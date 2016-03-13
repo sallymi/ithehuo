@@ -5,6 +5,7 @@ block content
   link(rel='stylesheet', href='/css/recruitments.css')
   script(src='/js/projects.js')
   script(src='/js/user.js')
+
   include search.jade
   .container-fluid.list-show
     .row.users
@@ -93,7 +94,7 @@ block content
                     br
                   | 请试试其他搜索吧......
                 each user in users
-                  if user.email
+                  if user.email || user.mobile_phone
                     li.col-md-12.portfolio-item
                       .media
                         .media-left.media-middle.col-md-3.col-xs-12
@@ -102,7 +103,7 @@ block content
                         .media-body.col-md-5.col-xs-12(onclick="location.href='/users/#{user._id}'")
                           h5.media-heading.mb10
                             a(href= '/users/' + user._id)
-                              strong= user.name?user.name:user.email.split('@')[0]
+                              strong=user.name?user.name:(user.email?user.email.split('@')[0]:"ID: "+user.id)
                             small= user.role
                           .small
                             strong='地址：'
@@ -118,6 +119,7 @@ block content
                                 each tag in user.work_experiences_tags
                                   span.tag.label.label-info=tag
                                   span= ' '
+
                         //- .media-body.col-md-4
                         //-   a.btn.btn-info.navbar-header#addFav(href='javascript:new_add_follow("#{signinUser.id}","#{user.id}","#{user.name}")')='关注'
                         //-   a.btn.btn-default.navbar-header#removeFav(style='display:none', href='javascript:remove_follow("#{signinUser.id}","#{user.id}","#{user.name}")')='取消关注'

@@ -38,6 +38,24 @@ exports.getUserEmail = function (req) {
 };
 
 /**
+ * Get user mobile phone from request session
+ *
+ * @function
+ * @param {Object} req - express http request
+ * @return {String | undefine} user email or undefine
+ *
+ */
+exports.getUserMobile = function (req) {
+  logger.debug('try to get user mobile from session');
+  logger.trace(req && req.session);
+  var mobile = req && req.session && req.session.user && req.session.user.mobile_phone;
+  logger.debug('user mobile: ' + mobile);
+  return mobile;
+};
+
+
+
+/**
  * Get user hometown
  *
  * @function

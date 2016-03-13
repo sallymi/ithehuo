@@ -1,6 +1,7 @@
 extends user_home_base
 block append script
   script(src='/js/user_home_setting_email.js')
+  script(src='/js/base.js')
   link(rel='stylesheet', href='/css/user_home_profile.css')
 block user_home_content
   .panel
@@ -8,24 +9,26 @@ block user_home_content
       span 设置 /
       span 修改邮箱
     .panel-body
-      form#settingEmailForm.form-horizontal
-       .form-group
+      form#settingMobileForm.form-horizontal
+        .form-group
           .col-md-2
-            label.control-label(for='curent_email') 当前邮箱
+            label.control-label(for='current_mobile') 当前号码
           .col-md-5
-            span=current_email?current_email:"还未设置邮箱"
+            span=current_mobile?current_mobile:"还未设置手机"
         .form-group
           .col-md-2
             font(color="red")='* '
-            label.control-label(for='email') 新邮箱
+            label.control-label(for='mobile') 新手机号码
           .col-md-5
-            input#email.form-control(type='email' name='email' required)
+            input#phone.form-control(type='mobile' name='mobile' required)
         .form-group
           .col-md-2
             font(color="red")='* '
-            label.control-label(for='email_verify') 确认新邮箱
-          .col-md-5
-            input#email_verify.form-control(type='email' name='email_verify' required)
+            label.control-label(for='email_verify') 验证码
+          .col-md-3
+            input#sms.form-control(type='sms', name='sms', placeholder='', value= sms required)
+          .col-md-2
+            a.btn.btn-info.pull-right#getSmsCode(style='color:white', href='javascript:;') 获取验证码
         .form-group
           .col-md-5.col-sm-offset-2
             span 修改邮箱操作需要输入用户密码

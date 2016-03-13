@@ -50,8 +50,8 @@ block navbar
               else
                 img(src='/images/smile.png')
               span.ellipsis
-                - var displayName = signinUser.name ? signinUser.name : signinUser.email.split('@')[0]
-                a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=displayName
+                - var dN = (signinUser.name ? signinUser.name : (signinUser.email ? signinUser.email.split('@')[0] : signinUser.mobile_phone))
+                a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=dN
                 ul.dropdown-menu(role="menu")
                   li
                     a(href='/home/recruitments') 我的小伙伴招募

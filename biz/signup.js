@@ -10,7 +10,7 @@ var config = require('../config');
 var resUtil = require('../utils/response');
 var crypto = require('../utils/crypto');
 var mailer = require('../utils/mail');
-var logger = require('../utils/log').getLogger('biz/sign');
+var logger = require('../utils/log').getLogger('biz/signup');
 var App = require('alidayu-node');
 var ccap = require('ccap-dev')({
   width: 120,
@@ -24,7 +24,7 @@ var ccap = require('ccap-dev')({
 });
 
 var capText = null;
-var smsText = null;
+global.smsText = null;
 function MathRandom(){
   var Num="";
   for(var i=0;i<6;i++)
@@ -39,7 +39,8 @@ exports.showSignupPage = function (req, res) {
 };
 exports.sms = function (req, res) {
   var phone = req.params.phone;
-  smsText = MathRandom();
+  global.smsText = MathRandom();
+  var smsText = global.smsText;
   logger.debug('get the phone number');
   logger.debug('the sms text is==='+smsText);
   var app = new App('23324086', '701378360789f40887a0db9905d11252');

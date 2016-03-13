@@ -257,6 +257,15 @@ $(function () {
   } 
   
   console.log(storage.reminder);
+  $('.lend_img1').on('click', function(){
+    $('.guide').hide();
+  });
+  $('.lend_img2').on('click', function(){
+    $('.guide').hide();
+  });
+  $('.lend_img3').on('click', function(){
+    $('.guide').hide();
+  });
   $('.lend_about').on('click', function(){
     $('.guide').hide();
   });

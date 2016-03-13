@@ -32,4 +32,5 @@ $(function(){
 		$(this).text(_text.substring(0,35)+'...');
 		}
 	});
+	
 });

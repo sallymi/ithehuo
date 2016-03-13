@@ -47,11 +47,31 @@ exports.index = function (req, res) {
  *
  */
 exports.userHome = function (req, res) {
-  logger.info('request received to user home - user profile page, requester email: ' + reqUtil.getUserEmail(req));
-  logger.info('will render user_home_profile page with the user in session');
-  resUtil.render(req, res, 'user_home_profile', {
-    title: '我的IT合伙人',
-  });
+  if(reqUtil.getUserEmail(req)&&reqUtil.getUserMobile(req)){
+    //already set email and phone
+    resUtil.render(req, res, 'user_home_profile', {
+      title: '我的IT合伙人',
+    });
+  }
+  else if(reqUtil.getUserEmail(req)){
+    //regester by email or already set email from setting page
+    logger.info('request received to user home - user profile page, requester email: ' + reqUtil.getUserEmail(req));
+    logger.info('will render user_home_profile page with the user in session');
+    resUtil.render(req, res, 'user_home_profile', {
+      regesterByEmail: true,
+      title: '我的IT合伙人',
+    });
+
+  }else if(reqUtil.getUserMobile(req)){
+    logger.info('request received to user home - user profile page, requester phone: ' + reqUtil.getUserMobile(req));
+    logger.info('will render user_home_profile page with the user in session');
+    resUtil.render(req, res, 'user_home_profile', {
+      regesterByPhoneNum: true,
+      title: '我的IT合伙人',
+    });
+    
+  }
+  
 };
 
 // 这是什么神奇的存在！ 完全不应该出现在这个地方啊

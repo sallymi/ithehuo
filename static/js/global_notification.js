@@ -37,6 +37,15 @@ var globalNotify = {
   }
 };
 
+var errorNotify = {
+  success: function (message) {
+    $('#global_notify_ctn').html(_fnCreateAlert('success', message));
+  },
+  failed: function (message) {
+    $('#global_notify_ctn').html(_fnCreateAlert('danger', message));
+  }
+};
+
 var messageNotify = {
   success: function (message) {
     $('#notification-container').html(_fnCreateAlert('success', message));
