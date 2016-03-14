@@ -311,6 +311,7 @@ $(function () {
   var seed = 60;
   var t1 = null;
   $('#getSmsCode').click(function(e){
+    console.log("here");
     var phone = $("#phone").val();
     var patt1 = new RegExp(/^(\+?0?86\-?)?1[345789]\d{9}$/);
     if(!patt1.test(phone)){

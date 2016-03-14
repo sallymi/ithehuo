@@ -107,6 +107,9 @@ exports.signin = function (req, res) {
       }
 
       logger.info('check if user password is correct');
+      logger.info("password==="+password);
+      logger.info("crypto password==="+crypto.md5(password));
+      logger.info("user password==="+user.password);
       if (crypto.md5(password) !== user.password) {
         logger.info('user password not correct, will return');
         resUtil.render(req, res, 'signin', {error: '您输入的账户或者密码不正确，请重新输入。'});
