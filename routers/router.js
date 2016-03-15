@@ -144,6 +144,9 @@ router.get('/home/settings/password', settings.changePasswordPage);
 router.put('/home/settings/password', settings.changePassword);
 router.get('/home/settings/email', settings.changeEmailPage);
 router.put('/home/settings/email', settings.changeEmail);
+router.get('/home/settings/mobile', settings.changeMobilePage);
+router.put('/home/settings/mobile', settings.changeMobile);
+
 // search
 router.get('/search', search.search);
 // admin routers

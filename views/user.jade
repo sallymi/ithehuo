@@ -13,7 +13,7 @@ block content
                 .col-md-3
                   img.img-responsive(src=user.logo_img?user.logo_img:'/images/portfolio/dog-160.png')
                 .col-md-9.description
-                  h3= user.name?user.name:user.email.split('@')[0]
+                  h3=displayName
                     small= user.status
                   .row
                     .col-md-4

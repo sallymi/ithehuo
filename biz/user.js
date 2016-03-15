@@ -168,8 +168,18 @@ exports.getUser = function (req, res) {
     logger.info(method, 'is signin user request target user as friend: ' + isRequested);
 
     logger.info(method, 'will render user page');
+    var displayName = '';
+    if(user.name) 
+      displayName = user.name;
+    else if(user.email){
+      displayName = user.email;
+    }else if(user.mobile_phone){
+      displayName = user.mobile_phone.toString().substring(0,3)+"****"+user.mobile_phone.toString().substring(8,11);
+    }
+    logger.debug(displayName);
     resUtil.render(req, res, 'user', {
       'user': user,
+      'displayName': displayName,
       'projects': projects,
       'isFollowed': isFollowing,
       'request': request,
