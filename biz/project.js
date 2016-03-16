@@ -186,6 +186,26 @@ exports.updateProject = function (req, res) {
 };
 
 /**
+ * Request handler for add project like
+ *
+ * @function
+ * @param req - express http request
+ * @param res - express http response
+ *
+ */
+exports.addProjectLike = function (req, res) {
+  logger.info('request received to add project like');
+  var pid = req.body.pid;
+  logger.info('try to find the project, pid: ' + pid);
+  projectProxy.addLike(pid).then(function () {
+    res.json('success');
+  }).fail(function (err) {
+    logger.error(err);
+    res.status(500).json(err);
+  });
+};
+
+/**
  * Request handler for user home - user projet list page
  *
  * @function

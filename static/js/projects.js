@@ -32,5 +32,22 @@ $(function(){
 		$(this).text(_text.substring(0,35)+'...');
 		}
 	});
-	
+	$('i.like').click(function(){
+		var id = this.id;
+		var self =this;
+		var curNum = Number(self.children[0].innerText);
+		$.ajax({
+			url:'/projects/addlike',
+			data: {'pid':id},
+			type: 'POST'
+		}).done(function (res){
+			//errorNotify.success(res)
+			console.log(self.children[0].innerText);
+			console.log("点赞成功");
+			self.children[0].innerText = ++curNum;
+		}).fail(function (err) {
+			//errorNotify.failed(err)
+			console.log("点赞失败！")
+		});
+	})
 });

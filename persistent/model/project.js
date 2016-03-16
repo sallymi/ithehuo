@@ -39,6 +39,15 @@ var schema = new Schema({
     'default': false
   },
   /**
+   * 是否是hot项目
+   * true: 是
+   * false: 否
+   */
+  'like': {
+    'type': Number,
+    'default': 0
+  },
+  /**
    * 创建时间，项目创建时自动添加系统时间
    */
   'creation_time': {

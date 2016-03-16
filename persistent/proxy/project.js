@@ -441,3 +441,32 @@ exports.search = function (key) {
     );
   });
 };
+
+/**
+ * Update project like field
+ *
+ * @function
+ * @param {String} pid - project id
+ * @return {Promise} promise to update the like field
+ * <li>success: resolve with undefined
+ * <li>failed: reject with the error
+ *
+ */
+exports.addLike = function (pid) {
+  return Q.Promise(function (resolve, reject) {
+
+    Project.update({
+      '_id': pid
+    }, {
+      $inc: {
+        'like': 1
+      }
+    }, function (err) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+};

@@ -491,3 +491,12 @@ img {
     top: 308px;
     z-index: 12002;
 }
+.like {
+  position: absolute;
+  right: 3rem;
+  top: 0.5rem;
+}
+.like-number {
+  position: absolute;
+  right: -1rem;
+}
