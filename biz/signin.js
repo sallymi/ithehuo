@@ -12,9 +12,6 @@ var crypto = require('../utils/crypto');
 var logger = require('../utils/log').getLogger('biz/signin.js');
 var mailer = require('../utils/mail');
 var Q = require('q');
-var request = require('request');
-var REQ_GET = Q.nfbind(request.get);
-var config = require('../config');
 var signUp = require('./signup');
 exports.showSigninPage = function (req, res) {
 
