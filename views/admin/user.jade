@@ -7,6 +7,7 @@ block content
   table.table.table-condensed.table-bordered#user-table
     thead
       tr
+        th 序号
         th 头像
         th 姓名
         th 是否激活
@@ -17,8 +18,9 @@ block content
         th 操作
     tbody
       if users
-        each user in users
+        each user, key in users
           tr.user(uid= user.id)
+            td=key+1
             td.small
               img(src=user.logo_img height='40px')
             td= user.name

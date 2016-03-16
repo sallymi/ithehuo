@@ -299,8 +299,8 @@ exports.changeMobile = function (req, res) {
    return;
  }
     logger.info('[pass]');
-   logger.debug('check if sms is valid, sms: ' +  sms + ' with globalsmsText:'+global.smsText);
-   if (global.smsText!=sms) {
+   logger.debug('check if sms is valid, sms: ' +  sms + ' with globalsmsText:'+global.smsMap[newMobile]);
+   if (global.smsMap[newMobile]!=sms) {
     logger.info('[failed] will response with error message');
      resUtil.errJson(res, '验证码不正确', null, 406);
      return;

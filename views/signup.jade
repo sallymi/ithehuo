@@ -10,6 +10,8 @@ block content
       if (success)
         .alert.alert-success
           strong= success
+          if (action)
+            a(href=action) 前往
       else
         if(error)
           .alert.alert-danger

@@ -45,6 +45,7 @@ router.get('/construct', index.construct);
 //forgot password
 router.get('/forgot-password', signin.showForgotPassword);
 router.post('/reset-password', signin.resetPassword);
+router.post('/reset-mobile-password/:phone',signin.resetMobilePassword);
 // user
 router.get('/users', user.getUsers);
 router.get('/users/:uid', user.getUser);
@@ -152,5 +153,23 @@ router.put('/home/settings/mobile', settings.changeMobile);
 router.get('/search', search.search);
 // admin routers
 router.use('/admin', adminRouter);
+
+
+router.get('*', function (req, res, next) {
+    res.redirect('/')
+});
+
+router.post('*', function (req, res, next) {
+    res.render('error');
+});
+
+router.put('*', function (req, res, next) {
+    res.render('error');
+});
+
+router.delete('*', function (req, res, next) {
+    res.render('error');
+});
+
 
 module.exports = router;

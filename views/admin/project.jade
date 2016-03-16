@@ -7,18 +7,22 @@ block content
   table.table.table-condensed.table-bordered#project-table
     thead
       tr
+        th 序号
         th 图表
         th 名称
         th slogan
+        th 登记时间
         th 操作
     tbody
       if projects
-        each project in projects
+        each project,key in projects
           tr.project(pid= project.id)
+            td=key+1
             td.small
               img(src=project.logo_img height='40px')
             td= project.name
             td= project.keyword
+            td= moment(project.creation_time).format('YYYY/MM/DD')
             td.small
               //- add hot button
               if project.recruitments && project.recruitments.length > 0

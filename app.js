@@ -17,7 +17,6 @@ var app = express();
 
 app.set('view engine', 'jade');
 app.locals.moment = require('moment');
-console.log(process.env);
 
 /*
  * middlewares

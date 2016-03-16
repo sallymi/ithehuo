@@ -19,7 +19,7 @@ block content
             img.img-responsive.center-block(src='images/team.png', alt='')
         .row
           if signinUser
-            button.btn.btn-warning.center-block(onclick='window.location.href="/users"')  立刻寻找创业伙伴
+            button.btn.btn-warning.center-block(onclick='window.location.href="/users"')  立刻发布合伙人招募
           else
             button.btn.btn-warning.center-block(onclick='window.location.href="/signin"')  立刻开启你的创业梦想
   <!--IT人-->
@@ -193,7 +193,7 @@ block content
                     span 查找招募信息，找到合适的创始人和创业项目
             .row
               .col-sm-5.col-sm-offset-1
-                button.btn.btn-warning.center-block(onclick='window.location.href="/projects"')  立刻寻找创业项目
+                button.btn.btn-warning.center-block(onclick='window.location.href="/projects"')  立刻加入创业项目
               
   each item in hots
     include project_detail

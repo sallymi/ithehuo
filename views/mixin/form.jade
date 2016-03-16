@@ -3,7 +3,14 @@ mixin radio(name, value, checkedValue, required, displayName)
     - var checked = (value === String(checkedValue)) ? true : false
     input(type='radio', name=name, value=value, checked=checked, required=required)
     = displayName? displayName : value
-
+mixin radio_input(name, value, checkedValue, required, displayName)
+  .col-xs-12.col-sm-12.col-md-4(style="text-align: left;")
+    label.radio-inline
+      - var checked = (value === String(checkedValue)) ? true : false
+      input(type='radio', name=name, value=value, checked=checked, required=required)
+      = displayName? displayName : value
+  .col-xs-12.col-sm-12.col-md-8
+    input.form-control(type='text', name=value)
 mixin option(value, selectedValue, name)
   - var selected = (value === selectedValue) ? true : false
   option(value=value, selected=selected)= name ? name : value

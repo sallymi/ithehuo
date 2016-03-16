@@ -24,7 +24,7 @@ var ccap = require('ccap-dev')({
 });
 
 var capText = null;
-global.smsText = null;
+global.smsMap = {};
 function MathRandom(){
   var Num="";
   for(var i=0;i<6;i++)
@@ -37,13 +37,25 @@ exports.showSignupPage = function (req, res) {
   resUtil.render(req, res, 'signup');
 
 };
-exports.sms = function (req, res) {
-  var phone = req.params.phone;
-  global.smsText = MathRandom();
-  var smsText = global.smsText;
+exports.sms = function (req, res, next) {
+  var registry = req.body.registry;
+  var phone = req.params.phone?req.params.phone:req.body.phone;
+  var smsText = MathRandom();
   logger.debug('get the phone number');
   logger.debug('the sms text is==='+smsText);
   var app = new App('23324086', '701378360789f40887a0db9905d11252');
+  // global.smsMap[phone]=smsText;
+  // logger.debug(global.smsMap);
+
+  // if(registry){
+  //   //更改密码
+  //   next({success:true})
+  // }else{
+  //   //注册
+  //   resUtil.okJson(res, '已发送');
+  // }
+  
+
   app.smsSend({
       sms_free_sign_name: '注册验证', //短信签名，参考这里 http://www.alidayu.com/admin/service/sign
       sms_param: JSON.stringify({"code": smsText, "product": "［IT合伙人］"}),//短信变量，对应短信模板里面的变量
@@ -51,7 +63,15 @@ exports.sms = function (req, res) {
       sms_template_code: 'SMS_5495196' //短信模板，参考这里 http://www.alidayu.com/admin/service/tpl
   }, function(result){
     logger.debug(result);
-    resUtil.okJson(res, '已发送');
+    global.smsMap[phone]=smsText;
+    logger.debug(global.smsMap);
+    if(registry){
+      //更改密码
+      next({success:true})
+    }else{
+      //注册
+      resUtil.okJson(res, '已发送');
+    }
   });
   
 };
@@ -60,6 +80,8 @@ exports.captcha = function (req, res) {
     capText= ary[0];
     var buf = ary[1];
     logger.debug("now ccap is==="+capText);
+    req.session.capText = capText;
+    logger.debug(req.session.capText);
     res.set('Content-Type', 'image/jpeg');
     res.send(buf);
 };
@@ -74,7 +96,7 @@ exports.signup = function (req, res) {
 
    if(email){
      logger.debug('check if email, password and re_password are all set');
-     if (email === '' || pass === '' || re_pass === '') {
+     if (email === '' || pass === '') {
        resUtil.render(req, res, 'signup', {error: '信息不完整。', email: email});
        return;
      }
@@ -129,13 +151,14 @@ exports.signup = function (req, res) {
        resUtil.render(req, res, 'signup', {error: '不正确的手机号。', phone: phone});
        return;
      }
-     logger.debug('check if captcha is valid, captcha: ' +  captcha + ' with generated Code '+capText);
-     if (capText.toLowerCase()!=captcha.toLowerCase()) {
+     logger.debug('check if captcha is valid, captcha: ' +  captcha + ' with generated Code '+req.session.capText);
+     if (req.session.capText.toLowerCase()!=captcha.toLowerCase()) {
        resUtil.render(req, res, 'signup', {error: '图形验证码不正确。', captcha: captcha});
        return;
      }
-     logger.debug('check if sms is valid, captcha: ' +  sms);
-     if (smsText!=sms) {
+     logger.debug('check if sms is valid, smsText: ' +  sms);
+     logger.debug(global.smsMap);
+     if (global.smsMap[phone]!=sms) {
        resUtil.render(req, res, 'signup', {error: '手机验证码不正确。', sms: sms});
        return;
      }
