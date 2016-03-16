@@ -3,6 +3,9 @@ var config = {
   host: 'ithehuo.com',
   admin: ['sallymi_82@126.com','jiaji1104@126.com','liubaoshu@helloworld-cafe.com', 'vincevenwang@163.com','wswjylq@163.com'],
   secret: 'SVTlkIjkvJnkuro=',
+  ITHEHUO_SERVICE_PRODUCTION: 'http://ithehuo.com/',
+  ITHEHUO_SERVICE_DEVELOPEMNT: 'http://localhost:8005/',
+  ITHEHUO_SERVICE_QA:'http://ithehuo.com:8005/',
   mailer: {
     host: 'smtp.126.com',
     port: 25,
