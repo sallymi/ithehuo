@@ -37,26 +37,42 @@ exports.showSignupPage = function (req, res) {
   resUtil.render(req, res, 'signup');
 
 };
-exports.sms = function (req, res) {
-  var phone = req.params.phone;
+exports.sms = function (req, res, next) {
+  var registry = req.body.registry;
+  var phone = req.params.phone?req.params.phone:req.body.phone;
   var smsText = MathRandom();
   logger.debug('get the phone number');
   logger.debug('the sms text is==='+smsText);
   var app = new App('23324086', '701378360789f40887a0db9905d11252');
-  // global.smsMap[phone]=smsText;
-  // logger.debug(global.smsMap);
-  // resUtil.okJson(res, '已发送');
-  app.smsSend({
-      sms_free_sign_name: '注册验证', //短信签名，参考这里 http://www.alidayu.com/admin/service/sign
-      sms_param: JSON.stringify({"code": smsText, "product": "［IT合伙人］"}),//短信变量，对应短信模板里面的变量
-      rec_num: phone, //接收短信的手机号
-      sms_template_code: 'SMS_5495196' //短信模板，参考这里 http://www.alidayu.com/admin/service/tpl
-  }, function(result){
-    logger.debug(result);
-    global.smsMap[phone]=smsText;
-    logger.debug(global.smsMap);
+  global.smsMap[phone]=smsText;
+  logger.debug(global.smsMap);
+
+  if(registry){
+    //更改密码
+    next({success:true})
+  }else{
+    //注册
     resUtil.okJson(res, '已发送');
-  });
+  }
+  
+
+  // app.smsSend({
+  //     sms_free_sign_name: '注册验证', //短信签名，参考这里 http://www.alidayu.com/admin/service/sign
+  //     sms_param: JSON.stringify({"code": smsText, "product": "［IT合伙人］"}),//短信变量，对应短信模板里面的变量
+  //     rec_num: phone, //接收短信的手机号
+  //     sms_template_code: 'SMS_5495196' //短信模板，参考这里 http://www.alidayu.com/admin/service/tpl
+  // }, function(result){
+  //   logger.debug(result);
+  //   global.smsMap[phone]=smsText;
+  //   logger.debug(global.smsMap);
+  //   if(registry){
+  //     //更改密码
+  //     next({success:true})
+  //   }else{
+  //     //注册
+  //     resUtil.okJson(res, '已发送');
+  //   }
+  // });
   
 };
 exports.captcha = function (req, res) {

@@ -15,7 +15,7 @@ var Q = require('q');
 var request = require('request');
 var REQ_GET = Q.nfbind(request.get);
 var config = require('../config');
-
+var signUp = require('./signup');
 exports.showSigninPage = function (req, res) {
 
   logger.info('check if redirect url is provided');
@@ -201,23 +201,15 @@ exports.resetPassword = function (req, res) {
        resUtil.render(req, res, 'forgot_password', {error: '图形验证码不正确。', captcha: captcha});
        return;
      }
-
-     var options = {
-          url: 'http://localhost:8005/sms/'+phone,
-          method: 'get',
-          headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-          }
-      };
-      REQ_GET(options).then(function (data) {
-        resUtil.render(req, res, 'confirm_mobile_pass_reset',{
-          phone: req.body.phone
-        });
-      }).fail(function (err) {
-          logger.error(err);
-          resUtil.render(req, res, 'confirm_mobile_pass_reset', {error: err, phone: phone});
-      });   
+     signUp.sms(req,res,function(data){
+        if(data.success){
+          resUtil.render(req, res, 'confirm_mobile_pass_reset',{
+            phone: req.body.phone
+          });
+        }else{
+          resUtil.render(req, res, 'confirm_mobile_pass_reset', {error: data.msg, phone: phone});
+        }
+     }); 
   }
   else{
     var email = req.body.email;
@@ -342,13 +334,4 @@ exports.resetMobilePassword = function (req, res) {
     logger.info(phone);
     
   
-}
-
-function _getServer(env) {
-  if(env=='development')
-    return config.get("ITHEHUO_SERVICE_DEVELOPEMNT");
-  else if(env=='qa')
-    return config.get("ITHEHUO_SERVICE_QA");
-  else
-    return config.get("ITHEHUO_SERVICE_PRODUCTION");
 }
