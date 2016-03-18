@@ -518,4 +518,71 @@ $(document).ready(function(){
   //   });
   //   $('#filed').parent().css('display','block');
   // }
+  if (window.File && window.FileReader && window.FileList && window.Blob){
+//Blob是计算机界通用术语之一，全称写作：BLOB (binary large object)，表示二进制大对象。
+    //全部支持
+    function handleFileSelect(evt) {
+      var files = evt.target.files, f = files[0];
+      if (!/image\/\w+/.test(f.type)){
+        alert("请确保文件为图像类型");
+        return false;
+      }
+      var reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+          var show_pic = document.getElementById("show_pic");
+          var preview = document.getElementById("preview");
+          show_pic.src = e.target.result;
+          preview.src = e.target.result;
+        };
+      })(f);
+      reader.readAsDataURL(f);
+    }
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+  }else {
+    alert('该浏览器不全部支持File APIs的功能');
+  }
+  $('#show_pic').load(function(){
+    var jcrop_api,
+        boundx,
+        boundy,
+
+    // Grab some information about the preview pane
+        $preview = $('#preview-pane'),
+        $pcnt = $('#preview-pane .preview-container'),
+        $pimg = $('#preview-pane .preview-container img'),
+
+        xsize = $pcnt.width(),
+        ysize = $pcnt.height();
+    $('#show_pic').Jcrop({
+      onChange: updatePreview,
+      onSelect: updatePreview,
+      aspectRatio: 1
+    },function(){
+      // Use the API to get the real image size
+      var bounds = this.getBounds();
+      boundx = bounds[0];
+      boundy = bounds[1];
+      // Store the API in the jcrop_api variable
+      jcrop_api = this;
+
+      // Move the preview into the jcrop container for css positioning
+      $preview.appendTo(jcrop_api.ui.holder);
+    });
+    function updatePreview(c) {
+      if (parseInt(c.w) > 0) {
+        var rx = xsize / c.w;
+        var ry = ysize / c.h;
+
+        $pimg.css({
+          width: Math.round(rx * boundx) + 'px',
+          height: Math.round(ry * boundy) + 'px',
+          marginLeft: '-' + Math.round(rx * c.x) + 'px',
+          marginTop: '-' + Math.round(ry * c.y) + 'px'
+        });
+      }
+    };
+
+    //todo onsubmit 向后台提交 以及后台处理保存 以及CSS调样式
+  });
 })

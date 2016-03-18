@@ -5,6 +5,7 @@ block append link
 block append script
 
   script(src='/javascripts/jquery-ui.min.js')
+  script(src='/javascripts/jquery.Jcrop.min.js')
   script(src='/javascripts/jquery.tag-editor.min.js')
   script(type='text/javascript',src='/javascripts/typeahead.bundle.js')
   script(type='text/javascript',src='/javascripts/handlebars-v3.0.3.js')
@@ -15,7 +16,7 @@ block user_home_content
     .panel-heading.c-insetC-header 我的信息
     .panel-body
       form#userProfileForm.form-horizontal
-        .col-lg-9
+        .col-lg-7
           .row.form-group
             .col-xs-12.col-sm-4
               font(color="red")='* '
@@ -151,6 +152,7 @@ block user_home_content
             h4='头像'
             img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
             button.btn.btn-primary(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+            button.btn.btn-primary(type='button' data-toggle='modal', data-target='.user-logo-upload') 本地上传
         .dashline
       //- .row
       //-   .form-group.col-xs-12.text-center
@@ -197,4 +199,22 @@ block user_home_content
           .col-xs-6.col-md-3
             a.thumbnail(href='#')
               img(src='/images/avatars/profile.png')
+        .modal-footer
+  .modal.fade.user-logo-upload(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
+    .modal-dialog.model-sm
+      .modal-content
+        a.closeBtn(href='#', data-dismiss='modal') X
+        h1.margin-bottom-15
+        .modal-body
+          form#uploadImg
+            input#files(type='file', name='files[]', multiple='')
+            input.btn.btn-primary(type='submit' value='提交')
+            input#x(type='hidden', name='x')
+            input#y(type='hidden', name='y')
+            input#w(type='hidden', name='w')
+            input#h(type='hidden', name='h')
+            img#show_pic(src='')
+            #preview-pane
+              .preview-container
+                img.jcrop-preview#preview(src='', alt='Preview')
         .modal-footer
