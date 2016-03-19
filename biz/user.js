@@ -16,6 +16,10 @@ var filterUtil = require('../utils/filter');
 var logger = require('../utils/log').getLogger('biz/user.js');
 var friendUtil = require('../utils/friendutil');
 var User = require('../persistent/model/user');
+var gm = require('gm');
+var fs = require('fs');
+var formidable = require('formidable');
+var path = require('path');
 
 /**
  * Request handler for user list page
@@ -231,6 +235,135 @@ exports.updateUser = function (req, res) {
     logger.error(err);
     resUtil.render(req, res, 'error', err);
   });
+};
+
+/**
+ * Request handler to update a user's avatar
+ *
+ * @function
+ * @param req - express http request
+ * @param res - express http response
+ *
+ */
+exports.updateAvatar = function (req, res) {
+  logger.debug('request received to update a users avatar');
+  var form = new formidable.IncomingForm();
+  //var imageMagick = gm.subClass({ imageMagick : true});
+  //这里formidable会对upload的对象进行解析和处理
+  var IMG_PATH = path.resolve(__dirname,'../public/images/upload_avatars');
+  logger.debug()
+  form.parse(req, function(err, fields, files) {
+    logger.debug(fields)
+    logger.debug(files)
+    var width = fields.w;
+    var height = fields.h;
+    var x = fields.x;
+    var y = fields.y;
+    var uid = fields.uid;
+    var imgPath = files.file.path;
+    logger.debug("img imgPath====="+imgPath);
+    var sz = files.file.size;
+    if(sz > 2*1024*1024){
+        logger.debug('image is out of size')
+        fs.unlink(imgPath, function() {	//fs.unlink 删除用户上传的文件
+          res.end('1');
+        });
+    } else if (files.file.type.split('/')[0] != 'image') {
+      logger.debug('file is not image')
+      fs.unlink(imgPath, function() {
+        res.end('2');
+      });
+    } else {
+      var filetype = files.file.type.split('/')[1];
+      gm(imgPath)
+            //.resize(150, 150, '!') //加('!')强行把图片缩放成对应尺寸150*150！
+            .crop(width, height, x, y)
+            //.autoOrient()
+            .write(path.resolve(IMG_PATH,uid+"."+filetype), function(err){
+              if (err) {
+                console.log(err);
+                res.end();
+              }
+              var src_path = '/images/upload_avatars/'+uid+"."+filetype;
+              userProxy.findUserById(uid).then(function (user) {
+                logger.debug('bellow user found will update the user object');
+                logger.debug(user);
+                user['logo_img'] = src_path;
+                logger.debug('user updated, bellow is the updated user');
+                logger.debug(user);
+                logger.debug('try to persistent the updated user');
+                return userProxy.saveUser(user);
+              }).then(function (u) {
+                logger.debug('user persistented, will store the persistented user to session and response with 200');
+                req.session.user = u.toObject();
+                res.status(200).end();
+              }).fail(function (err) {
+                logger.error('failed to persistent the updated user due to bellow error, will render error page with the bellow error');
+                logger.error(err);
+                resUtil.render(req, res, 'error', err);
+              });
+              fs.unlink(imgPath, function() {
+                return res.end('3');
+              });
+            });
+      }
+  });
+
+
+  //var path = req.files.img.path;
+  //res.end('ok');
+  //var sz = req.files.img.size;
+  //logger.debug(req.body);
+  //if(sz > 1024*1024){
+  //  logger.debug('image is out of size')
+  //  fs.unlink(path, function() {	//fs.unlink 删除用户上传的文件
+  //    res.end('1');
+  //  });
+  //}else if (req.files.img.type.split('/')[0] != 'image') {
+  //  logger.debug('file is not image')
+  //  fs.unlink(path, function() {
+  //    res.end('2');
+  //  });
+  //} else {
+  //  imageMagick(path)
+  //      .resize(150, 150, '!') //加('!')强行把图片缩放成对应尺寸150*150！
+  //      //.crop(width, height, x, y)
+  //      .autoOrient()
+  //      .write('public/images/user/'+req.files.img.name, function(err){
+  //        if (err) {
+  //          console.log(err);
+  //          res.end();
+  //        }
+  //        fs.unlink(path, function() {
+  //          return res.end('3');
+  //        });
+  //      });
+  //}
+  //var userUpdate = req.body;
+  //logger.debug('bellow is the user update');
+  //logger.debug(userUpdate);
+  //
+  //logger.debug('try find user in db and then update');
+  //userProxy.findUserById(uid).then(function (user) {
+  //  logger.debug('bellow user found will update the user object');
+  //  logger.debug(user);
+  //  var key;
+  //  for (key in userUpdate) {
+  //    user[key] = userUpdate[key];
+  //  }
+  //  logger.debug('user updated, bellow is the updated user');
+  //  logger.debug(user);
+  //  logger.debug('try to persistent the updated user');
+  //  return userProxy.saveUser(user);
+  //}).then(function (u) {
+  //  logger.debug('user persistented, will store the persistented user to session and response with 200');
+  //  req.session.user = u.toObject();
+  //  res.status(200).end();
+  //}).fail(function (err) {
+  //  logger.error('failed to persistent the updated user due to bellow error, will render error page with the bellow error');
+  //  logger.error(err);
+  //  resUtil.render(req, res, 'error', err);
+  //});
 };
 
 /**

@@ -210,7 +210,6 @@ exports.updateActive = function (uid, value) {
   });
 };
 
-
 /**
  * Save user
  *

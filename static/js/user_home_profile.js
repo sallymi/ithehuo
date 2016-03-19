@@ -557,15 +557,12 @@ $(document).ready(function(){
     $('#show_pic').Jcrop({
       onChange: updatePreview,
       onSelect: updatePreview,
-      aspectRatio: 1
+      aspectRatio: 1,
+      setSelect: [ 0, 0, 100, 100 ]
     },function(){
       // Use the API to get the real image size
-      var bounds = this.getBounds();
-      boundx = bounds[0];
-      boundy = bounds[1];
       // Store the API in the jcrop_api variable
       jcrop_api = this;
-
       // Move the preview into the jcrop container for css positioning
       $preview.appendTo(jcrop_api.ui.holder);
     });
@@ -573,7 +570,10 @@ $(document).ready(function(){
       if (parseInt(c.w) > 0) {
         var rx = xsize / c.w;
         var ry = ysize / c.h;
-
+        $('#x').val(c.x);
+        $('#y').val(c.y);
+        $('#w').val(c.w);
+        $('#h').val(c.h);
         $pimg.css({
           width: Math.round(rx * boundx) + 'px',
           height: Math.round(ry * boundy) + 'px',
@@ -582,7 +582,34 @@ $(document).ready(function(){
         });
       }
     };
+    $('#submit').click(function(){
+      var data = new FormData();
+      var files = $('#files')[0].files;
+      console.log(files)
+      var uid = $('#uid').val();
+      if(files){
+        //data.append('uid',)
+        data.append('file',files[0]);
+        data.append('x',$('#x').val());
+        data.append('y',$('#y').val());
+        data.append('w',$('#w').val());
+        data.append('h',$('#h').val());
+        data.append('uid',uid);
+      }
+      var url = '/users/avatar/upload';
+      $.ajax({
+        type:'POST',
+        url: url,
+        data:data,
+        contentType:false,
+        processData:false,
+      }).success(function(res){
+        console.log(JSON.stringify(res))
+      }).fail(function(res){
+        console.log(JSON.stringify(res))
+      })
 
+    })
     //todo onsubmit 向后台提交 以及后台处理保存 以及CSS调样式
   });
 })

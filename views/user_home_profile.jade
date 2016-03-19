@@ -207,8 +207,7 @@ block user_home_content
         h1.margin-bottom-15
         .modal-body
           form#uploadImg
-            input#files(type='file', name='files[]', multiple='')
-            input.btn.btn-primary(type='submit' value='提交')
+            input#files(type='file', name='img', multiple='')
             input#x(type='hidden', name='x')
             input#y(type='hidden', name='y')
             input#w(type='hidden', name='w')
@@ -217,4 +216,9 @@ block user_home_content
             #preview-pane
               .preview-container
                 img.jcrop-preview#preview(src='', alt='Preview')
+            button.btn.btn-default(type='button', data-dismiss='modal')
+            | 关闭
+            button#submit.btn.btn-primary(type='button')
+            | 提交更改
+
         .modal-footer
