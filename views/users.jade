@@ -103,7 +103,7 @@ block content
                         .media-body.col-md-5.col-xs-12(onclick="location.href='/users/#{user._id}'")
                           h5.media-heading.mb10
                             a(href= '/users/' + user._id)
-                              strong=user.name?user.name:(user.email?user.email.split('@')[0]:"ID: "+user.id)
+                              strong=user.name?user.name:(user.email?user.email.split('@')[0]:(user.mobile_phone?user.mobile_phone.toString().substring(0,3)+"****"+user.mobile_phone.toString().substring(8,11):"ID:"+user.id))
                             small= user.role
                           .small
                             strong='地址：'

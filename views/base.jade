@@ -50,7 +50,7 @@ block navbar
               else
                 img(src='/images/smile.png')
               span.ellipsis
-                - var dN = (signinUser.name ? signinUser.name : (signinUser.email ? signinUser.email.split('@')[0] : signinUser.mobile_phone))
+                - var dN = (signinUser.name ? signinUser.name : (signinUser.email ? signinUser.email.split('@')[0] : signinUser.mobile_phone.toString().substring(0,3)+"****"+signinUser.mobile_phone.toString().substring(8,11)))
                 a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=dN
                 ul.dropdown-menu(role="menu")
                   li
