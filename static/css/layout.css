@@ -49,6 +49,13 @@
 	  width: 30.623931623931625%;
 	  margin-left: 2.564102564102564%;
 	}
+  .navbar-collapse.for-large {
+    display: block;
+  }
+  .navbar-collapse.for-small {
+    display: none;
+  }
+  
 }
 @media(max-width:767px) {
 
@@ -73,6 +80,12 @@
 	}
   .cover {
     display: none;
+  }
+  .navbar-collapse.for-large {
+    display: none;
+  }
+  .navbar-collapse.for-small {
+    display: block;
   }
 }
 body{
