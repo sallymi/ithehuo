@@ -7,6 +7,7 @@
 var validator = require('validator');
 var userProxy = require('../persistent/proxy/user');
 var config = require('../config');
+var sms_config = config.sms.production;
 var resUtil = require('../utils/response');
 var crypto = require('../utils/crypto');
 var mailer = require('../utils/mail');
@@ -40,12 +41,28 @@ exports.showSignupPage = function (req, res) {
 exports.sms = function (req, res, next) {
   var registry = req.body.registry;
   var phone = req.params.phone?req.params.phone:req.body.phone;
+  var type = req.body.type;
   var smsText = MathRandom();
   logger.debug('get the phone number');
   logger.debug('the sms text is==='+smsText);
-  var app = new App('23324086', '701378360789f40887a0db9905d11252');
+  //var app = new App('23324086', '701378360789f40887a0db9905d11252');
+  var app = new App(sms_config.ID,sms_config.Key);
+  var template="";
+  var sign_name="";
+  switch (type) {
+    case 'resetPwd':
+      sign_name=sms_config.resetPwd.sign_name;
+      template=sms_config.resetPwd.template;
+      //sign_name='变更验证';
+      break;
+    default:
+      sign_name=sms_config.default.sign_name;
+      template=sms_config.default.template;
+      //sign_name='注册验证';
+  }
   // global.smsMap[phone]=smsText;
   // logger.debug(global.smsMap);
+  // logger.debug(sign_name, template);
 
   // if(registry){
   //   //更改密码
@@ -54,13 +71,12 @@ exports.sms = function (req, res, next) {
   //   //注册
   //   resUtil.okJson(res, '已发送');
   // }
-  
-
+  logger.debug(sign_name, template);
   app.smsSend({
-      sms_free_sign_name: '注册验证', //短信签名，参考这里 http://www.alidayu.com/admin/service/sign
+      sms_free_sign_name: sign_name, //短信签名，参考这里 http://www.alidayu.com/admin/service/sign
       sms_param: JSON.stringify({"code": smsText, "product": "［IT合伙人］"}),//短信变量，对应短信模板里面的变量
       rec_num: phone, //接收短信的手机号
-      sms_template_code: 'SMS_5495196' //短信模板，参考这里 http://www.alidayu.com/admin/service/tpl
+      sms_template_code: template//'SMS_5495196' //短信模板，参考这里 http://www.alidayu.com/admin/service/tpl
   }, function(result){
     logger.debug(result);
     global.smsMap[phone]=smsText;

@@ -198,6 +198,7 @@ exports.resetPassword = function (req, res) {
        resUtil.render(req, res, 'forgot_password', {error: '图形验证码不正确。', captcha: captcha});
        return;
      }
+     req.body.type="resetPwd";
      signUp.sms(req,res,function(data){
         if(data.success){
           resUtil.render(req, res, 'confirm_mobile_pass_reset',{
