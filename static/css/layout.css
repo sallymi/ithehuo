@@ -55,7 +55,7 @@
   .navbar-collapse.for-small {
     display: none;
   }
-  
+
 }
 @media(max-width:767px) {
 
@@ -80,6 +80,9 @@
 	}
   .cover {
     display: none;
+  }
+  .lend_img1, .lend_img2, .lend_img3 {
+    display: none
   }
   .navbar-collapse.for-large {
     display: none;
