@@ -284,7 +284,7 @@ exports.updateAvatar = function (req, res) {
             userProxy.findUserById(uid).then(function (user) {
               logger.debug('bellow user found will update the user object');
               logger.debug(user);
-              if(user['logo_img']&&user['logo_img'].includes('upload')){
+              if(user['logo_img']&&user['logo_img'].indexOf('upload')!==-1){
                 fs.unlink(path.resolve(__dirname,'../public'+user['logo_img']),function(err){
                   logger.error(err)
                 });
