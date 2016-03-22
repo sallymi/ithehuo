@@ -61,3 +61,19 @@ input.radiocheck+label.full:after, input.radiocheck+label.full:before {
     border-bottom: 1px dashed #e0e0e0;
     margin:15px -15px 15px 100px;
 }
+
+.user-logo-upload .modal-dialog{
+  width: 40rem;
+}
+.user-logo-upload .modal-body{
+  height: 43rem;
+}
+#show_pic {
+  width: 400px;
+  height: 400px;
+}
+
+#uploadButton{
+  display: inline-block;
+  margin-left: 2rem;
+}

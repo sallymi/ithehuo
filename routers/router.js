@@ -50,6 +50,7 @@ router.post('/reset-mobile-password/:phone',signin.resetMobilePassword);
 router.get('/users', user.getUsers);
 router.get('/users/:uid', user.getUser);
 router.put('/users/:uid', user.updateUser);
+router.post('/users/avatar/upload',user.updateAvatar);
 // following
 router.get('/home/followings', user.myFollowings);
 router.post('/followings', user.addFollowing);

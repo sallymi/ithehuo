@@ -518,4 +518,82 @@ $(document).ready(function(){
   //   });
   //   $('#filed').parent().css('display','block');
   // }
+  var show_pic = $('#show_pic');
+  var jcrop_api;
+  if (window.File && window.FileReader && window.FileList && window.Blob){
+//Blob是计算机界通用术语之一，全称写作：BLOB (binary large object)，表示二进制大对象。
+    //全部支持
+    function handleFileSelect(evt) {
+      var files = evt.target.files, f = files[0];
+      if (!/image\/\w+/.test(f.type)){
+        alert("请确保文件为图像类型");
+        return false;
+      }
+      var reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+          show_pic.attr('src',e.target.result);
+          if(jcrop_api!=undefined){
+            jcrop_api.setImage(e.target.result);
+          }else{
+            show_pic.trigger('click');
+          }
+        };
+      })(f);
+      reader.readAsDataURL(f);
+    }
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+  }else {
+    alert('该浏览器不全部支持File APIs的功能');
+  }
+  show_pic.click(function(){
+    show_pic.Jcrop({
+        onChange: updateXYWH,
+        onSelect: updateXYWH,
+        aspectRatio: 1,
+        setSelect: [ 0, 0, 100, 100 ]
+      },function(){
+        jcrop_api = this;
+      });
+      function updateXYWH(c) {
+        if (parseInt(c.w) > 0) {
+          $('#x').val(c.x);
+          $('#y').val(c.y);
+          $('#w').val(c.w);
+          $('#h').val(c.h);
+        }
+      };
+  });
+  $('#submit').click(function(){
+    $('.user-logo-upload').modal('hide');
+    var data = new FormData();
+    var files = $('#files')[0].files;
+    var uid = $('#uid').val();
+    if(files){
+      data.append('file',files[0]);
+      data.append('x',$('#x').val());
+      data.append('y',$('#y').val());
+      data.append('w',$('#w').val());
+      data.append('h',$('#h').val());
+      data.append('uid',uid);
+    }
+    var url = '/users/avatar/upload';
+    $.ajax({
+      type:'POST',
+      url: url,
+      data:data,
+      contentType:false,
+      processData:false,
+    }).done(function(res){
+      if(res.errCode!=0){
+        globalNotify.failed(res.msg);
+      }else{
+        globalNotify.success("上传成功")
+        jcrop_api.destroy();
+        $("#user_logo").attr('src',res.url);
+      }
+    }).fail(function(res){
+      globalNotify.failed(JSON.stringify(res))
+    })
+  });
 })

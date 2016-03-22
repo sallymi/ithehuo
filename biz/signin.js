@@ -129,7 +129,7 @@ exports.signin = function (req, res) {
       var rememberMe = req.body.remeberme;
       logger.info('check if user checked remember me, remember me: ' + rememberMe);
       if (rememberMe) {
-        res.cookie('ithhr_uid', crypto.encrypt(user.email));
+        res.cookie('ithhr_uid', crypto.encrypt(String(user.email)));
       }
 
       logger.info('store user to session');
