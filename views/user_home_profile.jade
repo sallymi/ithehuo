@@ -153,7 +153,7 @@ block user_home_content
             img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
             .visible-md-inline-blockk
               button.btn.btn-primary(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
-              button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload') 本地上传
+              //- button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload') 本地上传
         .dashline
       //- .row
       //-   .form-group.col-xs-12.text-center
@@ -196,10 +196,10 @@ block user_home_content
               img(src='/images/avatars/a15-160.png')
           .col-xs-6.col-md-3
             a.thumbnail(href='#')
-              img(src='/images/portfolio/wugui-160.png')
-          .col-xs-6.col-md-3
-            a.thumbnail(href='#')
               img(src='/images/avatars/profile.png')
+          .col-xs-6.col-md-3
+            a.thumbnail#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload')
+              img(src='/images/add.png')
         .modal-footer
   .modal.fade.user-logo-upload(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
     .modal-dialog.model-sm

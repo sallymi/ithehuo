@@ -67,8 +67,13 @@ $(function () {
 
   $('a.thumbnail').on('click', function (event){
     console.log(event.currentTarget.children[0].attributes["src"].value);
-    $('#user_logo')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
-    $('.user-logo-image').modal('hide');
+    if(event.currentTarget.id==='uploadButton'){
+      $('.user-logo-image').modal('hide');
+    }else{
+      $('#user_logo')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
+      $('.user-logo-image').modal('hide');
+    }
+    
   });
 
   // $('#field').tagEditor({

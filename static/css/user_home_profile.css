@@ -74,6 +74,6 @@ input.radiocheck+label.full:after, input.radiocheck+label.full:before {
 }
 
 #uploadButton{
-  display: inline-block;
-  margin-left: 2rem;
+  display: inline-block;/*
+  margin-left: 2rem;*/
 }
