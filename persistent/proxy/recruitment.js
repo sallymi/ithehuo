@@ -197,7 +197,8 @@ exports.search = function (key) {
   return Q.Promise(function (resolve, reject) {
     logger.debug('try search recruitment, key word: ' + key);
     var pattern = new RegExp(key);
-    Recruitment.find({
+    Recruitment.
+      find({
       $or: [
         { 'classify': { $regex: pattern, $options: "i" } },
         { 'fulltime': { $regex: pattern, $options: "i" } },
@@ -205,18 +206,41 @@ exports.search = function (key) {
         { 'description': { $regex: pattern, $options: "i" } },
         { 'location': { $regex: pattern, $options: "i" } }
       ]
-    }).exec().then(
-      function (recruitments) {
+    }).
+      populate('project').
+      sort({creation_time: -1}).
+      exec().
+      then(function (recruitments) {
         logger.debug('search complete, will resolve with the match recruitments');
         logger.debug(recruitments);
+        logger.debug('will resolve with the found recruitments');
         resolve(recruitments);
-      },
-      function (err) {
-        logger.error('error occur when try to search project');
+      }, function (err) {
+        logger.error('bellow error occur when try to search recruitments');
         logger.error(err);
+        logger.debug('will reject with the error');
         reject(err);
-      }
-    );
+      });
+    // Recruitment.find({
+    //   $or: [
+    //     { 'classify': { $regex: pattern, $options: "i" } },
+    //     { 'fulltime': { $regex: pattern, $options: "i" } },
+    //     { 'keyword': { $regex: pattern, $options: "i" } },
+    //     { 'description': { $regex: pattern, $options: "i" } },
+    //     { 'location': { $regex: pattern, $options: "i" } }
+    //   ]
+    // }).exec().then(
+    //   function (recruitments) {
+    //     logger.debug('search complete, will resolve with the match recruitments');
+    //     logger.debug(recruitments);
+    //     resolve(recruitments);
+    //   },
+    //   function (err) {
+    //     logger.error('error occur when try to search project');
+    //     logger.error(err);
+    //     reject(err);
+    //   }
+    // );
   });
 };
 

@@ -6,7 +6,7 @@ mixin creator(creator)
 		.caption
 			.caption-content
 				i.fa.fa-search-plus.fa-3x
-				p.f13= creator.user.name?creator.user.name:creator.user.email.split('@')[0]
+				p.f13= creator.user.name?creator.user.name:(creator.user.email ? creator.user.email.split('@')[0] : creator.user.mobile_phone.toString().substring(0,3)+"****"+creator.user.mobile_phone.toString().substring(8,11))
 				p.f13= creator.role
 		img.img-responsive(src=creator.user.logo_img?creator.user.logo_img:'/images/portfolio/dog-160.png', alt='',width='50%')
-	a.f13(href='/users/#{creator.user.id}')= creator.role+' : '+(creator.user.name?creator.user.name:creator.user.email.split('@')[0])
+	a.f13(href='/users/#{creator.user.id}')= creator.role+' : '+(creator.user.name?creator.user.name:(creator.user.email ? creator.user.email.split('@')[0] : creator.user.mobile_phone.toString().substring(0,3)+"****"+creator.user.mobile_phone.toString().substring(8,11)))
