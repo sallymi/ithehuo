@@ -78,7 +78,7 @@ block content
                   div='项目阶段：'+recommend.stage
                   if (recommend.funding&&recommend.funding.next)
                     div='融资需求：'+recommend.funding.next.need
-                  div='快来看看TA有什么合伙工作机会吧！！！'
+                  div='快来看看TA有什么合伙需求吧！！！'
               br
               if index!=recommends.length-1
                 div(style='BORDER-TOP: #00686b 1px dashed; OVERFLOW: hidden; HEIGHT: 1px')
@@ -92,7 +92,7 @@ block content
                   div='项目阶段：'+recommend.stage
                   if (recommend.funding&&recommend.funding.next)
                     div='融资需求：'+recommend.funding.next.need
-                  div='快来看看TA有什么合伙工作机会吧！！！'
+                  div='快来看看TA有什么合伙需求吧！！！'
                 .col-sm-3.portfolio-item
                   a(href='/projects/'+recommend._id)
                     img.img-responsive(src=recommend.logo_img, alt='')

@@ -5,7 +5,7 @@ link(rel='stylesheet', href='/css/search.css')
       select.form-control(name="type")
         include ./mixin/form.jade
         -var selected = searchType ? searchType : 'recruitment'
-        +option("recruitment", selected,'合伙工作机会')
+        +option("recruitment", selected,'合伙需求')
         +option("project", selected,'创业项目')
         //- +option("question", selected,'问答')
     .col-md-4.form-control-ctn
