@@ -1,7 +1,7 @@
 .recruitment_edit
   script(src='/js/recruitment_edit.js')
-  script(type='text/javascript',src='/javascripts/typeahead.bundle.js')
-  script(type='text/javascript',src='/javascripts/handlebars-v3.0.3.js')
+  script(type='text/javascript',src='https://cdn.bootcss.com/typeahead.js/0.11.1/typeahead.bundle.min.js')
+  script(type='text/javascript',src='https://cdn.bootcss.com/handlebars.js/3.0.3/handlebars.min.js')
   .col-md-12
     form#recruitmentForm(onkeydown="if(event.keyCode==13) {return false;}")
       input#recruitmentId(type='hidden' value= recruitment && recruitment._id)

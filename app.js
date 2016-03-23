@@ -21,8 +21,11 @@ app.locals.moment = require('moment');
 /*
  * middlewares
  */
+var oneDay = 86400000;
+var oneYear = oneDay * 365;
+var tenYear = oneYear * 10;
 app.use(express.static('./static'));
-app.use(express.static('./public'));
+app.use(express.static('./public',{ maxAge: tenYear }));
 app.use(session({
   secret: config.secret,
   resave: false,
