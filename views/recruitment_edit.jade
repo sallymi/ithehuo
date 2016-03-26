@@ -36,6 +36,7 @@
                 include ./mixin/form.jade
                 each project in projects
                   +option(project._id, recruitment && recruitment.project && recruitment.project.id, project.name)
+              a(href="/new/project").btn.btn-primary 创建项目
           .row.form-group
             .col-xs-12.col-sm-4
               font(color="red")='* '
