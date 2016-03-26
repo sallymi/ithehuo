@@ -48,6 +48,7 @@ router.post('/reset-password', signin.resetPassword);
 router.post('/reset-mobile-password/:phone',signin.resetMobilePassword);
 // user
 router.get('/users', user.getUsers);
+router.get('/usersAjax', user.getUsersAjax);
 router.get('/users/:uid', user.getUser);
 router.put('/users/:uid', user.updateUser);
 router.post('/users/avatar/upload',user.updateAvatar);

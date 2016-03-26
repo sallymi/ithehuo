@@ -92,6 +92,7 @@ exports.sms = function (req, res, next) {
   
 };
 exports.captcha = function (req, res) {
+    //return res.send('A');
     var ary = ccap.get();
     capText= ary[0];
     var buf = ary[1];

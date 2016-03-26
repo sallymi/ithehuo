@@ -22,6 +22,7 @@ exports.render = function (req, res, page, object) {
     }
     object.signinUser = req.session.user;
     object.oss = global.oss;
+    object.limit = global.limit;
   }
   res.render(page, object);
 };
