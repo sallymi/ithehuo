@@ -1,10 +1,12 @@
 script(type='text/javascript',src='/javascripts/typeahead.bundle.js')
 script(type='text/javascript',src='/javascripts/handlebars-v3.0.3.js')
-script(src='/js/project_edit.js')
+script(src='/javascripts/jquery.Jcrop.min.js')
 script(src='/javascripts/jquery-ui.min.js')
 script(src='/javascripts/jquery.tag-editor.min.js')
+script(src='/js/project_edit.js')
 
 link(rel='stylesheet', href='/stylesheets/jquery.tag-editor.css')
+link(rel='stylesheet', href='/stylesheets/jquery.Jcrop.min.css')
 link(rel='stylesheet', href='/css/project_edit.css')
 .row
   .col-lg-12
@@ -59,6 +61,9 @@ link(rel='stylesheet', href='/css/project_edit.css')
             - var n = Math.floor(Math.random() * Arr.length + 1)-1; 
             img#project_logo.img-responsive(src=project && project.logo_img ? project.logo_img:"/images/portfolio/"+Arr[n]+".png")
             button.btn.btn-primary(type='button' data-toggle='modal', data-target='.bs-example-modal-sm') 更换logo
+            input#files(type='file', name='img', multiple='')
+            //button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 本地上传
+            button.btn.btn-primary#uploadButton(type='button' ) 本地上传
       .panel
         .panel-heading='相关内容'
         .panel-body
@@ -160,7 +165,7 @@ link(rel='stylesheet', href='/css/project_edit.css')
         button(type='submit').btn.btn-info 保存并发布
       br
 .modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
-  .modal-dialog.model-sm
+  .modal-dialog.modal-sm
     .modal-content
       a.closeBtn(href='#', data-dismiss='modal') X
       h1.margin-bottom-15
@@ -202,3 +207,22 @@ link(rel='stylesheet', href='/css/project_edit.css')
           a.thumbnail(href='#')
             img(src='/images/portfolio/bigdata-160.png')
       .modal-footer
+
+.modal.fade.project-logo-upload(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        a.closeBtn(href='#', data-dismiss='modal') X
+        h4.margin-bottom-15 请选择合适的区域作为项目logo
+      .modal-body
+        form#uploadImg
+          input#x(type='hidden', name='x')
+          input#y(type='hidden', name='y')
+          input#w(type='hidden', name='w')
+          input#h(type='hidden', name='h')
+          input#W(type='hidden', name='W')
+          input#H(type='hidden', name='H')
+          img#show_pic_p(src='')
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') 关闭
+        button#submit.btn.btn-primary(type='button' ) 上传

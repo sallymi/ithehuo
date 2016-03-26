@@ -153,7 +153,9 @@ block user_home_content
             img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
             .visible-md-inline-blockk
               button.btn.btn-primary(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
-              //- button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload') 本地上传
+              input#files(type='file', name='img', multiple='')
+              //button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 本地上传
+              button.btn.btn-primary#uploadButton(type='button' ) 本地上传
         .dashline
       //- .row
       //-   .form-group.col-xs-12.text-center
@@ -201,19 +203,20 @@ block user_home_content
             a.thumbnail#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload')
               img(src='/images/add.png')
         .modal-footer
-  .modal.fade.user-logo-upload(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
-    .modal-dialog.model-sm
+  .modal.fade.user-avatar-upload(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
+    .modal-dialog.modal-lg
       .modal-content
-        a.closeBtn(href='#', data-dismiss='modal') X
-        h1.margin-bottom-15
+        .modal-header
+          a.closeBtn(href='#', data-dismiss='modal') X
+          h4.margin-bottom-15 请选择合适的区域作为头像
         .modal-body
           form#uploadImg
-            input#files(type='file', name='img', multiple='')
             input#x(type='hidden', name='x')
             input#y(type='hidden', name='y')
             input#w(type='hidden', name='w')
             input#h(type='hidden', name='h')
-            p 请裁剪合适的区域作为头像
+            input#W(type='hidden', name='W')
+            input#H(type='hidden', name='H')
             img#show_pic(src='')
         .modal-footer
           button.btn.btn-default(type='button', data-dismiss='modal') 关闭
