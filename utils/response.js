@@ -21,6 +21,7 @@ exports.render = function (req, res, page, object) {
       object = {};
     }
     object.signinUser = req.session.user;
+    object.oss = global.oss;
   }
   res.render(page, object);
 };

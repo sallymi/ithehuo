@@ -16,11 +16,11 @@ block navbar
         //-   span.icon-bar
         span.head-logo
           a(href='/')
-            img(src='/images/itgreen.png',style="width:100px;")
+            img(src=oss+'/images/itgreen.png',style="width:100px;")
         span.head_shu
-          img(src='/images/head-shu.png')
+          img(src=oss+'/images/head-shu.png')
         span.head-descript
-          img(src='/images/logo-desc.png', style="width:140px;")
+          img(src=oss+'/images/logo-desc.png', style="width:140px;")
       .navbar-collapse.for-large
         ul.nav.navbar-nav.navbar-left
           li.page-scroll
@@ -48,7 +48,7 @@ block navbar
               if(signinUser.logo_img)
                 img(src=signinUser.logo_img)
               else
-                img(src='/images/smile.png')
+                img(src=oss+'/images/smile.png')
               span.ellipsis
                 - var dN = (signinUser.name ? signinUser.name : (signinUser.email ? signinUser.email.split('@')[0] : signinUser.mobile_phone.toString().substring(0,3)+"****"+signinUser.mobile_phone.toString().substring(8,11)))
                 a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=dN

@@ -18,6 +18,8 @@ var app = express();
 app.set('view engine', 'jade');
 app.locals.moment = require('moment');
 
+var oss = global.oss = config.oss;
+
 /*
  * middlewares
  */

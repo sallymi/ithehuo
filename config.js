@@ -3,6 +3,7 @@ var config = {
   host: 'ithehuo.com',
   admin: ['sallymi_82@126.com','jiaji1104@126.com','liubaoshu@helloworld-cafe.com', 'vincevenwang@163.com','wswjylq@163.com'],
   secret: 'SVTlkIjkvJnkuro=',
+  oss: '',//'http://7xs7p3.com1.z0.glb.clouddn.com',
   sms: {
     production:{
       ID:'23298060',
