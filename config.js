@@ -712,7 +712,7 @@ config.filters.recruitments =
     }]
   }, {
     item: 'recruitments',
-    name: '合伙类别',
+    name: '项目阶段',
     key: 'project.stage',
     values: ['想法构思', '正在实现', '测试版已发布', '正式版已发布']
   }, {
