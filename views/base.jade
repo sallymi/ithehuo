@@ -21,64 +21,74 @@ block navbar
           img(src=oss+'/images/head-shu.png')
         span.head-descript
           img(src=oss+'/images/logo-desc.png', style="width:140px;")
+        a.entry-btn.for-small(href='/users') 进入企业版
       .navbar-collapse.for-large
         ul.nav.navbar-nav.navbar-left
+          //- li.page-scroll
+          //-   a.btn.btn-lg.btn-info(href='/new/project') 发布项目
+          //- li.page-scroll
+          //-   a.btn.btn-lg.btn-info(href='/new/recruitment') 发布合伙人招募
           li.page-scroll
-            a.btn.btn-lg.btn-info(href='/new/project') 发布项目
-          li.page-scroll
-            a.btn.btn-lg.btn-info(href='/new/recruitment') 发布合伙人招募
-          li.page-scroll
-            a(href='/users') 候选合伙人
+            a(href='/users') 专业人才
           li.page-scroll
             a(href='/recruitments') 合伙需求
           li.page-scroll
             a(href='/projects') 创业项目
           //- li.page-scroll
           //-   a(href='/questions')="创业问答"
-          if (signinUser)
-            li.page-scroll
-              a(href='/messages')
-                i.fa.fa-envelope-o 私信
-                  span.badge#unreadMessagesCount
+          //- if (signinUser)
+          //-   li.page-scroll
+          //-     a(href='/messages')
+          //-       i.fa.fa-envelope-o 私信
+          //-         span.badge#unreadMessagesCount
         ul.nav.navbar-nav.navbar-right
           if (signinUser)
-            span.badge.am-badge.am-badge-warning#reminder
-            //- a#login-button1.btn.btn-account(role="button" data-trigger="focus" data-toggle="popover" data-original-title title data-placement="bottom" tabindex="0")
-            .dropdown#login-button.btn.btn-account
-              if(signinUser.logo_img)
-                img(src=signinUser.logo_img)
-              else
-                img(src=oss+'/images/smile.png')
-              span.ellipsis
-                - var dN = (signinUser.name ? signinUser.name : (signinUser.email ? signinUser.email.split('@')[0] : signinUser.mobile_phone.toString().substring(0,3)+"****"+signinUser.mobile_phone.toString().substring(8,11)))
-                a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=dN
-                ul.dropdown-menu(role="menu")
-                  li
-                    a(href='/home/recruitments') 我的小伙伴招募
-                  li
-                    a(href='/home/projects') 我的创业项目
-                  li
-                    a(href='/home/friends') 我的好友申请
-                      span.badge#RequestCount
-                  li
-                    a(href='/home') 我的个人信息
-                  li
-                    a(href='/home/settings/password') 我的账号设置
-                  li
-                    a(href='/signout') 退出
+            li
+              a(href='/messages')
+                i.fa.fa-envelope-o 消息
+                  span.badge#unreadMessagesCount
+            li
+              span.badge.am-badge.am-badge-warning#reminder
+              //- a#login-button1.btn.btn-account(role="button" data-trigger="focus" data-toggle="popover" data-original-title title data-placement="bottom" tabindex="0")
+              .dropdown#login-button.btn.btn-account
+                if(signinUser.logo_img)
+                  img(src=signinUser.logo_img)
+                else
+                  img(src=oss+'/images/smile.png')
+                span.ellipsis
+                  - var dN = (signinUser.name ? signinUser.name : (signinUser.email ? signinUser.email.split('@')[0] : signinUser.mobile_phone.toString().substring(0,3)+"****"+signinUser.mobile_phone.toString().substring(8,11)))
+                  a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=dN
+                  ul.dropdown-menu(role="menu")
+                    li
+                      a(href='/home/recruitments') 我的小伙伴招募
+                    li
+                      a(href='/home/projects') 我的创业项目
+                    li
+                      a(href='/home/friends') 我的好友申请
+                        span.badge#RequestCount
+                    li
+                      a(href='/home') 我的个人信息
+                    li
+                      a(href='/home/settings/password') 我的账号设置
+                    li
+                      a(href='/signout') 退出
+            li
+              a.entry-btn(href='/users') 进入企业版
           else
             li
               a.btn.btn-info(href='/signin') 登录
             li
               a.btn.btn-info(href='/signup') 注册
+            li
+              a.entry-btn(href='/users') 进入企业版
       .navbar-collapse.for-small
         ul.nav.navbar-nav.navbar-left
+          //- li.page-scroll
+          //-   a.btn.btn-lg.btn-info(href='/new/project') 发布项目
+          //- li.page-scroll
+          //-   a.btn.btn-lg.btn-info(href='/new/recruitment') 发布合伙人招募
           li.page-scroll
-            a.btn.btn-lg.btn-info(href='/new/project') 发布项目
-          li.page-scroll
-            a.btn.btn-lg.btn-info(href='/new/recruitment') 发布合伙人招募
-          li.page-scroll
-            a(href='/users') 候选合伙人
+            a(href='/users') 专业人才
           li.page-scroll
             a(href='/recruitments') 合伙需求
           li.page-scroll

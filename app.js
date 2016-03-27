@@ -9,12 +9,13 @@ var router = require('./routers/router');
 var config = require('./config');
 var connection = require('./persistent/connection');
 var logger = require('./utils/log').getLogger('app.js');
+var compress = require('compression');
 
 /*
  * app setting
  */
 var app = express();
-
+app.use(compress());
 app.set('view engine', 'jade');
 app.locals.moment = require('moment');
 
@@ -36,6 +37,7 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended': false}));
+
 app.use(cookieParser());
 app.use(router);
 
@@ -43,7 +45,7 @@ app.use(router);
  * start server
  */
 connection.connect().then(function () {
-  var server = app.listen(8005, function () {
+  var server = app.listen(3000, function () {
     logger.info('server started, listen on port %d', server.address().port);
   });
   var io  = require('socket.io')(server);

@@ -355,5 +355,24 @@ $(function () {
     }
     return flag;
   }
+
+  if(location.href.indexOf("recruitments") !== -1){
+    $('.entry-btn').attr('href','/users');
+    $('.entry-btn').text('进入企业版');
+    $('.actionBtn a').attr('href','/new/recruitment');
+    $('.actionBtn a').text('发布合伙人招募')
+  }
+  if(location.href.indexOf("users") !== -1){
+    $('.entry-btn').attr('href','/recruitments');
+    $('.entry-btn').text('进入个人版');
+    $('.actionBtn a').attr('href','/home');
+    $('.actionBtn a').text('成为专业人才')
+  }
+
+  if(location.href.indexOf("projects") !== -1){
+    $('.actionBtn a').attr('href','/new/project');
+    $('.actionBtn a').text('发布项目')
+  }
+
 });
 

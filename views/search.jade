@@ -1,6 +1,6 @@
 link(rel='stylesheet', href='/css/search.css')
 .searchCtn.row
-  .col-md-10.col-sm-12
+  .col-md-10.col-xs-12
     form(action="/search" type="get")
       .col-md-2.col-md-offset-4.col-xs-3.form-control-ctn
         select.form-control(name="type")
@@ -13,5 +13,6 @@ link(rel='stylesheet', href='/css/search.css')
         input.form-control(type="text" name="key")
       .col-md-2.col-xs-2.form-control-ctn
         button.btn.btn-default(type="submit") 搜索
-  .col-md-2.col-xs-12(style="padding-top: 10px; text-align: center")
-    a.button.btn.btn-warning(href='/home') 成为候选合伙人
+  .col-md-2.col-xs-12.actionBtn(style="text-align: center")
+    a.btn.btn-info(href='/home') 成为候选合伙人
+    //- a.button.btn.btn-warning(href='/home') 成为候选合伙人
