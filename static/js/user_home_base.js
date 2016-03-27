@@ -40,4 +40,5 @@ $(document).ready(function(){
     // }).done(function (data) {
     //   $('#recruitments_offline').html(data.length);     
     // });
+    
 });

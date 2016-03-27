@@ -249,7 +249,7 @@ $(function () {
             title:'完善个人信息！',
             text:'完善个人信息，让更多创业者找到你',
             icon: 'fa fa-envelope-o',
-            type: 'success',
+            type: 'info',
             hide: false,
             confirm: {
               confirm: true,

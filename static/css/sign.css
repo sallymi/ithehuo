@@ -48,7 +48,7 @@ li {
     position: absolute;
     left: 0;
     bottom: -1px;
-    background-color: #00b38a;
+    background-color: rgba(52,152,219,1);;
     width: 220px;
     height: 1px;
 }
@@ -63,7 +63,7 @@ li {
     height: 0;
     line-height: 0;
     border: 6px solid transparent;
-    border-bottom-color: #00b38a;
+    border-bottom-color: rgba(52,152,219,1);;
 }
 .form_head .tab_active:after {
     z-index: 3;
@@ -75,7 +75,7 @@ li {
     border-bottom-color: #fff;
 }
 li.active {
-    color: #00b38a;
+    color:rgba(52,152,219,1);
 }
 .reflash {
     background: url('/images/reflash.jpg') center center no-repeat;
