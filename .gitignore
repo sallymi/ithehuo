@@ -4,3 +4,4 @@ node_modules/
 *.sublime-workspace
 *.sublime-project
 Assest/
+public/images/upload_avatars/
