@@ -8,31 +8,33 @@ block navbar
     input#profile(type='hidden' value=signinUser.name)
   nav.navbar.navbar-default.navbar-static-top
     .container
-      .navbar-header.page-scroll
+      .navbar-header
         //- button.navbar-toggle(data-toggle='collapse',data-target='#bs-example-navbar-collapse')
         //-   span.sr-only="Toggle navigation"
         //-   span.icon-bar
         //-   span.icon-bar
         //-   span.icon-bar
+        //- a.navbar-brand(href='/')
+        //-   img(src=oss+'/images/itblue.png',style="width:100px;margin-right: 50px;")
         span.head-logo
           a(href='/')
-            img(src=oss+'/images/itgreen.png',style="width:100px;")
-        span.head_shu
-          img(src=oss+'/images/head-shu.png')
-        span.head-descript
-          img(src=oss+'/images/logo-desc.png', style="width:140px;")
+            img(src=oss+'/images/itblue.png',style="width:100px;margin-right: 50px;")
+        //- span.head_shu
+        //-   img(src=oss+'/images/head-shu.png')
+        //- span.head-descript
+        //-   img(src=oss+'/images/logo-desc.png', style="width:140px;")
         a.entry-btn.for-small(href='/users') 进入企业版
-      .navbar-collapse.for-large
-        ul.nav.navbar-nav.navbar-left
+      .collapse.navbar-collapse.for-large
+        ul.nav.navbar-nav
           //- li.page-scroll
           //-   a.btn.btn-lg.btn-info(href='/new/project') 发布项目
           //- li.page-scroll
           //-   a.btn.btn-lg.btn-info(href='/new/recruitment') 发布合伙人招募
-          li.page-scroll
+          li.users
             a(href='/users') 专业人才
-          li.page-scroll
+          li.recruitments
             a(href='/recruitments') 合伙需求
-          li.page-scroll
+          li.projects
             a(href='/projects') 创业项目
           //- li.page-scroll
           //-   a(href='/questions')="创业问答"
@@ -76,9 +78,9 @@ block navbar
               a.entry-btn(href='/users') 进入企业版
           else
             li
-              a.btn.btn-info(href='/signin') 登录
+              a(href='/signin') 登录
             li
-              a.btn.btn-info(href='/signup') 注册
+              a(href='/signup') 注册
             li
               a.entry-btn(href='/users') 进入企业版
       .navbar-collapse.for-small
@@ -98,7 +100,7 @@ block navbar
           if (signinUser)
             li.page-scroll
               a(href='/messages')
-                i.fa.fa-envelope-o 私信
+                i.fa.fa-envelope-o 消息
                   span.badge#unreadMessagesCount
         ul.nav.navbar-nav.navbar-right
           if (signinUser)

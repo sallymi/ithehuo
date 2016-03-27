@@ -6,6 +6,8 @@
 }*/
 .list-show .portfolio-item{
 	padding: 13px;
+      margin-left:20px;
+      margin-right:20px;
   	line-height: 25px;
   	position: relative;
     overflow: auto;
@@ -13,8 +15,8 @@
 .list-show li{
 	list-style: none;
 }
-.list-show li:nth-of-type(odd){ background: rgba(240, 240, 240, 0.74);}
-//#recruitments li:nth-of-type(even){ background: #ffcc00;}
+/*.list-show li:nth-of-type(odd){ background: rgba(240, 240, 240, 0.74);}*/
+/*#recruitments li:nth-of-type(even){ background: #ffcc00;}*/
 .picow .state {
   border: 1px solid #666;
   color: #666;
@@ -52,3 +54,4 @@
 .jiathis_style .jiadiv_01 .link_01{
   display: none;
 }
+

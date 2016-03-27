@@ -2,17 +2,17 @@ link(rel='stylesheet', href='/css/search.css')
 .searchCtn.row
   .col-md-10.col-xs-12
     form(action="/search" type="get")
-      .col-md-2.col-md-offset-4.col-xs-3.form-control-ctn
+      .col-md-2.col-xs-3.form-control-ctn
         select.form-control(name="type")
           include ./mixin/form.jade
           -var selected = searchType ? searchType : 'recruitment'
           +option("recruitment", selected,'合伙需求')
           +option("project", selected,'创业项目')
           //- +option("question", selected,'问答')
-      .col-md-4.col-xs-7.form-control-ctn
+      .col-md-8.col-xs-7.form-control-ctn
         input.form-control(type="text" name="key")
       .col-md-2.col-xs-2.form-control-ctn
-        button.btn.btn-default(type="submit") 搜索
+        button.btn.btn-info.btn-block(type="submit") 搜索
   .col-md-2.col-xs-12.actionBtn(style="text-align: center")
-    a.btn.btn-info(href='/home') 成为候选合伙人
+    a.btn.btn-info.btn-block(href='/home') 成为专业人才
     //- a.button.btn.btn-warning(href='/home') 成为候选合伙人

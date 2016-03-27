@@ -4,16 +4,16 @@ block append script
 block content
   link(rel='stylesheet', href='/css/side_nav.css')
   link(rel='stylesheet', href='/css/recruitments.css')
-  include search.jade
   .container-fluid.list-show
     .row
-      .col-lg-3.col-md-3.col-sm-12.col-xs-12.padding-19
+      .col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19
         if filters
           .siderNav
             include mixin/filter.jade
             each filter in filters
               +filter(filter)
-      .col-lg-9.col-md-9s.col-sm-12.col-xs-12
+      .col-lg-9.col-md-9.col-sm-12.col-xs-12
+        include search.jade
         .well.transparent
           .panel
             .panel-body

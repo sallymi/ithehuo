@@ -71,6 +71,7 @@ $(function () {
       $('.user-logo-image').modal('hide');
     }else{
       $('#user_logo')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
+      $('#user_logo1')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
       $('.user-logo-image').modal('hide');
     }
     
@@ -596,6 +597,7 @@ $(document).ready(function(){
         globalNotify.success("上传成功")
         jcrop_api.destroy();
         $("#user_logo").attr('src',res.url);
+        $("#user_logo1").attr('src',res.url);
       }
     }).fail(function(res){
       globalNotify.failed(JSON.stringify(res))

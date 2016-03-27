@@ -16,6 +16,7 @@
     width: auto;
     overflow: auto;
   }
+  
   .navbar .container .btn {
     margin: 10px 0 5px 5px;
   }
@@ -25,13 +26,27 @@
     padding: 0px;
   }
   .navbar .fa-envelope-o{
-    color:white; 
+    color:#999; 
     display:block;
   }
   .navbar .badge {
       background: red;
       color: white;
   }
+  footer .footer-above {
+    background-color: #e9eaec;
+  }
+  footer .footer-above span {
+    color:#888;
+  }
+  footer .footer-below {
+    background-color: #333;
+  }
+  footer a, footer a:hover, footer a:focus, footer a:active, footer a.active{
+    color:#888;
+  }
+
+
   #recruitmentForm .col-sm-4, #detailForm .col-sm-4, #userProfileForm .col-sm-4, #questionForm .col-sm-4{
 	  text-align: right;
 	}
@@ -57,7 +72,9 @@
   }
   .entry-btn.for-small{
     display: none;
+    color: #ffffff;
   }
+
 
 }
 @media(max-width:767px) {
@@ -98,10 +115,46 @@
   }
 }
 body{
-  background: #e2e2e2 url('../images/background.png') repeat;
+  background: #fff;
+}
+.navbar-brand {
+    padding: 7px;
+  }
+.navbar-default {
+    background-color: #fafafa;
+        padding: 0;
+}
+.navbar-default .navbar-nav>li>a{
+  color: #999;
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-nav>li>a:active{
+  color:rgba(52,152,219,1);
+}
+a.entry-btn.for-small{
+  color: #999;
+}
+a.entry-btn.for-small:hover{
+  color:rgba(52,152,219,1);
+}
+.btn, .form-control{
+  border-radius: 0px;
+}
+.form-control, input {
+   border-width: 1px; 
+}
+a, a:hover, a:focus, a:active, a.active{
+  color:rgba(52,152,219,1);
+}
+}
+/*a:hover{
+  color:#3498db;
+}*/
+
+.navbar-static-top {
+  padding: 0;
 }
 .navbar-header {
-  margin-top: 14px;
+  margin-top: 7px;
 }
 .head-logo {
   margin-left: 10px;
@@ -521,4 +574,7 @@ img {
 .like-number {
   position: absolute;
   right: -1rem;
+}
+#portfolio .panel {
+  background-color: #fafafa;
 }

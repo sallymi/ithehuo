@@ -7,16 +7,16 @@ block content
   link(rel='stylesheet', href='/css/error.css')
   //- link(href="http://v3.jiathis.com/code/css/jiathis_counter.css" rel="stylesheet" type="text/css")
   //- link(href="http://v3.jiathis.com/code/css/jiathis_share.css" rel="stylesheet" type="text/css")
-  include search.jade
   .container-fluid.list-show#projects
     .row
-      .col-lg-2.col-md-2.col-sm-12.col-xs-12.padding-19
+      .col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19
         if filters
           .siderNav
             include mixin/filter.jade
             each filter in filters
               +filter(filter)
-      .col-lg-10.col-md-10.col-sm-12.col-xs-12
+      .col-lg-9.col-md-9.col-sm-12.col-xs-12
+        include search.jade
         .well.transparent
           .panel
             .panel-body
@@ -38,10 +38,10 @@ block content
                         a(href= '/projects/' + project._id)
                           strong= project.name
                       .row
-                        .small.col-md-6
+                        .small.col-md-6(style='padding-right:0')
                           i.fa.fa-map-marker.r5
                           em.c7.f14=project.location
-                        .jiathis_style.col-md-6.hidden-xs
+                        .jiathis_style.col-md-6.hidden-xs(style='padding-left:0')
                           a.jiathis.jiathis_txt(href="http://www.jiathis.com/share" target="_blank")
                             img(src='http://v3.jiathis.com/code/images/btn/v1/jiathis1.gif' border="0")
                       script(type='text/javascript').

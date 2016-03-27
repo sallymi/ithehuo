@@ -6,10 +6,10 @@ block content
   script(src='/js/projects.js')
   script(src='/js/user.js')
 
-  include search.jade
+
   .container-fluid.list-show
     .row.users
-      .col-lg-3.col-md-3.col-sm-12.col-xs-12.padding-19
+      .col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19
           if filters
             .siderNav
               include mixin/filter.jade
@@ -86,6 +86,7 @@ block content
             //-           each item in skills
             //-             a(href='/projects?location=北京')=item
         .col-lg-9.col-md-9.col-sm-12.col-xs-12
+          include search.jade
           .well.transparent
             .panel
               .panel-body
@@ -122,7 +123,8 @@ block content
                                   span.tag.label.label-info=tag
                                   span= ' '
               if users.length==limit
-                div.load-more(data-page=1, data-limit=limit) 加载更多
+                .col-md-12
+                  div.load-more.btn.btn-info.btn-block(data-page=1, data-limit=limit) 加载更多
                         //- .media-body.col-md-4
                         //-   a.btn.btn-info.navbar-header#addFav(href='javascript:new_add_follow("#{signinUser.id}","#{user.id}","#{user.name}")')='关注'
                         //-   a.btn.btn-default.navbar-header#removeFav(style='display:none', href='javascript:remove_follow("#{signinUser.id}","#{user.id}","#{user.name}")')='取消关注'

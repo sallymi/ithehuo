@@ -16,6 +16,12 @@ block user_home_content
     .panel-heading.c-insetC-header 我的信息
     .panel-body
       form#userProfileForm.form-horizontal
+        .col-lg-2.col-lg-offset-1.hidden-md.hidden-lg
+          h4='头像'
+          img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
+          .visible-md-inline-blockk
+            button.btn.btn-info.btn-block(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+            //- button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload') 
         .col-lg-7
           .row.form-group
             .col-xs-12.col-sm-4
@@ -148,11 +154,11 @@ block user_home_content
           .row.form-group
             .col-sm-offset-2.col-sm-10
               input#submitBtn.btn.btn-info.center-block(type='submit' value='保存' data-loading-text='正在保存...')
-        .col-lg-2.col-lg-offset-1
+        .col-lg-2.col-lg-offset-1.hidden-xs
             h4='头像'
-            img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
+            img#user_logo1.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
             .visible-md-inline-blockk
-              button.btn.btn-primary(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+              button.btn.btn-info.btn-block(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
               //- button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload') 本地上传
         .dashline
       //- .row
