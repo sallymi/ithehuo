@@ -155,28 +155,62 @@ exports.createProject = function (req, res) {
   logger.info(project);
   //重新存储logo
   projectProxy.createProject(project).then(function (pro) {
-    if(pro['logo_img'].includes('temp')){
-      var sourceFile = path.resolve(__dirname,'../public'+pro['logo_img']);
-      var tsName = pro['logo_img'].split("/").pop()
-      var destPath = path.resolve(__dirname,'../public/images/upload_portfolio/'+pro['_id']+"_"+tsName);;
-      fs.rename(sourceFile,destPath,function(err){
-        if(err){
-          logger.info("error occur when try to move the project logo,will response with the error");
-          logger.info(err);
-        }
-        fs.stat(destPath,function(err, stats) {
+    return Q.promise(function(resolve,reject){
+      if(pro['logo_img'].includes('temp')){
+        var sourceFile = path.resolve(__dirname,'../public'+pro['logo_img']);
+        var tsName = pro['logo_img'].split("/").pop()
+        var destPath = path.resolve(__dirname,'../public/images/upload_portfolio/'+pro['_id']+"_"+tsName);
+        //var pRename = function(from,to){
+        //  var deferred = Q.defer();
+        //  fs.rename(from,to,function(err){
+        //    if(err){
+        //      deferred.reject(err)
+        //    }else{
+        //      deferred.resolve();
+        //    }
+        //  })
+        //  return deferred.promise;
+        //};
+        //var pStat = function(dpath){
+        //  var deferred = Q.defer();
+        //  fs.stat(dpath,function(err,stats){
+        //    if(err){
+        //      deferred.reject(err);
+        //    }else{
+        //      deferred.resolve(stats);
+        //    }
+        //  })
+        //  return deferred.promise;
+        //};
+        //pRename(sourceFile,destPath).then(pStat(destPath)).then(function(stats){
+        //  logger.info("stats:"+JSON.stringify(stats));
+        //  var newimagePath =' /images/upload_portfolio/'+pro['_id']+"_"+tsName;
+        //  pro['logo_img'] = newimagePath;
+        //  return projectProxy.saveProject(pro);
+        //})
+        fs.rename(sourceFile,destPath,function(err){
           if(err){
-            logger.info("error occur when try to check the new file,will response with the error");
+            logger.info("error occur when try to move the project logo,will response with the error");
             logger.info(err);
-          }else{
-            logger.info("stats:"+JSON.stringify(stats));
-            var newimagePath =' /images/upload_portfolio/'+pro['_id']+"_"+tsName;
-            pro['logo_img'] = newimagePath;
-            return projectProxy.saveProject(pro);
+            reject(err);
           }
+          fs.stat(destPath,function(err, stats) {
+            if(err){
+              logger.info("error occur when try to check the new file,will response with the error");
+              logger.info(err);
+              reject(err);
+            }else{
+              logger.info("stats:"+JSON.stringify(stats));
+              var newimagePath =' /images/upload_portfolio/'+pro['_id']+"_"+tsName;
+              pro['logo_img'] = newimagePath;
+              projectProxy.saveProject(pro).then(function(p){
+                resolve(p);
+              });
+            }
+          })
         })
-      })
-    }
+      }
+    })
   }).then(function(p){
     logger.info('bellow project created, will response with the project');
     logger.info(p);
@@ -235,8 +269,8 @@ exports.updateLogo = function (req, res) {
     var pid = fields.pid;
     var imgPath = files.file.path;
     var sz = files.file.size;
-    logger.debug(fields);
-    logger.info(files.file);
+    //logger.debug(fields);
+    //logger.info(files.file);
     if(sz > 2*1024*1024){
       logger.debug('image is out of size')
       fs.unlink(imgPath, function() {	//fs.unlink 删除用户上传的文件
@@ -260,7 +294,7 @@ exports.updateLogo = function (req, res) {
 
       gm(imgPath)
           .autoOrient()
-          .resize(W>850?850:W) //加('!')强行把图片缩放成对应尺寸400*400！
+          //.resize(W>850?850:W) //加('!')强行把图片缩放成对应尺寸400*400！
           .crop(width, height, x, y)
           .write(store_path, function(err){
             if (err) {

@@ -1,6 +1,7 @@
 extends user_home_base
 block append link
   link(rel='stylesheet', href='/stylesheets/jquery.tag-editor.css')
+  link(rel='stylesheet', href='/stylesheets/jquery.Jcrop.min.css')
   link(rel='stylesheet', href='/css/user_home_profile.css')
 block append script
 
@@ -151,7 +152,7 @@ block user_home_content
         .col-lg-2.col-lg-offset-1
             h4='头像'
             img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
-            .visible-md-inline-blockk
+            .visible-md-inline-block
               button.btn.btn-primary(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
               input#files(type='file', name='img', multiple='')
               //button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 本地上传
@@ -207,7 +208,7 @@ block user_home_content
     .modal-dialog.modal-lg
       .modal-content
         .modal-header
-          a.closeBtn(href='#', data-dismiss='modal') X
+          a.closeBtn.cancel(href='#') X
           h4.margin-bottom-15 请选择合适的区域作为头像
         .modal-body
           form#uploadImg
@@ -219,5 +220,5 @@ block user_home_content
             input#H(type='hidden', name='H')
             img#show_pic(src='')
         .modal-footer
-          button.btn.btn-default(type='button', data-dismiss='modal') 关闭
+          button.cancel.btn.btn-default(type='button') 关闭
           button#submit.btn.btn-primary(type='button' ) 上传

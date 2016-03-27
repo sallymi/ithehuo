@@ -313,8 +313,8 @@ $(document).ready(function(){
                 image.onload = function() {
                     $('#W').val(image.width);
                     $('#H').val(image.width);
-                    var W = image.width>850?850:image.width;
-                    var H = image.width>850?850/image.width*image.height:image.height;
+                    var W = image.width;
+                    var H = image.height;
                     var x, y,x1,y1;
                     if(W>300&&H>300){
                         x = (W-300)/2;
@@ -367,7 +367,12 @@ $(document).ready(function(){
     }else {
         alert('该浏览器不全部支持File APIs的功能');
     }
+    $(".cancel").click(function () {
+        $('.project-logo-upload').modal('hide');
+        jcrop_api_p.destroy();
+    })
     $('#submit').click(function(){
+        $('#uploadButton').prop('disabled','disabled').text('上传中');
         $('.project-logo-upload').modal('hide');
         var data = new FormData();
         var files = $('#files')[0].files;
@@ -393,7 +398,8 @@ $(document).ready(function(){
             if(res.errCode!=0){
                 globalNotify.failed(res.msg);
             }else{
-                globalNotify.success("上传成功")
+                globalNotify.success("上传成功");
+                $('#uploadButton').prop('disabled','').text('本地上传');
                 jcrop_api_p.destroy();
                 $("#project_logo").attr('src',res.url);
             }

@@ -250,6 +250,7 @@ exports.updateAvatar = function (req, res) {
   var form = new formidable.IncomingForm();
   var IMG_PATH = path.resolve(__dirname,'../public/images/upload_avatars');
   form.parse(req, function(err, fields, files) {
+    var W = fields.W;
     var width = fields.w;
     var height = fields.h;
     var x = fields.x;
@@ -274,7 +275,7 @@ exports.updateAvatar = function (req, res) {
       var src_path = '/images/upload_avatars/'+uid+"_"+ts+"."+filetype;
       gm(imgPath)
           .autoOrient()
-          .resize(400,400, '!') //加('!')强行把图片缩放成对应尺寸400*400！
+          //.resize(W>850?850:W)
           .crop(width, height, x, y)
           .write(path.resolve(IMG_PATH,uid+"_"+ts+"."+filetype), function(err){
             if (err) {

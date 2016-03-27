@@ -550,8 +550,10 @@ $(document).ready(function(){
         image.onload = function() {
           $('#W').val(image.width);
           $('#H').val(image.width);
-          var W = image.width>850?850:image.width;
-          var H = image.width>850?850/image.width*image.height:image.height;
+          //var W = image.width>850?850:image.width;
+          var W = image.width;
+          //var H = image.width>850?850/image.width*image.height:image.height;
+          var H = image.height;
           var x, y,x1,y1;
           if(W>300&&H>300){
             x = (W-300)/2;
@@ -604,11 +606,16 @@ $(document).ready(function(){
   }else {
     alert('该浏览器不全部支持File APIs的功能');
   }
+  $(".cancel").click(function () {
+    $('.user-avatar-upload').modal('hide');
+    jcrop_api.destroy();
+  });
   $('#submit').click(function(){
+    $("#uploadButton").prop('disabled','disabled').text('上传中……');
     $('.user-avatar-upload').modal('hide');
     var data = new FormData();
     var files = $('#files')[0].files;
-    var pid = $('#projectId').val();
+    var uid = $('#uid').val();
     if(files){
       data.append('file',files[0]);
       data.append('x',$('#x').val());
@@ -617,9 +624,9 @@ $(document).ready(function(){
       data.append('h',$('#h').val());
       data.append('W',$('#W').val());
       data.append('H',$('#H').val());
-      data.append('pid',pid);
+      data.append('uid',uid);
     }
-    var url = '/projects/logo/upload';
+    var url = '/users/avatar/upload';
     $.ajax({
       type:'POST',
       url: url,
@@ -630,12 +637,14 @@ $(document).ready(function(){
       if(res.errCode!=0){
         globalNotify.failed(res.msg);
       }else{
+        $("#uploadButton").prop('disabled','').text('本地上传');
+        jcrop_api.destroy();
         globalNotify.success("上传成功")
-        jcrop_api_p.destroy();
-        $("#project_logo").attr('src',res.url);
+        jcrop_api.destroy();
+        $("#user_logo").attr('src',res.url);
       }
     }).fail(function(res){
-      globalNotify.failed(res.msg)
+      globalNotify.failed(JSON.stringify(res))
     })
   });
 })
