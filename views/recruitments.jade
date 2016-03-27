@@ -26,7 +26,8 @@ block content
                   .media
                     .media-left.media-middle.col-xs-2
                       a(href='/recruitments/' + recruitment._id)
-                        img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
+                        .logo=recruitment.project.name.substring(0,1)
+                        //- img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
                     .media-body.col-xs-5(onclick="location.href='/recruitments/#{recruitment._id}'")
                       h5.media-heading.mb10
                         a(href= '/recruitments/' + recruitment._id)
