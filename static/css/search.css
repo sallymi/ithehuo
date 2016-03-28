@@ -6,6 +6,11 @@
 
 }
 }
+@media(max-width:767px) {
+  .searchCtn.row {
+    margin:0;padding-bottom: 10px
+  }
+}
 .searchCtn.row .form-control-ctn{
   padding: 0 !important;
 }

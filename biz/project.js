@@ -156,7 +156,7 @@ exports.createProject = function (req, res) {
   //重新存储logo
   projectProxy.createProject(project).then(function (pro) {
     return Q.promise(function(resolve,reject){
-      if(pro['logo_img'].includes('temp')){
+      if(pro['logo_img'].indexOf('temp')!==-1){
         var sourceFile = path.resolve(__dirname,'../public'+pro['logo_img']);
         var tsName = pro['logo_img'].split("/").pop()
         var destPath = path.resolve(__dirname,'../public/images/upload_portfolio/'+pro['_id']+"_"+tsName);
@@ -209,6 +209,10 @@ exports.createProject = function (req, res) {
             }
           })
         })
+      }else{
+        projectProxy.saveProject(pro).then(function(p){
+          resolve(p);
+        });
       }
     })
   }).then(function(p){

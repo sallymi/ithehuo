@@ -22,13 +22,13 @@ block content
                   br
                   | 请试试其他搜索吧......
               each recruitment in recruitments
-                li.col-md-12.portfolio-item
+                li.col-md-12.col-xs-12.portfolio-item
                   .media
-                    .media-left.media-middle.col-xs-2
+                    .media-left.media-middle.col-md-2.col-xs-4
                       a(href='/recruitments/' + recruitment._id)
                         .logo=recruitment.project.name.substring(0,1)
                         //- img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
-                    .media-body.col-xs-5(onclick="location.href='/recruitments/#{recruitment._id}'")
+                    .media-body.col-md-5.col-xs-8(onclick="location.href='/recruitments/#{recruitment._id}'")
                       h5.media-heading.mb10
                         a(href= '/recruitments/' + recruitment._id)
                           strong= recruitment.classify
@@ -53,7 +53,7 @@ block content
                         include mixin/util
                         +date(recruitment.creation_time)
                         |  发布
-                    .media-body.col-xs-5(onclick="location.href='/projects/#{recruitment.project&&recruitment.project._id}'")
+                    .media-body.col-md-5.col-xs-12(onclick="location.href='/projects/#{recruitment.project&&recruitment.project._id}'")
                       h5.media-heading.mb10
                         if (recruitment.project)
                           large='所在项目：'+recruitment.project.name

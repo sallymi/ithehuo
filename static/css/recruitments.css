@@ -4,13 +4,25 @@
 /*.list-show .media-body a {
   font-size: 16px;
 }*/
-.list-show .portfolio-item{
-	padding: 13px;
-      margin-left:20px;
-      margin-right:20px;
+@media(min-width:768px) {
+  .list-show .portfolio-item{
+  	padding: 13px;
+    margin-left:20px;
+    margin-right:20px;
   	line-height: 25px;
   	position: relative;
     overflow: auto;
+  }
+}
+@media(max-width:767px) {
+  .list-show .portfolio-item{
+    padding: 13px;
+    /*margin-left:20px;
+    margin-right:20px;*/
+    line-height: 25px;
+    position: relative;
+    overflow: auto;
+  }
 }
 .list-show li{
 	list-style: none;
