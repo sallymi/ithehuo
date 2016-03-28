@@ -1,6 +1,7 @@
 extends user_home_base
 block append link
   link(rel='stylesheet', href='/stylesheets/jquery.tag-editor.css')
+  link(rel='stylesheet', href='/stylesheets/jquery.Jcrop.min.css')
   link(rel='stylesheet', href='/css/user_home_profile.css')
 block append script
 
@@ -157,9 +158,11 @@ block user_home_content
         .col-lg-2.col-lg-offset-1.hidden-xs
             h4='头像'
             img#user_logo1.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
-            .visible-md-inline-blockk
-              button.btn.btn-info.btn-block(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
-              //- button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload') 本地上传
+            div
+              button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+              input#files(type='file', name='img', multiple='')
+              //button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 本地上传
+              //button.btn.btn-info.btn-block#uploadButton(type='button' ) 本地上传
         .dashline
       //- .row
       //-   .form-group.col-xs-12.text-center
@@ -204,23 +207,24 @@ block user_home_content
             a.thumbnail(href='#')
               img(src='/images/avatars/profile.png')
           .col-xs-6.col-md-3
-            a.thumbnail#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload')
+            a.thumbnail#uploadButton
               img(src='/images/add.png')
         .modal-footer
-  .modal.fade.user-logo-upload(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
-    .modal-dialog.model-sm
+  .modal.fade.user-avatar-upload(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
+    .modal-dialog.modal-lg
       .modal-content
-        a.closeBtn(href='#', data-dismiss='modal') X
-        h1.margin-bottom-15
+        .modal-header
+          a.closeBtn.cancel(href='#') X
+          h4.margin-bottom-15 请选择合适的区域作为头像
         .modal-body
           form#uploadImg
-            input#files(type='file', name='img', multiple='')
             input#x(type='hidden', name='x')
             input#y(type='hidden', name='y')
             input#w(type='hidden', name='w')
             input#h(type='hidden', name='h')
-            p 请裁剪合适的区域作为头像
+            input#W(type='hidden', name='W')
+            input#H(type='hidden', name='H')
             img#show_pic(src='')
         .modal-footer
-          button.btn.btn-default(type='button', data-dismiss='modal') 关闭
+          button.cancel.btn.btn-default(type='button') 关闭
           button#submit.btn.btn-primary(type='button' ) 上传

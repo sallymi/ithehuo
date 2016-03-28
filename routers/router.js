@@ -78,6 +78,7 @@ router.post('/projects', project.createProject);
 router.get('/projects/:pid', project.getProject);
 router.put('/projects/:pid', project.updateProject);
 router.post('/projects/addLike', project.addProjectLike);
+router.post('/projects/logo/upload', project.updateLogo);
 router.get('/home/projects', project.myProjects);
 router.get('/home/projects/:pid', project.projectEdit);
 // recruitment

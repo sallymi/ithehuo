@@ -62,18 +62,38 @@ input.radiocheck+label.full:after, input.radiocheck+label.full:before {
     margin:15px -15px 15px 100px;
 }
 
-.user-logo-upload .modal-dialog{
-  width: 40rem;
+.modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+
 }
-.user-logo-upload .modal-body{
-  height: 43rem;
+@media (min-width: 768px){
+  .modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
 }
-#show_pic {
-  width: 400px;
-  height: 400px;
+@media (min-width: 992px){
+  .modal-lg {
+    width: 900px;
+  }
 }
 
+.user-avatar-upload .modal-body{
+  /*height: auto;*/
+  padding: 15px 20px;
+}
+/*#show_pic_p {*/
+/*width: auto;*/
+/*height: auto;*/
+/*}*/
+.jcrop-holder {
+  margin: auto;
+}
 #uploadButton{
   display: inline-block;/*
   margin-left: 2rem;*/
+}
+#files {
+  display: none !important;
 }

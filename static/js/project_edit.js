@@ -284,5 +284,128 @@ $(document).ready(function(){
       });
     }
   });
+
+    var show_pic_p = $('#show_pic_p');
+    var maxWidth = window.innerWidth;
+    show_pic_p.css('max-width',maxWidth*0.8+"px");
+    var jcrop_api_p;
+    $("#uploadButton").click(function(){
+        console.log("here");
+        jcrop_api_p = undefined;
+        var fileinput = $("#files");
+        fileinput.val('');
+        fileinput.trigger("click");
+    })
+    if (window.File && window.FileReader && window.FileList && window.Blob){
+        //Blob是计算机界通用术语之一，全称写作：BLOB (binary large object)，表示二进制大对象。
+        //全部支持
+        function handleFileSelect(evt) {
+            console.log("handleFileSelect");
+            var files = evt.target.files, f = files[0];
+            if (!/image\/\w+/.test(f.type)){
+                alert("请确保文件为图像类型");
+                return false;
+            }
+            var reader = new FileReader();
+            reader.onload = function() {
+                var image = new Image();
+                image.src = reader.result;
+                image.onload = function() {
+                    $('#W').val(image.width);
+                    $('#H').val(image.width);
+                    var W = image.width;
+                    var H = image.height;
+                    var x, y,x1,y1;
+                    if(W>300&&H>300){
+                        x = (W-300)/2;
+                        y = (H-300)/2;
+                        x1 = x + 300;
+                        y1 = y + 300;
+                    }else if(W<H){
+                        x =0;
+                        y = (H-W)/2;
+                        x1 = x+W;
+                        y1 = y+W;
+
+                    }else{
+                        y = 0;
+                        x = (W-H)/2;
+                        y1 = y +H;
+                        x1 = x + H;
+                    }
+                    console.log("x="+x+"y="+y+"x1="+x1+"y1="+y1);
+                    show_pic_p.attr('src',reader.result);
+                    if(jcrop_api_p!=undefined){
+                        jcrop_api_p.setImage(reader.result);
+                        $('.project-logo-upload').modal('show');
+                    }else{
+                        show_pic_p.Jcrop({
+                            onChange: updateXYWH,
+                            onSelect: updateXYWH,
+                            boxWidth: 300,
+                            aspectRatio: 1,
+                            setSelect: [ x, y, x1, y1 ]
+                        },function(){
+                            jcrop_api_p = this;
+                        });
+                        function updateXYWH(c) {
+                            if (parseInt(c.w) > 0) {
+                                $('#x').val(c.x);
+                                $('#y').val(c.y);
+                                $('#w').val(c.w);
+                                $('#h').val(c.h);
+                            }
+                        };
+                        $('.project-logo-upload').modal('show');
+                    }
+                };
+
+            };
+            reader.readAsDataURL(f);
+        }
+        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+    }else {
+        alert('该浏览器不全部支持File APIs的功能');
+    }
+    $(".cancel").click(function () {
+        $('.project-logo-upload').modal('hide');
+        jcrop_api_p.destroy();
+    })
+    $('#submit').click(function(){
+        $('#uploadButton').prop('disabled','disabled').text('上传中');
+        $('.project-logo-upload').modal('hide');
+        var data = new FormData();
+        var files = $('#files')[0].files;
+        var pid = $('#projectId').val();
+        if(files){
+            data.append('file',files[0]);
+            data.append('x',$('#x').val());
+            data.append('y',$('#y').val());
+            data.append('w',$('#w').val());
+            data.append('h',$('#h').val());
+            data.append('W',$('#W').val());
+            data.append('H',$('#H').val());
+            data.append('pid',pid);
+        }
+        var url = '/projects/logo/upload';
+        $.ajax({
+            type:'POST',
+            url: url,
+            data:data,
+            contentType:false,
+            processData:false,
+        }).done(function(res){
+            if(res.errCode!=0){
+                globalNotify.failed(res.msg);
+            }else{
+                globalNotify.success("上传成功");
+                $('#uploadButton').prop('disabled','').text('本地上传');
+                jcrop_api_p.destroy();
+                $("#project_logo").attr('src',res.url);
+            }
+        }).fail(function(res){
+            globalNotify.failed(res.msg)
+        })
+    });
 });
 

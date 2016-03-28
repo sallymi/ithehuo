@@ -28,10 +28,10 @@ block content
                 li.col-xs-12.portfolio-item.span4.fix-height
                   .media
                     .media-left.media-middle.col-md-5.picow
-                      //- if project.logo_img
-                      //-   img.media-object(src=project.logo_img, width='100%')
-                      //- else
-                      .logo=project.name.substring(0,1)
+                      if project.logo_img&&project.logo_img.indexOf('upload_portfolio')!==-1
+                        img.media-object(src=project.logo_img, width='100%')
+                      else
+                        .logo=project.name.substring(0,1)
                       if project.recruitments && project.recruitments.length > 0
                         a(href='/recruitments?project=' + project._id)
                           .state='合伙人招募中'
