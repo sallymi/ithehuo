@@ -36,9 +36,10 @@ link(rel='stylesheet', href='/css/project_edit.css')
                 input.form-control#projectTags(style='width:100%',type='text',name='projectTags', placeholder='如 互联网团队，天使轮，A轮, 以回车分隔')=project && project.tag
             .row.form-group
               .col-xs-12.col-sm-4
+                font(color="red")='* '
                 label.control-label(for='projectStage') 项目阶段
               .col-xs-12.col-sm-8
-                select.form-control#projectStage(style="width:100%", name='projectStage', 'required')
+                select.form-control#projectStage(style="width:100%", name='projectStage', required)
                   include ./mixin/form.jade
                   +option('想法构思', project && project.stage)
                   +option('正在实现', project && project.stage)
@@ -52,6 +53,7 @@ link(rel='stylesheet', href='/css/project_edit.css')
                 input.form-control#projectDescription(style='width:100%',type='text', name='projectDescription', value=project && project.description, placeholder='项目描述', required)
             .row.form-group
               .col-xs-12.col-sm-4
+                font(color="red")='* '
                 label.control-label='项目城市'
               .col-xs-12.col-sm-8
                 input.form-control#projectLocation(style='width:100%',type='text', name='projectLocation', value=project && project.location, placeholder='项目城市')
@@ -87,6 +89,7 @@ link(rel='stylesheet', href='/css/project_edit.css')
         .panel-body
           .row.form-group
             .col-xs-12.col-sm-4
+              font(color="red")='* '
               label.control-label(for='projectFundingCurrent') 融资情况
             .col-xs-12.col-sm-8
               select.form-control#projectFundingCurrent(name='projectFundingCurrent', 'required')

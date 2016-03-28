@@ -166,7 +166,10 @@ $(document).ready(function(){
         },  
         projectKeyword : {  
             required : true  
-        },  
+        },
+        projectStage : {
+            required: true
+        },
         projectDescription : {  
             required : true  
         },
@@ -177,6 +180,7 @@ $(document).ready(function(){
             required : true
         },
         projectLocation:{
+            required : true,
           remote: {
             url: "/validateAddr",
             type: "post",
@@ -186,6 +190,9 @@ $(document).ready(function(){
               }
             }
           }
+        },
+        projectFundingCurrent :{
+            required : true
         }
     },  
     messages : {  
@@ -194,7 +201,10 @@ $(document).ready(function(){
         },  
         projectKeyword : {  
             required : "请输入项目slogan"  
-        },  
+        },
+        projectStage : {
+            required: "请选择项目阶段"
+        },
         projectDescription : {  
             required : "请输入项目介绍"  
         },
@@ -205,7 +215,11 @@ $(document).ready(function(){
             required : "请选择在项目的角色",
         },
         projectLocation:{
+            required:"请输入项目所在城市",
             remote:"请输入合法城市，如无匹配，请输入其他"
+        },
+        projectFundingCurrent:{
+            required:"请选择融资情况"
         }
     },  
     highlight : function(element) {  
