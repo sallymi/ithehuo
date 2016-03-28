@@ -3,6 +3,8 @@ var config = {
   host: 'ithehuo.com',
   admin: ['sallymi_82@126.com','jiaji1104@126.com','liubaoshu@helloworld-cafe.com', 'vincevenwang@163.com','wswjylq@163.com'],
   secret: 'SVTlkIjkvJnkuro=',
+  oss: '',//'http://7xs7p3.com1.z0.glb.clouddn.com',
+  limit: 20,
   sms: {
     production:{
       ID:'23298060',
@@ -710,7 +712,7 @@ config.filters.recruitments =
     }]
   }, {
     item: 'recruitments',
-    name: '合伙类别',
+    name: '项目阶段',
     key: 'project.stage',
     values: ['想法构思', '正在实现', '测试版已发布', '正式版已发布']
   }, {
@@ -830,7 +832,7 @@ config.filters.users =
     }]
   }, {
     item: 'users',
-    name: '是校友',
+    name: '校友',
     key: 'schoolmates',
     values: [{
       name: '是校友',
@@ -841,7 +843,7 @@ config.filters.users =
     }]
   }, {
     item: 'users',
-    name: '是老乡',
+    name: '老乡',
     key: 'fellow',
     values: [{
       name: '是老乡',
@@ -852,7 +854,7 @@ config.filters.users =
     }]
   }, {
     item: 'users',
-    name: '前同事',
+    name: '同事',
     key: 'exworkmate',
     values: [{
       name: '前同事',

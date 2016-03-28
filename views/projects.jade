@@ -7,16 +7,16 @@ block content
   link(rel='stylesheet', href='/css/error.css')
   //- link(href="http://v3.jiathis.com/code/css/jiathis_counter.css" rel="stylesheet" type="text/css")
   //- link(href="http://v3.jiathis.com/code/css/jiathis_share.css" rel="stylesheet" type="text/css")
-  include search.jade
   .container-fluid.list-show#projects
     .row
-      .col-lg-2.col-md-2.col-sm-12.col-xs-12.padding-19
+      .col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19
         if filters
           .siderNav
             include mixin/filter.jade
             each filter in filters
               +filter(filter)
-      .col-lg-10.col-md-10.col-sm-12.col-xs-12
+      .col-lg-9.col-md-9.col-sm-12.col-xs-12
+        include search.jade
         .well.transparent
           .panel
             .panel-body
@@ -27,21 +27,24 @@ block content
               each project in projects
                 li.col-xs-12.portfolio-item.span4.fix-height
                   .media
-                    .media-left.media-middle.col-md-5.picow
-                      img.media-object(src=project.logo_img, width='100%')
+                    .media-left.media-middle.col-md-5.col-xs-5.picow
+                      if project.logo_img&&project.logo_img.indexOf('upload_portfolio')!==-1
+                        img.media-object(src=project.logo_img, width='100%')
+                      else
+                        .logo=project.name.substring(0,1)
                       if project.recruitments && project.recruitments.length > 0
                         a(href='/recruitments?project=' + project._id)
                           .state='合伙人招募中'
-                    .media-body.col-md-7
+                    .media-body.col-md-7.col-xs-7
                       input#pid(type='hidden' value=project._id)
                       h5.media-heading.mb10
                         a(href= '/projects/' + project._id)
                           strong= project.name
                       .row
-                        .small.col-md-6
+                        .small.col-md-6.col-xs-12(style='padding-right:0')
                           i.fa.fa-map-marker.r5
                           em.c7.f14=project.location
-                        .jiathis_style.col-md-6.hidden-xs
+                        .jiathis_style.col-md-6.hidden-xs(style='padding-left:0')
                           a.jiathis.jiathis_txt(href="http://www.jiathis.com/share" target="_blank")
                             img(src='http://v3.jiathis.com/code/images/btn/v1/jiathis1.gif' border="0")
                       script(type='text/javascript').
@@ -66,9 +69,9 @@ block content
                         em.c7= '融资回报：'
                         =project.funding.next.return
 
-                  .col-md-12.insvestemt
+                  .col-md-12.col-xs-12.insvestemt
                     p.c7.f13=project.keyword
-                  .col-md-12
+                  .col-md-12.col-xs-12
                       i.fa.fa-map-marker
                       em.c7.f13.r26=project.location
                       i.fa.fa-tags
@@ -76,7 +79,7 @@ block content
                       i.fa.fa-thumbs-o-up(id=project.id).like
                         span.like-number
                           em.c7.f13=project.like
-                  .col-md-12
+                  .col-md-12.col-xs-12
                       i.fa.fa-clock-o
                       em.c7.f13
                         include mixin/util

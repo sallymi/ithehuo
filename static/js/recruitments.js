@@ -21,9 +21,11 @@ $(function(){
  //        // }, 100);
  //    });
     $("[rel=drevil]").on("mouseenter", function(evt){
+    	$(this).children().addClass('active');
     	$('#'+evt.currentTarget.attributes.getNamedItem('name').value).css({"top":evt.currentTarget.offsetTop});
     	$('#'+evt.currentTarget.attributes.getNamedItem('name').value).removeClass('dn');
     }).on("mouseleave", function(evt){
+    	$(this).children().removeClass('active')
     	$('#'+evt.currentTarget.attributes.getNamedItem('name').value).addClass('dn');
     })
 })

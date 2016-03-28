@@ -12,7 +12,7 @@
 }
 .my_jobs li {
   margin-bottom: 30px;
-  border-left: 3px solid #91cebe;
+  border-left: 3px solid #3498db;
   padding: 2px 10px 2px 15px;
   background: #fff;
   overflow: hidden;
@@ -24,7 +24,7 @@
 }
 .my_jobs h3 a {
   font-size: 18px;
-  color: #019875;
+  color: #3498db;
 }
 .my_jobs h3 span {
   color: #999;
@@ -62,5 +62,5 @@ mark.small {
   color: red;
 }
 .badge {
-	background-color: #f37b1d;
+	background-color: red;
 }

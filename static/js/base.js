@@ -63,8 +63,11 @@ function updateUnreadMessagesCount() {
   getUnreadMessagesCount(uid)
     .done(function (count) {
     	if (count > 0) {
-    		$('#unreadMessagesCount').text(count);
-    	}
+    		// $('#unreadMessagesCount').text(count);
+        $('#unreadMessagesCount').show();
+    	}else{
+        $('#unreadMessagesCount').hide();
+      }
     })
     .fail(function (err) {
       console.error(err);
@@ -79,8 +82,13 @@ function updateRequestListCount() {
   getFriendRequestCount(uid)
     .done(function (count) {
     	if (count >0){
-    		$('#reminder').text('New');
-      	$('#RequestCount').text('New');
+    		// $('#reminder').text('New');
+      // 	$('#RequestCount').text('New');
+        $('#reminder').show();
+        $('#RequestCount').show();
+      }else{
+        $('#reminder').hide();
+        $('#RequestCount').hide();
       }
     })
     .fail(function (err) {
@@ -115,7 +123,37 @@ function processMessage(msg) {
   }
   return result;
 }
+$(document).ready(function () {
+  $('ul.nav > li').click(function (e) {
+    //e.preventDefault();
+  $('ul.nav > li').removeClass('active');
+    $(this).addClass('active');
+  });
+  if(location.href.indexOf("recruitments") !== -1){
+    $('.entry-btn').attr('href','/users');
+    $('.entry-btn').text('进入企业版');
+    $('.actionBtn a').attr('href','/new/recruitment');
+    $('.actionBtn a').text('发布合伙需求')
+    $('ul.nav > li.recruitments').addClass('active');
+  }
+  if(location.href.indexOf("users") !== -1){
+    $('.entry-btn').attr('href','/recruitments');
+    $('.entry-btn').text('进入个人版');
+    $('.actionBtn a').attr('href','/home');
+    $('.actionBtn a').text('成为专业人才')
+    $('ul.nav > li.users').addClass('active');
+  }
 
+  if(location.href.indexOf("projects") !== -1){
+    $('.actionBtn a').attr('href','/new/project');
+    $('.actionBtn a').text('发布项目');
+    $('ul.nav > li.projects').addClass('active');
+  }
+  if(location.href.indexOf("messages") !== -1){
+    $('ul.nav > li.messages').addClass('active');
+  }
+
+});
 $(function () {
   // update the unread messages
   var uid = $('#uid').val();
@@ -222,7 +260,7 @@ $(function () {
             title:'完善个人信息！',
             text:'完善个人信息，让更多创业者找到你',
             icon: 'fa fa-envelope-o',
-            type: 'success',
+            type: 'info',
             hide: false,
             confirm: {
               confirm: true,
@@ -355,5 +393,8 @@ $(function () {
     }
     return flag;
   }
+
+
+
 });
 

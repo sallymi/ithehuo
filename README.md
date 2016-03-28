@@ -36,7 +36,7 @@ git clone https://git.oschina.net/tala/ithhr.git
 ==========create ithhr image=============
 cd ithhr
 docker build -t ithhr .
-the Dockerfile will get node image for use, and expose 8005 port
+the Dockerfile will get node image for use, and expose 3000 port
 
 =========start db container==============
 docker run -d --name db mongo
@@ -45,7 +45,7 @@ docker run -d --name db -v /root/data:/data/db/ mongo
 //data is persistent
 
 =========start ithhr container=============
-docker run -it -d -p 8005:8005 --name ithhr --link db:db ithhr
+docker run -it -d -p 3000:3000 --name ithhr --link db:db ithhr
 
 =========check status====================
 docker images:
@@ -65,4 +65,4 @@ CONTAINER ID        IMAGE               COMMAND                CREATED          
 3. create a new image version
 docker build -t ithhr:0.1 .
 4. create a new ithhr:0.1 container
-docker run -it -d -p 8005:8005 --name ithhr --link db:db ithhr:0.1
+docker run -it -d -p 3000:3000 --name ithhr --link db:db ithhr:0.1

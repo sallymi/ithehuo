@@ -71,6 +71,7 @@ $(function () {
       $('.user-logo-image').modal('hide');
     }else{
       $('#user_logo')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
+      $('#user_logo1')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
       $('.user-logo-image').modal('hide');
     }
     
@@ -581,7 +582,7 @@ $(document).ready(function(){
             show_pic.Jcrop({
               onChange: updateXYWH,
               onSelect: updateXYWH,
-              boxWidth: 850,
+              boxWidth: 300,
               aspectRatio: 1,
               setSelect: [ x, y, x1, y1 ]
             },function(){
@@ -611,7 +612,8 @@ $(document).ready(function(){
     jcrop_api.destroy();
   });
   $('#submit').click(function(){
-    $("#uploadButton").prop('disabled','disabled').text('上传中……');
+    $("#upload").prop('disabled','disabled').text('上传中……');
+    $("#upload1").prop('disabled','disabled').text('上传中……');
     $('.user-avatar-upload').modal('hide');
     var data = new FormData();
     var files = $('#files')[0].files;
@@ -637,11 +639,13 @@ $(document).ready(function(){
       if(res.errCode!=0){
         globalNotify.failed(res.msg);
       }else{
-        $("#uploadButton").prop('disabled','').text('本地上传');
+        $("#upload").prop('disabled','').text('更换头像');
+        $("#upload1").prop('disabled','').text('更换头像');
         jcrop_api.destroy();
         globalNotify.success("上传成功")
         jcrop_api.destroy();
         $("#user_logo").attr('src',res.url);
+        $("#user_logo1").attr('src',res.url);
       }
     }).fail(function(res){
       globalNotify.failed(JSON.stringify(res))

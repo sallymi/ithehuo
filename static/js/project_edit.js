@@ -267,7 +267,7 @@ $(document).ready(function(){
 	        confirm: {
 	        	confirm: true,
 	        	buttons: [{
-	        		text: '发布合伙人招募',
+	        		text: '发布合伙需求',
 	        		addClass: 'btn-primary',
 	        		click: function(notice){
 	        			window.location.href = '/new/recruitment';
@@ -356,7 +356,7 @@ $(document).ready(function(){
                         show_pic_p.Jcrop({
                             onChange: updateXYWH,
                             onSelect: updateXYWH,
-                            boxWidth: 850,
+                            boxWidth: 300,
                             aspectRatio: 1,
                             setSelect: [ x, y, x1, y1 ]
                         },function(){
@@ -386,7 +386,7 @@ $(document).ready(function(){
         jcrop_api_p.destroy();
     })
     $('#submit').click(function(){
-        $('#uploadButton').prop('disabled','disabled').text('上传中');
+        $('#upload').prop('disabled','disabled').text('上传中……');
         $('.project-logo-upload').modal('hide');
         var data = new FormData();
         var files = $('#files')[0].files;
@@ -413,7 +413,7 @@ $(document).ready(function(){
                 globalNotify.failed(res.msg);
             }else{
                 globalNotify.success("上传成功");
-                $('#uploadButton').prop('disabled','').text('本地上传');
+                $('#upload').prop('disabled','').text('更换logo');
                 jcrop_api_p.destroy();
                 $("#project_logo").attr('src',res.url);
             }

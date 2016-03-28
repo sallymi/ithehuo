@@ -3,3 +3,7 @@ node_modules/
 *.log
 *.sublime-workspace
 *.sublime-project
+Assest/
+public/images/upload_avatars/
+public/images/upload_portfolio/
+public/images/temp/

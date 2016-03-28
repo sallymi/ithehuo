@@ -1,5 +1,5 @@
-script(type='text/javascript',src='/javascripts/typeahead.bundle.js')
-script(type='text/javascript',src='/javascripts/handlebars-v3.0.3.js')
+script(type='text/javascript',src='https://cdn.bootcss.com/typeahead.js/0.11.1/typeahead.bundle.min.js')
+script(type='text/javascript',src='https://cdn.bootcss.com/handlebars.js/3.0.3/handlebars.min.js')
 script(src='/javascripts/jquery.Jcrop.min.js')
 script(src='/javascripts/jquery-ui.min.js')
 script(src='/javascripts/jquery.tag-editor.min.js')
@@ -62,10 +62,11 @@ link(rel='stylesheet', href='/css/project_edit.css')
             - var Arr = ["cabin-160","cake-160","eCommerce-160","plane-160","safe-160","social-160","social2-160","submarine-160","vision-160","finice-160","cloud-160","bigdata-160"];
             - var n = Math.floor(Math.random() * Arr.length + 1)-1; 
             img#project_logo.img-responsive(src=project && project.logo_img ? project.logo_img:"/images/portfolio/"+Arr[n]+".png")
-            button.btn.btn-primary(type='button' data-toggle='modal', data-target='.bs-example-modal-sm') 更换logo
+
+            button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.bs-example-modal-sm') 更换logo
             input#files(type='file', name='img', multiple='')
             //button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 本地上传
-            button.btn.btn-primary#uploadButton(type='button' ) 本地上传
+            //- button.btn.btn-info.btn-block#uploadButton(type='button' ) 更换logo
       .panel
         .panel-heading='相关内容'
         .panel-body
@@ -165,7 +166,7 @@ link(rel='stylesheet', href='/css/project_edit.css')
                 +radio('projectCreatorRole', '合伙人', project && project.creator && project.creator.role, 'required')
                 +radio('projectCreatorRole', '投资人', project && project.creator && project.creator.role, 'required')
       .form-group.col-xs-12.text-center
-        button(type='submit').btn.btn-info 保存并发布
+        button(type='submit').btn.btn-info.btn-block 保存并发布
       br
 .modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
   .modal-dialog.modal-sm
@@ -207,8 +208,8 @@ link(rel='stylesheet', href='/css/project_edit.css')
           a.thumbnail(href='#')
             img(src='/images/portfolio/cloud-160.png')
         .col-xs-6.col-md-3
-          a.thumbnail(href='#')
-            img(src='/images/portfolio/bigdata-160.png')
+          a.thumbnail#uploadButton
+              img(src='/images/add.png')
       .modal-footer
 
 .modal.fade.project-logo-upload(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")

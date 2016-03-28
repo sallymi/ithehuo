@@ -21,7 +21,7 @@ var adminRouter = require('./admin');
 
 var router = express.Router();
 
-router.use(['/new', '/home', '/users', '/recruitments/*', '/questions/ask', '/messages', '/chat'], auth.signinAuth);
+router.use(['/new', '/home', '/users/*', '/recruitments/*', '/questions/ask', '/messages', '/chat'], auth.signinAuth);
 router.use(['/admin'], auth.signinAuthforAdmin);
 router.use('/', sanitizer.sanitizeFilter);
 
@@ -48,6 +48,7 @@ router.post('/reset-password', signin.resetPassword);
 router.post('/reset-mobile-password/:phone',signin.resetMobilePassword);
 // user
 router.get('/users', user.getUsers);
+router.get('/usersAjax', user.getUsersAjax);
 router.get('/users/:uid', user.getUser);
 router.put('/users/:uid', user.updateUser);
 router.post('/users/avatar/upload',user.updateAvatar);

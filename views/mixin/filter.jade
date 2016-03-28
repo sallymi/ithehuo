@@ -4,7 +4,7 @@ mixin filterLink(item, query, name)
 mixin sideFilter(filter)
   if filter
     .menu_main
-      h2=filter.name
+      p(style='color: #333;font-size: 18px;padding-left: 0px;font-weight: 500;text-align: left;')=filter.name
         if filter.categories
           span
       if filter.values
