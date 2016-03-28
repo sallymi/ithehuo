@@ -7,6 +7,7 @@
     width: auto;
     z-index: 1000;
   }
+  
   .contentCtn {
     /*position: fixed;
     top: 112px;*/
@@ -105,6 +106,10 @@
     display: none;
     color: #ffffff;
   }
+  .for-small{
+    display: none;
+
+  }
 
 
 }
@@ -115,6 +120,23 @@
 
   .navbar .container .btn {
     margin: 5px 10px;
+  }
+  .mobile-nav a.active {
+    background: #fff;
+    color: #333333;
+    cursor: default;
+  }
+  .mobile-nav a {
+    display: block;
+    height: 43px;
+    line-height: 43px;
+    text-align: center;
+    border-bottom: solid 1px #cddce7;
+    background: #f3f6f8;
+    float: left;
+    border-right: solid 1px #cddce7;
+    color: #4b5d69;
+    font-size: 14px;
   }
 	 #recruitmentForm .col-sm-4, #detailForm .col-sm-4, #userProfileForm .col-sm-4, #questionForm .col-sm-4{
 	  text-align: left;
@@ -147,6 +169,9 @@
   .actionBtn{
     padding-top: 10px;
   }
+  .for-large {
+    display: none;
+  }
 }
 body{
   background: #fff;
@@ -160,6 +185,9 @@ body{
     background-color: #fafafa;
         padding: 0;
 }
+.navbar-default .navbar-toggle, .navbar-default .navbar-toggle{
+  background-color: #1a242f;
+}
 .navbar-default .navbar-nav>li>a{
   color: #999;
 }
@@ -171,6 +199,9 @@ body{
 }
 a.entry-btn.for-small{
   color: #999;
+  float: right;
+  margin-top: 20px;
+  margin-right: 10px;
 }
 a.entry-btn.for-small:hover{
   color:rgba(52,152,219,1);

@@ -135,6 +135,7 @@ $(document).ready(function () {
     $('.actionBtn a').attr('href','/new/recruitment');
     $('.actionBtn a').text('发布合伙需求')
     $('ul.nav > li.recruitments').addClass('active');
+    $('.mobile-nav > a.recruitments').addClass('active');
   }
   if(location.href.indexOf("users") !== -1){
     $('.entry-btn').attr('href','/recruitments');
@@ -142,12 +143,14 @@ $(document).ready(function () {
     $('.actionBtn a').attr('href','/home');
     $('.actionBtn a').text('成为专业人才')
     $('ul.nav > li.users').addClass('active');
+    $('.mobile-nav > a.users').addClass('active');
   }
 
   if(location.href.indexOf("projects") !== -1){
     $('.actionBtn a').attr('href','/new/project');
     $('.actionBtn a').text('发布项目');
     $('ul.nav > li.projects').addClass('active');
+    $('.mobile-nav > a.projects').addClass('active');
   }
   if(location.href.indexOf("messages") !== -1){
     $('ul.nav > li.messages').addClass('active');
