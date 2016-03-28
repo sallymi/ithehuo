@@ -4,20 +4,43 @@ block append link
 block append script
   //- script(src='/javascripts/jquery.js')
 block content
-  include search.jade
+  //- include search.jade
   <!--header-->
   .section.banner
-    .jumbotron.wrapper
-      .container
+    .jumbotron.wrapper.visible-xs(style='height:310px')
+      img.outlook-img(src='images/team.png')
+      div.color-overlay
+      div.signup-left
+        h3 IT合伙人
+        p 在这里找到创业小伙伴
+        .row(style='margin-left:20px')
+          button.btn.btn-info.center-block.btn-block(style='border-color:#fff; border-bottom:0; margin-bottom:0; ',onclick='window.location.href="/home"')  成为专业人才
+          button.btn.btn-info.center-block.btn-block(style='border-color:#fff; border-bottom:0;margin-top:0',onclick='window.location.href="/new/recruitment"')  发布合伙需求
+          button.btn.btn-info.center-block.btn-block(style='border-color:#fff;margin-top:0',onclick='window.location.href="/new/project"')  发布创业项目
+    //- .jumbotron.wrapper.visible-xs(style='background: url("images/team.png" ) no-repeat center 0px; ')
+    //-   .container
+    //-     .row
+    //-       .col-sm-4
+    //-         h1 IT合伙人
+    //-         h4 在这里找到创业小伙伴
+    //-     .row
+    //-       button.btn.btn-info.center-block.btn-block(style='border-color:#fff; border-bottom:0; margin-bottom:0; ',onclick='window.location.href="/home"')  成为专业人才
+    //-       button.btn.btn-info.center-block.btn-block(style='border-color:#fff; border-bottom:0;margin-top:0',onclick='window.location.href="/new/recruitment"')  发布合伙需求
+    //-       button.btn.btn-info.center-block.btn-block(style='border-color:#fff;margin-top:0',onclick='window.location.href="/new/project"')  发布创业项目
+    .jumbotron.wrapper.hidden-xs
+      .container.hidden-xs
         .row
-          .col-sm-4
+          .col-sm-4.hidden-xs
             img.img-responsive.center-block(src='images/profile.png', alt='', width='65%')
           .col-sm-4
             h1 IT合伙人
             h4 在这里找到创业小伙伴
-          .col-sm-4
+          .col-sm-4.hidden-xs
             img.img-responsive.center-block(src='images/team.png', alt='')
-        .row
+          .col-sm-4.visible-xs
+            img.img-responsive.center-block(src='images/team.png', alt='', width='80%', style='opacity: 0.5;')
+        
+        .row.hidden-xs  
           if signinUser
             button.btn.btn-info.center-block(style='border-color:#fff',onclick='window.location.href="/new/recruitment"')  立刻发布合伙需求
           else

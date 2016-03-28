@@ -22,14 +22,14 @@ block navbar
         //-   img(src='/images/head-shu.png')
         //- span.head-descript
         //-   img(src='/images/logo-desc.png', style="width:140px;")
-      ul.nav.navbar-nav.navbar-left.for-large
+      ul.nav.navbar-nav.navbar-left.hidden-xs
         li.users
           a(href='/users') 专业人才
         li.recruitments
           a(href='/recruitments') 合伙需求
         li.projects
           a(href='/projects') 创业项目
-      ul.nav.navbar-nav.navbar-right.for-large
+      ul.nav.navbar-nav.navbar-right.hidden-xs
         if (signinUser)
           li.messages
             a(href='/messages' style＝'position:relative;') 消息
@@ -74,7 +74,7 @@ block navbar
           li
             a.entry-btn(href='/users') 进入企业版
       #bs-example-navbar-collapse.collapse.navbar-collapse
-        ul.nav.navbar-nav.navbar-right.for-small
+        ul.nav.navbar-nav.navbar-right.visible-xs
           if(signinUser)
             li
               a(href='/home/recruitments') 我发布的合伙需求
@@ -128,7 +128,7 @@ block navbar
       //-   input.form-control(type='text', value='搜索创业项目/合伙工作机会/话题')
       //-   span.input-group-btn
       //-     button.btn.btn-default(type='button')='搜索!'
-    .mobile-nav.row.for-small(style='margin:0;')
+    .mobile-nav.row.visible-xs(style='margin:0;')
       a.users.tab.col-xs-4(href='/users') 专业人才
       a.recruitments.tab.col-xs-4(href='/recruitments') 合伙需求
       a.projects.tab.col-xs-4(href='/projects') 创业项目
