@@ -372,7 +372,7 @@ $(document).ready(function(){
         jcrop_api_p.destroy();
     })
     $('#submit').click(function(){
-        $('#uploadButton').prop('disabled','disabled').text('上传中');
+        $('#upload').prop('disabled','disabled').text('上传中……');
         $('.project-logo-upload').modal('hide');
         var data = new FormData();
         var files = $('#files')[0].files;
@@ -399,7 +399,7 @@ $(document).ready(function(){
                 globalNotify.failed(res.msg);
             }else{
                 globalNotify.success("上传成功");
-                $('#uploadButton').prop('disabled','').text('本地上传');
+                $('#upload').prop('disabled','').text('更换logo');
                 jcrop_api_p.destroy();
                 $("#project_logo").attr('src',res.url);
             }

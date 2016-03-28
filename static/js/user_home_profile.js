@@ -613,6 +613,7 @@ $(document).ready(function(){
   });
   $('#submit').click(function(){
     $("#upload").prop('disabled','disabled').text('上传中……');
+    $("#upload1").prop('disabled','disabled').text('上传中……');
     $('.user-avatar-upload').modal('hide');
     var data = new FormData();
     var files = $('#files')[0].files;
@@ -639,6 +640,7 @@ $(document).ready(function(){
         globalNotify.failed(res.msg);
       }else{
         $("#upload").prop('disabled','').text('更换头像');
+        $("#upload1").prop('disabled','').text('更换头像');
         jcrop_api.destroy();
         globalNotify.success("上传成功")
         jcrop_api.destroy();

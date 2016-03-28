@@ -21,7 +21,7 @@ block user_home_content
           h4='头像'
           img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
           .visible-md-inline-blockk
-            button.btn.btn-info.btn-block(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+            button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
             //- button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload') 
         .col-lg-7
           .row.form-group
@@ -159,7 +159,7 @@ block user_home_content
             h4='头像'
             img#user_logo1.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
             div
-              button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+              button.btn.btn-info.btn-block#upload1(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
               input#files(type='file', name='img', multiple='')
               //button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 本地上传
               //button.btn.btn-info.btn-block#uploadButton(type='button' ) 本地上传

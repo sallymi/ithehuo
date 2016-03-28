@@ -5,3 +5,5 @@ node_modules/
 *.sublime-project
 Assest/
 public/images/upload_avatars/
+public/images/upload_portfolio/
+public/images/temp/
