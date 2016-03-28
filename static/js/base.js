@@ -149,6 +149,9 @@ $(document).ready(function () {
     $('.actionBtn a').text('发布项目');
     $('ul.nav > li.projects').addClass('active');
   }
+  if(location.href.indexOf("messages") !== -1){
+    $('ul.nav > li.messages').addClass('active');
+  }
 
 });
 $(function () {

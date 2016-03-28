@@ -1,5 +1,6 @@
 extends base
 block content
+  link(rel='stylesheet', href='/css/recruitments.css')
   include search.jade
   .container-fluid#portfolio
     .row
@@ -9,7 +10,11 @@ block content
             .panel-body
               .row
                 .col-md-3
-                  img.img-responsive(src=project.logo_img)
+                  if project.logo_img&&project.logo_img.indexOf('upload_portfolio')!==-1
+                    img.img-responsive(src=project.logo_img, width='100%')
+                  else
+                    .logo(style='padding-top:5px')=project.name.substring(0,1)
+                  //- img.img-responsive(src=project.logo_img)
                 .col-md-9
                   h3= project.name
                   p= project.keyword

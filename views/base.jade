@@ -45,7 +45,7 @@ block navbar
           //-         span.badge#unreadMessagesCount
         ul.nav.navbar-nav.navbar-right
           if (signinUser)
-            li
+            li.messages
               a(href='/messages' style＝'position:relative;') 消息
                 i#unreadMessagesCount(style='display:none')
               //- a(href='/messages')
@@ -63,24 +63,24 @@ block navbar
                 span.ellipsis
                   - var dN = (signinUser.name ? signinUser.name : (signinUser.email ? signinUser.email.split('@')[0] : signinUser.mobile_phone.toString().substring(0,3)+"****"+signinUser.mobile_phone.toString().substring(8,11)))
                   a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=dN
-                  ul.dropdown-menu(role="menu")
-                    li
-                      a(href='/home/recruitments') 我发布的合伙需求
-                    li
-                      a(href='/home/projects') 我的创业项目
-                    li
-                      a(href='/home/friends') 我的好友申请
-                        i#RequestCount(style='display:none')
-                    li
-                      a(href='/home') 我的个人信息
-                    li
-                      a(href='/home/followings') 我的关注
-                    li
-                      a(href='/home/friends') 我的好友
-                    li
-                      a(href='/home/settings/password') 我的账号设置
-                    li
-                      a(href='/signout') 退出
+                    ul.dropdown-menu(role="menu")
+                      li
+                        a(href='/home/recruitments') 我发布的合伙需求
+                      li
+                        a(href='/home/projects') 我的创业项目
+                      li
+                        a(href='/home/friends') 我的好友申请
+                          i#RequestCount(style='display:none')
+                      li
+                        a(href='/home') 我的个人信息
+                      li
+                        a(href='/home/followings') 我的关注
+                      li
+                        a(href='/home/friends') 我的好友
+                      li
+                        a(href='/home/settings/password') 我的账号设置
+                      li
+                        a(href='/signout') 退出
             li
               a.entry-btn(href='/users') 进入企业版
           else
@@ -91,16 +91,16 @@ block navbar
             li
               a.entry-btn(href='/users') 进入企业版
       .navbar-collapse.for-small
-        ul.nav.navbar-nav.navbar-left
+        ul.nav.navbar-nav
           //- li.page-scroll
           //-   a.btn.btn-lg.btn-info(href='/new/project') 发布项目
           //- li.page-scroll
           //-   a.btn.btn-lg.btn-info(href='/new/recruitment') 发布合伙人招募
-          li.page-scroll
+          li.users
             a(href='/users') 专业人才
-          li.page-scroll
+          li.recruitments
             a(href='/recruitments') 合伙需求
-          li.page-scroll
+          li.projects
             a(href='/projects') 创业项目
           //- li.page-scroll
           //-   a(href='/questions')="创业问答"

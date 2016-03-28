@@ -10,9 +10,10 @@ block content
               .row
                 .col-md-12
                   h3
-                    span.f20= '开放职位 ' 
-                    span.c9c=(recruitment && recruitment.classify)
-                  p.f13= '所在项目: ' + (recruitment && recruitment.project && recruitment.project.name)
+                    //- span.f20= '合伙需求 ' 
+                    span=(recruitment && recruitment.classify)
+                  a(href='/projects/'+recruitment.project.id)
+                    p.f13= '所在项目: ' + (recruitment && recruitment.project && recruitment.project.name)
                   p.f13= '职位诱惑: ' + (recruitment && recruitment.keyword)
                   p.f13= 'Slogan: '+ (recruitment.project&&recruitment.project.keyword)
                   include mixin/util

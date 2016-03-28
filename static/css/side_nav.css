@@ -8,10 +8,19 @@
   	background: #fafafa;
   	//width: 230px;
 }
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
-    color: #999;
-    background-color: transparent;
-    border-bottom: 4px solid #3498db;
+@media(min-width:768px) {
+  .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+      color: #999;
+      background-color: #fff;
+      border-bottom: 4px solid #3498db;
+  }
+}
+@media(max-width:767px) {
+  .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+      color: #333;
+      background-color: #e9eaec;
+      /*border-bottom: 4px solid #3498db;*/
+  }
 }
 .siderNav .menu_main {
   //width: 206px;

@@ -14,7 +14,7 @@
     left: 0;
     right: 0;
     width: auto;
-    overflow: auto;
+    overflow: hidden;
   }
   
   .navbar .container .btn {
@@ -147,6 +147,7 @@
 }
 body{
   background: #fff;
+  overflow-x:hidden; 
 }
 .navbar-brand {
     padding: 7px;
@@ -157,6 +158,9 @@ body{
 }
 .navbar-default .navbar-nav>li>a{
   color: #999;
+}
+.navbar-default .navbar-nav>li>a.btn{
+  color: #fff;
 }
 .navbar-default .navbar-nav>li>a:hover, .navbar-nav>li>a:active{
   color:rgba(52,152,219,1);
@@ -356,6 +360,9 @@ em {
 }
 .c9 {
   color: #999;
+}
+.cdb {
+  color: #3498db;
 }
 .c9c {
   color: #18bc9c;
