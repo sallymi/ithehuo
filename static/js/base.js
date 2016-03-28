@@ -133,7 +133,7 @@ $(document).ready(function () {
     $('.entry-btn').attr('href','/users');
     $('.entry-btn').text('进入企业版');
     $('.actionBtn a').attr('href','/new/recruitment');
-    $('.actionBtn a').text('发布合伙人招募')
+    $('.actionBtn a').text('发布合伙需求')
     $('ul.nav > li.recruitments').addClass('active');
   }
   if(location.href.indexOf("users") !== -1){

@@ -253,7 +253,7 @@ $(document).ready(function(){
 	        confirm: {
 	        	confirm: true,
 	        	buttons: [{
-	        		text: '发布合伙人招募',
+	        		text: '发布合伙需求',
 	        		addClass: 'btn-primary',
 	        		click: function(notice){
 	        			window.location.href = '/new/recruitment';

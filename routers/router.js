@@ -21,7 +21,7 @@ var adminRouter = require('./admin');
 
 var router = express.Router();
 
-router.use(['/new', '/home', '/users', '/recruitments/*', '/questions/ask', '/messages', '/chat'], auth.signinAuth);
+router.use(['/new', '/home', '/users/*', '/recruitments/*', '/questions/ask', '/messages', '/chat'], auth.signinAuth);
 router.use(['/admin'], auth.signinAuthforAdmin);
 router.use('/', sanitizer.sanitizeFilter);
 
