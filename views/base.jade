@@ -46,11 +46,14 @@ block navbar
         ul.nav.navbar-nav.navbar-right
           if (signinUser)
             li
-              a(href='/messages')
-                i.fa.fa-envelope-o 消息
-                  span.badge#unreadMessagesCount
+              a(href='/messages' style＝'position:relative;') 消息
+                i#unreadMessagesCount(style='display:none')
+              //- a(href='/messages')
+              //-   i.fa.fa-envelope-o 消息
+              //-     span.badge#unreadMessagesCount
             li
-              span.badge.am-badge.am-badge-warning#reminder
+              span(style＝'position:relative;')
+                i#reminder(style='display:none')
               //- a#login-button1.btn.btn-account(role="button" data-trigger="focus" data-toggle="popover" data-original-title title data-placement="bottom" tabindex="0")
               .dropdown#login-button.btn.btn-account
                 if(signinUser.logo_img)
@@ -62,14 +65,18 @@ block navbar
                   a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=dN
                   ul.dropdown-menu(role="menu")
                     li
-                      a(href='/home/recruitments') 我的小伙伴招募
+                      a(href='/home/recruitments') 我发布的合伙需求
                     li
                       a(href='/home/projects') 我的创业项目
                     li
                       a(href='/home/friends') 我的好友申请
-                        span.badge#RequestCount
+                        i#RequestCount(style='display:none')
                     li
                       a(href='/home') 我的个人信息
+                    li
+                      a(href='/home/followings') 我的关注
+                    li
+                      a(href='/home/friends') 我的好友
                     li
                       a(href='/home/settings/password') 我的账号设置
                     li
@@ -105,7 +112,7 @@ block navbar
         ul.nav.navbar-nav.navbar-right
           if (signinUser)
             li
-              a(href='/home/recruitments') 我的小伙伴招募
+              a(href='/home/recruitments') 我发布的合伙需求
             li
               a(href='/home/projects') 我的创业项目
             li
@@ -113,6 +120,10 @@ block navbar
                 span.badge#RequestCount
             li
               a(href='/home') 我的个人信息
+            li
+              a(href='/home/followings') 我的关注
+            li
+              a(href='/home/friends') 我的好友
             li
               a(href='/home/settings/password') 我的账号设置
             li

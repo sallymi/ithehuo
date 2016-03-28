@@ -832,7 +832,7 @@ config.filters.users =
     }]
   }, {
     item: 'users',
-    name: '是校友',
+    name: '校友',
     key: 'schoolmates',
     values: [{
       name: '是校友',
@@ -843,7 +843,7 @@ config.filters.users =
     }]
   }, {
     item: 'users',
-    name: '是老乡',
+    name: '老乡',
     key: 'fellow',
     values: [{
       name: '是老乡',
@@ -854,7 +854,7 @@ config.filters.users =
     }]
   }, {
     item: 'users',
-    name: '前同事',
+    name: '同事',
     key: 'exworkmate',
     values: [{
       name: '前同事',

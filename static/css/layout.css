@@ -33,6 +33,37 @@
       background: red;
       color: white;
   }
+  .navbar i {
+    display: block;
+    background: #f00;
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    top: 19px;
+    right: 10px;
+    position: absolute;
+  }
+  #reminder{
+    display: block;
+    background: #f00;
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    top: 15px;
+    right: 5px;
+    position: absolute;
+    z-index: 1;
+  }
+  #RequestCount{
+    display: block;
+    background: #f00;
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    top: 62px;
+    right: 50px;
+    position: absolute;
+  }
   footer .footer-above {
     background-color: #e9eaec;
   }
@@ -488,9 +519,9 @@ small.error {
   outline: none;
   font-weight: normal;
 }
-.navbar-default .badge {
+/*.navbar-default .badge {
 	background-color: #f37b1d;
-}
+}*/
 .am-badge {
   font-size: 10px;
   padding: 2px;

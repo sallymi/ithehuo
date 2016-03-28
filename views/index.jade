@@ -19,9 +19,9 @@ block content
             img.img-responsive.center-block(src='images/team.png', alt='')
         .row
           if signinUser
-            button.btn.btn-info.center-block(style='border-color:#fff',onclick='window.location.href="/new/recruitment"')  立刻发布合伙人招募
+            button.btn.btn-info.center-block(style='border-color:#fff',onclick='window.location.href="/new/recruitment"')  立刻发布合伙需求
           else
-            button.btn.btn-info.center-block(style='border-color:#fff',onclick='window.location.href="/signin"')  立刻开启你的创业梦想
+            button.btn.btn-info.center-block(style='border-color:#fff',onclick='window.location.href="/signup"')  立刻开启你的创业梦想
   <!--IT人-->
   .section.private_promise
     .wrapper
@@ -53,9 +53,9 @@ block content
         .row(style="text-align: center;")
           if signinUser
             .btn-group(role="group")
-              button.btn.btn-info(onclick='window.location.href="/recruitments"')  立刻加入创业项目
+              button.btn.btn-info(onclick='window.location.href="/home"')  立刻成为专业人才
           else
-            button.btn.btn-info.center-block(onclick='window.location.href="/signin"')  立刻开启你的创业梦想
+            button.btn.btn-info.center-block(onclick='window.location.href="/home"')  立刻成为专业人才
   <!--introduction-section-->
   if recommends && recommends.length >0
     .section.browse_by_prod
@@ -131,9 +131,9 @@ block content
         .row(style="text-align: center;")
           if signinUser
             .btn-group(role="group")
-              button.btn.btn-info(onclick='window.location.href="/new/recruitment"')  立刻发布合伙人招募
+              button.btn.btn-info(onclick='window.location.href="/new/recruitment"')  立刻发布合伙需求
           else
-            button.btn.btn-info.center-block(onclick='window.location.href="/signin"')  立刻开启你的创业梦想
+            button.btn.btn-info.center-block(onclick='window.location.href="/new/recruitment"')  立刻发布合伙需求
      
   
   <!--projects-section-->
@@ -178,7 +178,7 @@ block content
                       span 发布IT合伙人招募信息
             .row
               .col-sm-5.col-sm-offset-1
-                button.btn.btn-info.center-block(onclick='window.location.href="/new/recruitment"')  立刻发布合伙人招募
+                button.btn.btn-info.center-block(onclick='window.location.href="/new/recruitment"')  立刻发布合伙需求
           .col-sm-6
             .row
               .col-sm-12   
@@ -193,7 +193,7 @@ block content
                     span 查找招募信息，找到合适的创始人和创业项目
             .row
               .col-sm-5.col-sm-offset-1
-                button.btn.btn-info.center-block(onclick='window.location.href="/recruitments"')  立刻加入创业项目
+                button.btn.btn-info.center-block(onclick='window.location.href="/home"')  立刻成为专业人才
               
   each item in hots
     include project_detail

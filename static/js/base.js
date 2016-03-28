@@ -63,8 +63,11 @@ function updateUnreadMessagesCount() {
   getUnreadMessagesCount(uid)
     .done(function (count) {
     	if (count > 0) {
-    		$('#unreadMessagesCount').text(count);
-    	}
+    		// $('#unreadMessagesCount').text(count);
+        $('#unreadMessagesCount').show();
+    	}else{
+        $('#unreadMessagesCount').hide();
+      }
     })
     .fail(function (err) {
       console.error(err);
@@ -79,8 +82,13 @@ function updateRequestListCount() {
   getFriendRequestCount(uid)
     .done(function (count) {
     	if (count >0){
-    		$('#reminder').text('New');
-      	$('#RequestCount').text('New');
+    		// $('#reminder').text('New');
+      // 	$('#RequestCount').text('New');
+        $('#reminder').show();
+        $('#RequestCount').show();
+      }else{
+        $('#reminder').hide();
+        $('#RequestCount').hide();
       }
     })
     .fail(function (err) {
