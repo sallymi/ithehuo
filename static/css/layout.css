@@ -109,6 +109,9 @@
 
 }
 @media(max-width:767px) {
+  .well {
+    padding: 0;
+  }
 
   .navbar .container .btn {
     margin: 5px 10px;

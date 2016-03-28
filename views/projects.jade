@@ -27,7 +27,7 @@ block content
               each project in projects
                 li.col-xs-12.portfolio-item.span4.fix-height
                   .media
-                    .media-left.media-middle.col-md-5.picow
+                    .media-left.media-middle.col-md-5.col-xs-5.picow
                       if project.logo_img&&project.logo_img.indexOf('upload_portfolio')!==-1
                         img.media-object(src=project.logo_img, width='100%')
                       else
@@ -35,13 +35,13 @@ block content
                       if project.recruitments && project.recruitments.length > 0
                         a(href='/recruitments?project=' + project._id)
                           .state='合伙人招募中'
-                    .media-body.col-md-7
+                    .media-body.col-md-7.col-xs-7
                       input#pid(type='hidden' value=project._id)
                       h5.media-heading.mb10
                         a(href= '/projects/' + project._id)
                           strong= project.name
                       .row
-                        .small.col-md-6(style='padding-right:0')
+                        .small.col-md-6.col-xs-12(style='padding-right:0')
                           i.fa.fa-map-marker.r5
                           em.c7.f14=project.location
                         .jiathis_style.col-md-6.hidden-xs(style='padding-left:0')
@@ -69,9 +69,9 @@ block content
                         em.c7= '融资回报：'
                         =project.funding.next.return
 
-                  .col-md-12.insvestemt
+                  .col-md-12.col-xs-12.insvestemt
                     p.c7.f13=project.keyword
-                  .col-md-12
+                  .col-md-12.col-xs-12
                       i.fa.fa-map-marker
                       em.c7.f13.r26=project.location
                       i.fa.fa-tags
@@ -79,7 +79,7 @@ block content
                       i.fa.fa-thumbs-o-up(id=project.id).like
                         span.like-number
                           em.c7.f13=project.like
-                  .col-md-12
+                  .col-md-12.col-xs-12
                       i.fa.fa-clock-o
                       em.c7.f13
                         include mixin/util
