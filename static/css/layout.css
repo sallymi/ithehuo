@@ -176,6 +176,7 @@
 body{
   background: #fff;
   overflow-x:hidden; 
+  font-family: "Hiragino Sans GB","Microsoft Yahei",SimSun,Arial,"Helvetica Neue",Helvetica;
 }
 
 .navbar-brand {
@@ -251,12 +252,25 @@ a, a:hover, a:focus, a:active, a.active{
 }
 .signup-left {
     position: absolute;
-    margin: 50px 0 30px;
-    left: 5%;
+    margin: 0px 0 30px;
+    left: 7.5%;
     z-index: 3;
     display: inline-block;
-    width: 40%;
+    width: 85%;
     min-width: 300px;
+}
+.signup-left h1 {
+  font-size: 47px;
+  font-weight: 700;
+}
+.signup-left span {
+    font-family: "Hiragino Sans GB","Microsoft Yahei",SimSun,Arial,"Helvetica Neue",Helvetica;
+    font-size: 40px;
+}
+
+.signup-left button::after  {
+    content: " ▸";
+}
 }
 /*a:hover{
   color:#3498db;
