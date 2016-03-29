@@ -36,6 +36,7 @@ router.get('/reset', signup.reset);
 router.put('/signup/reset/password', signup.changePassword);
 router.get('/sms/:phone', signup.sms);
 router.get('/getCaptcha', signup.captcha);
+router.post('/checkPhoneUsed', signup.checkPhoneUsed);
 // sign in
 router.get('/signin', signin.showSigninPage);
 router.post('/signin', signin.signin);
