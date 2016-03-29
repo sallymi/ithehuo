@@ -15,95 +15,98 @@ block user_home_content
       span.badge.am-badge-warning#receivedRequestCount
     .panel-body
       ul.sent-requests.my_jobs
-        each request in myRequests
-          li.col-md-12.request(requestId= request.id)
-              .media
-                .media-left.media-middle.col-md-3.col-sm-0
-                  a(href='/users/' + request.target._id)
-                    img.media-object(src=request.target && request.target.logo_img ? request.requestor.logo_img:"/images/portfolio/dog-160.png",width='50%')
-                .media-body.col-md-5.col-sm-8(onclick="location.href='/users/#{request.target._id}'")
-                  h5.media-heading.mb10
-                    a(href= '/users/' + request.target._id)
-                      strong= (request.target.name ? request.target.name : request.target.email)
-                    small= (request.target.role ? request.target.role : '什么都没留下')
-                  .small
-                    em.c7='地址：'
-                    =(request.target.location ? request.target.location : '什么都没留下')
-                  .small
-                    em.c7='状态：'
-                    =(request.target.status ? request.target.status : '什么都没留下')
-                  .small
-                    em.c7='个人一句话描述：'
-                    =(request.target.description ? request.target.description : '什么都没留下')
-                  .small
-                    em.c7='申请时间：'
-                    =moment(request.creation_time).format('YYYY年MM月DD日 hh:mm:ss')
-                  mark.small
-                    em.c7='申请留言：'
-                    =(request.request_msg ? request.request_msg : '')
-                .media-body.col-md-4.col-sm-4
-                  if (relation)
-                    button.btn.btn-success.head_shu 已经是朋友
-                  else
-                    if (request)
-                      button.btn.btn-success.head_shu#addFriend(onclick='reminderRequest("#{request.target._id}","#{request.request_msg}")')
-                        if (request.status === 'pending')
-                            = '再次发送申请'
+        if myRequests && myRequests.length>0
+          each request in myRequests
+            li.col-md-12.request(requestId= request.id)
+                .media
+                  .media-left.media-middle.col-md-3.col-sm-0
+                    a(href='/users/' + request.target._id)
+                      img.media-object(src=request.target && request.target.logo_img ? request.requestor.logo_img:"/images/portfolio/dog-160.png",width='50%')
+                  .media-body.col-md-5.col-sm-8(onclick="location.href='/users/#{request.target._id}'")
+                    h5.media-heading.mb10
+                      a(href= '/users/' + request.target._id)
+                        strong= (request.target.name ? request.target.name : request.target.email)
+                      small= (request.target.role ? request.target.role : '什么都没留下')
+                    .small
+                      em.c7='地址：'
+                      =(request.target.location ? request.target.location : '什么都没留下')
+                    .small
+                      em.c7='状态：'
+                      =(request.target.status ? request.target.status : '什么都没留下')
+                    .small
+                      em.c7='个人一句话描述：'
+                      =(request.target.description ? request.target.description : '什么都没留下')
+                    .small
+                      em.c7='申请时间：'
+                      =moment(request.creation_time).format('YYYY年MM月DD日 hh:mm:ss')
+                    mark.small
+                      em.c7='申请留言：'
+                      =(request.request_msg ? request.request_msg : '')
+                  .media-body.col-md-4.col-sm-4
+                    if (relation)
+                      button.btn.btn-success.head_shu 已经是朋友
+                    else
+                      if (request)
+                        button.btn.btn-success.head_shu#addFriend(onclick='reminderRequest("#{request.target._id}","#{request.request_msg}")')
+                          if (request.status === 'pending')
+                              = '再次发送申请'
       ul.received-requests.my_jobs
-        each request in needActionRequests
-          li.col-md-12.request(requestId= request.id)
-              if (request.requestor)
-                  .media
-                    .media-left.media-middle.col-md-3
-                      a(href='/users/' + request.requestor._id)
-                        img.media-object(src=request.requestor && request.requestor.logo_img ? request.requestor.logo_img:"/images/portfolio/dog-160.png",width='50%')
-                    .media-body.col-md-5(onclick="location.href='/users/#{request.requestor._id}'")
-                      h5.media-heading.mb10
-                        a(href= '/users/' + request.requestor._id)
-                          strong= (request.requestor.name ? request.requestor.name : request.requestor.email)
-                        small= (request.requestor.role ? request.requestor.role : '什么都没留下')
-                      .small
-                        em.c7='地址：'
-                        =(request.requestor.location ? request.requestor.location : '什么都没留下')
-                      .small
-                        em.c7='状态：'
-                        =(request.requestor.status ? request.requestor.status : '什么都没留下')
-                      .small
-                        em.c7='个人一句话描述：'
-                        =(request.requestor.description ? request.requestor.description : '什么都没留下')
-                      .small
-                        em.c7='申请时间：'
-                        =moment(request.creation_time).format('YYYY年MM月DD日 hh:mm:ss')
-                      mark.small
-                        em.c7='申请留言：'
-                        =(request.request_msg ? request.request_msg : '')
-                    .media-body.col-md-4
-                      if request.status === 'pending' 
-                        button.btn.btn-info.action.pass(action='accept') 通过
-                        button.btn.btn-danger.action.deny(action='deny') 拒绝
-                        //button.btn.btn-default.action.ignore(action='ignore') 忽略
+        if needActionRequests && needActionRequests.length>0
+          each request in needActionRequests
+            li.col-md-12.request(requestId= request.id)
+                if (request.requestor)
+                    .media
+                      .media-left.media-middle.col-md-3
+                        a(href='/users/' + request.requestor._id)
+                          img.media-object(src=request.requestor && request.requestor.logo_img ? request.requestor.logo_img:"/images/portfolio/dog-160.png",width='50%')
+                      .media-body.col-md-5(onclick="location.href='/users/#{request.requestor._id}'")
+                        h5.media-heading.mb10
+                          a(href= '/users/' + request.requestor._id)
+                            strong= (request.requestor.name ? request.requestor.name : request.requestor.email)
+                          small= (request.requestor.role ? request.requestor.role : '什么都没留下')
+                        .small
+                          em.c7='地址：'
+                          =(request.requestor.location ? request.requestor.location : '什么都没留下')
+                        .small
+                          em.c7='状态：'
+                          =(request.requestor.status ? request.requestor.status : '什么都没留下')
+                        .small
+                          em.c7='个人一句话描述：'
+                          =(request.requestor.description ? request.requestor.description : '什么都没留下')
+                        .small
+                          em.c7='申请时间：'
+                          =moment(request.creation_time).format('YYYY年MM月DD日 hh:mm:ss')
+                        mark.small
+                          em.c7='申请留言：'
+                          =(request.request_msg ? request.request_msg : '')
+                      .media-body.col-md-4
+                        if request.status === 'pending' 
+                          button.btn.btn-info.action.pass(action='accept') 通过
+                          button.btn.btn-danger.action.deny(action='deny') 拒绝
+                          //button.btn.btn-default.action.ignore(action='ignore') 忽略
             
       ul.my_jobs
-        each friend in friends
-          li.col-md-12.friends(relationId= friend.relationId)
-              .media
-                .media-left.media-middle.col-md-3.col-xs-4
-                  a(href='/users/' + friend._id)
-                    img.media-object(src=friend && friend.logo_img ? friend.logo_img:"/images/portfolio/dog-160.png",width='50%')
-                .media-body.col-md-5.col-xs-8(onclick="location.href='/users/#{friend._id}'")
-                  h5.media-heading.mb10
-                    a(href= '/users/' + friend._id)
-                      strong= (friend.name ? friend.name : friend.email)
-                    small= (friend.role ? friend.role : '什么都没留下')
-                  .small
-                    em.c7='地址：'
-                    =(friend.location ? friend.location : '什么都没留下')
-                  .small
-                    em.c7='状态：'
-                    =(friend.status ? friend.status : '什么都没留下')
-                  .small
-                    em.c7='个人一句话描述：'
-                    =(friend.description ? friend.description : '什么都没留下')
-                .media-body.col-md-4.col-xs-12
-                    a.btn.btn-info(href='/chat/'+friend.id) 发消息
-                    button.btn.btn-danger.action.terminate 解除关系
+        if friends && friends.length>0
+          each friend in friends
+            li.col-md-12.friends(relationId= friend.relationId)
+                .media
+                  .media-left.media-middle.col-md-3.col-xs-4
+                    a(href='/users/' + friend._id)
+                      img.media-object(src=friend && friend.logo_img ? friend.logo_img:"/images/portfolio/dog-160.png",width='50%')
+                  .media-body.col-md-5.col-xs-8(onclick="location.href='/users/#{friend._id}'")
+                    h5.media-heading.mb10
+                      a(href= '/users/' + friend._id)
+                        strong= (friend.name ? friend.name : friend.email)
+                      small= (friend.role ? friend.role : '什么都没留下')
+                    .small
+                      em.c7='地址：'
+                      =(friend.location ? friend.location : '什么都没留下')
+                    .small
+                      em.c7='状态：'
+                      =(friend.status ? friend.status : '什么都没留下')
+                    .small
+                      em.c7='个人一句话描述：'
+                      =(friend.description ? friend.description : '什么都没留下')
+                  .media-body.col-md-4.col-xs-12
+                      a.btn.btn-info(href='/chat/'+friend.id) 发消息
+                      button.btn.btn-danger.action.terminate 解除关系
