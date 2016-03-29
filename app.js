@@ -2,6 +2,7 @@
  * module dependency
  */
 var express = require('express');
+var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -16,6 +17,7 @@ var compress = require('compression');
  */
 var app = express();
 app.use(compress());
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.locals.moment = require('moment');
 
@@ -28,8 +30,9 @@ var limit = global.limit = config.limit;
 var oneDay = 86400000;
 var oneYear = oneDay * 365;
 var tenYear = oneYear * 10;
-app.use(express.static('./static'));
-app.use(express.static('./public',{ maxAge: tenYear }));
+
+// app.use(express.static('./static'));
+// app.use(express.static('./public',{ maxAge: tenYear }));
 app.use(session({
   secret: config.secret,
   resave: false,
@@ -37,8 +40,9 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended': false}));
-
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, 'public'),{ maxAge: tenYear }));
 app.use(router);
 
 /*
