@@ -27,8 +27,8 @@ block navbar
           a(href='/users') 专业人才
         li.recruitments
           a(href='/recruitments') 合伙需求
-        li.projects
-          a(href='/projects') 创业项目
+        //- li.projects
+        //-   a(href='/projects') 创业项目
       ul.nav.navbar-nav.navbar-right.hidden-xs
         if (signinUser)
           li.messages
@@ -129,9 +129,9 @@ block navbar
       //-   span.input-group-btn
       //-     button.btn.btn-default(type='button')='搜索!'
     .mobile-nav.row.visible-xs(style='margin:0;')
-      a.users.tab.col-xs-4(href='/users') 专业人才
-      a.recruitments.tab.col-xs-4(href='/recruitments') 合伙需求
-      a.projects.tab.col-xs-4(href='/projects') 创业项目
+      a.users.tab.col-xs-6(href='/users') 专业人才
+      a.recruitments.tab.col-xs-6(href='/recruitments') 合伙需求
+      //- a.projects.tab.col-xs-4(href='/projects') 创业项目
   .popover(role="tooltip")
     .nav.nav-stacked(style='width: 180px')
       li
