@@ -63,7 +63,7 @@ function updateRequestListCount() {
 }
 $(function () {
   showFriends();
-  //updateRequestListCount();
+  updateRequestListCount();
   // accept, deny or ignore friend request
   $('.received-requests .action').click(function () {
     var requestId = $(this).parents('.request').attr('requestId');
