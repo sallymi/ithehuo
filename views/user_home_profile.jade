@@ -87,7 +87,7 @@ block user_home_content
             .col-xs-12.col-sm-2
               font(color="red")='* '
               label 角色定位
-            .col-xs-12.col-sm-10
+            .col-xs-12.col-sm-8
               include ./mixin/form.jade
               +radio('role', '创始人', signinUser.role, 'required')
               +radio('role', '技术合伙人', signinUser.role, 'required')
@@ -185,11 +185,11 @@ block user_home_content
               input#submitBtn.btn.btn-info.center-block.btn-block(type='submit' value='保存' data-loading-text='正在保存...')
         .col-lg-2.col-lg-offset-1.hidden-xs
             h4='头像'
-            img#user_logo1.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
+            img#user_logo1.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/avatars/default.png")
             div
-              button.btn.btn-info.btn-block#upload1(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+              //- button.btn.btn-info.btn-block#upload1(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
               input#files(type='file', name='img', multiple='')
-              //button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 本地上传
+              button.btn.btn-info.btn-block#uploadButton1(type='button' data-toggle='modal', data-target='.project-logo-upload') 更换头像
               //button.btn.btn-info.btn-block#uploadButton(type='button' ) 本地上传
         .dashline
       //- .row

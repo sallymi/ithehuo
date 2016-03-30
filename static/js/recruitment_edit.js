@@ -303,37 +303,38 @@ $(document).ready(function(){
         data: JSON.stringify(recruitment)
       }).done(function (res) {
         $('#recruitmentId').val(res._id);
+        window.location.href = '/recruitments'
         //globalNotify.success('招募保存并发布成功');
-        var notice = new PNotify({
-          title:'成功！',
-          text:'招募保存并发布成功！再发布一个合伙人招募信息',
-          icon: 'fa fa-envelope-o',
-          type: 'success',
-          hide: false,
-          confirm: {
-            confirm: true,
-            buttons: [{
-              text: '发布合伙需求',
-              addClass: 'btn-primary',
-              click: function(notice){
-                window.location.href = '/new/recruitment';
-              }
-            },
-            {
-              text: '稍后再说',
-              click: function (notice){
-                window.location.href = '/recruitments';
-              }
-            }]
-          },
-          buttons: {
-            closer: false,
-            sticker: false
-          },
-          history: {
-            history: false
-          }
-        });
+        // var notice = new PNotify({
+        //   title:'成功！',
+        //   text:'招募保存并发布成功！再发布一个合伙人招募信息',
+        //   icon: 'fa fa-envelope-o',
+        //   type: 'success',
+        //   hide: false,
+        //   confirm: {
+        //     confirm: true,
+        //     buttons: [{
+        //       text: '发布合伙需求',
+        //       addClass: 'btn-primary',
+        //       click: function(notice){
+        //         window.location.href = '/new/recruitment';
+        //       }
+        //     },
+        //     {
+        //       text: '稍后再说',
+        //       click: function (notice){
+        //         window.location.href = '/recruitments';
+        //       }
+        //     }]
+        //   },
+        //   buttons: {
+        //     closer: false,
+        //     sticker: false
+        //   },
+        //   history: {
+        //     history: false
+        //   }
+        // });
       }).fail(function (resp) {
         globalNotify.failed('操作失败，请稍后再试');
         console.log(resp.responseText);

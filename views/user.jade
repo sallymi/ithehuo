@@ -10,9 +10,9 @@ block content
           .panel
             .panel-body
               .row
-                .col-md-3
-                  img.img-responsive(src=user.logo_img?user.logo_img:'/images/portfolio/dog-160.png')
-                .col-md-9.description
+                .col-md-2
+                  img.img-responsive(src=user.logo_img?user.logo_img:'/images/avatars/default.png')
+                .col-md-10.description
                   h3=displayName
                     small= user.status
                   .row
@@ -23,10 +23,14 @@ block content
                     .col-md-5
                       span='籍贯：'+(user.hometown?user.hometown:'暂未填写')
                   .row
-                    .col-md-12
+                    .col-md-6
+                      span='状态：   '+(user.status?user.status:'暂未填写')
+                    .col-md-6
                       span='感兴趣的方向：   '+(user.field?user.field:'暂未填写')
                   .row
-                    .col-md-12
+                    .col-md-6
+                      span='角色定位：   '+(user.role?user.role:'暂未填写')
+                    .col-md-6
                       span='创业心态：   '+(user.prefer?user.prefer:'暂未填写')
                   if user.work_experiences_tags && user.work_experiences_tags.length>0
                       .row

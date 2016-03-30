@@ -631,7 +631,7 @@ exports.myTodos = function (req, res) {
             if (!flag)
                 needAction.push(receivedRequests[i]);
         }
-        logger.info('render user_home_friends page');
+        logger.info('get todos');
         res.status(200).json({
             'needAction': needAction.length
         });

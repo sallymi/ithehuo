@@ -98,12 +98,15 @@ block content
                   if user.email || user.mobile_phone
                     li.col-md-12.portfolio-item
                       .media
-                        .media-left.media-middle.col-md-3.col-xs-12
+                        .media-left.media-middle.col-md-3.col-xs-3
                           a(href='/users/' + user._id)
-                            - var Arr = ["a6-160","a7-160","a8-160","a9-160","a10-160","a11-160","a12-160","a13-160","a14-160","a15-160"];
-                            - var n = Math.floor(Math.random() * Arr.length + 1)-1; 
-                            img.media-object(src=user.logo_img?user.logo_img:'/images/avatars/'+Arr[n]+'.png', width='50%')
-                        .media-body.col-md-5.col-xs-12(onclick="location.href='/users/#{user._id}'")
+                            // - var Arr = ["a6-160","a7-160","a8-160","a9-160","a10-160","a11-160","a12-160","a13-160","a14-160","a15-160"];
+                            // - var n = Math.floor(Math.random() * Arr.length + 1)-1; 
+                            if user.logo_img&&user.logo_img.indexOf('upload_avatars')!==-1
+                              img.media-object(src=user.logo_img, width='100%')
+                            else
+                              img.media-object(src='/images/avatars/default.png')
+                        .media-body.col-md-5.col-xs-9(onclick="location.href='/users/#{user._id}'")
                           h5.media-heading.mb10
                             a(href= '/users/' + user._id)
                               strong=user.name?user.name:(user.email?user.email.split('@')[0]:(user.mobile_phone?user.mobile_phone.toString().substring(0,3)+"****"+user.mobile_phone.toString().substring(8,11):"ID:"+user.id))
@@ -113,6 +116,9 @@ block content
                             =user.location?user.location:'创业者暂未公布'
                           .small
                             strong='状态：'
+                            =user.role?user.role:'创业者暂未公布'
+                          .small
+                            strong='角色定位：'
                             =user.status?user.status:'创业者暂未公布'
                           .small
                             strong='个人一句话描述：'

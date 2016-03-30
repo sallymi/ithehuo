@@ -1,23 +1,25 @@
 {
-  "name": "IThehuoren",
-  "description": "IT合伙人平台",
-  "version": "1.0.0",
-  "private": "true",
+  "name": "ithehuo",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app"
   },
   "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "jade": "~1.11.0",
+    "serve-favicon": "~2.3.0",
     "accepts": "~1.2.2",
     "alidayu-node": "^1.0.2",
-    "basic-auth": "^1.0.1",
-    "body-parser": "^1.10.1",
+    "basic-auth": "^1.0.1",    
     "ccap-dev": "^0.2.0",
     "cookie-parser": "^1.3.3",
-    "express": "~4.9.8",
     "express-session": "^1.10.2",
     "formidable": "^1.0.17",
     "gm": "^1.21.1",
-    "jade": "~1.7.0",
     "log4js": "~0.6.21",
     "moment": "^2.10.2",
     "mongodb": "^2.0.12",
@@ -28,8 +30,5 @@
     "socket.io": "^1.3.6",
     "validator": "^3.28.0",
     "compression": "1.6.1"
-  },
-  "devDependencies": {
-    "mocha": "^2.2.5"
   }
 }

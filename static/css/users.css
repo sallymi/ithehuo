@@ -45,5 +45,13 @@
     margin-left: 20px;
     margin-top: 9px;
   }
+  img.media-object{
+    width: 70px
+  }
+}
+@media(max-width:767px) {
+  img.media-object{
+    width: 40px
+  }
 }
 /*.load-more:hover{background:#bccbd9}*/

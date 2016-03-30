@@ -48,9 +48,9 @@ link(rel='stylesheet', href='/css/project_edit.css')
             .row.form-group
               .col-xs-12.col-sm-4
                 font(color="red")='* '
-                label.control-label='项目描述'
+                label.control-label='项目亮点'
               .col-xs-12.col-sm-8
-                input.form-control#projectDescription(style='width:100%',type='text', name='projectDescription', value=project && project.description, placeholder='项目描述', required)
+                input.form-control#projectDescription(style='width:100%',type='text', name='projectDescription', value=project && project.description, placeholder='项目亮点', required)
             .row.form-group
               .col-xs-12.col-sm-4
                 font(color="red")='* '
@@ -61,11 +61,11 @@ link(rel='stylesheet', href='/css/project_edit.css')
             h4='项目LOGO'
             - var Arr = ["cabin-160","cake-160","eCommerce-160","plane-160","safe-160","social-160","social2-160","submarine-160","vision-160","finice-160","cloud-160","bigdata-160"];
             - var n = Math.floor(Math.random() * Arr.length + 1)-1; 
-            img#project_logo.img-responsive(src=project && project.logo_img ? project.logo_img:"/images/portfolio/"+Arr[n]+".png")
+            img#project_logo.img-responsive(src=project && project.logo_img ? project.logo_img:"/images/portfolio/default.png")
 
-            button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.bs-example-modal-sm') 更换logo
+            //- button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.bs-example-modal-sm') 更换logo
             input#files(type='file', name='img', multiple='')
-            //button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 本地上传
+            button.btn.btn-info.btn-block#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 更换logo
             //- button.btn.btn-info.btn-block#uploadButton(type='button' ) 更换logo
       .panel
         .panel-heading='相关内容'
