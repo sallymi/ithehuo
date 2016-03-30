@@ -89,8 +89,8 @@ exports.sms = function (req, res, next) {
       resUtil.okJson(res, '已发送');
     }
   });
-  
 };
+
 exports.captcha = function (req, res) {
     //return res.send('A');
     var ary = ccap.get();
@@ -102,6 +102,19 @@ exports.captcha = function (req, res) {
     res.set('Content-Type', 'image/jpeg');
     res.send(buf);
 };
+
+exports.checkPhoneUsed = function (req, res) {
+  var phone = req.body.phone;
+  userProxy.findUserByPhone(phone).then(function (user) {
+    if (user) {
+      logger.debug('The phone number ' + phone + ' is registered');
+      res.status(200).json({errCode:100001,msg:'the phone is registered'})
+    }else{
+      logger.debug('The phone number ' + phone + ' is registered');
+      res.status(200).json({errCode:0,msg:'the phone is not registered'})
+    }
+  })
+}
 exports.signup = function (req, res) {
   logger.debug('request received to sign up');
   logger.debug(JSON.stringify(req.body));

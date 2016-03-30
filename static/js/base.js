@@ -348,27 +348,52 @@ $(function () {
   $('.reflash').click(function(e){
     $('img.captcha').attr("src", "/getCaptcha?rnd="+Math.random());
   });
+  //验证手机号是否已用
+  var checkPhoneUsed = function(phone){
+    var dfd = $.Deferred();
+    $.ajax({
+      url:'/checkPhoneUsed',
+      method:'POST',
+      data:{phone:phone}
+    }).success(function (res) {
+      if(res.errCode==100001){
+        dfd.resolve(false)
+      }else{
+        dfd.resolve(true)
+      }
+    }).fail(function (err) {
+      console.log(err);
+      dfd.resolve(true)
+    })
+    return dfd.promise();
+  }
   //获取短信验证码
   var seed = 60;
   var t1 = null;
   $('#getSmsCode').click(function(e){
-    console.log("here");
     var phone = $("#phone").val();
     var patt1 = new RegExp(/^(\+?0?86\-?)?1[345789]\d{9}$/);
     if(!patt1.test(phone)){
-      alert("手机号不合规范，请输入11位中国大陆手机号！");
-      //setTimeout($("#phone"))
+      globalNotify.failed("手机号不合规范，请输入11位中国大陆手机号！");
       return
     }
-    $.ajax({
-      'url': '/sms/' + phone,
-      'method': 'GET'
-    }).done(function (res) {
-      $("#getSmsCode").attr("disabled","disabled");
-      t1 = setInterval(tip,1000);
-    }).fail(function (resp) {
-      $()
-    });
+    checkPhoneUsed(phone).then(function(flag){
+      if(flag){
+        $.ajax({
+          'url': '/sms/' + phone,
+          'method': 'GET'
+        }).done(function (res) {
+          $("#getSmsCode").attr("disabled","disabled");
+          t1 = setInterval(tip,1000);
+        }).fail(function (resp) {
+          globalNotify.failed("获取验证码失败请稍候再试");
+        });
+      }else{
+        globalNotify.failed("该手机号已经注册，请直接登录");
+        return
+      }
+    })
+
   });
 
   function tip() {
