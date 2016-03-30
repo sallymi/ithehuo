@@ -21,21 +21,26 @@ var logger = require('../utils/log').getLogger('biz/index.js');
  */
 exports.index = function (req, res) {
   logger.info('request received for index page');
-  logger.info('try to find all hot projects');
-  Q.all([
-    projectProxy.findHotProjects(),
-    projectProxy.findRecommendedProjects()
-  ]).then(function (result) {
-    logger.info(result);
-    resUtil.render(req, res, 'index', {
-      title: 'IT合伙人',
-      hots: result[0],
-      recommends : result[1]
-    });
-  }).fail(function (err) {
-    logger.error(err);
-    res.render('error');
+  // logger.info('try to find all hot projects');
+  resUtil.render(req, res, 'index', {
+    title: 'IT合伙人',
+    // hots: result[0],
+    // recommends : result[1]
   });
+  // Q.all([
+  //   projectProxy.findHotProjects(),
+  //   projectProxy.findRecommendedProjects()
+  // ]).then(function (result) {
+  //   logger.info(result);
+  //   resUtil.render(req, res, 'index', {
+  //     title: 'IT合伙人',
+  //     hots: result[0],
+  //     recommends : result[1]
+  //   });
+  // }).fail(function (err) {
+  //   logger.error(err);
+  //   res.render('error');
+  // });
 };
 
 /**
