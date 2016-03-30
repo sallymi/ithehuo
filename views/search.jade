@@ -1,6 +1,6 @@
 link(rel='stylesheet', href='/css/search.css')
 .searchCtn.row
-  .col-md-10.col-xs-12
+  .col-md-10.col-xs-12.hidden
     form(action="/search" type="get")
       .col-md-2.col-xs-4.form-control-ctn
         select.form-control(name="type")
@@ -13,6 +13,6 @@ link(rel='stylesheet', href='/css/search.css')
         input.form-control(type="text" name="key")
       .col-md-2.col-xs-2.form-control-ctn
         button.btn.btn-info.btn-block(type="submit") 搜索
-  .col-md-2.col-xs-12.actionBtn(style="text-align: center")
+  .col-md-2.col-md-offset-9.col-xs-12.actionBtn(style="text-align: center")
     a.btn.btn-info.btn-block(href='/home') 成为专业人才
     //- a.button.btn.btn-warning(href='/home') 成为候选合伙人
