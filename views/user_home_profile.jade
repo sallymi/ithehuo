@@ -80,7 +80,7 @@ block user_home_content
           .row.form-group
             .col-xs-12.col-sm-4
               font(color="red")='* '
-              label 角色定位
+              label （现在或期望的）角色定位
             .col-xs-12.col-sm-8
               include ./mixin/form.jade
               +radio('role', '创始人', signinUser.role, 'required')
