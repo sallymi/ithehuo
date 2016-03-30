@@ -63,9 +63,9 @@ link(rel='stylesheet', href='/css/project_edit.css')
             - var n = Math.floor(Math.random() * Arr.length + 1)-1; 
             img#project_logo.img-responsive(src=project && project.logo_img ? project.logo_img:"/images/portfolio/"+Arr[n]+".png")
 
-            button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.bs-example-modal-sm') 更换logo
+            //- button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.bs-example-modal-sm') 更换logo
             input#files(type='file', name='img', multiple='')
-            //button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 本地上传
+            button.btn.btn-info.btn-block#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 更换logo
             //- button.btn.btn-info.btn-block#uploadButton(type='button' ) 更换logo
       .panel
         .panel-heading='相关内容'
