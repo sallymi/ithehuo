@@ -380,21 +380,24 @@ $(document).ready(function(){
     },
     message: {
       name:{
-        reqired: "请输入姓名"
+        required: "请输入姓名"
       },
       location:{
-        reqired: "请输入所在地",
+        required: "请输入所在地",
         remote: "请输入合法城市，如无匹配，请输入其他"
       },
       field:{
-        reqired: "请输入专注的领域，以回车分隔"
+        required: "请输入专注的领域，以回车分隔"
       },
       age:{
         range:"请输入0-99之间数字"
       },
       hometown:{
-          remote: "请输入合法籍贯，如无匹配，请输入其他"
+        remote: "请输入合法籍贯，如无匹配，请输入其他"
       },
+      mobile_phone: {
+        required: "请输入手机号"
+      }
     },
     highlight : function(element) {
         $(element).closest('.form-group').addClass('has-error');
