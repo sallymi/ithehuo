@@ -13,6 +13,18 @@
           .row.form-group
             .col-xs-12.col-sm-4
               font(color="red")='* '
+              label.control-label(for='project_find_talent') 目标项目
+            .col-xs-8.col-sm-8
+              select.form-control#project_find_talent(name='project', 'required')
+                include ./mixin/form.jade
+                each project in projects
+                  +option(project._id, recruitment && recruitment.project && recruitment.project.id, project.name)
+              a.btn.btn-primary.hidden-xs(href="/new/project") 创建项目  
+            .col-xs-4.visible-xs
+              a.btn.btn-primary(href="/new/project") 创建项目
+          .row.form-group
+            .col-xs-12.col-sm-4
+              font(color="red")='* '
               label.control-label 合伙需求
             .col-xs-12.col-sm-8
               .radio.form-control
@@ -27,16 +39,6 @@
                   +radio('classify', '资源合伙人', recruitment && recruitment.classify, 'required')
                   +radio('classify', '投资合伙人', recruitment && recruitment.classify, 'required')
                   +radio('classify', '顾问/导师轻合伙人', recruitment && recruitment.classify, 'required')
-          .row.form-group
-            .col-xs-12.col-sm-4
-              font(color="red")='* '
-              label.control-label(for='project_find_talent') 目标项目
-            .col-xs-12.col-sm-8
-              select.form-control#project_find_talent(name='project', 'required')
-                include ./mixin/form.jade
-                each project in projects
-                  +option(project._id, recruitment && recruitment.project && recruitment.project.id, project.name)
-              a(href="/new/project").btn.btn-primary 创建项目
           .row.form-group
             .col-xs-12.col-sm-4
               font(color="red")='* '
