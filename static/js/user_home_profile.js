@@ -376,7 +376,7 @@ $(document).ready(function(){
               }
             }
           }
-        }
+      }
     },
     message: {
       name:{
@@ -397,6 +397,11 @@ $(document).ready(function(){
       },
       mobile_phone: {
         required: "请输入手机号"
+      },
+      technical_experience: {
+        required: "请填写技术经验，不少于70字。",
+        minlength: "请不要少于70字。"
+
       }
     },
     highlight : function(element) {

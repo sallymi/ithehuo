@@ -152,10 +152,11 @@ block user_home_content
           .dashline
           .row.form-group
             .col-xs-12.col-sm-2
+              font(color="red")='* '
               label(for='technical_experience') 技术经验
             .col-xs-12.col-sm-10
               textarea#technical_experience.form-control(type='text', name='techExperience', placeholder='请详细填写您的技术经验和能力情况，展示您的实力，有利于更多公司预约您。' +
-              '请不要小于70字')= signinUser.technical_experience
+              '请不要小于70字' required minlength=70)= signinUser.technical_experience
               p.example 示例：
               p.example 毕业于某985高校计算机系，在校期间专业成绩优秀，获得一等奖学金。曾参加ACM并获奖。毕业论文获得优秀。
               p.example 毕业后就职于某知名互联网公司核心部门，参与公司主要产品的iOS客户端开发。负责界面UI和内核通信模块。在职期间绩效良好，被评为优秀员工。工作两年后晋升为高级工程师。
