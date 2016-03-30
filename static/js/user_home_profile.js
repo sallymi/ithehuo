@@ -65,17 +65,17 @@ $(function () {
   //   });
   // });
 
-  $('a.thumbnail').on('click', function (event){
-    console.log(event.currentTarget.children[0].attributes["src"].value);
-    if(event.currentTarget.id==='uploadButton'){
-      $('.user-logo-image').modal('hide');
-    }else{
-      $('#user_logo')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
-      $('#user_logo1')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
-      $('.user-logo-image').modal('hide');
-    }
+  // $('a.thumbnail').on('click', function (event){
+  //   console.log(event.currentTarget.children[0].attributes["src"].value);
+  //   if(event.currentTarget.id==='uploadButton' || event.currentTarget.id==='uploadButton1'){
+  //     $('.user-logo-image').modal('hide');
+  //   }else{
+  //     $('#user_logo')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
+  //     $('#user_logo1')[0].attributes["src"].value=event.currentTarget.children[0].attributes["src"].value
+  //     $('.user-logo-image').modal('hide');
+  //   }
     
-  });
+  // });
 
   // $('#field').tagEditor({
   //   //initialTags: ['互联网'],
@@ -535,6 +535,13 @@ $(document).ready(function(){
     fileinput.val('');
     fileinput.trigger("click");
   })
+  $("#uploadButton1").click(function(){
+    //console.log("here");
+    jcrop_api = undefined;
+    var fileinput = $("#files");
+    fileinput.val('');
+    fileinput.trigger("click");
+  })
   if (window.File && window.FileReader && window.FileList && window.Blob){
 
     function handleFileSelect(evt) {
@@ -612,8 +619,8 @@ $(document).ready(function(){
     jcrop_api.destroy();
   });
   $('#submit').click(function(){
-    $("#upload").prop('disabled','disabled').text('上传中……');
-    $("#upload1").prop('disabled','disabled').text('上传中……');
+    $("#uploadButton").prop('disabled','disabled').text('上传中……');
+    $("#uploadButton1").prop('disabled','disabled').text('上传中……');
     $('.user-avatar-upload').modal('hide');
     var data = new FormData();
     var files = $('#files')[0].files;
@@ -639,8 +646,8 @@ $(document).ready(function(){
       if(res.errCode!=0){
         globalNotify.failed(res.msg);
       }else{
-        $("#upload").prop('disabled','').text('更换头像');
-        $("#upload1").prop('disabled','').text('更换头像');
+        $("#uploadButton").prop('disabled','').text('更换头像');
+        $("#uploadButton1").prop('disabled','').text('更换头像');
         jcrop_api.destroy();
         globalNotify.success("上传成功")
         jcrop_api.destroy();

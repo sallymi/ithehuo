@@ -61,7 +61,7 @@ link(rel='stylesheet', href='/css/project_edit.css')
             h4='项目LOGO'
             - var Arr = ["cabin-160","cake-160","eCommerce-160","plane-160","safe-160","social-160","social2-160","submarine-160","vision-160","finice-160","cloud-160","bigdata-160"];
             - var n = Math.floor(Math.random() * Arr.length + 1)-1; 
-            img#project_logo.img-responsive(src=project && project.logo_img ? project.logo_img:"/images/portfolio/"+Arr[n]+".png")
+            img#project_logo.img-responsive(src=project && project.logo_img ? project.logo_img:"/images/portfolio/default.png")
 
             //- button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.bs-example-modal-sm') 更换logo
             input#files(type='file', name='img', multiple='')

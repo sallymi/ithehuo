@@ -26,7 +26,10 @@ block content
                   .media
                     .media-left.media-middle.col-md-2.col-xs-4
                       a(href='/recruitments/' + recruitment._id)
-                        .logo=recruitment.project.name.substring(0,1)
+                        if recruitment.project.logo_img&&recruitment.project.logo_img.indexOf('upload_portfolio')!==-1
+                          img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
+                        else
+                          .logo=recruitment.project.name.substring(0,1)
                         //- img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
                     .media-body.col-md-5.col-xs-8(onclick="location.href='/recruitments/#{recruitment._id}'")
                       h5.media-heading.mb10

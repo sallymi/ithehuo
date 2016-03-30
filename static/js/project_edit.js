@@ -257,37 +257,38 @@ $(document).ready(function(){
         data: JSON.stringify(project)
       }).done(function (resp) {
         $('#projectId').val(resp._id);
+        window.location.href = '/new/recruitment'
         //globalNotify.success('项目保存并发布成功！请立即发布你的合伙人招募信息');
-        var notice = new PNotify({
-	        title:'成功！',
-	        text:'项目保存并发布成功！请立即发布你的合伙人招募信息',
-	        icon: 'fa fa-envelope-o',
-	        type: 'success',
-	        hide: false,
-	        confirm: {
-	        	confirm: true,
-	        	buttons: [{
-	        		text: '发布合伙需求',
-	        		addClass: 'btn-primary',
-	        		click: function(notice){
-	        			window.location.href = '/new/recruitment';
-	        		}
-	        	},
-	        	{
-	        		text: '稍后再说',
-	        		click: function (notice){
-	        			window.location.href = '/projects';
-	        		}
-	        	}]
-	        },
-	        buttons: {
-	        	closer: false,
-	        	sticker: false
-	        },
-	        history: {
-	        	history: false
-	        }
-	      });
+       //  var notice = new PNotify({
+	      //   title:'成功！',
+	      //   text:'项目保存并发布成功！请立即发布你的合伙人招募信息',
+	      //   icon: 'fa fa-envelope-o',
+	      //   type: 'success',
+	      //   hide: false,
+	      //   confirm: {
+	      //   	confirm: true,
+	      //   	buttons: [{
+	      //   		text: '发布合伙需求',
+	      //   		addClass: 'btn-primary',
+	      //   		click: function(notice){
+	      //   			window.location.href = '/new/recruitment';
+	      //   		}
+	      //   	},
+	      //   	{
+	      //   		text: '稍后再说',
+	      //   		click: function (notice){
+	      //   			window.location.href = '/projects';
+	      //   		}
+	      //   	}]
+	      //   },
+	      //   buttons: {
+	      //   	closer: false,
+	      //   	sticker: false
+	      //   },
+	      //   history: {
+	      //   	history: false
+	      //   }
+	      // });
 	      // notice.get().click(function(){
 	      //   notice.remove();
 	      //   window.location.href = '/new/recruitment';
