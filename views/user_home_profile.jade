@@ -33,9 +33,9 @@ block user_home_content
           .row.form-group
             .col-xs-12.col-sm-2
               //font(color="red")='* '
-              label(for='nickName') 昵称
+              label(for='nick_name') 昵称
             .col-xs-12.col-sm-10
-              input#nickName.form-control(type='text', name='nickName', placeholder='昵称', value=signinUser.nickName)
+              input#nick_name.form-control(type='text', name='nick_name', placeholder='昵称', value=signinUser.nick_name)
           .row.form-group
             .col-xs-12.col-sm-2
               label.control-label(for='age') 年龄
@@ -155,7 +155,7 @@ block user_home_content
               font(color="red")='* '
               label(for='technical_experience') 技术经验
             .col-xs-12.col-sm-10
-              textarea#technical_experience.form-control(type='text', name='techExperience', placeholder='请详细填写您的技术经验和能力情况，展示您的实力，有利于更多公司预约您。' +
+              textarea#technical_experience.form-control(type='text', name='technical_experience', placeholder='请详细填写您的技术经验和能力情况，展示您的实力，有利于更多公司预约您。' +
               '请不要小于70字' required minlength=70)= signinUser.technical_experience
               p.example 示例：
               p.example 毕业于某985高校计算机系，在校期间专业成绩优秀，获得一等奖学金。曾参加ACM并获奖。毕业论文获得优秀。
