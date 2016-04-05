@@ -80,20 +80,22 @@ input.radiocheck+label.full:after, input.radiocheck+label.full:before {
 }
 
 .user-avatar-upload .modal-body{
-  /*height: auto;*/
   padding: 15px 20px;
 }
-/*#show_pic_p {*/
-/*width: auto;*/
-/*height: auto;*/
-/*}*/
+
 .jcrop-holder {
   margin: auto;
 }
 #uploadButton{
-  display: inline-block;/*
-  margin-left: 2rem;*/
+  display: inline-block;
 }
 #files {
   display: none !important;
+}
+.col-sm-2 {
+  text-align: right;
+}
+.example {
+  color: #ACB6C0;
+  font-size: small;
 }

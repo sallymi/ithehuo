@@ -42,7 +42,11 @@ var schema = new Schema({
    */
   'name': String,
   /**
-   * 姓名
+   * 昵称
+   */
+  'nick_name': String,
+  /**
+   * 年龄
    */
   'age': Number,
   /**
@@ -90,6 +94,16 @@ var schema = new Schema({
    * 全职主导创业 | 全职参与创业 | 兼职创业
    */
   'prefer': String,
+  /**
+   * 技术经验
+   * 不少于70字
+   */
+  'technical_experience': String,
+  /**
+   * 项目经验
+   * 不少于70字
+   */
+  'project_experience': String,
   /**
    * 创业项目id列表
    * 在IT合伙人平台上登记的，是creator或partner

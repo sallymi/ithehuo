@@ -17,28 +17,34 @@ block user_home_content
     .panel-heading.c-insetC-header 我的信息
     .panel-body
       form#userProfileForm.form-horizontal
-        .col-lg-2.col-lg-offset-1.col-xs-6.hidden-md.hidden-lg
-          label='头像'
-          img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/avatars/default.png")
+        .col-lg-2.col-lg-offset-1.hidden-md.hidden-lg
+          h4='头像'
+          img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
           .visible-md-inline-blockk
-            //- button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
-            button.btn.btn-info.btn-block#uploadButton(type='button' data-toggle='modal', data-target='.project-logo-upload') 更换头像
-        .col-lg-7
+            button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+            //- button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload') 
+        .col-lg-9
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
               font(color="red")='* '
               label(for='name') 姓名
-            .col-xs-12.col-sm-8
+            .col-xs-12.col-sm-10
               input#name.form-control(type='text', name='name', placeholder='姓名', value=signinUser.name, required)
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
+              //font(color="red")='* '
+              label(for='nick_name') 昵称
+            .col-xs-12.col-sm-10
+              input#nick_name.form-control(type='text', name='nick_name', placeholder='昵称', value=signinUser.nick_name)
+          .row.form-group
+            .col-xs-12.col-sm-2
               label.control-label(for='age') 年龄
-            .col-xs-12.col-sm-8
+            .col-xs-12.col-sm-10
               input#age.form-control(type='text', name='age', placeholder='年龄', value=signinUser.age)
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
               label.control-label(for='hometown') 家乡
-            .col-xs-12.col-sm-8
+            .col-xs-12.col-sm-10
               input#hometown.form-control(type='text', name='hometown', placeholder='填写后，老乡就能找到你啦', value=signinUser.hometown)
           //- .row.form-group
           //-   .col-xs-4
@@ -51,36 +57,36 @@ block user_home_content
           //-       each item in cities
           //-         +option(item, signinUser.location)
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
               font(color="red")='* '
               label.control-label(for='location') 所在地
-            .col-xs-12.col-sm-8
+            .col-xs-12.col-sm-10
               input#location.form-control(type='text', name='location', value=signinUser.location, placeholder='请输入工作城市名称，如北京 / beijing / bj', required)
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
               font(color="red")='* '
               label.control-label(for='field') 领域方向
-            .col-xs-12.col-sm-8
+            .col-xs-12.col-sm-10
               input#field.form-control(type='text', name='field', value=signinUser.field, placeholder='移动互联网 | O2O | 电子商务', required)
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
               font(color="red")='* '
               label(for='skill') 技能
-            .col-xs-12.col-sm-8
+            .col-xs-12.col-sm-10
               input#skill.form-control(type='text', name='skill', value=signinUser.skill,placeholder='Java | PHP | C++ | UI | 后端 | 数据库 | 用户体验', required)
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
               font(color="red")='* '
               label 状态
-            .col-xs-12.col-sm-8
+            .col-xs-12.col-sm-10
               include ./mixin/form.jade
               +radio('status', '全职创业中', signinUser.status, 'required')
               +radio('status', '兼职创业中', signinUser.status, 'required')
               +radio('status', '没有任何创业', signinUser.status, 'required')
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
               font(color="red")='* '
-              label （现在或期望的）角色定位
+              label 角色定位
             .col-xs-12.col-sm-8
               include ./mixin/form.jade
               +radio('role', '创始人', signinUser.role, 'required')
@@ -92,56 +98,79 @@ block user_home_content
               +radio('role', '资金合伙人', signinUser.role, 'required')
               +radio('role', '顾问/导师轻合伙人', signinUser.role, 'required')
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
               font(color="red")='* '
               label 创业倾向
-            .col-xs-12.col-sm-8
+            .col-xs-12.col-sm-10
               include ./mixin/form.jade
               +radio('prefer', '全职主导创业', signinUser.prefer, 'required')
               +radio('prefer', '全职参与创业', signinUser.prefer, 'required')
               +radio('prefer', '兼职创业', signinUser.prefer, 'required')
           if regesterByPhoneNum
             .row.form-group
-              .col-xs-12.col-sm-4
+              .col-xs-12.col-sm-2
                 label(for='email') 邮箱
-              .col-xs-12.col-sm-8
+              .col-xs-12.col-sm-10
                 input#email.form-control(type='text', name='email', placeholder='邮箱', value= signinUser.email)
             .row.form-group
-              .col-xs-12.col-sm-4
+              .col-xs-12.col-sm-2
                 label(for='mobile_phone') 手机
-              .col-xs-12.col-sm-8
+              .col-xs-12.col-sm-10
                 span=signinUser.mobile_phone
                 a(href='/home/settings/mobile')=' 修改手机'
           else if regesterByEmail
             .row.form-group
-              .col-xs-12.col-sm-4
+              .col-xs-12.col-sm-2
                 label(for='email') 邮箱
-              .col-xs-12.col-sm-8
+              .col-xs-12.col-sm-10
                 span=signinUser.email
                 a(href='/home/settings/email')=' 修改邮箱'
             .row.form-group
-              .col-xs-12.col-sm-4
+              .col-xs-12.col-sm-2
+                font(color="red")='* '
                 label(for='mobile_phone') 手机
-              .col-xs-12.col-sm-8
+              .col-xs-12.col-sm-10
                 input#mobile_phone.form-control(type='text', name='mobile_phone', placeholder='手机', value= signinUser.mobile_phone)
           else
             .row.form-group
-              .col-xs-12.col-sm-4
+              .col-xs-12.col-sm-2
                 label(for='email') 邮箱
-              .col-xs-12.col-sm-8
+              .col-xs-12.col-sm-10
                 span=signinUser.email
                 a(href='/home/settings/email')=' 修改邮箱'
             .row.form-group
-              .col-xs-12.col-sm-4
+              .col-xs-12.col-sm-2
                 label(for='mobile_phone') 手机
-              .col-xs-12.col-sm-8
+              .col-xs-12.col-sm-10
                 span=signinUser.mobile_phone
                 a(href='/home/settings/mobile')=' 修改手机'
           .row.form-group
-            .col-xs-12.col-sm-4
+            .col-xs-12.col-sm-2
               label(for='description') 个人描述
-            .col-xs-12.col-sm-8
+            .col-xs-12.col-sm-10
               textarea#description.form-control(type='text', name='description', placeholder='个人描述')= signinUser.description
+          .dashline
+          .row.form-group
+            .col-xs-12.col-sm-2
+              font(color="red")='* '
+              label(for='technical_experience') 技术经验
+            .col-xs-12.col-sm-10
+              textarea#technical_experience.form-control(type='text', name='technical_experience', placeholder='请详细填写您的技术经验和能力情况，展示您的实力，有利于更多公司预约您。' +
+              '请不要小于70字' required minlength=70)= signinUser.technical_experience
+              p.example 示例：
+              p.example 毕业于某985高校计算机系，在校期间专业成绩优秀，获得一等奖学金。曾参加ACM并获奖。毕业论文获得优秀。
+              p.example 毕业后就职于某知名互联网公司核心部门，参与公司主要产品的iOS客户端开发。负责界面UI和内核通信模块。在职期间绩效良好，被评为优秀员工。工作两年后晋升为高级工程师。
+              p.example 对技术有原发的兴趣，持续学习前沿技术，并独立完成多个兴趣项目，某业余时间做的iOS程序已有过万活跃用户。
+          .dashline
+          .row.form-group
+            .col-xs-12.col-sm-2
+              label(for='project_experience') 项目经验
+            .col-xs-12.col-sm-10
+              textarea#project_experience.form-control(type='text', name='project_experience', placeholder='请详细填写您在工作和业余时间参与过的项目，以及您在项目中所做的具体工作，有利于更多公司预约您。' +
+              '请不要小于70字。')= signinUser.project_experience
+              p.example 示例：
+              p.example 工作项目：1，淘宝客户端，主要负责移动电商客户端的功能模块的开发，包括了商品展示、用户登录后进行收藏加入购物车、订单处理、付款和社交等其他方面的功能。2，高德地图，主要负责地图客户端的导航功能开发，期间和队友合作完成了导航功能的重大升级，提升了导航速度与准确性。并且通过优化大量底层代码提升了地图响应速度，很大程度上提升了用户体验。
+              p.example 业余项目：自己做过地图应用，上线AppStore获得了过万用户。独立完成过包括道路拥堵指数计算、行车速度计算、道路选择在内的多个重点问题的算法实现。有比较丰富的地图开发经验。
           .dashline
           include ./mixin/form_educations.jade
           +educations(signinUser.educations)
