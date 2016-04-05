@@ -45,11 +45,11 @@ block content
                     if (signinUser.id!=user.id)
                       //- following
                       if (!isFollowed)
-                        button.btn.btn-info.navbar-header#addFollowing 关注
-                        button.btn.btn-default.navbar-header#removeFollowing(style='display:none') 取消关注
+                        button.btn.btn-info.head_shu#addFollowing 关注
+                        button.btn.btn-default.head_shu#removeFollowing(style='display:none') 取消关注
                       else
                         button.btn.btn-info.navbar-header#addFollowing(style='display:none') 关注
-                        button.btn.btn-default.navbar-header#removeFollowing 取消关注
+                        button.btn.btn-default.head_shu#removeFollowing 取消关注
                       //- friend
                       if (relation)
                         button.btn.btn-success.head_shu 已经是朋友
