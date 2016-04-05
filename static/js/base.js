@@ -136,6 +136,16 @@ $(document).ready(function () {
     $('.actionBtn a').text('发布合伙需求')
     $('ul.nav > li.recruitments').addClass('active');
     $('.mobile-nav > a.recruitments').addClass('active');
+    $('ul.dropdown-menu').children().remove();
+    $('ul.dropdown-menu').append('<li><a href="/home">我的人才档案</a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/home/followings">我的关注</a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/home/friends">我的好友</a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/home/friends">我的好友申请<i id="RequestCount" style="display:none"></i></a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/home/settings/password">我的账号设置</a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/users">进入企业版</a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/signout">退出</a></li>');
+    // $('ul.dropdown-menu.private').show();
+    // $('ul.dropdown-menu.enterprise').hide();
   }
   if(location.href.indexOf("users") !== -1){
     $('.entry-btn').attr('href','/recruitments');
@@ -144,6 +154,15 @@ $(document).ready(function () {
     $('.actionBtn a').text('成为专业人才')
     $('ul.nav > li.users').addClass('active');
     $('.mobile-nav > a.users').addClass('active');
+    $('ul.dropdown-menu').children().remove();
+    $('ul.dropdown-menu').append('<li><a href="/home/recruitments">我发布的合伙需求</a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/home/projects">我的创业项目</a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/home/friends">我的好友申请<i id="RequestCount" style="display:none"></i></a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/home/settings/password">我的账号设置</a></li>');
+    $('ul.dropdown-menu').append('<li><a href="recruitments">进入个人版</a></li>');
+    $('ul.dropdown-menu').append('<li><a href="/signout">退出</a></li>');
+    // $('ul.dropdown-menu.private').hide();
+    // $('ul.dropdown-menu.enterprise').show();
   }
 
   if(location.href.indexOf("projects") !== -1){
