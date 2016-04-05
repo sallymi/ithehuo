@@ -75,6 +75,7 @@ router.get('/chat/:uid', message.chatPage);
 // project
 router.get('/new/project', project.newProject);
 router.get('/projects', project.getProjects);
+router.get('/projectsAjax', project.getProjectsAjax);
 router.post('/projects', project.createProject);
 router.get('/projects/:pid', project.getProject);
 router.put('/projects/:pid', project.updateProject);
@@ -85,6 +86,7 @@ router.get('/home/projects/:pid', project.projectEdit);
 // recruitment
 router.get('/new/recruitment', recruitment.newRecruitmentPage);
 router.get('/recruitments', recruitment.getRecruitments);
+router.get('/recruitmentsAjax', recruitment.getRecruitmentsAjax);
 router.post('/recruitments', recruitment.createRecruitment);
 router.get('/recruitments/:rid', recruitment.getRecruitment);
 router.put('/recruitments/:rid', recruitment.updateRecruitment);

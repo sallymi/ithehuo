@@ -62,10 +62,10 @@ function updateUnreadMessagesCount() {
   var uid = $('#uid').val();
   getUnreadMessagesCount(uid)
     .done(function (count) {
-    	if (count > 0) {
-    		// $('#unreadMessagesCount').text(count);
+      if (count > 0) {
+        // $('#unreadMessagesCount').text(count);
         $('#unreadMessagesCount').show();
-    	}else{
+      }else{
         $('#unreadMessagesCount').hide();
       }
     })
@@ -81,9 +81,9 @@ function updateRequestListCount() {
   var uid = $('#uid').val();
   getFriendRequestCount(uid)
     .done(function (count) {
-    	if (count >0){
-    		// $('#reminder').text('New');
-      // 	$('#RequestCount').text('New');
+      if (count >0){
+        // $('#reminder').text('New');
+      //  $('#RequestCount').text('New');
         $('#reminder').show();
         $('#RequestCount').show();
       }else{
@@ -227,7 +227,7 @@ $(function () {
       //TODO
     }
     if (window.location.pathname.split('/')[1] === 'home' && window.location.pathname.split('/')[2] === 'friends'){
-    	window.location.reload();
+      window.location.reload();
     }
     //session storage
 
@@ -426,3 +426,16 @@ $(function () {
 
 });
 
+/**
+ * 全局加载方法：供加载更多使用
+ * @constructor
+ */
+var Loading = function(){};
+Loading.prototype.loadMore = function(query,render){
+  $.ajax({
+    url:query,
+    success:function(res,status,xhr){
+      render(res)
+    }
+  });
+};
