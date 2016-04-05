@@ -1,6 +1,18 @@
 mixin works(works)
   .experiences.works.form-group
     .col-xs-12.col-sm-4
+      label 工作经历标签
+    .col-xs-12.col-sm-8
+        +checkbox('work_experiences_tag_1','work_experiences_tag','500强', signinUser.work_experiences_tags, 'required', '500强')
+        +checkbox('work_experiences_tag_2','work_experiences_tag','BAT', signinUser.work_experiences_tags, 'required', 'BAT')
+        +checkbox('work_experiences_tag_3','work_experiences_tag','技术Lead', signinUser.work_experiences_tags, 'required', '技术Lead')
+        +checkbox('work_experiences_tag_4','work_experiences_tag','运营Lead', signinUser.work_experiences_tags, 'required', '运营Lead')
+        +checkbox('work_experiences_tag_5','work_experiences_tag','国内顶尖IT公司', signinUser.work_experiences_tags, 'required', '国内顶尖IT公司')
+        +checkbox('work_experiences_tag_6','work_experiences_tag','知名创业公司', signinUser.work_experiences_tags, 'required', '知名创业公司')
+        +checkbox('work_experiences_tag_7','work_experiences_tag','资深经理', signinUser.work_experiences_tags, 'required', '资深经理')
+        +checkbox('work_experiences_tag_8','work_experiences_tag','连续创业者', signinUser.work_experiences_tags, 'required', '连续创业者')
+        +checkbox('work_experiences_tag_9','work_experiences_tag','资深Marketing', signinUser.work_experiences_tags, 'required', '资深Marketing')
+    .col-xs-12.col-sm-4
       font(color="red")='* '
       label 工作经历
     .col-xs-12.col-sm-8
@@ -18,15 +30,3 @@ mixin works(works)
         +work(work)
     #new_work_template.hide
       +work()
-    .col-xs-12.col-sm-4
-      label 工作经历标签
-    .col-xs-12.col-sm-8
-        +checkbox('work_experiences_tag_1','work_experiences_tag','500强', signinUser.work_experiences_tags, 'required', '500强')
-        +checkbox('work_experiences_tag_2','work_experiences_tag','BAT', signinUser.work_experiences_tags, 'required', 'BAT')
-        +checkbox('work_experiences_tag_3','work_experiences_tag','技术Lead', signinUser.work_experiences_tags, 'required', '技术Lead')
-        +checkbox('work_experiences_tag_4','work_experiences_tag','运营Lead', signinUser.work_experiences_tags, 'required', '运营Lead')
-        +checkbox('work_experiences_tag_5','work_experiences_tag','国内顶尖IT公司', signinUser.work_experiences_tags, 'required', '国内顶尖IT公司')
-        +checkbox('work_experiences_tag_6','work_experiences_tag','知名创业公司', signinUser.work_experiences_tags, 'required', '知名创业公司')
-        +checkbox('work_experiences_tag_7','work_experiences_tag','资深经理', signinUser.work_experiences_tags, 'required', '资深经理')
-        +checkbox('work_experiences_tag_8','work_experiences_tag','连续创业者', signinUser.work_experiences_tags, 'required', '连续创业者')
-        +checkbox('work_experiences_tag_9','work_experiences_tag','资深Marketing', signinUser.work_experiences_tags, 'required', '资深Marketing')
