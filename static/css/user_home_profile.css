@@ -93,7 +93,7 @@ input.radiocheck+label.full:after, input.radiocheck+label.full:before {
   display: none !important;
 }
 .col-sm-2 {
-  text-align: right;
+  text-align: left;
 }
 .example {
   color: #ACB6C0;

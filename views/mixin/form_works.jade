@@ -8,6 +8,7 @@ mixin works(works)
       include ./form.jade
       +radio('work_experiences_public', 'false', signinUser.work_experiences_public, 'required', '不公开')
       +radio('work_experiences_public', 'true', signinUser.work_experiences_public, 'required', '公开')
+      .error
     .col-xs-4
     .col-md-8
       i.fa.fa-plus.pull-right
