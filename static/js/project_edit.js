@@ -170,6 +170,9 @@ $(document).ready(function(){
         projectStage : {
             required: true
         },
+        projectTags: {
+          required:true
+        },
         projectDescription : {  
             required : true  
         },
@@ -193,6 +196,9 @@ $(document).ready(function(){
         },
         projectFundingCurrent :{
             required : true
+        },
+        projectRequiredSkills:{
+          required:true
         }
     },  
     messages : {  
@@ -204,6 +210,12 @@ $(document).ready(function(){
         },
         projectStage : {
             required: "请选择项目阶段"
+        },
+        projectTags:{
+          required: "请输入项目标签，以回车分隔"
+        },
+        projectRequiredSkills:{
+          required:"请输入技术需求，以回车分隔"
         },
         projectDescription : {  
             required : "请输入项目介绍"  
