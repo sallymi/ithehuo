@@ -31,6 +31,7 @@ link(rel='stylesheet', href='/css/project_edit.css')
                 input.form-control#projectKeyword(style='width:100%',type='text', name='projectKeyword', value=project && project.keyword, placeholder='一句话描述', required)
             .row.form-group
               .col-xs-12.col-sm-4
+                font(color="red")='* '
                 label.control-label='项目标签 (领域方向等)'
               .col-xs-12.col-sm-8
                 input.form-control#projectTags(style='width:100%',type='text',name='projectTags', placeholder='如 互联网团队，天使轮，A轮, 以回车分隔')=project && project.tag
@@ -77,6 +78,7 @@ link(rel='stylesheet', href='/css/project_edit.css')
               input.form-control#projectCompany(type='text',name='projectCompany', value=project && project.company, placeholder='公司全名')
           .row.form-group
             .col-xs-12.col-sm-4
+              font(color="red")='* '
               label.control-label='技术需求'
             .col-xs-12.col-sm-8
               textarea.form-control#projectRequiredSkills(type='text',name='projectRequiredSkills', value=project && project.required_skills, placeholder='如 PHP，PS，JAVA')
@@ -166,7 +168,7 @@ link(rel='stylesheet', href='/css/project_edit.css')
                 +radio('projectCreatorRole', '合伙人', project && project.creator && project.creator.role, 'required')
                 +radio('projectCreatorRole', '投资人', project && project.creator && project.creator.role, 'required')
       .form-group.col-xs-12.text-center
-        button(type='submit').btn.btn-info.btn-block 保存并发布
+        button(type='submit').btn.btn-info.btn-block 保存并发布合伙需求
       br
 .modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
   .modal-dialog.modal-sm

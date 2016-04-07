@@ -189,7 +189,7 @@ $(function () {
   //       }
   //    }
   // );
-  $('#field').tagEditor({
+  $('#fields').tagEditor({
     // initialTags: ['互联网', '天使轮', '全职团队'],
     autocomplete: { delay: 0, position: { collision: 'flip' },
       minLength: 0,
@@ -349,22 +349,51 @@ $(document).ready(function(){
     errorClass : 'error',
     focusInvalid : false,
     rules:{
+      name: {
+        required : true
+      },
       location:{
-          remote: {
-            url: "/validateAddr",
-            type: "post",
-            data: {
-              city: function(){
-                return $("#location").val();
-              }
+        required : true,
+        remote: {
+          url: "/validateAddr",
+          type: "post",
+          data: {
+            city: function(){
+              return $("#location").val();
             }
           }
+        }
       },
+      fields:{
+        required: true
+      },
+
       mobile_phone:{
         isMobile: true
       },
       age:{
         range:[0,99]
+      },
+      skill: {
+        required: true
+      },
+      status: {
+        required: true
+      },
+      role: {
+        required: true
+      },
+      prefer: {
+        required: true
+      },
+      technical_experience: {
+        required: true
+      },
+      work_experiences_public: {
+        required: true
+      },
+      startup_experiences_public:{
+        required:true
       },
       hometown:{
           remote: {
@@ -376,9 +405,9 @@ $(document).ready(function(){
               }
             }
           }
-        }
+      }
     },
-    message: {
+    messages: {
       name:{
         required: "请输入姓名"
       },
@@ -386,17 +415,40 @@ $(document).ready(function(){
         required: "请输入所在地",
         remote: "请输入合法城市，如无匹配，请输入其他"
       },
-      field:{
+      fields:{
         required: "请输入专注的领域，以回车分隔"
+      },
+      skill:{
+        required: "请输入技能，以回车分隔"
+      },
+      status: {
+        required: "请选择状态"
+      },
+      role:{
+        required:"请选择角色定位"
       },
       age:{
         range:"请输入0-99之间数字"
+      },
+      prefer:{
+        required: "请选择创业倾向"
       },
       hometown:{
         remote: "请输入合法籍贯，如无匹配，请输入其他"
       },
       mobile_phone: {
         required: "请输入手机号"
+      },
+      technical_experience: {
+        required: "请填写技术经验，不少于70字。",
+        minlength: "请不要少于70字。"
+
+      },
+      work_experiences_public:{
+        required: "请选择是否公开"
+      },
+      startup_experiences_public:{
+        required:"请选择是否公开"
       }
     },
     highlight : function(element) {
@@ -409,11 +461,14 @@ $(document).ready(function(){
     errorPlacement : function(error, element) {
 
         if ( element.is(":radio") )
-            error.appendTo ( element.parent().parent().parent() );
+          error.appendTo(element.parent().parent().children('.error'));
+            // error.appendTo ( element.parent().parent().parent() );
         else if ( element.is(":checkbox") )
             error.appendTo ( element.parent() );
         else if (element.is("#location") || element.is("#hometown"))
             error.appendTo ( element.parent().parent('div') );
+        else if(element.is("#technical_experience"))
+            error.appendTo(element.parent().children('.error'));
         else
             element.parent('div').append(error);
 

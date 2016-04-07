@@ -8,6 +8,7 @@ mixin startups(startups)
       include ./form.jade
       +radio('startup_experiences_public', 'false', signinUser.startup_experiences_public, 'required', '不公开')
       +radio('startup_experiences_public', 'true', signinUser.startup_experiences_public, 'required', '公开')
+      .error
     .col-xs-4
     .col-md-8
       i.fa.fa-plus.pull-right

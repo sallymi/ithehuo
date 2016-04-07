@@ -29,16 +29,13 @@ var path = require('path');
 exports.newProject = function (req, res) {
   resUtil.render(req, res, 'project_new');
 };
-
-/**
- * Request handler to project list page
- *
- * @function
+/***
+ * 获取项目列表
  * @param req - express http request
- * @param res - express http response
- *
+ * @param res - express http request
+ * @param fn 处理函数
  */
-exports.getProjects = function (req, res) {
+function getProjectsService(req,res,fn){
   logger.info('request received to project list page');
   logger.info('filter: ' + JSON.stringify(req.query));
 
@@ -64,7 +61,7 @@ exports.getProjects = function (req, res) {
   } else {
     // handle common filter
     var filter = filterUtil.toMongoFilter(req.query);
-    promiseToGetProjects = projectProxy.findProjects(filter);
+    promiseToGetProjects = projectProxy.findProjectsLimit(filter);
   }
 
   promiseToGetProjects.then(function (projects) {
@@ -91,7 +88,7 @@ exports.getProjects = function (req, res) {
     logger.info('find complete');
     logger.info('will render projects page with bellow projects');
     logger.info(projects);
-    resUtil.render(req, res, 'projects', {
+    fn.success(req, res, {
       'projects': projects,
       'filters': filters,
       'searchType': 'project'
@@ -100,7 +97,40 @@ exports.getProjects = function (req, res) {
     logger.error('error occur when try to find all the projects, see bellow error');
     logger.error(err);
     logger.debug('will render error page');
-    resUtil.render(req, res, 'error', err);
+    fn.fail(req, res,  err);
+  });
+}
+/**
+ * Request handler to project list page
+ *
+ * @function
+ * @param req - express http request
+ * @param res - express http response
+ *
+ */
+exports.getProjects = function (req, res) {
+  getProjectsService(req,res,{
+    success:function(req,res,obj){
+      resUtil.render(req, res, 'projects', obj);
+    },
+    fail:function(req, res,err){
+      resUtil.render(req, res, 'error', err);
+    }
+  });
+};
+/***
+ * 异步获取项目列表
+ * @param req - express http request
+ * @param res - express http request
+ */
+exports.getProjectsAjax = function (req, res) {
+  getProjectsService(req,res,{
+    success:function(req,res,obj){
+      res.send(obj);
+    },
+    fail:function(req, res,err){
+      res.send(err);
+    }
   });
 };
 
@@ -277,7 +307,7 @@ exports.updateLogo = function (req, res) {
     //logger.info(files.file);
     if(sz > 2*1024*1024){
       logger.debug('image is out of size')
-      fs.unlink(imgPath, function() {	//fs.unlink 删除用户上传的文件
+      fs.unlink(imgPath, function() { //fs.unlink 删除用户上传的文件
         res.json({errCode:1001,msg:'图片超出指定大小'});
       });
     } else if (files.file.type.split('/')[0] != 'image') {

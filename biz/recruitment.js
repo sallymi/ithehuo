@@ -13,6 +13,7 @@ var reqUtil = require('../utils/request');
 var resUtil = require('../utils/response');
 var filterUtil = require('../utils/filter');
 var logger = require('../utils/log').getLogger('biz/recruitment.js');
+var config = require('../config');
 
 /**
  * Request handler to new recruitment page
@@ -64,16 +65,8 @@ exports.createRecruitment = function (req, res) {
     res.status(500).json(err);
   });
 };
+function getRecruitmentsService (req,res,fn){
 
-/**
- * Request handler for recruitments page
- *
- * @function
- * @param req - express http request
- * @param res - express http response
- *
- */
-exports.getRecruitments = function (req, res) {
   logger.info('request received to recruitments page');
   logger.info('filter: ' + JSON.stringify(req.query));
 
@@ -95,24 +88,27 @@ exports.getRecruitments = function (req, res) {
       for (i = 0; i < result.length; i++) {
         recruitments = recruitments.concat(result[i]);
       }
-      resUtil.render(req, res, 'recruitments', {
+      fn.success(req,res,{
         'recruitments': recruitments,
         'filters': filters
       });
+
     }).fail(function (err) {
       logger.error(err);
-      resUtil.render(req, res, 'error', err);
+      fn.fail(req,res,err);
     });
     return;
   }
 
   var filter = filterUtil.toMongoFilter(req.query);
+  if(!filter.limit)
+      filter['limit']=config.limit;
   logger.info('try to find all recruitments');
-  recruitmentProxy.find(filter).then(function (recruitments) {
+  recruitmentProxy.findLimit(filter).then(function (recruitments) {
     logger.info('find complete');
     logger.info('will render recruitments page with bellow recruitments');
     logger.info(recruitments);
-    resUtil.render(req, res, 'recruitments', {
+    fn.success(req,res, {
       'recruitments': recruitments,
       'filters': filters
     });
@@ -120,8 +116,36 @@ exports.getRecruitments = function (req, res) {
     logger.error('error occur when try to find all the recruitments, see bellow error');
     logger.error(err);
     logger.debug('will render error page');
-    resUtil.render(req, res, 'error', err);
+    fn.fail(req,res,err);
   });
+}
+/**
+ * Request handler for recruitments page
+ *
+ * @function
+ * @param req - express http request
+ * @param res - express http response
+ *
+ */
+exports.getRecruitments = function (req, res) {
+  getRecruitmentsService(req,res,{
+    success:function(req,res,obj){
+      resUtil.render(req, res, 'recruitments', obj);
+    },
+    fail:function(req,res,err){
+      resUtil.render(req, res, 'error', err);
+    }
+  })
+};
+exports.getRecruitmentsAjax = function (req, res) {
+  getRecruitmentsService(req,res,{
+    success:function(req,res,obj){
+      res.send(obj);
+    },
+    fail:function(req,res,err){
+      res.send( err);
+    }
+  })
 };
 
 /**
@@ -132,6 +156,7 @@ exports.getRecruitments = function (req, res) {
  * @param res - express http response
  *
  */
+
 exports.getRecruitment = function (req, res) {
   var method = '[getRecruitment]';
   logger.info(method, 'request received to get recruitment by id');

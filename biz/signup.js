@@ -7,22 +7,22 @@
 var validator = require('validator');
 var userProxy = require('../persistent/proxy/user');
 var config = require('../config');
-var sms_config = config.sms.qa;
+var sms_config = config.sms.production;
 var resUtil = require('../utils/response');
 var crypto = require('../utils/crypto');
 var mailer = require('../utils/mail');
 var logger = require('../utils/log').getLogger('biz/signup');
 var App = require('alidayu-node');
-var ccap = require('ccap-dev')({
-  width: 120,
-  height: 43,
-  offset: 24,
-  quality: 100,
-  fontSize: 24,
-  textLen: 4,
-  noiseType: 2,
-  noiseSigma: 1
-});
+//var ccap = require('ccap-dev')({
+//  width: 120,
+//  height: 43,
+//  offset: 24,
+//  quality: 100,
+//  fontSize: 24,
+//  textLen: 4,
+//  noiseType: 2,
+//  noiseSigma: 1
+//});
 
 var capText = null;
 global.smsMap = {};
@@ -92,7 +92,7 @@ exports.sms = function (req, res, next) {
 };
 
 exports.captcha = function (req, res) {
-    //return res.send('A');
+    return res.send('A');
     var ary = ccap.get();
     capText= ary[0];
     var buf = ary[1];

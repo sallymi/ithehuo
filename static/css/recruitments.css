@@ -13,6 +13,9 @@
   	position: relative;
     overflow: auto;
   }
+  .load-more{
+    margin-left: 20px;
+  }
 }
 @media(max-width:767px) {
   .list-show .portfolio-item{

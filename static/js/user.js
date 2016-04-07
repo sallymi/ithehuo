@@ -111,18 +111,18 @@ $(function () {
     else
       url = '/usersAjax'+window.location.search+'&limit='+$(this).data('page')+'&page='
     Loading.prototype.loadMore(url+(page+1),function(users){
-      if(users.length<limit) {
+      if(users.users.length<limit) {
         $('.load-more').remove();
       }else{
         $(self).text('加载更多');
       }
-      users.forEach(function(item,idx){
+      users.users.forEach(function(item,idx){
         var user = item;
         var text = $.clone($('.panel-body li:first-child')[0]);
         $(text).find('.media-left a').attr('href','/users/'+item._id);
-        var Arr = ["a6-160","a7-160","a8-160","a9-160","a10-160","a11-160","a12-160","a13-160","a14-160","a15-160"];
-        var n = Math.floor(Math.random() * Arr.length + 1)-1;
-        $(text).find('img.media-object').attr('src',user.logo_img?user.logo_img:'/images/avatars/'+Arr[n]+'.png');
+        // var Arr = ["a6-160","a7-160","a8-160","a9-160","a10-160","a11-160","a12-160","a13-160","a14-160","a15-160"];
+        // var n = Math.floor(Math.random() * Arr.length + 1)-1;
+        $(text).find('img.media-object').attr('src',user.logo_img?user.logo_img:'/images/avatars/default.png');
         $(text).find('.media-heading a').attr('href','/users/'+item._id);
         $(text).find('.media-heading a strong').text(user.name?user.name:(user.email?user.email.split('@')[0]:(user.mobile_phone?user.mobile_phone.toString().substring(0,3)+"****"+user.mobile_phone.toString().substring(8,11):"ID:"+user.id)));
         $(text).find('.media-heading small').text(user.role);
@@ -159,13 +159,4 @@ function cutString(str, len) {
   return s;
 }
 
-var Loading = function(){};
-Loading.prototype.loadMore = function(query,render){
-  $.ajax({
-    url:query,
-    success:function(res,status,xhr){
-      render(res.users)
-    }
-  });
-}
 

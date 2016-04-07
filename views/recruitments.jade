@@ -74,3 +74,6 @@ block content
                       .small
                         strong= '融资规模：'
                         =recruitment.project&&recruitment.project.funding&&recruitment.project.funding.current?recruitment.project.funding.current:'<创建者还没有填写>'
+            if recruitments.length==limit
+              .col-md-12
+                div.load-more.btn.btn-info.btn-block(data-page=1, data-limit=limit) 加载更多
