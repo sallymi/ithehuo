@@ -6,7 +6,7 @@ mixin baseItem(item, query, name)
 mixin dropdownMenu(filter)
     if filter
         li.dropdown
-            a.dropdown-toggle(data-target="#",data-toggle="dropdown",data-hover="dropdown")=filter.name
+            a.dropdown-toggle(href="#",data-toggle="dropdown")=filter.name
                 b.caret
             ul.dropdown-menu
                 if filter.values

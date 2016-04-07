@@ -6,9 +6,11 @@
 }*/
 @media(min-width:768px) {
   .list-show .portfolio-item{
+    width: 80%;
+    margin: 0 10%;
   	padding: 13px;
-    margin-left:20px;
-    margin-right:20px;
+    /*margin-left:20px;*/
+    /*margin-right:20px;*/
   	line-height: 25px;
   	position: relative;
     overflow: auto;
