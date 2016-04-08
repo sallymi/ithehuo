@@ -13,16 +13,16 @@ var crypto = require('../utils/crypto');
 var mailer = require('../utils/mail');
 var logger = require('../utils/log').getLogger('biz/signup');
 var App = require('alidayu-node');
-//var ccap = require('ccap-dev')({
-//  width: 120,
-//  height: 43,
-//  offset: 24,
-//  quality: 100,
-//  fontSize: 24,
-//  textLen: 4,
-//  noiseType: 2,
-//  noiseSigma: 1
-//});
+var ccap = require('ccap-dev')({
+  width: 120,
+  height: 43,
+  offset: 24,
+  quality: 100,
+  fontSize: 24,
+  textLen: 4,
+  noiseType: 2,
+  noiseSigma: 1
+});
 
 var capText = null;
 global.smsMap = {};
@@ -43,6 +43,12 @@ exports.sms = function (req, res, next) {
   var phone = req.params.phone?req.params.phone:req.body.phone;
   var type = req.body.type;
   var smsText = MathRandom();
+  var captcha = req.body.captcha;
+  logger.debug('check if captcha is valid, captcha: ' +  captcha + ' with generated Code '+req.session.capText);
+  if (req.session.capText.toLowerCase()!=captcha.toLowerCase()) {
+    resUtil.render(req, res, 'signup', {error: '图形验证码不正确。', captcha: captcha});
+    return;
+  }
   logger.debug('get the phone number');
   logger.debug('the sms text is==='+smsText);
   //var app = new App('23324086', '701378360789f40887a0db9905d11252');
@@ -92,7 +98,7 @@ exports.sms = function (req, res, next) {
 };
 
 exports.captcha = function (req, res) {
-    return res.send('A');
+    //return res.send('A');
     var ary = ccap.get();
     capText= ary[0];
     var buf = ary[1];
@@ -121,7 +127,7 @@ exports.signup = function (req, res) {
   var email = req.body.email;
   var pass = req.body.password;
    var phone = req.body.phone;
-   var captcha = req.body.captcha;
+   //var captcha = req.body.captcha;
    var sms = req.body.sms;
 
    if(email){
@@ -181,11 +187,11 @@ exports.signup = function (req, res) {
        resUtil.render(req, res, 'signup', {error: '不正确的手机号。', phone: phone});
        return;
      }
-     logger.debug('check if captcha is valid, captcha: ' +  captcha + ' with generated Code '+req.session.capText);
-     if (req.session.capText.toLowerCase()!=captcha.toLowerCase()) {
-       resUtil.render(req, res, 'signup', {error: '图形验证码不正确。', captcha: captcha});
-       return;
-     }
+     //logger.debug('check if captcha is valid, captcha: ' +  captcha + ' with generated Code '+req.session.capText);
+     //if (req.session.capText.toLowerCase()!=captcha.toLowerCase()) {
+     //  resUtil.render(req, res, 'signup', {error: '图形验证码不正确。', captcha: captcha});
+     //  return;
+     //}
      logger.debug('check if sms is valid, smsText: ' +  sms);
      logger.debug(global.smsMap);
      if (global.smsMap[phone]!=sms) {
