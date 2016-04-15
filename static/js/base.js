@@ -391,9 +391,14 @@ $(function () {
   var t1 = null;
   $('#getSmsCode').click(function(e){
     var phone = $("#phone").val();
+    var captcha = $("#captcha").val();
     var patt1 = new RegExp(/^(\+?0?86\-?)?1[345789]\d{9}$/);
     if(!patt1.test(phone)){
       globalNotify.failed("手机号不合规范，请输入11位中国大陆手机号！");
+      return
+    }
+    if(captcha.length==0){
+      globalNotify.failed("请输入图片验证码！");
       return
     }
     checkPhoneUsed(phone).then(function(flag){
