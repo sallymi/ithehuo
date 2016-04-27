@@ -152,7 +152,7 @@ exports.getProject = function (req, res) {
     recruitmentProxy.find({'project': pid})
   ]).spread(function (project, recruitments) {
     logger.info(method, 'find complete');
-
+    logger.debug(project);
     if (req.accepts('html')) {
       logger.info(method, 'request accept html type, will render project page');
       resUtil.render(req, res, 'project', {
