@@ -11,7 +11,7 @@ block content
   .container-fluid
     //.col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19.hidden-xs
     .header.sub-header
-      .navbar-collapse.mega-menu.navbar-responsive-collapse
+      .navbar-collapse.mega-menu.navbar-responsive-collapse.hidden-xs
         if filters
           ul.nav.navbar-nav
             include mixin/select.jade
@@ -37,7 +37,7 @@ block content
                       if user.logo_img&&user.logo_img.indexOf('upload_avatars')!==-1
                         img.media-object(src=user.logo_img, width='100%')
                       else
-                        img.media-object(src='/images/avatars/default.png')
+                        img.media-object(src='/images/avatars/default.png',width='100%')
                   .media-body.col-md-5.col-xs-9(onclick="location.href='/users/#{user._id}'")
                     h5.media-heading.mb10
                       a(href= '/users/' + user._id)
