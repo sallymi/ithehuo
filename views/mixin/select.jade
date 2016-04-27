@@ -1,0 +1,29 @@
+mixin baseItem(item, query, name)
+    li
+        a(href='/'+item+'?'+query)=name
+
+
+mixin dropdownMenu(filter)
+    if filter
+        li.dropdown
+            a.dropdown-toggle(href="#",data-toggle="dropdown")=filter.name
+                b.caret
+            ul.dropdown-menu
+                if filter.values
+                    each value in filter.values
+                        if value.name
+                            +baseItem(filter.item, value.query, value.name)
+                        else
+                            +baseItem(filter.item, filter.key + '=' + value, value)
+                if filter.categories
+                    each category in filter.categories
+                        li.dropdown-submenu
+                            a(href='#',tabindex="-1")=category.name
+                            ul.dropdown-menu
+                                each value in category.values
+                                    li
+                                        if value.operator && value.value && value.name
+                                            +baseItem(filter.item, filter.key, value.operator + '=', value.value, value.name)
+                                        else
+                                            +baseItem(filter.item, filter.key + '=' + value, value)
+

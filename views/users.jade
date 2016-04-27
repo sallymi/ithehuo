@@ -1,139 +1,71 @@
 extends base
 block content
-  link(rel='stylesheet', href='/css/users.css')
-  link(rel='stylesheet', href='/css/side_nav.css')
+  //link(rel='stylesheet', href='/css/users.css')
+  //link(rel='stylesheet', href='/css/side_nav.css')
+  link(rel='stylesheet', href='/css/top_nav.css')
   link(rel='stylesheet', href='/css/recruitments.css')
   script(src='/js/projects.js')
   script(src='/js/user.js')
 
 
-  .container-fluid.list-show
-    .row.users
-      .col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19.hidden-xs
-          if filters
-            .siderNav
-              include mixin/filter.jade
-              each filter in filters
-                +filter(filter)
+  .container-fluid
+    //.col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19.hidden-xs
+    .header.sub-header
+      .navbar-collapse.mega-menu.navbar-responsive-collapse
+        if filters
+          ul.nav.navbar-nav
+            include mixin/select.jade
+            each filter in filters
+              +dropdownMenu(filter)
 
-            //- .menu_box(rel='drevil', name='skills')
-            //-   .menu_main
-            //-     h2 技能
-            //-       span
-            //-     - var status =["了解行业动态","善于团队管理","沟通能力强","善于把握风口趋势","资源丰富","市场敏锐"]
-            //-     each item in status
-            //-       a(href='#')=item
-            //-   .menu_sub#skills.dn
-            //-     dl.reset
-            //-       dt
-            //-         a(href='#') 创业能力
-            //-         dd
-            //-           a(href='/projects?location=北京') 了解行业动态
-            //-           a(href='/projects?location=天津') 善于团队管理
-            //-           a(href='/projects?location=河北') 沟通能力强
-            //-         dd
-            //-           a(href='/projects?location=河北') 善于把握风口趋势
-            //-           a(href='/projects?location=河北') 资源丰富
-            //-           a(href='/projects?location=河北') 市场敏锐
-            //-       dt
-            //-         a(href='#') A
-            //-         dd
-            //-           - var skills = ['ActionScript', 'AppleScript', 'Asp']
-            //-           each item in skills
-            //-             a(href='/projects?location=北京')=item
-            //-       dt
-            //-         a(href='#') B
-            //-         dd
-            //-           - var skills = ['BASIC']
-            //-           each item in skills
-            //-             a(href='/projects?location=北京')=item
-            //-       dt
-            //-         a(href='#') C
-            //-         dd
-            //-           - var skills = [ 'C', 'C++', 'CSS', 'Clojure', 'COBOL', 'ColdFusion']
-            //-           each item in skills
-            //-             a(href='/projects?location=北京')=item
-            //-       dt
-            //-         a(href='#') E~G
-            //-         dd
-            //-           - var skills = ['Erlang', 'Fortran', 'Groovy']
-            //-           each item in skills
-            //-             a(href='/projects?location=北京')=item
-
-            //-       dt
-            //-         a(href='#') H
-            //-         dd
-            //-           - var skills = ['Haskell', 'HTML']
-            //-           each item in skills
-            //-             a(href='/projects?location=北京')=item
-            //-       dt
-            //-         a(href='#') J
-            //-         dd
-            //-           - var skills = ['Java', 'JavaScript']
-            //-           each item in skills
-            //-             a(href='/projects?location=北京')=item
-            //-       dt
-            //-         a(href='#') L~P
-            //-         dd
-            //-           - var skills = ['Lisp', 'NodeJS','Perl', 'PHP', 'Python']
-            //-           each item in skills
-            //-             a(href='/projects?location=北京')=item
-
-            //-       dt
-            //-         a(href='#') R~S
-            //-         dd
-            //-           - var skills = ['Ruby', 'Scala', 'Scheme']
-            //-           each item in skills
-            //-             a(href='/projects?location=北京')=item
-        .col-lg-9.col-md-9.col-sm-12.col-xs-12
-          include search.jade
-          .well.transparent
-            .panel
-              .panel-body
-                if users.length==0
-                  .empty_result 没有搜索到人
-                    br
-                  | 请试试其他搜索吧......
-                each user in users
-                  if user.email || user.mobile_phone
-                    li.col-md-12.portfolio-item
-                      .media
-                        .media-left.media-middle.col-md-3.col-xs-3
-                          a(href='/users/' + user._id)
-                            // - var Arr = ["a6-160","a7-160","a8-160","a9-160","a10-160","a11-160","a12-160","a13-160","a14-160","a15-160"];
-                            // - var n = Math.floor(Math.random() * Arr.length + 1)-1; 
-                            if user.logo_img&&user.logo_img.indexOf('upload_avatars')!==-1
-                              img.media-object(src=user.logo_img, width='100%')
-                            else
-                              img.media-object(src='/images/avatars/default.png')
-                        .media-body.col-md-5.col-xs-9(onclick="location.href='/users/#{user._id}'")
-                          h5.media-heading.mb10
-                            a(href= '/users/' + user._id)
-                              strong=user.name?user.name:(user.email?user.email.split('@')[0]:(user.mobile_phone?user.mobile_phone.toString().substring(0,3)+"****"+user.mobile_phone.toString().substring(8,11):"ID:"+user.id))
-                            small= user.role
-                          .small
-                            strong='地址：'
-                            =user.location?user.location:'创业者暂未公布'
-                          .small
-                            strong='状态：'
-                            =user.role?user.role:'创业者暂未公布'
-                          .small
-                            strong='角色定位：'
-                            =user.status?user.status:'创业者暂未公布'
-                          .small
-                            strong='个人一句话描述：'
-                            =user.description?user.description:'创业者暂未公布'
-                        .media-body.col-md-4.col-xs-12
-                            if user.work_experiences_tags && user.work_experiences_tags.length>0
-                                each tag in user.work_experiences_tags
-                                  span.tag.label.label-info=tag
-                                  span= ' '
-              if users.length==limit
-                .col-md-12
-                  div.load-more.btn.btn-info.btn-block(data-page=1, data-limit=limit) 加载更多
-                        //- .media-body.col-md-4
-                        //-   a.btn.btn-info.navbar-header#addFav(href='javascript:new_add_follow("#{signinUser.id}","#{user.id}","#{user.name}")')='关注'
-                        //-   a.btn.btn-default.navbar-header#removeFav(style='display:none', href='javascript:remove_follow("#{signinUser.id}","#{user.id}","#{user.name}")')='取消关注'
-                        //-   if (signinUser.id!=user.id)
-                        //-     a.btn.btn-info.head_shu#askAdd(href='javascript:new_add_friend("#{signinUser.id}","#{user.id}","#{user.name}")')='建立联系'
-                        //-     a.btn.btn-success.head_shu#Added(style='display:none', href='###')='已建立联系'
+    include search.jade
+    .well.transparent.list-show
+      .panel
+        .panel-body
+          if users.length==0
+            .empty_result 没有搜索到人
+              br
+            | 请试试其他搜索吧......
+          each user in users
+            if user.email || user.mobile_phone
+              li.col-md-12.portfolio-item
+                .media
+                  .media-left.media-middle.col-md-3.col-xs-3
+                    a(href='/users/' + user._id)
+                      // - var Arr = ["a6-160","a7-160","a8-160","a9-160","a10-160","a11-160","a12-160","a13-160","a14-160","a15-160"];
+                      // - var n = Math.floor(Math.random() * Arr.length + 1)-1;
+                      if user.logo_img&&user.logo_img.indexOf('upload_avatars')!==-1
+                        img.media-object(src=user.logo_img, width='100%')
+                      else
+                        img.media-object(src='/images/avatars/default.png')
+                  .media-body.col-md-5.col-xs-9(onclick="location.href='/users/#{user._id}'")
+                    h5.media-heading.mb10
+                      a(href= '/users/' + user._id)
+                        strong=user.name?user.name:(user.email?user.email.split('@')[0]:(user.mobile_phone?user.mobile_phone.toString().substring(0,3)+"****"+user.mobile_phone.toString().substring(8,11):"ID:"+user.id))
+                      small= user.role
+                    .small
+                      strong='地址：'
+                      =user.location?user.location:'创业者暂未公布'
+                    .small
+                      strong='状态：'
+                      =user.role?user.role:'创业者暂未公布'
+                    .small
+                      strong='角色定位：'
+                      =user.status?user.status:'创业者暂未公布'
+                    .small
+                      strong='个人一句话描述：'
+                      =user.description?user.description:'创业者暂未公布'
+                  .media-body.col-md-4.col-xs-12
+                      if user.work_experiences_tags && user.work_experiences_tags.length>0
+                          each tag in user.work_experiences_tags
+                            span.tag.label.label-info=tag
+                            span= ' '
+        if users.length==limit
+          .col-md-12
+            div.load-more.btn.btn-info.btn-block(data-page=1, data-limit=limit) 加载更多
+                  //- .media-body.col-md-4
+                  //-   a.btn.btn-info.navbar-header#addFav(href='javascript:new_add_follow("#{signinUser.id}","#{user.id}","#{user.name}")')='关注'
+                  //-   a.btn.btn-default.navbar-header#removeFav(style='display:none', href='javascript:remove_follow("#{signinUser.id}","#{user.id}","#{user.name}")')='取消关注'
+                  //-   if (signinUser.id!=user.id)
+                  //-     a.btn.btn-info.head_shu#askAdd(href='javascript:new_add_friend("#{signinUser.id}","#{user.id}","#{user.name}")')='建立联系'
+                  //-     a.btn.btn-success.head_shu#Added(style='display:none', href='###')='已建立联系'
