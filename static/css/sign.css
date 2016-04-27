@@ -34,7 +34,7 @@ h3 {
     line-height: 24px;
     position: relative;
     float: left;
-    width: 190px;
+    width: 50%;
     height: 33px;
     cursor: pointer;
     text-align: center;
@@ -49,7 +49,7 @@ li {
     left: 0;
     bottom: -1px;
     background-color: rgba(52,152,219,1);;
-    width: 220px;
+    width: 50%;
     height: 1px;
 }
 .form_head .tab_active:before, .form_head .tab_active:after {

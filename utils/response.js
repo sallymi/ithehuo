@@ -15,7 +15,10 @@
  * @param {Object} object - object to render page
  *
  */
+var logger = require('./log').getLogger('./response.js');
+
 exports.render = function (req, res, page, object) {
+  logger.info("=============we are here 2=============="+page);
   if (req.session.user) {
     if (!object) {
       object = {};

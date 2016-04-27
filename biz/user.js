@@ -122,12 +122,14 @@ function getUsersService (req,res,fn){
 exports.getUsers = function (req, res) {
     getUsersService(req,res,{
         success:function(req, res,users,filters){
+            logger.info("the filters is "+JSON.stringify(filters));
             resUtil.render(req, res, 'users', {
                 'users': users,
                 'filters': filters
             })
         },
         fail:function(req, res, err){
+            logger.info("=============we are here 1==============");
             resUtil.render(req, res, 'error', err);
         }
     })
