@@ -54,15 +54,16 @@ block navbar
                 li
                   a(href='/home') 我的人才档案
                 li
-                  a(href='/home/friends') 我的好友申请
+                  a(href='/home/settings/password') 我的账号设置
+                li
+                  a(href='/home/friends') 我的好友
                     i#RequestCount(style='display:none')
                 
-                //- li
-                //-   a(href='/home/followings') 我的关注
+                li
+                  a(href='/home/followings') 我的关注
                 //- li
                 //-   a(href='/home/friends') 我的好友
-                li
-                  a(href='/home/settings/password') 我的账号设置
+                
                 li
                   a(href='/users') 进入企业版
                 li
@@ -84,7 +85,9 @@ block navbar
             li
               a(href='/home/projects') 我的创业项目
             li
-              a(href='/home/friends') 我的好友申请
+              a(href='/home/settings/password') 我的账号设置
+            li
+              a(href='/home/friends') 我的好友
                 i#RequestCount(style='display:none')
             li
               a(href='/home') 我的个人信息
@@ -92,8 +95,7 @@ block navbar
               a(href='/home/followings') 我的关注
             li
               a(href='/home/friends') 我的好友
-            li
-              a(href='/home/settings/password') 我的账号设置
+            
             li
               a(href='/signout') 退出
           else
@@ -142,7 +144,7 @@ block navbar
       li
         a(href='/home/projects') 我的创业项目
       li
-        a(href='/home/friends') 我的好友申请
+        a(href='/home/friends') 我的好友
           span.badge#RequestCount
       li
         a(href='/home') 我的个人信息

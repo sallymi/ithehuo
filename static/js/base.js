@@ -138,10 +138,9 @@ $(document).ready(function () {
     $('.mobile-nav > a.recruitments').addClass('active');
     $('#login-button ul.dropdown-menu').children().remove();
     $('#login-button ul.dropdown-menu').append('<li><a href="/home">我的人才档案</a></li>');
-    $('#login-button ul.dropdown-menu').append('<li><a href="/home/followings">我的关注</a></li>');
-    $('#login-button ul.dropdown-menu').append('<li><a href="/home/friends">我的好友</a></li>');
-    $('#login-button ul.dropdown-menu').append('<li><a href="/home/friends">我的好友申请<i id="RequestCount" style="display:none"></i></a></li>');
     $('#login-button ul.dropdown-menu').append('<li><a href="/home/settings/password">我的账号设置</a></li>');
+    $('#login-button ul.dropdown-menu').append('<li><a href="/home/followings">我的关注</a></li>');
+    $('#login-button ul.dropdown-menu').append('<li><a href="/home/friends">我的好友<i id="RequestCount" style="display:none"></i></a></li>');
     $('#login-button ul.dropdown-menu').append('<li><a href="/users">进入企业版</a></li>');
     $('#login-button ul.dropdown-menu').append('<li><a href="/signout">退出</a></li>');
     // $('ul.dropdown-menu.private').show();
@@ -157,8 +156,9 @@ $(document).ready(function () {
     $('#login-button ul.dropdown-menu').children().remove();
     $('#login-button ul.dropdown-menu').append('<li><a href="/home/recruitments">我发布的合伙需求</a></li>');
     $('#login-button ul.dropdown-menu').append('<li><a href="/home/projects">我的创业项目</a></li>');
-    $('#login-button ul.dropdown-menu').append('<li><a href="/home/friends">我的好友申请<i id="RequestCount" style="display:none"></i></a></li>');
     $('#login-button ul.dropdown-menu').append('<li><a href="/home/settings/password">我的账号设置</a></li>');
+    $('#login-button ul.dropdown-menu').append('<li><a href="/home/followings">我的关注</a></li>');
+    $('#login-button ul.dropdown-menu').append('<li><a href="/home/friends">我的好友<i id="RequestCount" style="display:none"></i></a></li>');    
     $('#login-button ul.dropdown-menu').append('<li><a href="recruitments">进入个人版</a></li>');
     $('#login-button ul.dropdown-menu').append('<li><a href="/signout">退出</a></li>');
     // $('ul.dropdown-menu.private').hide();
