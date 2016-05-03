@@ -9,15 +9,17 @@ block content
             .panel-body
               .row
                 .col-md-12
+                  .col-md-10
                   h3
                     //- span.f20= '合伙需求 ' 
                     span=(recruitment && recruitment.classify)
+                    a.btn.btn-info(style='float:right' href='/users/'+recruitment.project.creator.user) 联系项目创建人
                   p.f13= '所在项目: '
                     a(href='/projects/'+recruitment.project.id)
                       span.f13= (recruitment && recruitment.project && recruitment.project.name)
-                  p.f13='项目创建人信息: '
-                    a(href='/users/'+recruitment.project.creator.user) 
-                      span.f13= recruitment.project.creator.role
+                  //- p.f13='项目创建人信息: '
+                  //-   a(href='/users/'+recruitment.project.creator.user) 
+                  //-     span.f13= recruitment.project.creator.role
                   p.f13= '职位诱惑: ' + (recruitment && recruitment.keyword)
                   p.f13= 'Slogan: '+ (recruitment.project&&recruitment.project.keyword)
                   include mixin/util

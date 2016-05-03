@@ -52,11 +52,11 @@ block content
                         button.btn.btn-default.head_shu#removeFollowing 取消关注
                       //- friend
                       if (relation)
-                        button.btn.btn-success.head_shu 已经是朋友
+                        button.btn.btn-info.head_shu 已经是朋友
                       else
                         if (request)
                           input#status(hidden, value=request.status)
-                          button.btn.btn-success.head_shu#addFriend(data-toggle='modal', data-target='.user-request')
+                          button.btn.btn-info.head_shu#addFriend(data-toggle='modal', data-target='.user-request')
                               if (request.status === 'pending')
                                   = '再次发送好友申请'
                               else

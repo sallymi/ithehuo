@@ -9,6 +9,12 @@ mixin dropdownMenu(filter)
             a.dropdown-toggle(href="#",data-toggle="dropdown")=filter.name
                 b.caret
             ul.dropdown-menu
+                if filter.values
+                    each value in filter.values
+                        if value.name
+                            +baseItem(filter.item, value.query, value.name)
+                        else
+                            +baseItem(filter.item, filter.key + '=' + value, value)
                 if filter.categories
                     each category in filter.categories
                         li.dropdown-submenu
@@ -20,10 +26,5 @@ mixin dropdownMenu(filter)
                                             +baseItem(filter.item, filter.key, value.operator + '=', value.value, value.name)
                                         else
                                             +baseItem(filter.item, filter.key + '=' + value, value)
-                else
-                    each value in filter.values
-                        if value.name
-                            +baseItem(filter.item, value.query, value.name)
-                        else
-                            +baseItem(filter.item, filter.key + '=' + value, value)
+                
 

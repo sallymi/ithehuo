@@ -778,31 +778,39 @@ config.filters.users =
     name: '角色定位',
     key: 'role',
     // values: ['创始人', '技术合伙人', '产品设计合伙人', '市场运营合伙人', '市场营销合伙人', '资源合伙人', '投资合伙人','顾问/导师轻合伙人']
-    values: ['创始人', '技术合伙人', '产品设计合伙人', '市场运营合伙人']
+    values: ['技术合伙人', '产品设计合伙人', '市场运营合伙人']
   }, {
     item: 'users',
     name: '所在地',
     key: 'location',
-    values: ['北京', '上海', '广州', '深圳'],
-    categories: [{
-      name: 'ABCDE',
-      values: ['北京','成都','长沙','重庆','大连','东莞','常州','长春']
-    },{
-      name: 'FGHJ',
-      values: ['广州','杭州','合肥','福州','济南','佛山','哈尔滨','海口','惠州','贵阳','嘉兴']
-    },{
-      name: 'KLMNP',
-      values: ['南京','宁波','昆明','南昌','南宁','昆山','兰州']
-    },{
-       name: 'QRSTW',
-      values:['上海','深圳','苏州','天津','青岛','沈阳','石家庄','太原','泰安','泉州']
-    },{
-       name: 'XYWZ',
-      values:['武汉','西安','厦门','郑州','珠海','无锡','中山','烟台']
-    },
+    values: ['北京', '上海', '广州', '深圳', '杭州','成都','海外'],
+    categories: [
+    // {
+    //   name: 'ABCDE',
+    //   values: ['北京','成都','长沙','重庆','大连','东莞','常州','长春']
+    // },{
+    //   name: 'FGHJ',
+    //   values: ['广州','杭州','合肥','福州','济南','佛山','哈尔滨','海口','惠州','贵阳','嘉兴']
+    // },{
+    //   name: 'KLMNP',
+    //   values: ['南京','宁波','昆明','南昌','南宁','昆山','兰州']
+    // },{
+    //    name: 'QRSTW',
+    //   values:['上海','深圳','苏州','天津','青岛','沈阳','石家庄','太原','泰安','泉州']
+    // },{
+    //    name: 'XYWZ',
+    //   values:['武汉','西安','厦门','郑州','珠海','无锡','中山','烟台']
+    // },
+    // {
+    //    name: '其他',
+    //   values: ['香港','澳门','台湾','国际']
+    // }
     {
        name: '其他',
-      values: ['香港','澳门','台湾','国际']
+      values: ['全国','长沙','重庆','大连','福州',
+      '南京','宁波','苏州','天津',
+      '西安','厦门','郑州',
+      '香港','澳门','台湾','国际']
     }]
   }, {
     item: 'users',
@@ -856,39 +864,41 @@ config.filters.users =
       name: '40岁以上',
       query: 'age$gt=40'
     }]
-  }, {
-    item: 'users',
-    name: '校友',
-    key: 'schoolmates',
-    values: [{
-      name: '是校友',
-      query: 'schoolmate=true'
-    },{
-      name: '不是校友',
-      query: 'schoolmate=false'
-    }]
-  }, {
-    item: 'users',
-    name: '老乡',
-    key: 'fellow',
-    values: [{
-      name: '是老乡',
-      query: 'fellow=true'
-    }, {
-      name: '不是老乡',
-      query: 'fellow=false'
-    }]
-  }, {
-    item: 'users',
-    name: '同事',
-    key: 'exworkmate',
-    values: [{
-      name: '前同事',
-      query: 'exworkmate=true'
-    }, {
-      name: '不是同事',
-      query: 'exworkmate=false'
-    }]
-  }];
+  }, 
+  // {
+  //   item: 'users',
+  //   name: '校友',
+  //   key: 'schoolmates',
+  //   values: [{
+  //     name: '是校友',
+  //     query: 'schoolmate=true'
+  //   },{
+  //     name: '不是校友',
+  //     query: 'schoolmate=false'
+  //   }]
+  // }, {
+  //   item: 'users',
+  //   name: '老乡',
+  //   key: 'fellow',
+  //   values: [{
+  //     name: '是老乡',
+  //     query: 'fellow=true'
+  //   }, {
+  //     name: '不是老乡',
+  //     query: 'fellow=false'
+  //   }]
+  // }, {
+  //   item: 'users',
+  //   name: '同事',
+  //   key: 'exworkmate',
+  //   values: [{
+  //     name: '前同事',
+  //     query: 'exworkmate=true'
+  //   }, {
+  //     name: '不是同事',
+  //     query: 'exworkmate=false'
+  //   }]
+  // }
+  ];
 
 module.exports = config;
