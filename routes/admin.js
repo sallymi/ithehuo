@@ -36,6 +36,8 @@ router.delete('/answers/:aid/comments/:cid', answer.deleteComment);
 router.get('/users', user.userPage);
 router.post('/users/active', user.active);
 router.delete('/users/active', user.deActive);
+router.post('/users/top', user.addTop);
+router.delete('/users/top', user.removeTop);
 
 // TODO: just for development, need remove before go to production
 router.get('/reset', index.reset);

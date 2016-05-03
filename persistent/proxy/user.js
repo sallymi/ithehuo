@@ -44,6 +44,7 @@ exports.findUsers = function (filter) {
   return Q.Promise(function (resolve, reject) {
     User
       .find(filter)
+      .sort({creation_time: -1})
       .populate('fav_questions.question fav_answers.answer followings')
       .exec(function (err, users) {
         if (err) {
@@ -73,6 +74,7 @@ exports.findUsersLimit = function (filter) {
     delete filter.limit;
     User
       .find(filter)
+      .sort({creation_time: -1})
       .populate('fav_questions.question fav_answers.answer followings')
       .skip((page-1)*limit)
       .limit(limit)
@@ -182,6 +184,28 @@ exports.findUserById = function (uid) {
 };
 
 /**
+ * Find top users
+ *
+ * @function
+ * @return {Promise} promise to find all top users
+ * <li>success: resolve with the found users
+ * <li>failed: reject with the error
+ *
+ */
+exports.findTopUsers = function () {
+  return Q.Promise(function (resolve, reject) {
+    User.find({
+      'top': {'$gte':0}
+    }).sort({top: 1}).
+    exec().then(function (users) {
+      resolve(users);
+    }, function (err) {
+      logger.error(err);
+      reject(err);
+    });
+  });
+};
+/**
  * Active user by id
  *
  * @function
@@ -207,6 +231,59 @@ exports.updateActive = function (uid, value) {
           resolve();
         }
       });
+  });
+};
+
+/**
+ * Update project hot filed
+ *
+ * @function
+ * @param {String} pid - project id
+ * @param {Boolean} value
+ * @return {Promise} promise to update the hot filed
+ * <li>success: resolve with undefined
+ * <li>failed: reject with the error
+ *
+ */
+exports.updateTop = function (pid, enable, value) {
+  logger.debug('try to update user top for user:' + pid);
+  return Q.Promise(function (resolve, reject) {
+
+    if (typeof enable !== 'boolean') {
+      reject(new Error('value type must be boolean'));
+    }
+    if(enable){
+      User.update({
+        '_id': pid
+      }, {
+        $set: {
+            'top': value
+        }
+        
+      }, function (err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    }else{
+      User.update({
+        '_id': pid
+      }, {
+        $set: {
+            'top': -1
+          }
+        
+      }, function (err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    }
+    
   });
 };
 

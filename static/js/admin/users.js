@@ -34,4 +34,9 @@ $(function () {
       console.log(resp.responseText);
     });
   });
+
+  $('#updateTop').click(function (){
+    alert("TODO");
+  });
+
 });

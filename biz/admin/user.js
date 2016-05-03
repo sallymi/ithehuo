@@ -47,9 +47,9 @@ exports.deActive = function (req, res) {
   });
 }
 
-exports.addHot = function (req, res) {
-  var pid = req.body.pid;
-  projectProxy.updateHot(pid, true).then(function () {
+exports.addTop = function (req, res) {
+  var uid = req.body.uid;
+  userProxy.updateTop(uid, true, 1).then(function () {
     res.json('success');
   }).fail(function (err) {
     logger.error(err);
@@ -57,9 +57,9 @@ exports.addHot = function (req, res) {
   });
 };
 
-exports.removeHot = function (req, res) {
-  var pid = req.body.pid;
-  projectProxy.updateHot(pid, false).then(function () {
+exports.removeTop = function (req, res) {
+  var uid = req.body.uid;
+  userProxy.updateTop(uid, false).then(function () {
     res.json('success');
   }).fail(function (err) {
     logger.error(err);
@@ -67,22 +67,22 @@ exports.removeHot = function (req, res) {
   });
 };
 
-exports.addRecommended = function (req, res) {
-  var pid = req.body.pid;
-  projectProxy.updateRecommended(pid, true).then(function () {
-    res.json('success');
-  }).fail(function (err) {
-    logger.error(err);
-    res.status(500).json(err);
-  });
-};
+// exports.addRecommended = function (req, res) {
+//   var pid = req.body.pid;
+//   userProxy.updateRecommended(pid, true).then(function () {
+//     res.json('success');
+//   }).fail(function (err) {
+//     logger.error(err);
+//     res.status(500).json(err);
+//   });
+// };
 
-exports.removeRecommended = function (req, res) {
-  var pid = req.body.pid;
-  projectProxy.updateRecommended(pid, false).then(function () {
-    res.json('success');
-  }).fail(function (err) {
-    logger.error(err);
-    res.status(500).json(err);
-  });
-};
+// exports.removeRecommended = function (req, res) {
+//   var pid = req.body.pid;
+//   userProxy.updateRecommended(pid, false).then(function () {
+//     res.json('success');
+//   }).fail(function (err) {
+//     logger.error(err);
+//     res.status(500).json(err);
+//   });
+// };

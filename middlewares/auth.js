@@ -87,7 +87,7 @@ exports.signinAuthforAdmin = function (req, res, next) {
   var user = req && req.session && req.session.user;
   if (user) {
     logger.debug('user exist in session, will pass control to next handler');
-     if(-1 !== config.admin.indexOf(user.email)){
+     if(-1 !== config.admin.indexOf(user.email) || config.admin.indexOf(user.mobile_phone)){
       console.log("here")
         next();
         return;
@@ -114,7 +114,7 @@ exports.signinAuthforAdmin = function (req, res, next) {
         if (user) {
           logger.debug('user found, will store user in session and pass control to next handler');
           req.session.user = user.toObject();
-          if(-1 !== config.admin.indexOf(user.email)){
+          if(-1 !== config.admin.indexOf(user.email)|| config.admin.indexOf(user.mobile_phone)){
             next();
             return;
           }else{

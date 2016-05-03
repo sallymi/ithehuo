@@ -99,17 +99,30 @@ function getUsersService (req,res,fn){
     if(!filter.limit)
       filter['limit']=config.limit;
 
-    userProxy.findUsersLimit(filter).then(function (users) {
+      Q.all([
+        userProxy.findTopUsers(),
+        userProxy.findUsersLimit(filter)
+      ]).then(function (result) {
+        logger.info(result);
+        logger.info(method, result[1].length + ' users found, will render and response user list page');
 
-        logger.info(method, users.length + ' users found, will render and response user list page');
-
-        fn.success(req, res,users,filters);
-    }).fail(function (err) {
-        logger.error(method, 'failed to find users due to bellow error, will response error page with the error');
+        fn.success(req, res,result,filters);
+      }).fail(function (err) {
         logger.error(err);
         fn.fail(req, res,err);
+      });
 
-    });
+    // userProxy.findUsersLimit(filter).then(function (users) {
+
+    //     logger.info(method, users.length + ' users found, will render and response user list page');
+
+    //     fn.success(req, res,users,filters);
+    // }).fail(function (err) {
+    //     logger.error(method, 'failed to find users due to bellow error, will response error page with the error');
+    //     logger.error(err);
+    //     fn.fail(req, res,err);
+
+    // });
 }
 /**
  * Request handler for user list page
@@ -124,7 +137,8 @@ exports.getUsers = function (req, res) {
         success:function(req, res,users,filters){
             logger.info("the filters is "+JSON.stringify(filters));
             resUtil.render(req, res, 'users', {
-                'users': users,
+                'tops':users[0],
+                'users': users[1],
                 'filters': filters
             })
         },

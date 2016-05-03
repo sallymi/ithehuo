@@ -19,6 +19,12 @@ var schema = new Schema({
     'default': false
   },
   /**
+   * 是否是置顶
+   * true: 是
+   * false: 否
+   */
+  'top': Number,
+  /**
    * 创建时间，用户创建时自动添加系统时间
    */
   'creation_time': {
