@@ -143,7 +143,6 @@ exports.getUsers = function (req, res) {
             })
         },
         fail:function(req, res, err){
-            logger.info("=============we are here 1==============");
             resUtil.render(req, res, 'error', err);
         }
     })

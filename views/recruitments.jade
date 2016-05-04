@@ -2,78 +2,80 @@ extends base
 block append script
   script(src='/js/recruitments.js')
 block content
-  link(rel='stylesheet', href='/css/side_nav.css')
+  link(rel='stylesheet', href='/css/top_nav.css')
   link(rel='stylesheet', href='/css/recruitments.css')
-  .container-fluid.list-show
-    .row
+  .container-fluid
+    //.row
       .col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19.hidden-xs
+    .header.sub-header
+      .navbar-collapse.mega-menu.navbar-responsive-collapse.hidden-xs
         if filters
-          .siderNav
-            include mixin/filter.jade
+          ul.nav.navbar-nav
+            include mixin/select.jade
             each filter in filters
-              +filter(filter)
-      .col-lg-9.col-md-9.col-sm-12.col-xs-12
-        include search.jade
-        .well.transparent
-          .panel
-            .panel-body
-              if recruitments.length==0
-                .empty_result 没有搜索到相关招募
-                  br
-                  | 请试试其他搜索吧......
-              each recruitment in recruitments
-                li.col-md-12.col-xs-12.portfolio-item
-                  .media
-                    .media-left.media-middle.col-md-2.col-xs-4
-                      a(href='/recruitments/' + recruitment._id)
-                        if recruitment.project.logo_img&&recruitment.project.logo_img.indexOf('upload_portfolio')!==-1
-                          img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
-                        else
-                          .logo=recruitment.project.name.substring(0,1)
-                        //- img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
-                    .media-body.col-md-5.col-xs-8(onclick="location.href='/recruitments/#{recruitment._id}'")
-                      h5.media-heading.mb10
-                        a(href= '/recruitments/' + recruitment._id)
-                          strong= recruitment.classify
-                        small=recruitment.location+' | '+recruitment.work_nature
-                      .small
-                        strong='月薪：'
-                        =recruitment.payment_min+'k-'+recruitment.payment_max+'k'
-                      if (recruitment.share_option_min && recruitment.share_option_max)
-                        .small
-                          strong= '期权：'
-                          if !recruitment.share_option_min && !recruitment.share_option_max
-                            ='<发布者暂不出让期权>'
-                          else
-                            =recruitment.share_option_min+'% - '+recruitment.share_option_max+'%'
+              +dropdownMenu(filter)
+      //.col-lg-9.col-md-9.col-sm-12.col-xs-12
+    include search.jade
+    .well.transparent
+      .panel
+        .panel-body
+          if recruitments.length==0
+            .empty_result 没有搜索到相关招募
+              br
+              | 请试试其他搜索吧......
+          each recruitment in recruitments
+            li.col-md-12.col-xs-12.portfolio-item
+              .media
+                .media-left.media-middle.col-md-2.col-xs-4
+                  a(href='/recruitments/' + recruitment._id)
+                    if recruitment.project.logo_img&&recruitment.project.logo_img.indexOf('upload_portfolio')!==-1
+                      img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
+                    else
+                      .logo=recruitment.project.name.substring(0,1)
+                    //- img.media-object(src=recruitment.project&&recruitment.project.logo_img, width='80%')
+                .media-body.col-md-5.col-xs-8(onclick="location.href='/recruitments/#{recruitment._id}'")
+                  h5.media-heading.mb10
+                    a(href= '/recruitments/' + recruitment._id)
+                      strong= recruitment.classify
+                    small=recruitment.location+' | '+recruitment.work_nature
+                  .small
+                    strong='月薪：'
+                    =recruitment.payment_min+'k-'+recruitment.payment_max+'k'
+                  if (recruitment.share_option_min && recruitment.share_option_max)
+                    .small
+                      strong= '期权：'
+                      if !recruitment.share_option_min && !recruitment.share_option_max
+                        ='<发布者暂不出让期权>'
                       else
-                        .small
-                          strong= '期权： 暂无'
-                      .small
-                        strong= '职位诱惑：'
-                        =recruitment.keyword
-                      .small.c7
-                        include mixin/util
-                        +date(recruitment.creation_time)
-                        |  发布
-                    .media-body.col-md-5.col-xs-12(onclick="location.href='/projects/#{recruitment.project&&recruitment.project._id}'")
-                      h5.media-heading.mb10
-                        if (recruitment.project)
-                          large='所在项目：'+recruitment.project.name
-                        else
-                          large='所在项目：'
-                      .small
-                        strong= 'Slogan：'
-                        =recruitment.project&&recruitment.project.keyword
-                      .small
-                        strong= '阶段：'
-                        =recruitment.project&&recruitment.project.stage?recruitment.project.stage:'暂未填写'
-                      .small
-                        strong= '项目标签：'
-                        =(recruitment.project&&recruitment.project.tag&&recruitment.project.tag.length>0?recruitment.project.tag:'创业项目')
-                      .small
-                        strong= '融资规模：'
-                        =recruitment.project&&recruitment.project.funding&&recruitment.project.funding.current?recruitment.project.funding.current:'<创建者还没有填写>'
-            if recruitments.length==limit
-              .col-md-12
-                div.load-more.btn.btn-info.btn-block(data-page=1, data-limit=limit) 加载更多
+                        =recruitment.share_option_min+'% - '+recruitment.share_option_max+'%'
+                  else
+                    .small
+                      strong= '期权： 暂无'
+                  .small
+                    strong= '职位诱惑：'
+                    =recruitment.keyword
+                  .small.c7
+                    include mixin/util
+                    +date(recruitment.creation_time)
+                    |  发布
+                .media-body.col-md-5.col-xs-12(onclick="location.href='/projects/#{recruitment.project&&recruitment.project._id}'")
+                  h5.media-heading.mb10
+                    if (recruitment.project)
+                      large='所在项目：'+recruitment.project.name
+                    else
+                      large='所在项目：'
+                  .small
+                    strong= 'Slogan：'
+                    =recruitment.project&&recruitment.project.keyword
+                  .small
+                    strong= '阶段：'
+                    =recruitment.project&&recruitment.project.stage?recruitment.project.stage:'暂未填写'
+                  .small
+                    strong= '项目标签：'
+                    =(recruitment.project&&recruitment.project.tag&&recruitment.project.tag.length>0?recruitment.project.tag:'创业项目')
+                  .small
+                    strong= '融资规模：'
+                    =recruitment.project&&recruitment.project.funding&&recruitment.project.funding.current?recruitment.project.funding.current:'<创建者还没有填写>'
+        if recruitments.length==limit
+          .col-md-12
+            div.load-more.btn.btn-info.btn-block(data-page=1, data-limit=limit) 加载更多

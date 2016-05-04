@@ -18,7 +18,6 @@
 var logger = require('./log').getLogger('./response.js');
 
 exports.render = function (req, res, page, object) {
-  logger.info("=============we are here 2=============="+page);
   if (req.session.user) {
     if (!object) {
       object = {};
@@ -27,7 +26,13 @@ exports.render = function (req, res, page, object) {
     object.oss = global.oss;
     object.limit = global.limit;
   }
-  res.render(page, object);
+  res.render(page, object,function(err,html){
+    if(err){
+      logger.error(err);
+    }else{
+      res.send(html);
+    }
+  });
 };
 
 /**
