@@ -235,6 +235,35 @@ exports.updateActive = function (uid, value) {
 };
 
 /**
+ * Display user by id
+ *
+ * @function
+ * @param {String} uid - user id
+ * @return {Promise} promise to perform a find action:
+ * <li>user found: resolve with user
+ * <li>user not found: resolve with undefine
+ * <li>error occur during find: reject with error
+ *
+ */
+exports.updateDisplay = function (uid, value) {
+  return Q.Promise(function (resolve, reject) {
+    User
+      .update(
+        { '_id': uid },
+        { "display": value}
+      )
+      .exec(function (err) {
+        if (err) {
+          logger.error(err);
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+  });
+};
+
+/**
  * Update project hot filed
  *
  * @function

@@ -28,7 +28,7 @@ block content
             | 请试试其他搜索吧......
           if tops.length!==0
             each user in tops
-              if user.email || user.mobile_phone
+              if user.display && (user.email || user.mobile_phone)
                 li.col-md-12.portfolio-item
                   .media
                     .media-left.media-middle.col-md-3.col-xs-3
@@ -62,7 +62,7 @@ block content
                               span.tag.label.label-info=tag
                               span= ' '
           each user in users
-            if user.email || user.mobile_phone && user.top<0
+            if user.top<0 && user.display && (user.email || user.mobile_phone)
               li.col-md-12.portfolio-item
                 .media
                   .media-left.media-middle.col-md-3.col-xs-3

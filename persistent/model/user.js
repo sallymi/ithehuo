@@ -19,11 +19,23 @@ var schema = new Schema({
     'default': false
   },
   /**
+   * 是否显示在用户列表
+   * true: 显示
+   * false: 不显示
+   */
+  'display': {
+    'type': Boolean,
+    'default': false
+  },
+  /**
    * 是否是置顶
    * true: 是
    * false: 否
    */
-  'top': Number,
+  'top': {
+    'type':Number,
+    'default':-1
+  },
   /**
    * 创建时间，用户创建时自动添加系统时间
    */

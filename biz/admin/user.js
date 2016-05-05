@@ -66,6 +66,25 @@ exports.removeTop = function (req, res) {
     res.status(500).json(err);
   });
 };
+exports.display = function (req, res) {
+  var uid = req.body.uid;
+  userProxy.updateDisplay(uid, true, 1).then(function () {
+    res.json('success');
+  }).fail(function (err) {
+    logger.error(err);
+    res.status(500).json(err);
+  });
+};
+
+exports.hide = function (req, res) {
+  var uid = req.body.uid;
+  userProxy.updateDisplay(uid, false).then(function () {
+    res.json('success');
+  }).fail(function (err) {
+    logger.error(err);
+    res.status(500).json(err);
+  });
+};
 
 // exports.addRecommended = function (req, res) {
 //   var pid = req.body.pid;

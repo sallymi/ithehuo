@@ -51,6 +51,10 @@ block content
                 button.action.btn.btn-danger.btn-xs.remove(title='该用户已经置顶' type='top') 取消置顶
               else
                 button.action.btn.btn-primary.btn-xs.add(title='添加到置顶' type='top') 添加置顶
+              if user.display
+                button.action.btn.btn-danger.btn-xs.remove(title='该用户正常显示，要隐藏吗？' type='display') 隐藏用户
+              else
+                button.action.btn.btn-primary.btn-xs.add(title='该用户已隐藏，要显示吗？' type='display') 显示用户
               //- add hot button
               //- if project.recruitments && project.recruitments.length > 0
               //-   if project.hot

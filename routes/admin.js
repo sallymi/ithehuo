@@ -38,6 +38,8 @@ router.post('/users/active', user.active);
 router.delete('/users/active', user.deActive);
 router.post('/users/top', user.addTop);
 router.delete('/users/top', user.removeTop);
+router.post('/users/display', user.display);
+router.delete('/users/display', user.hide);
 
 // TODO: just for development, need remove before go to production
 router.get('/reset', index.reset);
