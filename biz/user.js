@@ -156,7 +156,8 @@ exports.getUsersAjax = function (req, res) {
     getUsersService(req,res,{
         success:function(req, res,users,filters){
             res.json({
-                'users': users,
+                'tops':users[0],
+                'users': users[1],
                 'filters': filters
             })
         },

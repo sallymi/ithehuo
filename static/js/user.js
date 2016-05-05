@@ -118,7 +118,7 @@ $(function () {
       }
       users.users.forEach(function(item,idx){
         var user = item;
-        var text = $.clone($('.panel-body li:first-child')[0]);
+        var text = $.clone($('.panel-body li')[0]);
         $(text).find('.media-left a').attr('href','/users/'+item._id);
         // var Arr = ["a6-160","a7-160","a8-160","a9-160","a10-160","a11-160","a12-160","a13-160","a14-160","a15-160"];
         // var n = Math.floor(Math.random() * Arr.length + 1)-1;
