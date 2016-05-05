@@ -19,6 +19,9 @@ block content
       div.by_random(style="display: none")
         .form-group
           .col-xs-12
+            span 验证即登录，未注册将自动创建IT合伙人帐号
+        .form-group
+          .col-xs-12
             .control-wrapper
               label.control-label.fa-label(for='mobile')
                 i.fa.fa-user.fa-medium
@@ -39,12 +42,16 @@ block content
               label.control-label.fa-label
                 span 短信码
               .col-md-7.col-xs-7
-                input#sms.form-control(type='sms', name='sms', placeholder='请输入短信确认码', value= sms)
+                input#sms.form-control(type='sms', name='sms', placeholder='动态密码', value= sms)
               .col-md-5.col-xs-5
-                a.btn.btn-info.pull-right#getSmsCode_signin(style='color:white', href='javascript:;') 获取验证码
+                a.btn.btn-info.pull-right#getSmsCode_signin(style='color:white', href='javascript:;') 获取动态密码
         .form-group
           .col-md-12
             input.btn.btn-info.btn-block(type='submit', value='登录')
+        .text-center
+          span  您将同意并接受
+          a(data-toggle='modal', data-target='#terms-modal')  IT合伙人用户协议
+            i.fa.fa-arrow-circle-o-right
         //- .form-group
         //-   .col-md-8
         //-     input#sms.form-control(type='sms', name='sms', placeholder='', value= sms)
@@ -74,6 +81,10 @@ block content
             .control-wrapper
               input.btn.btn-info.pull-left(type='submit', value='登录')
               a.text-right.pull-right(href='/forgot-password') 忘记密码
+        .text-center
+          span 还没有IT合伙人账号?
+          a.templatemo-create-new(href= '/signup')  立即注册一个账号
+            i.fa.fa-arrow-circle-o-right
       //- hr
       //- .form-group
       //-   .col-md-12
@@ -85,7 +96,19 @@ block content
       //-         i.fa.fa-qq.login-with
       //-       a(href='#')='新浪微博'
       //-         i.fa.fa-weibo.login-with
-    .text-center
-      span 还没有IT合伙人账号?
-      a.templatemo-create-new(href= '/signup')  立即注册一个账号
-        i.fa.fa-arrow-circle-o-right
+    //- .text-center
+    //-   span 还没有IT合伙人账号?
+    //-   a.templatemo-create-new(href= '/signup')  立即注册一个账号
+    //-     i.fa.fa-arrow-circle-o-right
+  .modal.fade#terms-modal(tabindex='-1', role='dialog', aria-labelledby='terms-modal-label', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal')
+            span(aria-hidden='true') ×
+            span.sr-only 关闭
+          h4#terms-modal-label.modal-title 协议
+        .modal-body
+          include privacy.jade
+        .modal-footer
+          button.btn.btn-default(data-dismiss='modal') 关闭

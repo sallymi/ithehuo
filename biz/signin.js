@@ -44,55 +44,95 @@ exports.signin = function (req, res) {
 
     logger.info('login success');
     userProxy.findUserByPhone(phone).then(function (user) {
-      if (!user) {
-        logger.info('user not exist, will return');
-        resUtil.render(req, res, 'signin', {error: '请输入正确的账号。'});
-        return;
-      }
       logger.debug(req.session.capText);
       logger.debug('check if captcha is valid, captcha: ' +  captcha + ' with generated Code '+req.session.capText);
       if (req.session.capText.toLowerCase()!=captcha.toLowerCase()) {
-        resUtil.render(req, res, 'signup', {error: '图形验证码不正确。', captcha: captcha});
+        resUtil.render(req, res, 'signin', {error: '图形验证码不正确。', captcha: captcha});
         return;
       }
       logger.debug('check if sms is valid, smsText: ' +  sms);
       logger.debug(global.smsMap);
       if (global.smsMap[phone]!=sms) {
-        resUtil.render(req, res, 'signup', {error: '手机验证码不正确。', sms: sms});
+        resUtil.render(req, res, 'signin', {error: '手机验证码不正确。', sms: sms});
         return;
       }
-      logger.info('check if user is active');
-      if (!user.active) {
-        logger.info('user not active, will return');
-        resUtil.render(req, res, 'signin', {error: '您的账户尚未激活，我们已经向您的注册邮箱' + user.email + '发送了激活邮件，点击邮件中的激活链接即可激活账户。'});
-        return;
+      if (!user) {
+        logger.info('user not exist, register by phone');
+        // resUtil.render(req, res, 'signin', {error: '请输入正确的账号。'});
+        // return;
+        var password = crypto.md5(sms);
+
+       logger.debug('try to create user');
+       return userProxy.createUser({
+         'mobile_phone': phone,
+         'password': password,
+         'active': true
+       }).then(function (newuser) {
+        logger.debug(newuser);
+        logger.info('login success');
+
+        logger.info('store user to session');
+        req.session.user = newuser.toObject();
+
+        logger.info('check if original url exist in session');
+        var originalUrl = reqUtil.getOriginalUrl(req);
+        if (originalUrl) {
+          logger.info('original url found in session, redirect user to original url');
+          res.redirect(originalUrl);
+          return;
+        }
+        logger.info('original url not found in session');
+
+        logger.info('check if redirect url exist in session');
+        var redirectUrl = reqUtil.getRedirectUrl(req);
+        if (redirectUrl) {
+          logger.info('redirect url found in session, redirect user to provided redirect url');
+          res.redirect(redirectUrl);
+          return;
+        }
+        logger.info('redirect url not found in session');
+
+        logger.info('redirect user to home page');
+        res.redirect('/');
+         // resUtil.render(req, res, 'signin', {
+         //   success: '欢迎加入IT合伙人！注册成功，请返回首页登陆！'
+         // });
+       });
+      }else{
+        logger.info('check if user is active');
+        if (!user.active) {
+          logger.info('user not active, will return');
+          resUtil.render(req, res, 'signin', {error: '您的账户尚未激活，我们已经向您的注册邮箱' + user.email + '发送了激活邮件，点击邮件中的激活链接即可激活账户。'});
+          return;
+        }
+
+        logger.info('login success');
+
+        logger.info('store user to session');
+        req.session.user = user.toObject();
+
+        logger.info('check if original url exist in session');
+        var originalUrl = reqUtil.getOriginalUrl(req);
+        if (originalUrl) {
+          logger.info('original url found in session, redirect user to original url');
+          res.redirect(originalUrl);
+          return;
+        }
+        logger.info('original url not found in session');
+
+        logger.info('check if redirect url exist in session');
+        var redirectUrl = reqUtil.getRedirectUrl(req);
+        if (redirectUrl) {
+          logger.info('redirect url found in session, redirect user to provided redirect url');
+          res.redirect(redirectUrl);
+          return;
+        }
+        logger.info('redirect url not found in session');
+
+        logger.info('redirect user to home page');
+        res.redirect('/');
       }
-
-      logger.info('login success');
-
-      logger.info('store user to session');
-      req.session.user = user.toObject();
-
-      logger.info('check if original url exist in session');
-      var originalUrl = reqUtil.getOriginalUrl(req);
-      if (originalUrl) {
-        logger.info('original url found in session, redirect user to original url');
-        res.redirect(originalUrl);
-        return;
-      }
-      logger.info('original url not found in session');
-
-      logger.info('check if redirect url exist in session');
-      var redirectUrl = reqUtil.getRedirectUrl(req);
-      if (redirectUrl) {
-        logger.info('redirect url found in session, redirect user to provided redirect url');
-        res.redirect(redirectUrl);
-        return;
-      }
-      logger.info('redirect url not found in session');
-
-      logger.info('redirect user to home page');
-      res.redirect('/');
+      
 
     }).fail(function (err) {
       logger.error(err);

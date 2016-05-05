@@ -412,7 +412,7 @@ $(function () {
       globalNotify.failed("手机号不合规范，请输入11位中国大陆手机号！");
       return
     }
-    if(captcha.length==0){
+    if(captcha&&captcha.length==0){
       globalNotify.failed("请输入图片验证码！");
       return
     }
@@ -449,28 +449,42 @@ $(function () {
       globalNotify.failed("请输入图片验证码！");
       return
     }
-    checkPhoneUsed(phone).then(function(flag){
-      //flag==true 没有被注册过
-      if(!flag){
-        //被注册过，获取登录验证码
-        $.ajax({
-          'url': '/sms/' + phone,
-          'method': 'POST',
-          data:{
-            phone:phone,
-            captcha:captcha,
-            type:'login'}
-        }).done(function (res) {
-          $("#getSmsCode_signin").attr("disabled","disabled");
-          t1 = setInterval(tip,1000);
-        }).fail(function (resp) {
-          globalNotify.failed("获取验证码失败请稍候再试");
-        });
-      }else{
-        globalNotify.failed("该手机号还未注册，请先注册");
-        return
-      }
-    })
+    $.ajax({
+      'url': '/sms/' + phone,
+      'method': 'POST',
+      data:{
+        phone:phone,
+        captcha:captcha,
+        type:'login'}
+    }).done(function (res) {
+      $("#getSmsCode_signin").attr("disabled","disabled");
+      t1 = setInterval(tip,1000);
+    }).fail(function (resp) {
+      globalNotify.failed("获取验证码失败请稍候再试");
+    });
+    // checkPhoneUsed(phone).then(function(flag){
+    //   //flag==true 没有被注册过
+    //   if(!flag){
+    //     //被注册过，获取登录验证码
+    //     $.ajax({
+    //       'url': '/sms/' + phone,
+    //       'method': 'POST',
+    //       data:{
+    //         phone:phone,
+    //         captcha:captcha,
+    //         type:'login'}
+    //     }).done(function (res) {
+    //       $("#getSmsCode_signin").attr("disabled","disabled");
+    //       t1 = setInterval(tip,1000);
+    //     }).fail(function (resp) {
+    //       globalNotify.failed("获取验证码失败请稍候再试");
+    //     });
+    //   }else{
+    //     //没有注册，帮助用户注册
+    //     globalNotify.failed("该手机号还未注册，请先注册");
+    //     return
+    //   }
+    // })
 
   });
 
