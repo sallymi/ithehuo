@@ -132,7 +132,7 @@ exports.signup = function (req, res) {
   var email = req.body.email;
   var pass = req.body.password;
    var phone = req.body.phone;
-   //var captcha = req.body.captcha;
+   var captcha = req.body.captcha;
    var sms = req.body.sms;
 
    if(email){

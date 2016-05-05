@@ -483,7 +483,7 @@ $(function () {
       var t2 = clearInterval(t1);
     } else {
       $("#getSmsCode_signin").text(seed+" s后重新发送");
-      $("#getSmsCode").removeAttr("disabled").text("获取验证码");
+      $("#getSmsCode").text(seed+" s后重新发送");
     }
   }
 
