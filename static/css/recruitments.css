@@ -6,8 +6,8 @@
 }*/
 @media(min-width:768px) {
   .list-show .portfolio-item{
-    width: 80%;
-    margin: 0 10%;
+    /*width: 80%;*/
+    margin: 0;
   	padding: 13px;
     /*margin-left:20px;*/
     /*margin-right:20px;*/
@@ -22,11 +22,17 @@
 @media(max-width:767px) {
   .list-show .portfolio-item{
     padding: 13px;
+    margin:0;
     /*margin-left:20px;
     margin-right:20px;*/
     line-height: 25px;
     position: relative;
     overflow: auto;
+  }
+  .container-fluid{
+    width:100%;
+    margin-right: 0;
+    margin-left: 0;
   }
 }
 .list-show li{

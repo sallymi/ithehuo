@@ -7,16 +7,19 @@ block content
   .container-fluid
     //.row
       .col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19.hidden-xs
-    .header.sub-header
-      .navbar-collapse.mega-menu.navbar-responsive-collapse.hidden-xs
-        if filters
-          ul.nav.navbar-nav
-            include mixin/select.jade
-            each filter in filters
-              +dropdownMenu(filter)
-      //.col-lg-9.col-md-9.col-sm-12.col-xs-12
-    include search.jade
-    .well.transparent
+    .row
+      .col-lg-10.col-md-9.col-xs-12.hidden-xs
+        .header.sub-header
+          .navbar-collapse.mega-menu.navbar-responsive-collapse
+            if filters
+              ul.nav.navbar-nav
+                include mixin/select.jade
+                each filter in filters
+                  +dropdownMenu(filter)
+          //.col-lg-9.col-md-9.col-sm-12.col-xs-12
+      .col-lg-2.col-md-3.col-xs-12.actionBtn(style="text-align: center")
+        include search.jade
+    .well.transparent.list-show
       .panel
         .panel-body
           if recruitments.length==0

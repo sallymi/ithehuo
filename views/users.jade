@@ -8,15 +8,17 @@ block content
 
   .container-fluid
     //.col-lg-2.col-lg-offset-1.col-md-3.col-sm-12.col-xs-12.padding-19.hidden-xs
-    .header.sub-header
-      .navbar-collapse.mega-menu.navbar-responsive-collapse.hidden-xs
-        if filters
-          ul.nav.navbar-nav
-            include mixin/select.jade
-            each filter in filters
-              +dropdownMenu(filter)
-
-    include search.jade
+    .row
+      .col-lg-10.col-md-9.col-xs-12.hidden-xs
+        .header.sub-header
+          .navbar-collapse.mega-menu.navbar-responsive-collapse
+            if filters
+              ul.nav.navbar-nav
+                include mixin/select.jade
+                each filter in filters
+                  +dropdownMenu(filter)
+      .col-lg-2.col-md-3.col-xs-12.actionBtn(style="text-align: center")
+       include search.jade
     .well.transparent.list-show
       .panel
         .panel-body
@@ -34,9 +36,9 @@ block content
                         // - var Arr = ["a6-160","a7-160","a8-160","a9-160","a10-160","a11-160","a12-160","a13-160","a14-160","a15-160"];
                         // - var n = Math.floor(Math.random() * Arr.length + 1)-1;
                         if user.logo_img&&user.logo_img.indexOf('upload_avatars')!==-1
-                          img.media-object(src=user.logo_img, width='100%')
+                          img.media-object(src=user.logo_img, width='100%',style='max-width: 120px')
                         else
-                          img.media-object(src='/images/avatars/default.png',width='100%')
+                          img.media-object(src='/images/avatars/default.png',width='100%',style='max-width: 120px')
                     .media-body.col-md-5.col-xs-9(onclick="location.href='/users/#{user._id}'")
                       h5.media-heading.mb10
                         a(href= '/users/' + user._id)
@@ -68,9 +70,9 @@ block content
                       // - var Arr = ["a6-160","a7-160","a8-160","a9-160","a10-160","a11-160","a12-160","a13-160","a14-160","a15-160"];
                       // - var n = Math.floor(Math.random() * Arr.length + 1)-1;
                       if user.logo_img&&user.logo_img.indexOf('upload_avatars')!==-1
-                        img.media-object(src=user.logo_img, width='100%')
+                        img.media-object(src=user.logo_img, width='100%',style='max-width: 120px')
                       else
-                        img.media-object(src='/images/avatars/default.png',width='100%')
+                        img.media-object(src='/images/avatars/default.png',width='100%',style='max-width: 120px')
                   .media-body.col-md-5.col-xs-9(onclick="location.href='/users/#{user._id}'")
                     h5.media-heading.mb10
                       a(href= '/users/' + user._id)
