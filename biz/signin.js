@@ -40,12 +40,7 @@ exports.signin = function (req, res) {
       resUtil.render(req, res, 'signin', {error: '手机号码和验证码不能为空。'});
       return;
     }
-    logger.info('check if user is active');
-    if (!user.active) {
-      logger.info('user not active, will return');
-      resUtil.render(req, res, 'signin', {error: '您的账户尚未激活，我们已经向您的注册邮箱' + user.email + '发送了激活邮件，点击邮件中的激活链接即可激活账户。'});
-      return;
-    }
+    
 
     logger.info('login success');
     userProxy.findUserByPhone(phone).then(function (user) {
