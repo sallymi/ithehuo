@@ -178,7 +178,9 @@ body{
   overflow-x:hidden; 
   font-family: "Hiragino Sans GB","Microsoft Yahei",SimSun,Arial,"Helvetica Neue",Helvetica;
 }
-
+label {
+      padding-top: 11px;
+}
 .navbar-brand {
     padding: 7px;
   }
