@@ -10,12 +10,14 @@ var config = {
       ID:'23298060',
       Key:'64a0fe73e56868f9ef9cabd3461ed48f',
       sign_name:'IT合伙人',
+      login: {sign_name:'IT合伙人',template:'SMS_4425969'},
       resetPwd: {sign_name:'IT合伙人',template:'SMS_4425965'},
       default:{sign_name:'IT合伙人',template:'SMS_4425967'}
     },
     qa:{
       ID:'23324086',
       Key:'701378360789f40887a0db9905d11252',
+      login: {sign_name:'登录验证',template:'SMS_4425969'},
       resetPwd: {sign_name:'变更验证',template:'SMS_5495196'},
       default:{sign_name:'注册验证',template:'SMS_5495196'}
     }

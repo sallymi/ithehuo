@@ -124,6 +124,13 @@ function processMessage(msg) {
   return result;
 }
 $(document).ready(function () {
+  if ( navigator.userAgent.toLowerCase().indexOf('chrome') >= 0 ) {
+    $('input[autocomplete="off"]').each( function(){
+        var type = $(this).attr( 'type');
+        $(this).attr( 'type', '_' + type );
+        $(this).attr( 'type', type );
+    });
+  }
   $('ul.nav > li').click(function (e) {
     //e.preventDefault();
   $('ul.nav > li').removeClass('active');
@@ -357,10 +364,18 @@ $(function () {
       $('span.tab_active').css('left','218px');
       $('.by_phone').hide();
       $('.by_email').show();
-    }else{
+    }else if($(this).attr('name')=='by_phone'){
       $('span.tab_active').css('left','0');
       $('.by_email').hide();
       $('.by_phone').show();
+    }else if($(this).attr('name')=='by_user'){
+      $('span.tab_active').css('left','0');
+      $('.by_random').hide();
+      $('.by_user').show();
+    }else{
+      $('span.tab_active').css('left','218px');
+      $('.by_user').hide();
+      $('.by_random').show();
     }
     
   });
@@ -405,7 +420,10 @@ $(function () {
       if(flag){
         $.ajax({
           'url': '/sms/' + phone,
-          'method': 'GET'
+          'method': 'POST',
+          data:{
+            phone:phone,
+            captcha:captcha}
         }).done(function (res) {
           $("#getSmsCode").attr("disabled","disabled");
           t1 = setInterval(tip,1000);
@@ -419,15 +437,53 @@ $(function () {
     })
 
   });
+  $('#getSmsCode_signin').click(function(e){
+    var phone = $("#phone").val();
+    var captcha = $("#captcha").val();
+    var patt1 = new RegExp(/^(\+?0?86\-?)?1[345789]\d{9}$/);
+    if(!patt1.test(phone)){
+      globalNotify.failed("手机号不合规范，请输入11位中国大陆手机号！");
+      return
+    }
+    if(captcha.length==0){
+      globalNotify.failed("请输入图片验证码！");
+      return
+    }
+    checkPhoneUsed(phone).then(function(flag){
+      //flag==true 没有被注册过
+      if(!flag){
+        //被注册过，获取登录验证码
+        $.ajax({
+          'url': '/sms/' + phone,
+          'method': 'POST',
+          data:{
+            phone:phone,
+            captcha:captcha,
+            type:'login'}
+        }).done(function (res) {
+          $("#getSmsCode_signin").attr("disabled","disabled");
+          t1 = setInterval(tip,1000);
+        }).fail(function (resp) {
+          globalNotify.failed("获取验证码失败请稍候再试");
+        });
+      }else{
+        globalNotify.failed("该手机号还未注册，请先注册");
+        return
+      }
+    })
+
+  });
 
   function tip() {
     seed--;
     if (seed < 1) {
+      $("#getSmsCode_signin").removeAttr("disabled").text("获取验证码");
       $("#getSmsCode").removeAttr("disabled").text("获取验证码");
       seed = 60;
       var t2 = clearInterval(t1);
     } else {
-      $("#getSmsCode").text(seed+" s后重新发送");
+      $("#getSmsCode_signin").text(seed+" s后重新发送");
+      $("#getSmsCode").removeAttr("disabled").text("获取验证码");
     }
   }
 

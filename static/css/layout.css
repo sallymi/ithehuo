@@ -181,6 +181,10 @@ body{
 label {
       padding-top: 11px;
 }
+.control-wrapper {
+    position: relative;
+    padding-left: 40px;
+}
 .navbar-brand {
     padding: 7px;
   }

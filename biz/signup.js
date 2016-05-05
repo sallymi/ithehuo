@@ -61,6 +61,11 @@ exports.sms = function (req, res, next) {
       template=sms_config.resetPwd.template;
       //sign_name='变更验证';
       break;
+    case 'login':
+      sign_name=sms_config.login.sign_name;
+      template=sms_config.login.template;
+      //sign_name='变更验证';
+      break;
     default:
       sign_name=sms_config.default.sign_name;
       template=sms_config.default.template;
