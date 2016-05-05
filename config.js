@@ -4,7 +4,7 @@ var config = {
   admin: ['sallymi_82@126.com','jiaji1104@126.com','liubaoshu@helloworld-cafe.com', 'vincevenwang@163.com','wswjylq@163.com','sally@helloworld-cafe.com','18614093682'],
   secret: 'SVTlkIjkvJnkuro=',
   oss: '',//'http://7xs7p3.com1.z0.glb.clouddn.com',
-  limit: 2,
+  limit: 20,
   sms: {
     production:{
       ID:'23298060',
