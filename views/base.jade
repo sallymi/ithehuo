@@ -44,7 +44,7 @@ block navbar
             else
               img(src='/images/smile.png')
             span.ellipsis
-              - var dN = (signinUser.name ? signinUser.name : (signinUser.email ? signinUser.email.split('@')[0] : signinUser.mobile_phone.toString().substring(0,3)+"****"+signinUser.mobile_phone.toString().substring(8,11)))
+              - var dN = (signinUser.name ? signinUser.name : (signinUser.nick_name? signinUser.nick_name: (signinUser.email ? signinUser.email.split('@')[0] : signinUser.mobile_phone.toString().substring(0,3)+"****"+signinUser.mobile_phone.toString().substring(8,11))))
               a(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")=dN
               ul.dropdown-menu(role="menu")
                 //- li
@@ -52,7 +52,8 @@ block navbar
                 //- li
                 //-   a(href='/home/projects') 我的创业项目
                 li
-                  a(href='/home') 我的人才档案
+                  if (signinUser.mobile_phone || signinUser.email)
+                    a(href='/home') 我的人才档案
                 li
                   a(href='/home/settings/password') 我的账号设置
                 li
@@ -71,6 +72,8 @@ block navbar
           li
             a.entry-btn(href='/users') 进入企业版
         else
+          li
+            a(href='/signin/wechat/getQR') 微信登录
           li
             a(href='/signin') 登录
           li

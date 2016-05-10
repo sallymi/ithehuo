@@ -40,6 +40,9 @@ router.get('/getCaptcha', signup.captcha);
 router.post('/checkPhoneUsed', signup.checkPhoneUsed);
 // sign in
 router.get('/signin', signin.showSigninPage);
+//router.get('/signin/wechat', signin.signinWithWechat);
+router.get('/signin/wechat/getQR', signin.showWechatQR);
+router.get('/wechat/callback', signin.getAccessToken);
 router.post('/signin', signin.signin);
 router.get('/signout', signin.signout);
 //footer
