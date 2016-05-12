@@ -31,6 +31,8 @@ router.get('/home', index.userHome);
 // sign up
 router.get('/signup', signup.showSignupPage);
 router.post('/signup', signup.signup);
+router.get('/complete',signup.complete);
+router.put('/complete/:uid',user.updateUser);
 router.get('/active', signup.active);
 router.get('/reset', signup.reset);
 router.put('/signup/reset/password', signup.changePassword);

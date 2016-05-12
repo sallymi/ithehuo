@@ -297,7 +297,7 @@ $(function () {
                 text: '完善信息',
                 addClass: 'btn-primary',
                 click: function(notice){
-                  window.location.href = '/home';
+                  window.location.href = '/complete';
                 }
               },
               {

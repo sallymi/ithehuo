@@ -1,0 +1,43 @@
+extends base
+block append link
+
+   link(rel='stylesheet', href='/css/user_info_complete.css')
+block append script
+   script(src='js/user_info_complete.js')
+
+block content
+   .panel
+      .panel-heading.c-insetC-header 第一步，填写私密信息。（共三步）
+      .panel-body
+         form#userInfoForm1.form-horizontal
+            .col-lg-9
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label(for='name') 姓名
+                  .col-xs-12.col-sm-10
+                     input#name.form-control(type='text', name='name', placeholder='姓名', value=signinUser.name, required)
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label(for='mobile_phone') 手机
+                  .col-xs-12.col-sm-10
+                     input#mobile_phone.form-control(type='text', name='mobile_phone', placeholder='中国大陆手机号码', value=signinUser.mobile_phone,required)
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label.control-label(for='email') 邮箱
+                  .col-xs-12.col-sm-10
+                     input#email.form-control(type='text', name='email', placeholder='请输入常用邮箱', value=signinUser.email,required)
+                  hr
+               .row.form-group
+                  .col-sm-offset-2.col-sm-10
+                     input#submitBtn.btn.btn-info.center-block.btn-block(type='submit' value='保存并继续' data-loading-text='正在保存...')
+
+               br
+               br
+               br
+               br
+               br
+               br
+               br
