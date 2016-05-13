@@ -48,6 +48,10 @@ var schema = new Schema({
    */
   'email': String,
   /**
+   * 微信统一id，用作用户登录
+   */
+  'unionid': String,
+  /**
    * 曾使邮箱列表，用于后期管理
    */
   'emails_used': [String],
