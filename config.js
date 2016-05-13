@@ -5,6 +5,10 @@ var config = {
   secret: 'SVTlkIjkvJnkuro=',
   oss: '',//'http://7xs7p3.com1.z0.glb.clouddn.com',
   limit: 20,
+  wechat:{
+    AppId:"wxb7598efd14db0177",
+    AppSecret: "d7b3cb536eabee4fd1d88652fad206e8"//可以重置
+  },
   sms: {
     production:{
       ID:'23298060',

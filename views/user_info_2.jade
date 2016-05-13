@@ -1,0 +1,80 @@
+//
+   Created by zhushihao on 2016/5/11.
+extends base
+block append link
+   link(rel='stylesheet', href='/stylesheets/jquery.tag-editor.css')
+   link(rel='stylesheet', href='/css/user_info_complete.css')
+block append script
+   script(src='/javascripts/jquery-ui.min.js')
+   script(src='/javascripts/jquery.tag-editor.min.js')
+   script(type='text/javascript',src='https://cdn.bootcss.com/typeahead.js/0.11.1/typeahead.bundle.min.js')
+   script(type='text/javascript',src='https://cdn.bootcss.com/handlebars.js/3.0.3/handlebars.min.js')
+   script(src='js/user_info_complete.js')
+block content
+   .panel
+      .panel-heading.c-insetC-header 第二步，完善人才信息。（共三步）
+      .panel-body
+         form#userInfoForm2.form-horizontal
+            .col-lg-9
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label.control-label(for='location') 所在地
+                  .col-xs-12.col-sm-10
+                     input#location.form-control(type='text', name='location', value=signinUser.location, placeholder='请输入工作城市名称，如北京 / beijing / bj')
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label.control-label(for='field') 领域方向
+                  .col-xs-12.col-sm-10
+                     input#field.form-control(type='text', name='field', value=signinUser.field, placeholder='移动互联网 | O2O | 电子商务')
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label(for='skill') 技能
+                  .col-xs-12.col-sm-10
+                     input#skill.form-control(type='text', name='skill', value=signinUser.skill,placeholder='Java | PHP | C++ | UI | 后端 | 数据库 | 用户体验')
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label 状态
+                  .col-xs-12.col-sm-10
+                     include ./mixin/form.jade
+                     +radio('status', '全职创业中', signinUser.status, 'required')
+                     +radio('status', '兼职创业中', signinUser.status, 'required')
+                     +radio('status', '没有任何创业', signinUser.status, 'required')
+                     .error
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label 角色定位
+                  .col-xs-12.col-sm-8
+                     include ./mixin/form.jade
+                     +radio('role', '创始人', signinUser.role, 'required')
+                     +radio('role', '技术合伙人', signinUser.role, 'required')
+                     +radio('role', '产品设计合伙人', signinUser.role, 'required')
+                     +radio('role', '市场运营合伙人', signinUser.role, 'required')
+                     .error
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label 创业倾向
+                  .col-xs-12.col-sm-10
+                     include ./mixin/form.jade
+                     +radio('prefer', '全职主导创业', signinUser.prefer, 'required')
+                     +radio('prefer', '全职参与创业', signinUser.prefer, 'required')
+                     +radio('prefer', '兼职创业', signinUser.prefer, 'required')
+                     .error
+               .dashline
+               include ./mixin/form_educations.jade
+               +educations(signinUser.educations)
+               .dashline
+               include ./mixin/form_works.jade
+               +works(signinUser.work_experiences)
+               .dashline
+               include ./mixin/form_startups.jade
+               +startups(signinUser.startup_experiences)
+               .dashline
+               .row.form-group
+                  .col-sm-offset-2.col-sm-10
+                     input#submitBtn.btn.btn-info.center-block.btn-block(type='submit' value='保存并继续' data-loading-text='正在保存...')

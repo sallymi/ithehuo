@@ -31,6 +31,8 @@ router.get('/home', index.userHome);
 // sign up
 router.get('/signup', signup.showSignupPage);
 router.post('/signup', signup.signup);
+router.get('/complete',signup.complete);
+router.put('/complete/:uid',user.updateUser);
 router.get('/active', signup.active);
 router.get('/reset', signup.reset);
 router.put('/signup/reset/password', signup.changePassword);
@@ -40,6 +42,9 @@ router.get('/getCaptcha', signup.captcha);
 router.post('/checkPhoneUsed', signup.checkPhoneUsed);
 // sign in
 router.get('/signin', signin.showSigninPage);
+//router.get('/signin/wechat', signin.signinWithWechat);
+router.get('/signin/wechat/getQR', signin.showWechatQR);
+router.get('/wechat/callback', signin.getAccessToken);
 router.post('/signin', signin.signin);
 router.get('/signout', signin.signout);
 //footer

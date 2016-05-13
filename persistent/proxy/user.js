@@ -125,7 +125,7 @@ exports.findUserByEmail = function (email) {
  * Find user by phone
  *
  * @function
- * @param {String} uid - user id
+ * @param {String} phone - user phone
  * @return {Promise} promise to perform a find action:
  * <li>user found: resolve with user
  * <li>user not found: resolve with undefine
@@ -151,6 +151,37 @@ exports.findUserByPhone = function (phone) {
       });
   });
 };
+
+/**
+ * Find user by wechat unionid
+ *
+ * @function
+ * @param {String} unionid - user wechat unionid
+ * @return {Promise} promise to perform a find action:
+ * <li>user found: resolve with user
+ * <li>user not found: resolve with undefine
+ * <li>error occur during find: reject with error
+ *
+ */
+exports.findUserByUnionid = function (unionid) {
+  return Q.Promise(function (resolve, reject) {
+    User
+        .findOne({'unionid':unionid})
+        .populate('fav_questions.question fav_answers.answer followings')
+        .exec(function (err, user) {
+          if (err) {
+            logger.error(err);
+            reject(err);
+          } else {
+            if (user) {
+              resolve(user);
+            } else {
+              resolve();
+            }
+          }
+        });
+  });
+}
 
 /**
  * Find user by id

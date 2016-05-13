@@ -79,7 +79,7 @@ app.use(function(err, req, res, next) {
 });
 
 connection.connect().then(function () {
-  var server = app.listen(3000, function () {
+  var server = app.listen(80, function () {
     logger.info('server started, listen on port %d', server.address().port);
   });
   var io  = require('socket.io')(server);
