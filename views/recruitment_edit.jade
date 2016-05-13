@@ -149,16 +149,16 @@
           .panel-body
             .row.form-group
               .col-xs-12.col-sm-4
-                font(color="red")='* '
+                //- font(color="red")='* '
                 label.control-label(for='hometown') 希望的籍贯
               .col-xs-12.col-sm-8
-                input.form-control#hometown(type='text', name='hometown', value= recruitment && recruitment.hometown, placeholder='找个老乡一起创业？', required)
+                input.form-control#hometown(type='text', name='hometown', value= recruitment && recruitment.hometown, placeholder='找个老乡一起创业？')
             .row.form-group
               .col-xs-12.col-sm-4
-                font(color="red")='* '
+                //- font(color="red")='* '
                 label.control-label(for='school') 希望的毕业院校
               .col-xs-12.col-sm-8
-                input#school.form-control(type='text', name='school', value= recruitment && recruitment.school, placeholder='找个校友一起打拼？', required)
+                input#school.form-control(type='text', name='school', value= recruitment && recruitment.school, placeholder='找个校友一起打拼？')
             .row.form-group
               .col-xs-12.col-sm-4
                 font(color="red")='* '

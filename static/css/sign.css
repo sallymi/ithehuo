@@ -87,3 +87,12 @@ li.active {
     margin-left: 10px;
    
 }
+
+.templatemo-login-form-1 {
+    max-width: 760px;
+}
+.right_area {
+    /*width: 150px;*/
+    text-align: center;
+    color: #777;
+}

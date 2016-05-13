@@ -249,12 +249,12 @@ $(document).ready(function(){
           required:"请选择要求的年龄"
         },
         hometown:{
-          required: "请输入希望的籍贯",
+          //required: "请输入希望的籍贯",
           remote: "请输入合法籍贯，如无匹配，请输入其他"
         },
-        school:{
-          required:"请输入希望的毕业院校"
-        },
+        // school:{
+        //   required:"请输入希望的毕业院校"
+        // },
         attitude:{
           required:"请选择希望的心态"
         },
