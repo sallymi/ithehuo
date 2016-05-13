@@ -5,6 +5,7 @@
  *
  */
 var validator = require('validator');
+var request = require('request');
 var userProxy = require('../persistent/proxy/user');
 var reqUtil = require('../utils/request');
 var resUtil = require('../utils/response');
@@ -13,6 +14,8 @@ var logger = require('../utils/log').getLogger('biz/signin.js');
 var mailer = require('../utils/mail');
 var Q = require('q');
 var signUp = require('./signup');
+var config = require('../config')
+
 exports.showSigninPage = function (req, res) {
 
   logger.info('check if redirect url is provided');
@@ -24,6 +27,139 @@ exports.showSigninPage = function (req, res) {
   }
 
   resUtil.render(req, res, 'signin');
+};
+
+exports.showWechatQR = function (req, res) {
+  logger.info('redirect to wechat login url');
+  var wechatLoginUrl = "https://open.weixin.qq.com/connect/qrconnect?appid=" +
+      config.wechat.AppId +
+      "&redirect_uri=http%3a%2f%2fithehuo.com%2fwechat%2fcallback" +
+      "&response_type=code" +
+      "&scope=snsapi_login" +
+      "&state=" +
+      config.wechat.AppId +
+      "#wechat_redirect";
+  res.redirect(wechatLoginUrl);
+};
+
+exports.getAccessToken = function (req, res) {
+  logger.info('get access_token with code');
+  var code= req.query.code;
+  var state=req.query.state;
+  if(state!=config.wechat.AppId){
+    return false;
+  }
+  var accessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
+      "appid=" +
+       config.wechat.AppId+
+      "&secret=" +
+       config.wechat.AppSecret +
+      "&code=" +
+       code +
+      "&grant_type=authorization_code";
+  var options = {
+    url:accessTokenUrl
+  };
+  var callback = function(error, response, body) {
+    if(!error && response.statusCode == 200) {
+      var info = JSON.parse(body);
+      logger.info("get access_token response is "+ body);
+      var access_token = info.access_token;
+      var openid = info.openid;
+      var options = {
+        url:"https://api.weixin.qq.com/sns/userinfo?access_token="+access_token+"&openid="+openid
+      };
+      var callback = function(error,response,body) {
+        if(!error && response.statusCode == 200) {
+          logger.info("get user info response is "+ body);
+          var userInfo = JSON.parse(body);
+          //使用微信登录
+          userProxy.findUserByUnionid(userInfo.unionid).then(function (user) {
+            if (!user) {
+
+              logger.info('user not exist, register by wechat');
+              logger.debug('try to create user');
+              return userProxy.createUser({
+                'unionid': userInfo.unionid,
+                'nick_name': userInfo.nickname,
+                'location':userInfo.city,
+                'logo_img':userInfo.headimgurl,
+                'active': true
+              }).then(function (newuser) {
+                logger.debug(newuser);
+                logger.info('login success');
+                logger.info('store user to session');
+                req.session.user = newuser.toObject();
+
+                logger.info('check if original url exist in session');
+                var originalUrl = reqUtil.getOriginalUrl(req);
+                if (originalUrl) {
+                  logger.info('original url found in session, redirect user to original url');
+                  res.redirect(originalUrl);
+                  return;
+                }
+                logger.info('original url not found in session');
+
+                logger.info('check if redirect url exist in session');
+                var redirectUrl = reqUtil.getRedirectUrl(req);
+                if (redirectUrl) {
+                  logger.info('redirect url found in session, redirect user to provided redirect url');
+                  res.redirect(redirectUrl);
+                  return;
+                }
+                logger.info('redirect url not found in session');
+
+                logger.info('redirect user to home page');
+                res.redirect('/');
+                // resUtil.render(req, res, 'signin', {
+                //   success: '欢迎加入IT合伙人！注册成功，请返回首页登陆！'
+                // });
+              });
+            }else{
+              logger.info('check if user is active');
+              if (!user.active) {
+                logger.info('user not active, will return');
+                resUtil.render(req, res, 'signin', {error: '您的账户尚未激活，我们已经向您的注册邮箱' + user.email + '发送了激活邮件，点击邮件中的激活链接即可激活账户。'});
+                return;
+              }
+
+              logger.info('login success');
+
+              logger.info('store user to session');
+              req.session.user = user.toObject();
+
+              logger.info('check if original url exist in session');
+              var originalUrl = reqUtil.getOriginalUrl(req);
+              if (originalUrl) {
+                logger.info('original url found in session, redirect user to original url');
+                res.redirect(originalUrl);
+                return;
+              }
+              logger.info('original url not found in session');
+
+              logger.info('check if redirect url exist in session');
+              var redirectUrl = reqUtil.getRedirectUrl(req);
+              if (redirectUrl) {
+                logger.info('redirect url found in session, redirect user to provided redirect url');
+                res.redirect(redirectUrl);
+                return;
+              }
+              logger.info('redirect url not found in session');
+              logger.info('redirect user to home page');
+              res.redirect('/');
+            }
+
+
+          }).fail(function (err) {
+            logger.error(err);
+            resUtil.render(req, res, 'signin', {error: '出错了，请稍后再试。'});
+          });
+        }
+      }
+      request(options,callback);
+    }
+  }
+  request(options,callback);
 };
 
 exports.signin = function (req, res) {
@@ -40,9 +176,7 @@ exports.signin = function (req, res) {
       resUtil.render(req, res, 'signin', {error: '手机号码和验证码不能为空。'});
       return;
     }
-    
 
-    logger.info('login success');
     userProxy.findUserByPhone(phone).then(function (user) {
       logger.debug(req.session.capText);
       logger.debug('check if captcha is valid, captcha: ' +  captcha + ' with generated Code '+req.session.capText);
@@ -70,7 +204,6 @@ exports.signin = function (req, res) {
        }).then(function (newuser) {
         logger.debug(newuser);
         logger.info('login success');
-
         logger.info('store user to session');
         req.session.user = newuser.toObject();
 
