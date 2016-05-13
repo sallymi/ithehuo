@@ -47,6 +47,9 @@ block content
                     input#sms.form-control(type='sms', name='sms', placeholder='动态密码', value= sms)
                   .col-md-5.col-xs-5
                     a.btn.btn-info.pull-right#getSmsCode_signin(style='color:white', href='javascript:;') 获取动态密码
+            div(style='color:red;margin-bottom:5px')
+              small 默认密码将被重置为您的最近一次验证码，请登录后尽快修改
+            br
             .form-group
               .col-md-12
                 input.btn.btn-info.btn-block(type='submit', value='登录')
