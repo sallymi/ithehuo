@@ -157,7 +157,7 @@ $(document).ready(function () {
   if(location.href.indexOf("users") !== -1){
     $('.entry-btn').attr('href','/recruitments');
     $('.entry-btn').text('进入个人版');
-    $('.actionBtn a').attr('href','/home');
+    $('.actionBtn a').attr('href','/complete');
     $('.actionBtn a').text('成为专业人才')
     $('ul.nav > li.users').addClass('active');
     $('.mobile-nav > a.users').addClass('active');
