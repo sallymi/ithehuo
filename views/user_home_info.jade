@@ -1,0 +1,138 @@
+extends user_home_base
+block append link
+   link(rel='stylesheet', href='/stylesheets/jquery.tag-editor.css')
+   link(rel='stylesheet', href='/stylesheets/jquery.Jcrop.min.css')
+   link(rel='stylesheet', href='/css/user_home_profile.css')
+block append script
+   script(src='/javascripts/jquery-ui.min.js')
+   script(src='/javascripts/jquery.Jcrop.min.js')
+   script(src='/javascripts/jquery.tag-editor.min.js')
+   script(type='text/javascript',src='https://cdn.bootcss.com/typeahead.js/0.11.1/typeahead.bundle.min.js')
+   script(type='text/javascript',src='https://cdn.bootcss.com/handlebars.js/3.0.3/handlebars.min.js')
+   script(src='/js/user_info_complete.js')
+   script(src='/js/user_home_profile.js')
+
+block user_home_content
+   .panel
+      .panel-heading.c-insetC-header 私密信息
+      .panel-body
+         form#userInfoForm1.form-horizontal
+            .col-lg-2.col-lg-offset-1.hidden-md.hidden-lg
+                h4='头像'
+                img#user_logo.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/portfolio/dog-160.png")
+                .visible-md-inline-blockk
+                  button.btn.btn-info.btn-block#upload(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+                  //- button.btn.btn-primary#uploadButton(type='button' data-toggle='modal', data-target='.user-logo-upload') 
+            .col-lg-9
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label(for='name') 姓名
+                  .col-xs-12.col-sm-10
+                     input#name.form-control(type='text', name='name', placeholder='姓名', value=signinUser.name, required)
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label(for='mobile_phone') 手机
+                  .col-xs-12.col-sm-10
+                     .row
+                        if signinUser.mobile_phone
+                           .col-md-10
+                              input#mobile_phone.form-control(type='text', name='mobile_phone', placeholder='中国大陆手机号码', value=signinUser.mobile_phone,disabled)
+                           .col-md-2
+                              a.btn.btn-primary.hidden-xs(href="/home/settings/mobile") 修改手机
+                        else
+                           input#mobile_phone.form-control(type='text', name='mobile_phone', placeholder='中国大陆手机号码', value=signinUser.mobile_phone,required)
+               .row.form-group
+                  .col-xs-12.col-sm-2
+                     font(color="red")='* '
+                     label.control-label(for='email') 邮箱
+                  .col-xs-12.col-sm-10
+                     .row
+                        if signinUser.email
+                           .col-md-10
+                              input#email.form-control(type='text', name='email', placeholder='请输入常用邮箱', value=signinUser.email,disabled)
+                           .col-md-2
+                              a.btn.btn-primary.hidden-xs(href="/home/settings/mobile") 修改邮箱
+                        else
+                           input#email.form-control(type='text', name='email', placeholder='请输入常用邮箱', value=signinUser.email,required)
+                  hr
+               .row.form-group
+                  .col-sm-offset-2.col-sm-10
+                     input#submitBtn.btn.btn-info.center-block.btn-block(type='submit' value='保存' data-loading-text='正在保存...')
+            .col-lg-2.col-lg-offset-1.hidden-xs
+               h4='头像'
+               img#user_logo1.img-responsive(src=signinUser && signinUser.logo_img ? signinUser.logo_img:"/images/avatars/default.png")
+               div
+                 //- button.btn.btn-info.btn-block#upload1(type='button' data-toggle='modal', data-target='.user-logo-image') 更换头像
+                 input#files(type='file', name='img', multiple='')
+                 button.btn.btn-info.btn-block#uploadButton1(type='button' data-toggle='modal', data-target='.project-logo-upload') 更换头像
+               //button.btn.btn-info.btn-block#uploadButton(type='button' ) 本地上传
+               br
+               br
+               br
+               br
+               br
+               br
+               br
+   .modal.fade.user-logo-image(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
+      .modal-dialog.model-sm
+         .modal-content
+           a.closeBtn(href='#', data-dismiss='modal') X
+           h1.margin-bottom-15
+           .modal-body
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a6-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a7-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a8-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a9-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a10-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a11-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a12-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a13-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a14-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/a15-160.png')
+             .col-xs-6.col-md-3
+               a.thumbnail(href='#')
+                 img(src='/images/avatars/profile.png')
+             .col-xs-6.col-md-3
+               a.thumbnail#uploadButton
+                 img(src='/images/add.png')
+           .modal-footer
+   .modal.fade.user-avatar-upload(tabindex='-1', role='dialog', ariallabelledby='mySmallModalLabel', aria-hidden="true")
+      .modal-dialog.modal-lg
+         .modal-content
+            .modal-header
+               a.closeBtn.cancel(href='#') X
+               h4.margin-bottom-15 请选择合适的区域作为头像
+            .modal-body
+               form#uploadImg
+                  input#x(type='hidden', name='x')
+                  input#y(type='hidden', name='y')
+                  input#w(type='hidden', name='w')
+                  input#h(type='hidden', name='h')
+                  input#W(type='hidden', name='W')
+                  input#H(type='hidden', name='H')
+                  img#show_pic(src='')
+            .modal-footer
+               button.cancel.btn.btn-default(type='button') 关闭
+               button#submit.btn.btn-primary(type='button' ) 上传

@@ -144,7 +144,8 @@ $(document).ready(function () {
     $('ul.nav > li.recruitments').addClass('active');
     $('.mobile-nav > a.recruitments').addClass('active');
     $('#login-button ul.dropdown-menu').children().remove();
-    $('#login-button ul.dropdown-menu').append('<li><a href="/home">我的人才档案</a></li>');
+    $('#login-button ul.dropdown-menu').append('<li><a href="/home/profile">我的人才档案</a></li>');
+    $('#login-button ul.dropdown-menu').append('<li><a href="/home/info">修改个人资料</a></li>');
     $('#login-button ul.dropdown-menu').append('<li><a href="/home/settings/password">我的账号设置</a></li>');
     $('#login-button ul.dropdown-menu').append('<li><a href="/home/followings">我的关注</a></li>');
     $('#login-button ul.dropdown-menu').append('<li><a href="/home/friends">我的好友<i id="RequestCount" style="display:none"></i></a></li>');
@@ -268,8 +269,10 @@ $(function () {
   var localstorage = window.localStorage;
   var uid = $('#uid').val();
   var profile = $('#profile').val();
+  var locate = $('#locate').val();
   if(!uid){
     storage.removeItem("reminder");
+    storage.removeItem("reminder1");
     storage.removeItem("intro");
     localstorage.removeItem("intro");
   }else{
@@ -297,7 +300,7 @@ $(function () {
                 text: '完善信息',
                 addClass: 'btn-primary',
                 click: function(notice){
-                  window.location.href = '/complete';
+                  window.location.href = '/info';
                 }
               },
               {
@@ -318,6 +321,45 @@ $(function () {
         storage.reminder=1;
       }else{
         storage.reminder = parseInt(storage.getItem("reminder")) + 1;
+      }
+    }else if(!locate){
+      if(!storage.getItem("reminder1")){
+        storage.setItem("reminder1", 0);
+      }
+      if(storage.reminder1==="0"){
+        var notice = new PNotify({
+            title:'完善信息成为专业人才！',
+            text:'完善个人信息，让更多创业者找到你',
+            icon: 'fa fa-envelope-o',
+            type: 'info',
+            hide: false,
+            confirm: {
+              confirm: true,
+              buttons: [{
+                text: '完善专业人才资料',
+                addClass: 'btn-primary',
+                click: function(notice){
+                  window.location.href = '/complete';
+                }
+              },
+              {
+                text: '稍后再说',
+                click: function (notice){
+                  notice.remove();
+                }
+              }]
+            },
+            buttons: {
+              closer_hover: false,
+              sticker: false
+            },
+            history: {
+              history: false
+            }
+          });
+        storage.reminder1=1;
+      }else{
+        storage.reminder1 = parseInt(storage.getItem("reminder1")) + 1;
       }
     }
 

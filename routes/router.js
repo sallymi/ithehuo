@@ -59,6 +59,10 @@ router.get('/usersAjax', user.getUsersAjax);
 router.get('/users/:uid', user.getUser);
 router.put('/users/:uid', user.updateUser);
 router.post('/users/avatar/upload',user.updateAvatar);
+//profile
+router.get('/home/profile', user.myProfile);
+router.get('/home/info', user.myInfo);
+router.get('/info', user.setInfo);
 // following
 router.get('/home/followings', user.myFollowings);
 router.post('/followings', user.addFollowing);

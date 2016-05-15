@@ -1,0 +1,119 @@
+extends user_home_base
+block append link
+   link(rel='stylesheet', href='/stylesheets/jquery.tag-editor.css')
+   link(rel='stylesheet', href='/stylesheets/jquery.Jcrop.min.css')
+   link(rel='stylesheet', href='/css/user_home_profile.css')
+block append script
+  script(src='/javascripts/jquery-ui.min.js')
+  script(src='/javascripts/jquery.Jcrop.min.js')
+  script(src='/javascripts/jquery.tag-editor.min.js')
+  script(type='text/javascript',src='https://cdn.bootcss.com/typeahead.js/0.11.1/typeahead.bundle.min.js')
+  script(type='text/javascript',src='https://cdn.bootcss.com/handlebars.js/3.0.3/handlebars.min.js')
+  script(src='/js/user_info_complete.js')
+
+block user_home_content
+  .panel
+    .panel-heading.c-insetC-header 第一步，完善人才信息。（共两步）
+    .panel-body
+       form#userInfoForm2.form-horizontal
+          .col-lg-9
+             .row.form-group
+                .col-xs-12.col-sm-2
+                   font(color="red")='* '
+                   label.control-label(for='location') 所在地
+                .col-xs-12.col-sm-10
+                   input#location.form-control(type='text', name='location', value=signinUser.location, placeholder='请输入工作城市名称，如北京 / beijing / bj')
+             .row.form-group
+                .col-xs-12.col-sm-2
+                   font(color="red")='* '
+                   label.control-label(for='field') 领域方向
+                .col-xs-12.col-sm-10
+                   input#field.form-control(type='text', name='field', value=signinUser.field, placeholder='移动互联网 | O2O | 电子商务')
+             .row.form-group
+                .col-xs-12.col-sm-2
+                   font(color="red")='* '
+                   label(for='skill') 技能
+                .col-xs-12.col-sm-10
+                   input#skill.form-control(type='text', name='skill', value=signinUser.skill,placeholder='Java | PHP | C++ | UI | 后端 | 数据库 | 用户体验')
+             .row.form-group
+                .col-xs-12.col-sm-2
+                   font(color="red")='* '
+                   label 状态
+                .col-xs-12.col-sm-10
+                   include ./mixin/form.jade
+                   +radio('status', '全职创业中', signinUser.status, 'required')
+                   +radio('status', '兼职创业中', signinUser.status, 'required')
+                   +radio('status', '没有任何创业', signinUser.status, 'required')
+                   .error
+             .row.form-group
+                .col-xs-12.col-sm-2
+                   font(color="red")='* '
+                   label 角色定位
+                .col-xs-12.col-sm-8
+                   include ./mixin/form.jade
+                   +radio('role', '创始人', signinUser.role, 'required')
+                   +radio('role', '技术合伙人', signinUser.role, 'required')
+                   +radio('role', '产品设计合伙人', signinUser.role, 'required')
+                   +radio('role', '市场运营合伙人', signinUser.role, 'required')
+                   .error
+             .row.form-group
+                .col-xs-12.col-sm-2
+                   font(color="red")='* '
+                   label 创业倾向
+                .col-xs-12.col-sm-10
+                   include ./mixin/form.jade
+                   +radio('prefer', '全职主导创业', signinUser.prefer, 'required')
+                   +radio('prefer', '全职参与创业', signinUser.prefer, 'required')
+                   +radio('prefer', '兼职创业', signinUser.prefer, 'required')
+                   .error
+             .dashline
+             include ./mixin/form_educations.jade
+             +educations(signinUser.educations)
+             .dashline
+             include ./mixin/form_works.jade
+             +works(signinUser.work_experiences)
+             .dashline
+             include ./mixin/form_startups.jade
+             +startups(signinUser.startup_experiences)
+             .dashline
+             .row.form-group
+                .col-sm-offset-2.col-sm-10
+                   input#submitBtn.btn.btn-info.center-block.btn-block(type='submit' value='保存' data-loading-text='正在保存...')
+  .panel
+    .panel-heading.c-insetC-header 第二步，完善相关经验。（共两步）
+    .panel-body
+      form#userInfoForm3.form-horizontal
+        .col-lg-9
+           .row.form-group
+              .col-xs-12.col-sm-2
+                 font(color="red")='* '
+                 label(for='description') 个人描述
+              .col-xs-12.col-sm-10
+                 textarea#description.form-control(type='text', name='description', placeholder='个人描述',required)= signinUser.description
+           .dashline
+           .row.form-group
+              .col-xs-12.col-sm-2
+                 font(color="red")='* '
+                 label(for='technical_experience') 技术经验
+              .col-xs-12.col-sm-10
+                 textarea#technical_experience.form-control(type='text', name='technical_experience', placeholder='请详细填写您的技术经验和能力情况，展示您的实力，有利于更多公司预约您。' +
+                 '请不要小于70字' required minlength=70)= signinUser.technical_experience
+                 .error
+                 p.example 示例：
+                 p.example 毕业于某985高校计算机系，在校期间专业成绩优秀，获得一等奖学金。曾参加ACM并获奖。毕业论文获得优秀。
+                 p.example 毕业后就职于某知名互联网公司核心部门，参与公司主要产品的iOS客户端开发。负责界面UI和内核通信模块。在职期间绩效良好，被评为优秀员工。工作两年后晋升为高级工程师。
+                 p.example 对技术有原发的兴趣，持续学习前沿技术，并独立完成多个兴趣项目，某业余时间做的iOS程序已有过万活跃用户。
+           .dashline
+           .row.form-group
+              .col-xs-12.col-sm-2
+                 font(color="red")='* '
+                 label(for='project_experience') 项目经验
+              .col-xs-12.col-sm-10
+                 textarea#project_experience.form-control(type='text', name='project_experience', placeholder='请详细填写您在工作和业余时间参与过的项目，以及您在项目中所做的具体工作，有利于更多公司预约您。' +
+                 '请不要小于70字。')= signinUser.project_experience
+                 p.example 示例：
+                 p.example 工作项目：1，淘宝客户端，主要负责移动电商客户端的功能模块的开发，包括了商品展示、用户登录后进行收藏加入购物车、订单处理、付款和社交等其他方面的功能。2，高德地图，主要负责地图客户端的导航功能开发，期间和队友合作完成了导航功能的重大升级，提升了导航速度与准确性。并且通过优化大量底层代码提升了地图响应速度，很大程度上提升了用户体验。
+                 p.example 业余项目：自己做过地图应用，上线AppStore获得了过万用户。独立完成过包括道路拥堵指数计算、行车速度计算、道路选择在内的多个重点问题的算法实现。有比较丰富的地图开发经验。
+           .row.form-group
+              .col-sm-offset-2.col-sm-10
+                 input#submitBtn.btn.btn-info.center-block.btn-block(type='submit' value='保存' data-loading-text='正在保存...')

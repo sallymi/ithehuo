@@ -4,13 +4,15 @@ extends base
 block append link
    link(rel='stylesheet', href='/css/user_info_complete.css')
 block append script
+   script(src='/javascripts/jquery-ui.min.js')
+   script(src='/javascripts/jquery.tag-editor.min.js')
    script(src='js/user_info_complete.js')
 block content
    .panel
-      .panel-heading.c-insetC-header 第三步，完善相关经验。（共三步）
+      .panel-heading.c-insetC-header 第二步，完善相关经验。（共两步）
       .panel-body
          form#userInfoForm3.form-horizontal
-            .col-lg-9
+            .col-lg-12
                .row.form-group
                   .col-xs-12.col-sm-2
                      font(color="red")='* '

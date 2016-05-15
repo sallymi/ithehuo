@@ -6,6 +6,7 @@ block navbar
     input#uid(type='hidden' value=signinUser.id)
   if signinUser&&signinUser.name
     input#profile(type='hidden' value=signinUser.name)
+    input#locate(type='hidden' value=signinUser.location)
   nav.navbar.navbar-default.navbar-static-top
     .container
       .navbar-header.page-scroll
@@ -52,10 +53,15 @@ block navbar
                 //- li
                 //-   a(href='/home/projects') 我的创业项目
                 li
-                  if (!signinUser.name || !signinUser.mobile_phone ||!signinUser.email ||!signinUser.location || !signinUser.field || !signinUser.skill || !signinUser.status || !signinUser.role || !signinUser.prefer ||!signinUser.technical_experience || !signinUser.project_experience)
-                    a(href='/complete') 成为专业人才
+                  if (!signinUser.location || !signinUser.field || !signinUser.skill || !signinUser.status || !signinUser.role || !signinUser.prefer ||!signinUser.technical_experience || !signinUser.project_experience)
+                    a(href='/complete') 我的人才档案
                   else
-                    a(href='/home') 我的人才档案
+                    a(href='/home/profile') 我的人才档案
+                li
+                  if !signinUser.name || !signinUser.mobile_phone ||!signinUser.email
+                    a(href='/info') 修改个人资料
+                  else
+                    a(href='/home/info') 修改个人资料
                 li
                   a(href='/home/settings/password') 我的账号设置
                 li

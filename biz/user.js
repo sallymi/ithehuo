@@ -454,6 +454,31 @@ exports.updateAvatar = function (req, res) {
   });
 };
 
+exports.myInfo = function (req, res) {
+var method = '[myInfo]';
+logger.info(method, 'request to signin user\' info');
+  resUtil.render(req, res, 'user_home_info', {
+  title: '我的IT合伙人',
+    });
+  
+};
+
+exports.setInfo = function (req, res) {
+var method = '[setInfo]';
+logger.info(method, 'request to signin user\' info');
+  resUtil.render(req, res, 'user_info_1', {
+  title: '我的IT合伙人',
+    });
+  
+};
+exports.myProfile = function (req, res) {
+var method = '[myProfile]';
+logger.info(method, 'request to signin user\' info');
+  resUtil.render(req, res, 'user_home_myprofile', {
+  title: '我的IT合伙人',
+    });
+  
+};
 /**
  * Request handler to get a user
  *

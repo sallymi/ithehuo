@@ -2,6 +2,47 @@
  * Created by zhushihao on 2016/5/10.
  */
 $(document).ready(function () {
+    var address = $('#location');
+  if(address){
+    var addlist = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('alias'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: {
+        url:'/addr',
+        cache: false
+      },
+      identify: function(obj) {return obj.value;}
+    });
+    function addlistWithDefaults(q, sync) {
+      if (q === ''){
+        sync(addlist.get(['北京','上海','广州']));
+      }else{
+        addlist.search(q, sync);
+      }
+    }
+    address.typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 0
+    },
+      {
+      name: 'location',
+      source: addlistWithDefaults,
+      display: 'value',
+      templates: {
+      // header: '<h3>输入城市</h3>',
+      empty: [
+        '<div class="empty-message">',
+          '<i class="fa fa-warning">',
+          '请输入目前所在城市，如：北京',
+          '</i>',
+        '</div>'
+      ].join('\n'),
+      suggestion: Handlebars.compile('<div><strong>{{value}}</strong> | {{alias}}</div>')
+    }
+    });
+    $('#location').parent().css('display','block');
+  }
     $('#userInfoForm1').validate({
         errorElement : 'small',
         errorClass : 'error',
