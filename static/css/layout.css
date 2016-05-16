@@ -222,7 +222,7 @@ a.entry-btn.for-small:hover{
 a, a:hover, a:focus, a:active, a.active{
   color:rgba(52,152,219,1);
 }
-}
+
 
 .signup-page {
     background-color: #fff;
@@ -277,7 +277,7 @@ a, a:hover, a:focus, a:active, a.active{
 .signup-left button::after  {
     content: " ▸";
 }
-}
+
 /*a:hover{
   color:#3498db;
 }*/
@@ -712,4 +712,10 @@ img {
 }
 #portfolio .panel {
   background-color: #fafafa;
+}
+#global_notify_ctn {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;;
 }

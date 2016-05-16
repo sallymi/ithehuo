@@ -70,8 +70,10 @@ $(document).ready(function () {
                 'contentType': 'application/json',
                 'data': JSON.stringify(oUser)
             }).done(function () {
-                location.reload();
-                //globalNotify.success('保存成功');
+                globalNotify.success('保存成功，进入下一步');
+                setTimeout(function(){
+                    location.reload();
+                },2000);
             }).fail(function () {
                 globalNotify.failed('操作失败，请稍后再试');
             }).always(function () {
@@ -211,7 +213,10 @@ $(document).ready(function () {
                 'contentType': 'application/json',
                 'data': JSON.stringify(oUser)
             }).done(function () {
-                location.reload();
+                globalNotify.success('保存成功，进入下一步');
+                setTimeout(function(){
+                    location.reload();
+                },2000);
             }).fail(function () {
                 globalNotify.failed('操作失败，请稍后再试');
             }).always(function () {
