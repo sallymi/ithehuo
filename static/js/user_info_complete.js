@@ -110,7 +110,7 @@ $(document).ready(function () {
                 'contentType': 'application/json',
                 'data': JSON.stringify(oUser)
             }).done(function () {
-                location.reload();
+                window.location.href = '/complete?step=2';
                 //globalNotify.success('保存成功');
             }).fail(function () {
                 globalNotify.failed('操作失败，请稍后再试');
@@ -251,7 +251,7 @@ $(document).ready(function () {
                 'contentType': 'application/json',
                 'data': JSON.stringify(oUser)
             }).done(function () {
-                location.reload();
+                window.location.href = '/complete?step=3';
             }).fail(function () {
                 globalNotify.failed('操作失败，请稍后再试');
             }).always(function () {

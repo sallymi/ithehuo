@@ -76,5 +76,7 @@ block content
                +startups(signinUser.startup_experiences)
                .dashline
                .row.form-group
-                  .col-sm-offset-2.col-sm-10
+                  .col-sm-6
+                     a.btn.btn-info.center-block.btn-block(href='/complete?step=1') 上一步
+                  .col-sm-6
                      input#submitBtn.btn.btn-info.center-block.btn-block(type='submit' value='保存并继续' data-loading-text='正在保存...')

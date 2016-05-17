@@ -46,5 +46,7 @@ block content
                      p.example 工作项目：1，淘宝客户端，主要负责移动电商客户端的功能模块的开发，包括了商品展示、用户登录后进行收藏加入购物车、订单处理、付款和社交等其他方面的功能。2，高德地图，主要负责地图客户端的导航功能开发，期间和队友合作完成了导航功能的重大升级，提升了导航速度与准确性。并且通过优化大量底层代码提升了地图响应速度，很大程度上提升了用户体验。
                      p.example 业余项目：自己做过地图应用，上线AppStore获得了过万用户。独立完成过包括道路拥堵指数计算、行车速度计算、道路选择在内的多个重点问题的算法实现。有比较丰富的地图开发经验。
                .row.form-group
-                  .col-sm-offset-2.col-sm-10
-                     input#submitBtn.btn.btn-info.center-block.btn-block(type='submit' value='保存并完成入驻' data-loading-text='正在保存...')
+                  .col-sm-6
+                     a.btn.btn-info.center-block.btn-block(href='/complete?step=2') 上一步
+                  .col-sm-6
+                     input#submitBtn.btn.btn-info.center-block.btn-block(type='submit' value='保存并提交' data-loading-text='正在保存...')
