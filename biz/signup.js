@@ -370,10 +370,9 @@ exports.changePassword = function (req, res) {
 
 exports.complete = function (req, res) {
   var user = req.session.user;
-  // if(!user.name || !user.mobile_phone ||!user.email){
-  //   resUtil.render(req,res,'user_info_1',{title:"私密信息"});
-  // }else 
-  if(!user.location || !user.field || !user.skill || !user.status || !user.role || !user.prefer){
+  if(!user.name || !user.mobile_phone ||!user.email){
+    resUtil.render(req,res,'user_info_1',{title:"私密信息"});
+  }else if(!user.location || !user.field || !user.skill || !user.status || !user.role || !user.prefer){
     resUtil.render(req,res,'user_info_2',{title:"人才信息"});
   }else if(!user.technical_experience || !user.project_experience){
     resUtil.render(req,res,'user_info_3',{title:'相关经验'});

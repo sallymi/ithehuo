@@ -52,6 +52,7 @@ exports.index = function (req, res) {
  *
  */
 exports.userHome = function (req, res) {
+  logger.info(req.session.user);
   if(reqUtil.getUserEmail(req)&&reqUtil.getUserMobile(req)){
     //already set email and phone
     resUtil.render(req, res, 'user_home_profile', {

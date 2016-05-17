@@ -26,6 +26,7 @@ exports.render = function (req, res, page, object) {
     object.oss = global.oss;
     object.limit = global.limit;
   }
+  logger.info(object);
   res.render(page, object,function(err,html){
     if(err){
       logger.error(err);

@@ -23,8 +23,12 @@ block content
             lh.c-navstack-heading 我的IT合伙人
             //- li
             //-   a.c-navstack-item(href='/home') 我的信息
-            li
-              a.c-navstack-item(href='/home/profile') 人才档案
+            if (!signinUser.location)
+              li
+                a.c-navstack-item(href='/complete') 人才档案
+            else
+              li
+                a.c-navstack-item(href='/home/profile') 人才档案
             li
               a.c-navstack-item(href='/home/info') 我的资料
             li
