@@ -103,7 +103,6 @@ $(document).ready(function () {
                     oUser[field.name] = field.value;
                 }
             });
-
             var url = '/complete/' + $('#uid').val();
             $.ajax({
                 'url': url,
@@ -353,7 +352,7 @@ $(document).ready(function () {
         placeholder: '如 PHP PS JAVA，以回车分隔',
     });
     var cache = {};
-    $('#fields').tagEditor({
+    $('#field').tagEditor({
         // initialTags: ['互联网', '天使轮', '全职团队'],
         autocomplete: { delay: 0, position: { collision: 'flip' },
             minLength: 0,
