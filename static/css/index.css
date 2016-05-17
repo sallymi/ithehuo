@@ -129,7 +129,7 @@ i.numeral {
 }
 .text {
   float: left;
-  width: 60%;
+  /*width: 60%;*/
   line-height: 2.0;
 }
 .portfolio-item p {

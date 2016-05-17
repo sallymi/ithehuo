@@ -17,7 +17,7 @@ block content
                 include mixin/select.jade
                 each filter in filters
                   +dropdownMenu(filter)
-      if (!signinUser.location || !signinUser.field || !signinUser.skill || !signinUser.status || !signinUser.role || !signinUser.prefer ||!signinUser.technical_experience || !signinUser.project_experience)
+      if signinUser && (!signinUser.location || !signinUser.field || !signinUser.skill || !signinUser.status || !signinUser.role || !signinUser.prefer ||!signinUser.technical_experience || !signinUser.project_experience)
         .col-lg-2.col-md-3.col-xs-12.actionBtn(style="text-align: center")
           include search.jade
     .well.transparent.list-show
