@@ -13,6 +13,7 @@ var crypto = require('../utils/crypto');
 var mailer = require('../utils/mail');
 var logger = require('../utils/log').getLogger('biz/signup');
 var App = require('alidayu-node');
+var errCode = require('./constants').errCode;
 var ccap = require('ccap-dev')({
   width: 120,
   height: 43,
@@ -46,7 +47,7 @@ exports.sms = function (req, res, next) {
   var captcha = req.body.captcha;
   logger.debug('check if captcha is valid, captcha: ' +  captcha + ' with generated Code '+req.session.capText);
   if (captcha && req.session.capText.toLowerCase()!=captcha.toLowerCase()) {
-    resUtil.render(req, res, 'signup', {error: '图形验证码不正确。', captcha: captcha});
+    resUtil.okJson( res, '图形验证码不正确', {errCode: errCode.CAPTCHA_ERROR, captcha: captcha});
     return;
   }
   logger.debug('get the phone number');
@@ -97,7 +98,7 @@ exports.sms = function (req, res, next) {
       next({success:true})
     }else{
       //注册
-      resUtil.okJson(res, '已发送');
+      resUtil.okJson(res, '已发送',{errCode: errCode.SUCCESS});
     }
   });
 };
@@ -377,4 +378,31 @@ exports.complete = function (req, res) {
   }else if(!user.technical_experience || !user.project_experience){
     resUtil.render(req,res,'user_info_3',{title:'相关经验'});
   }
-}
+};
+
+exports.completeCheck = function(req, res) {
+  logger.info('receive request to check if email or phone is used');
+  var email = req.query.email;
+  var phone =req.query.mobile_phone;
+  logger.info("check email "+email);
+  logger.info("check phone "+phone);
+  if(phone){
+    userProxy.findUserByPhone(phone).then(function(user){
+      if(user){
+        logger.info("phone has been used!");
+        resUtil.okJson(res,"该手机已被使用！",{errCode:errCode.PHONE_USED_ERROR});
+      }else{
+        resUtil.okJson(res,"可以使用",{errCode:errCode.SUCCESS});
+      }
+    })
+  }
+  if(email){
+    userProxy.findUserByEmail(email).then(function(user) {
+      if(user){
+        resUtil.okJson(res,"该邮箱已被使用！",{errCode:errCode.EMAIL_USED_ERROR});
+      }else{
+        resUtil.okJson(res,"可以使用",{errCode:errCode.SUCCESS});
+      }
+    })
+  }
+};

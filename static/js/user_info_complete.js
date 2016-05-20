@@ -63,22 +63,52 @@ $(document).ready(function () {
                 }
             });
 
-            var url = '/complete/' + $('#uid').val();
+            var submit = function() {
+                var url = '/complete/' + $('#uid').val();
+                $.ajax({
+                    'url': url,
+                    'type': 'PUT',
+                    'contentType': 'application/json',
+                    'data': JSON.stringify(oUser)
+                }).done(function () {
+                    globalNotify.success('保存成功，进入下一步');
+                    setTimeout(function(){
+                        location.reload();
+                    },2000);
+                }).fail(function () {
+                    globalNotify.failed('操作失败，请稍后再试');
+                }).always(function () {
+                    //$('#userProfileForm #submitBtn').button('reset');
+                });
+            }
+
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("mobile_phone").value;
             $.ajax({
-                'url': url,
-                'type': 'PUT',
-                'contentType': 'application/json',
-                'data': JSON.stringify(oUser)
-            }).done(function () {
-                globalNotify.success('保存成功，进入下一步');
-                setTimeout(function(){
-                    location.reload();
-                },2000);
-            }).fail(function () {
-                globalNotify.failed('操作失败，请稍后再试');
-            }).always(function () {
-                //$('#userProfileForm #submitBtn').button('reset');
+                url:  "/complete/check?email="+email,
+                contentType: 'application/json',
+            }).success(function(res){
+                if(res.errCode==0){
+                    $.ajax({
+                        url: "/complete/check?mobile_phone="+phone,
+                        contentType: 'application/json',
+                    }).success(function(res){
+                        if(res.errCode==0){
+                            submit();
+                        }else{
+                            globalNotify.failed("手机号已被使用！")
+                        }
+                    }).fail(function(){
+                        globalNotify.failed("检测手机号使用发生错误！")
+                    })
+                }else{
+                    globalNotify.failed("邮箱已被使用！")
+                }
+            }).fail(function(){
+                globalNotify.failed("检查邮箱使用发生错误！")
             });
+
+
         }
     });
     $('#userInfoForm2').validate({
