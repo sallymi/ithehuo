@@ -1,4 +1,79 @@
 extends layout
+mixin by_phone(display)
+  div.by_random(style="display:"+display)
+    .form-group
+      .col-xs-12
+        span 验证即登录，未注册将自动创建IT合伙人帐号
+    .form-group
+      .col-xs-12
+        .control-wrapper
+          label.control-label.fa-label(for='mobile')
+            i.fa.fa-user.fa-medium
+          input#phone.form-control(name='phone', placeholder='请输入手机号')
+    .form-group
+      .col-md-12.col-xs-12
+        .control-wrapper
+          label.control-label.fa-label(for='captcha')
+            span 图形码
+          .col-md-5.col-xs-5
+            input#captcha.form-control(type='captcha', name='captcha', placeholder='请输入图形中验证码', value= captcha)
+          .col-md-7.col-xs-7
+            img.captcha(src='/getCaptcha', onclick="this.src='/getCaptcha'")
+            a.reflash(href='javascript:;')
+    .form-group
+      .col-xs-12
+        .control-wrapper
+          label.control-label.fa-label
+            span 短信码
+          .col-md-7.col-xs-7
+            input#sms.form-control(type='sms', name='sms', placeholder='动态密码', value= sms)
+          .col-md-5.col-xs-5
+            a.btn.btn-info.pull-right#getSmsCode_signin(style='color:white', href='javascript:;') 获取动态密码
+    //- div(style='color:red;margin-bottom:5px')
+    //-   small 默认密码将被重置为您的最近一次验证码，请登录后尽快修改
+    //- br
+    .form-group
+      .col-md-12
+        input.btn.btn-info.btn-block(type='submit', value='登录')
+    .text-center
+      span  您将同意并接受
+      a(data-toggle='modal', data-target='#terms-modal')  IT合伙人用户协议
+        i.fa.fa-arrow-circle-o-right
+    //- .form-group
+    //-   .col-md-8
+    //-     input#sms.form-control(type='sms', name='sms', placeholder='', value= sms)
+    //-   .col-md-4
+    //-     a.btn.btn-info.pull-right#getSmsCode(style='color:white', href='javascript:;') 获取验证码
+
+mixin by_user(display)
+  div.by_user(style="display:"+display)
+    .form-group
+      .col-xs-12
+        .control-wrapper
+          label.control-label.fa-label(for='username')
+            i.fa.fa-user.fa-medium
+          input#username.form-control(name='username', placeholder='手机号码')
+    .form-group
+      .col-md-12
+        .control-wrapper
+          label.control-label.fa-label(for='password')
+            i.fa.fa-lock.fa-medium
+          input#password.form-control(type='password', name='password', placeholder='请输入密码')
+    .form-group
+      .col-md-12
+        .checkbox.control-wrapper
+          label.pull-left
+            input(type='checkbox', name='remeberme')
+            span 记住我
+    .form-group
+      .col-md-12
+        .control-wrapper
+          input.btn.btn-info.pull-left(type='submit', value='登录')
+          a.text-right.pull-right(href='/forgot-password') 忘记密码
+    .text-center
+      span 还没有IT合伙人账号?
+      a.templatemo-create-new(href= '/signup')  立即注册一个账号
+        i.fa.fa-arrow-circle-o-right
 block content
   link(rel='stylesheet', href='/css/sign.css')
   script(src='/js/base.js')
@@ -13,83 +88,24 @@ block content
               a.close(data-dismiss='alert' href='#') &times;
               strong= error
           ul.form_head
-            li(name='by_user').active
-              i.fa.fa-user 普通登录
-            li(name='by_random')
-              i.fa.fa-mobile 手机动态码登录
-            span.tab_active
-          div.by_random(style="display: none")
-            .form-group
-              .col-xs-12
-                span 验证即登录，未注册将自动创建IT合伙人帐号
-            .form-group
-              .col-xs-12
-                .control-wrapper
-                  label.control-label.fa-label(for='mobile')
-                    i.fa.fa-user.fa-medium
-                  input#phone.form-control(name='phone', placeholder='请输入手机号')
-            .form-group
-              .col-md-12.col-xs-12
-                .control-wrapper
-                  label.control-label.fa-label(for='captcha')
-                    span 图形码
-                  .col-md-5.col-xs-5
-                    input#captcha.form-control(type='captcha', name='captcha', placeholder='请输入图形中验证码', value= captcha)
-                  .col-md-7.col-xs-7
-                    img.captcha(src='/getCaptcha', onclick="this.src='/getCaptcha'")
-                    a.reflash(href='javascript:;')
-            .form-group
-              .col-xs-12
-                .control-wrapper
-                  label.control-label.fa-label
-                    span 短信码
-                  .col-md-7.col-xs-7
-                    input#sms.form-control(type='sms', name='sms', placeholder='动态密码', value= sms)
-                  .col-md-5.col-xs-5
-                    a.btn.btn-info.pull-right#getSmsCode_signin(style='color:white', href='javascript:;') 获取动态密码
-            //- div(style='color:red;margin-bottom:5px')
-            //-   small 默认密码将被重置为您的最近一次验证码，请登录后尽快修改
-            //- br
-            .form-group
-              .col-md-12
-                input.btn.btn-info.btn-block(type='submit', value='登录')
-            .text-center
-              span  您将同意并接受
-              a(data-toggle='modal', data-target='#terms-modal')  IT合伙人用户协议
-                i.fa.fa-arrow-circle-o-right
-            //- .form-group
-            //-   .col-md-8
-            //-     input#sms.form-control(type='sms', name='sms', placeholder='', value= sms)
-            //-   .col-md-4
-            //-     a.btn.btn-info.pull-right#getSmsCode(style='color:white', href='javascript:;') 获取验证码
-          div.by_user
-            .form-group
-              .col-xs-12
-                .control-wrapper
-                  label.control-label.fa-label(for='username')
-                    i.fa.fa-user.fa-medium
-                  input#username.form-control(name='username', placeholder='手机号码')
-            .form-group
-              .col-md-12
-                .control-wrapper
-                  label.control-label.fa-label(for='password')
-                    i.fa.fa-lock.fa-medium
-                  input#password.form-control(type='password', name='password', placeholder='请输入密码')
-            .form-group
-              .col-md-12
-                .checkbox.control-wrapper
-                  label.pull-left
-                    input(type='checkbox', name='remeberme')
-                    span 记住我
-            .form-group
-              .col-md-12
-                .control-wrapper
-                  input.btn.btn-info.pull-left(type='submit', value='登录')
-                  a.text-right.pull-right(href='/forgot-password') 忘记密码
-            .text-center
-              span 还没有IT合伙人账号?
-              a.templatemo-create-new(href= '/signup')  立即注册一个账号
-                i.fa.fa-arrow-circle-o-right
+            if (from=='phone')
+              li(name='by_user')
+                i.fa.fa-user 普通登录
+              li(name='by_random').active
+                i.fa.fa-mobile 手机动态码登录
+              span.tab_active(style='left:218px')
+            else
+              li(name='by_user').active
+                i.fa.fa-user 普通登录
+              li(name='by_random')
+                i.fa.fa-mobile 手机动态码登录
+              span.tab_active
+        if(from=='phone')
+          +by_phone("block")
+          +by_user("none")
+        else
+          +by_phone("none")
+          +by_user("block")
       .col-md-1
         img(src=oss+'/images/divider-login.jpg')
       .col-md-4

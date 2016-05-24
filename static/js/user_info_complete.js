@@ -103,20 +103,53 @@ $(document).ready(function () {
                     oUser[field.name] = field.value;
                 }
             });
-            var url = '/complete/' + $('#uid').val();
+
+            var submit = function() {
+                var url = '/complete/' + $('#uid').val();
+                $.ajax({
+                    'url': url,
+                    'type': 'PUT',
+                    'contentType': 'application/json',
+                    'data': JSON.stringify(oUser)
+                }).done(function () {
+                    globalNotify.success('保存成功，进入下一步');
+                    setTimeout(function(){
+                        window.location.href = '/complete?step=2';
+                    },2000);
+                }).fail(function () {
+                    globalNotify.failed('操作失败，请稍后再试');
+                }).always(function () {
+                    //$('#userProfileForm #submitBtn').button('reset');
+                });
+            }
+
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("mobile_phone").value;
             $.ajax({
-                'url': url,
-                'type': 'PUT',
-                'contentType': 'application/json',
-                'data': JSON.stringify(oUser)
-            }).done(function () {
-                window.location.href = '/complete?step=2';
-                //globalNotify.success('保存成功');
-            }).fail(function () {
-                globalNotify.failed('操作失败，请稍后再试');
-            }).always(function () {
-                //$('#userProfileForm #submitBtn').button('reset');
+                url:  "/complete/check?uid="+$('#uid').val()+"&email="+email,
+                contentType: 'application/json',
+            }).success(function(res){
+                if(res.data.errCode==0){
+                    $.ajax({
+                        url: "/complete/check?uid="+$('#uid').val()+"&mobile_phone="+phone,
+                        contentType: 'application/json',
+                    }).success(function(res){
+                        if(res.data.errCode==0){
+                            submit();
+                        }else{
+                            globalNotify.failed("手机号已被使用！")
+                        }
+                    }).fail(function(){
+                        globalNotify.failed("检测手机号使用发生错误！")
+                    })
+                }else{
+                    globalNotify.failed("邮箱已被使用！")
+                }
+            }).fail(function(){
+                globalNotify.failed("检查邮箱使用发生错误！")
             });
+
+
         }
     });
     $('#userInfoForm2').validate({
@@ -251,7 +284,13 @@ $(document).ready(function () {
                 'contentType': 'application/json',
                 'data': JSON.stringify(oUser)
             }).done(function () {
-                window.location.href = '/complete?step=3';
+// <<<<<<< HEAD
+//                 window.location.href = '/complete?step=3';
+// =======
+                globalNotify.success('保存成功，进入下一步');
+                setTimeout(function(){
+                    window.location.href = '/complete?step=3';
+                },2000);
             }).fail(function () {
                 globalNotify.failed('操作失败，请稍后再试');
             }).always(function () {

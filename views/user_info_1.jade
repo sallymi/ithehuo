@@ -15,7 +15,7 @@ block content
       .panel-heading.c-insetC-header 私密信息
       .panel-body
          form#userInfoForm1.form-horizontal
-            .col-lg-12
+            .col-lg-10
                .row.form-group
                   .col-xs-12.col-sm-2
                      font(color="red")='* '
@@ -27,13 +27,21 @@ block content
                      font(color="red")='* '
                      label(for='mobile_phone') 手机
                   .col-xs-12.col-sm-10
-                     input#mobile_phone.form-control(type='text', name='mobile_phone', placeholder='中国大陆手机号码', value=signinUser.mobile_phone,required)
+                     if(signinUser.mobile_phone)
+                        input#mobile_phone.form-control(style="width:80%;display:inline-block" ,type='text', name='mobile_phone', placeholder='中国大陆手机号码', disabled, value=signinUser.mobile_phone,required)
+                        a(href="/home/settings/mobile", style="width:20%").btn.btn-info 修改手机
+                     else
+                        input#mobile_phone.form-control(type='text', name='mobile_phone', placeholder='中国大陆手机号码', ,required)
                .row.form-group
                   .col-xs-12.col-sm-2
                      font(color="red")='* '
                      label.control-label(for='email') 邮箱
                   .col-xs-12.col-sm-10
-                     input#email.form-control(type='text', name='email', placeholder='请输入常用邮箱', value=signinUser.email,required)
+                     if(signinUser.email)
+                        input#email.form-control(style="width:80%;display:inline-block",type='text', name='email', placeholder='请输入常用邮箱', disabled, value=signinUser.email,required)
+                        a(href="/home/settings/mobile",style="width:20%").btn.btn-info 修改邮箱
+                     else
+                        input#email.form-control(type='text', name='email', placeholder='请输入常用邮箱', required)
                   hr
                .row.form-group
                   .col-sm-offset-2.col-sm-10

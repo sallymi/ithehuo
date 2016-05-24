@@ -499,11 +499,17 @@ $(function () {
         captcha:captcha,
         type:'login'}
     }).done(function (res) {
-      $("#getSmsCode_signin").attr("disabled","disabled");
-      t1 = setInterval(tip,1000);
+      if(res.data.errCode == 0){
+        $("#getSmsCode_signin").attr("disabled","disabled");
+        t1 = setInterval(tip,1000);
+      }else if(res.data.errCode == 100){
+        globalNotify.failed("图形验证码错误，请重试！");
+      }
+
     }).fail(function (resp) {
       globalNotify.failed("获取验证码失败请稍候再试");
     });
+    console.log(error)
     // checkPhoneUsed(phone).then(function(flag){
     //   //flag==true 没有被注册过
     //   if(!flag){

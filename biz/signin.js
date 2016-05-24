@@ -173,21 +173,15 @@ exports.signin = function (req, res) {
     logger.info('check if mobile captcha and sms code are all set');
     if(!phone || !sms || !captcha){
       logger.info('user mobile or code not set, will return');
-      resUtil.render(req, res, 'signin', {error: '手机号码和验证码不能为空。'});
+      resUtil.render(req, res, 'signin', {from:'phone',error: '手机号码和验证码不能为空。'});
       return;
     }
 
     userProxy.findUserByPhone(phone).then(function (user) {
-      logger.debug(req.session.capText);
-      logger.debug('check if captcha is valid, captcha: ' +  captcha + ' with generated Code '+req.session.capText);
-      if (req.session.capText.toLowerCase()!=captcha.toLowerCase()) {
-        resUtil.render(req, res, 'signin', {error: '图形验证码不正确。', captcha: captcha});
-        return;
-      }
       logger.debug('check if sms is valid, smsText: ' +  sms);
       logger.debug(global.smsMap);
       if (global.smsMap[phone]!=sms) {
-        resUtil.render(req, res, 'signin', {error: '手机验证码不正确。', sms: sms});
+        resUtil.render(req, res, 'signin', {from:'phone',error: '手机验证码不正确。', sms: sms});
         return;
       }
       if (!user) {
@@ -235,7 +229,7 @@ exports.signin = function (req, res) {
         logger.info('check if user is active');
         if (!user.active) {
           logger.info('user not active, will return');
-          resUtil.render(req, res, 'signin', {error: '您的账户尚未激活，我们已经向您的注册邮箱' + user.email + '发送了激活邮件，点击邮件中的激活链接即可激活账户。'});
+          resUtil.render(req, res, 'signin', {from:'user',error: '您的账户尚未激活，我们已经向您的注册邮箱' + user.email + '发送了激活邮件，点击邮件中的激活链接即可激活账户。'});
           return;
         }
 
